@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aiden & Sophia — A Destination Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean-deep: #0B4F6C;
+    --ocean-mid: #1A7FA0;
+    --ocean-shallow: #4BBFCF;
+    --ocean-foam: #A8E6EF;
+    --sky-dusk: #2D1B69;
+    --sky-twilight: #7B3F8C;
+    --sky-sunset: #D4567A;
+    --sky-horizon: #F4845F;
+    --sky-glow: #FFBE6A;
+    --sand-dark: #C4956A;
+    --sand-warm: #E8C99A;
+    --sand-pale: #F7E8D4;
+    --coral-primary: #E8604C;
+    --coral-light: #F28472;
+    --coral-pale: #FAC4B8;
+    --ivory-warm: #FDF8F0;
+    --white-foam: #F0FAFC;
+    --palm-dark: #1A3A1A;
+    --palm-mid: #2D5A2D;
+    --gold-sun: #FFD166;
+    --text-xs: clamp(0.65rem, 1vw, 0.75rem);
+    --text-sm: clamp(0.8rem, 1.5vw, 0.9rem);
+    --text-base: clamp(0.95rem, 2vw, 1.05rem);
+    --text-md: clamp(1.1rem, 2.5vw, 1.35rem);
+    --text-lg: clamp(1.5rem, 3.5vw, 2rem);
+    --text-xl: clamp(2.2rem, 5vw, 3.2rem);
+    --text-hero: clamp(3.5rem, 9vw, 7rem);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', serif;
+    background: var(--ocean-deep);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ======================== FLOATING ELEMENTS OVERLAY ======================== */
+  #floating-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+  }
+
+  .float-item {
+    position: absolute;
+    bottom: -60px;
+    animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    5%   { opacity: var(--max-opacity, 0.65); }
+    90%  { opacity: var(--max-opacity, 0.65); }
+    100% { transform: translateY(-110vh) translateX(var(--sway, 40px)) rotate(var(--spin, 180deg)); opacity: 0; }
+  }
+
+  /* ======================== HERO SECTION ======================== */
+  #hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #sky-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      #2D1B69 0%,
+      #7B3F8C 18%,
+      #D4567A 38%,
+      #F4845F 55%,
+      #FFBE6A 70%,
+      #FFD166 78%,
+      #4BBFCF 88%,
+      #1A7FA0 100%
+    );
+    will-change: transform;
+  }
+
+  /* Stars */
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.5); }
+  }
+
+  /* Sun */
+  #sun {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    left: 50%;
+    top: 72%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, #fff9e0 0%, #FFD166 40%, rgba(255,209,102,0) 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 80px 40px rgba(255,209,102,0.35), 0 0 160px 80px rgba(244,132,95,0.15);
+  }
+
+  #sun-shimmer {
+    position: absolute;
+    left: 50%;
+    top: 72%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 8%;
+    background: linear-gradient(to bottom, rgba(255,209,102,0.5), transparent);
+    animation: shimmer 2s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) scaleY(1); }
+    50% { opacity: 0.8; transform: translateX(-50%) scaleY(1.3); }
+  }
+
+  /* Moon */
+  #moon {
+    position: absolute;
+    top: 8%;
+    right: 12%;
+    width: 36px;
+    height: 36px;
+    opacity: 0.55;
+  }
+
+  /* Clouds */
+  .cloud-layer {
+    position: absolute;
+    width: 200%;
+    pointer-events: none;
+    will-change: transform;
+  }
+  #cloud1 { top: 28%; animation: cloudDrift1 40s ease-in-out infinite; opacity: 0.4; filter: blur(2px); }
+  #cloud2 { top: 18%; animation: cloudDrift2 28s ease-in-out infinite; opacity: 0.35; filter: blur(1.5px); }
+  #cloud3 { top: 8%; animation: cloudDrift3 60s ease-in-out infinite; opacity: 0.3; filter: blur(3px); }
+
+  @keyframes cloudDrift1 {
+    0%, 100% { transform: translateX(-5%); }
+    50% { transform: translateX(5%); }
+  }
+  @keyframes cloudDrift2 {
+    0%, 100% { transform: translateX(3%); }
+    50% { transform: translateX(-3%); }
+  }
+  @keyframes cloudDrift3 {
+    0%, 100% { transform: translateX(-2%); }
+    50% { transform: translateX(2%); }
+  }
+
+  /* Waves */
+  .wave-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    will-change: transform;
+  }
+  #wave1 { animation: waveFlow 8s linear infinite; }
+  #wave2 { animation: waveFlow 6s linear infinite reverse; }
+  #wave3 { animation: waveFlow 4s linear infinite; }
+  #wave4 { animation: waveFlow 3s linear infinite reverse; }
+  @keyframes waveFlow {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Beach */
+  #beach {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, #C4956A 0%, #E8C99A 60%, #D4B48A 100%);
+    z-index: 2;
+  }
+  #wet-sand {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 18px;
+    background: linear-gradient(to bottom, rgba(26,127,160,0.3), transparent);
+  }
+
+  /* Palm Trees */
+  #palm-left, #palm-right {
+    position: absolute;
+    bottom: 55px;
+    z-index: 5;
+    will-change: transform;
+  }
+  #palm-left { left: -20px; }
+  #palm-right { right: -20px; transform: scaleX(-1); }
+
+  .frond {
+    transform-origin: 50% 100%;
+    animation: palmSway 4s ease-in-out infinite;
+  }
+  .frond:nth-child(1) { animation-delay: 0s; }
+  .frond:nth-child(2) { animation-delay: 0.3s; }
+  .frond:nth-child(3) { animation-delay: 0.6s; }
+  .frond:nth-child(4) { animation-delay: 0.9s; }
+  .frond:nth-child(5) { animation-delay: 1.2s; }
+  .frond:nth-child(6) { animation-delay: 1.5s; }
+  .frond:nth-child(7) { animation-delay: 1.8s; }
+
+  @keyframes palmSway {
+    0%, 100% { transform: rotate(-3deg); }
+    50%       { transform: rotate(3deg); }
+  }
+
+  /* Hero Text */
+  #hero-text {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    will-change: transform, opacity;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    letter-spacing: 0.3em;
+    color: var(--ivory-warm);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .hero-pre {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--sand-pale);
+    margin-bottom: 8px;
+  }
+
+  .hero-name {
+    font-family: 'Pacifico', cursive;
+    font-size: var(--text-hero);
+    color: white;
+    text-shadow: 0 2px 30px rgba(244,132,95,0.7), 0 0 60px rgba(255,209,102,0.4);
+    line-height: 1.05;
+    display: block;
+  }
+
+  .hero-amp {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--coral-light);
+    display: block;
+    margin: -8px 0;
+  }
+
+  .hero-date {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-sm);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ivory-warm);
+    margin-top: 18px;
+  }
+
+  .hero-location {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: var(--sand-pale);
+    margin-top: 8px;
+  }
+
+  .scroll-cta {
+    margin-top: 28px;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: rgba(255,255,255,0.7);
+    animation: bounceDown 2s ease-in-out infinite;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% { transform: translateY(0); opacity: 0.7; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
+
+  /* Distant island */
+  #island-silhouette {
+    position: absolute;
+    bottom: 28%;
+    left: 15%;
+    opacity: 0.35;
+    filter: blur(1px);
+    z-index: 1;
+  }
+
+  #sailboat {
+    position: absolute;
+    bottom: 30%;
+    right: 15%;
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* ======================== WAVE DIVIDERS ======================== */
+  .wave-divider {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .wave-divider svg { display: block; }
+
+  /* ======================== BLESSINGS SECTION ======================== */
+  #blessings {
+    position: relative;
+    background: var(--sand-pale);
+    padding: 100px 20px;
+    overflow: hidden;
+  }
+  #blessings::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(196,149,106,0.04) 0px,
+      rgba(196,149,106,0.04) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+    pointer-events: none;
+  }
+
+  .blessings-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--coral-primary);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .big-quote-mark {
+    font-family: 'Pacifico', cursive;
+    font-size: 7rem;
+    line-height: 0;
+    color: var(--coral-light);
+    opacity: 0.4;
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .blessing-quote {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+    line-height: 1.85;
+    color: var(--ocean-deep);
+    margin-bottom: 20px;
+  }
+
+  .quote-attr {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-sm);
+    color: var(--sand-dark);
+    letter-spacing: 0.05em;
+  }
+
+  .mini-wave {
+    margin: 40px auto;
+    display: block;
+  }
+
+  .family-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .family-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sand-dark);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .family-name {
+    font-family: 'Lora', serif;
+    font-size: var(--text-base);
+    color: var(--ocean-deep);
+    line-height: 1.7;
+  }
+
+  .hibiscus-watermark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  /* ======================== EVENTS SECTION ======================== */
+  #events {
+    position: relative;
+    background: linear-gradient(160deg, #FFBE6A 0%, #F4845F 45%, #D4567A 100%);
+    padding: 100px 20px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-title {
+    font-family: 'Pacifico', cursive;
+    font-size: var(--text-xl);
+    color: white;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .section-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: var(--text-base);
+    color: var(--sand-pale);
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .event-card {
+    background: rgba(253,248,240,0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 48px 36px;
+    position: relative;
+    transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden;
+  }
+
+  .event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  .event-card.featured {
+    border: 2px solid rgba(255,209,102,0.7);
+    box-shadow: 0 8px 40px rgba(255,209,102,0.25);
+    padding-top: 56px;
+  }
+
+  .event-card:hover .event-icon {
+    transform: scale(1.15);
+  }
+
+  .event-icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 24px;
+    transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    display: block;
+  }
+
+  .card-wave-accent {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    opacity: 0.5;
+  }
+
+  .event-time {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-sun);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .event-name {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+    color: white;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .event-venue {
+    font-family: 'Lora', serif;
+    font-size: var(--text-sm);
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 16px;
+  }
+
+  .event-vibe {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--coral-pale);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .event-dress {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.08em;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 14px;
+    margin-top: 14px;
+  }
+
+  /* ======================== COUPLE SECTION ======================== */
+  #couple {
+    position: relative;
+    background: var(--ocean-deep);
+    padding: 100px 20px;
+    overflow: hidden;
+  }
+
+  #couple::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(26,127,160,0.25), transparent 70%);
+    pointer-events: none;
+  }
+  #couple::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(75,191,207,0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  .couple-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .couple-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .couple-header .section-title { color: white; }
+  .couple-header .section-sub { color: var(--ocean-foam); }
+
+  .couple-frames {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .photo-frame {
+    position: relative;
+    text-align: center;
+    transition: transform 0.5s ease;
+  }
+
+  #frame-groom { transform: rotate(-2.5deg); }
+  #frame-bride { transform: rotate(2deg); }
+  #frame-groom:hover, #frame-bride:hover { transform: rotate(0deg); }
+
+  .frame-arch {
+    position: relative;
+    width: 240px;
+    height: 320px;
+    margin: 0 auto;
+    border-radius: 120px 120px 20px 20px;
+    overflow: hidden;
+    border: 3px solid rgba(242,132,114,0.5);
+    box-shadow: 0 0 0 8px rgba(242,132,114,0.1);
+  }
+
+  .frame-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pacifico', cursive;
+    font-size: 5rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  #groom-placeholder {
+    background: linear-gradient(160deg, #0B4F6C, #1A7FA0, #4BBFCF);
+  }
+  #bride-placeholder {
+    background: linear-gradient(160deg, #D4567A, #F4845F, #FFBE6A);
+  }
+
+  .frame-name-tag {
+    margin-top: 20px;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(180,120,60,0.3) 0px, rgba(140,90,40,0.2) 3px,
+      rgba(180,120,60,0.3) 3px, rgba(200,140,70,0.3) 6px
+    );
+    border-radius: 6px;
+    padding: 10px 20px;
+    display: inline-block;
+  }
+
+  .frame-name-tag .person-name {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: white;
+    display: block;
+  }
+
+  .frame-name-tag .person-role {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ocean-foam);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .frame-bio {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--ocean-foam);
+    line-height: 1.75;
+    margin-top: 16px;
+    max-width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .couple-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .couple-divider-line {
+    width: 1px;
+    height: 60px;
+    background: var(--coral-light);
+    opacity: 0.5;
+  }
+
+  .couple-weds {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: var(--coral-light);
+  }
+
+  /* ======================== RSVP SECTION ======================== */
+  #rsvp {
+    position: relative;
+    background: var(--coral-primary);
+    padding: 100px 20px;
+    overflow: hidden;
+  }
+
+  #rsvp::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 10 C35 5 28 8 30 15 C32 22 20 20 22 28 C24 36 32 34 34 40 C36 46 28 48 32 54 C36 60 44 56 46 62 C48 68 56 66 54 60 C52 54 60 52 58 46 C56 40 64 38 62 32 C60 26 52 28 50 22 C48 16 45 15 40 10Z' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E");
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+
+  .rsvp-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .rsvp-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .rsvp-header .section-title { color: white; }
+  .rsvp-deadline {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: var(--text-base);
+    color: var(--coral-pale);
+    margin-top: 8px;
+  }
+
+  .rsvp-form { display: flex; flex-direction: column; gap: 32px; }
+
+  .field-group {
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+  }
+
+  .field-group input, .field-group select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Lora', serif;
+    font-size: var(--text-base);
+    color: white;
+    padding: 12px 0 8px;
+    appearance: none;
+  }
+
+  .field-group input::placeholder { color: rgba(255,255,255,0.45); }
+  .field-group input:focus { border-bottom-width: 2px; box-shadow: 0 1px 0 white; }
+
+  .field-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .pill {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    background: transparent;
+    color: rgba(255,255,255,0.75);
+    font-family: 'Lora', serif;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .pill:hover, .pill.active {
+    background: white;
+    color: var(--coral-primary);
+    border-color: white;
+  }
+
+  .rsvp-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .btn-whatsapp, .btn-email {
+    padding: 16px 24px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    border: 2px solid white;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-whatsapp {
+    background: white;
+    color: var(--coral-primary);
+  }
+  .btn-whatsapp:hover { background: #25D366; color: white; border-color: #25D366; }
+
+  .btn-email {
+    background: transparent;
+    color: white;
+  }
+  .btn-email:hover { background: white; color: var(--coral-primary); }
+
+  .rsvp-confirm {
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: white;
+    padding: 20px;
+    display: none;
+    animation: fadeIn 0.6s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ======================== DETAILS SECTION ======================== */
+  #details {
+    background: var(--sand-pale);
+    padding: 100px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  #details::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(196,149,106,0.04) 0px,
+      rgba(196,149,106,0.04) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .detail-card {
+    background: #FAFAF8;
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: 0 4px 24px rgba(11,79,108,0.08);
+    border-top: 3px solid var(--coral-primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .detail-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(11,79,108,0.13);
+  }
+
+  .detail-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 20px;
+  }
+
+  .detail-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--ocean-deep);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .detail-body {
+    font-family: 'Lora', serif;
+    font-size: var(--text-sm);
+    color: #4A6572;
+    line-height: 1.75;
+  }
+
+  .detail-link {
+    color: var(--coral-primary);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .swatch-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.08);
+  }
+
+  .hashtag-big {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5rem;
+    color: var(--coral-primary);
+    display: block;
+    margin-top: 12px;
+  }
+
+  .details-header { text-align: center; margin-bottom: 60px; position: relative; z-index: 1; }
+  .details-header .section-eyebrow { margin-bottom: 12px; }
+  .details-header .section-title {
+    font-family: 'Pacifico', cursive;
+    font-size: var(--text-xl);
+    color: var(--ocean-deep);
+  }
+
+  /* ======================== COUNTDOWN SECTION ======================== */
+  #countdown {
+    position: relative;
+    background: linear-gradient(180deg, var(--ocean-deep) 0%, var(--ocean-mid) 100%);
+    padding: 100px 20px;
+    overflow: hidden;
+  }
+
+  .countdown-header { text-align: center; margin-bottom: 60px; position: relative; z-index: 1; }
+  .countdown-header .section-title { color: white; }
+  .countdown-header .section-sub { color: var(--ocean-foam); }
+
+  .timer-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timer-block {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 28px 32px;
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .timer-number {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: white;
+    display: block;
+    line-height: 1;
+    animation: flipNum 0.5s ease;
+  }
+
+  @keyframes flipNum {
+    0% { transform: rotateX(-90deg); opacity: 0; }
+    100% { transform: rotateX(0deg); opacity: 1; }
+  }
+
+  .timer-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ocean-foam);
+    margin-top: 8px;
+    display: block;
+  }
+
+  .timer-sep {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: var(--coral-light);
+    align-self: center;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+  .progress-section {
+    max-width: 500px;
+    margin: 40px auto 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .progress-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 14px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--coral-light);
+    border-radius: 2px;
+    transition: width 1s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: sweep 2s linear infinite;
+  }
+  @keyframes sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+  .progress-label {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--ocean-foam);
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* ======================== FOOTER ======================== */
+  #footer {
+    background: var(--ocean-deep);
+    padding: 80px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-monogram {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: white;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .footer-date {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ocean-foam);
+    margin-bottom: 28px;
+    display: block;
+  }
+
+  .footer-tagline {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: var(--text-base);
+    color: var(--ocean-foam);
+    margin-bottom: 16px;
+  }
+
+  .footer-hashtag {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: var(--coral-light);
+    display: block;
+    margin-bottom: 32px;
+  }
+
+  .footer-fine {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--text-xs);
+    color: var(--ocean-mid);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    pointer-events: none;
+  }
+  #footer-wave1 { animation: waveFlow 7s linear infinite; }
+  #footer-wave2 { animation: waveFlow 5s linear infinite reverse; }
+  #footer-wave3 { animation: waveFlow 3.5s linear infinite; }
+
+  .footer-stars { margin: 0 auto 8px; }
+
+  /* ======================== SCROLL ANIMATIONS ======================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  /* ======================== RESPONSIVE ======================== */
+  @media (max-width: 768px) {
+    .events-grid {
+      grid-template-columns: 1fr;
+    }
+    .couple-frames {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .couple-center {
+      flex-direction: row;
+      justify-content: center;
+    }
+    .couple-divider-line {
+      width: 60px;
+      height: 1px;
+    }
+    .details-grid {
+      grid-template-columns: 1fr;
+    }
+    .family-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .rsvp-buttons {
+      grid-template-columns: 1fr;
+    }
+    #palm-left, #palm-right { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating Elements Overlay -->
+<div id="floating-overlay"></div>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <div id="sky-bg"></div>
+
+  <!-- Stars (generated by JS) -->
+  <div id="stars-container"></div>
+
+  <!-- Moon -->
+  <svg id="moon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M28 18C28 23.523 23.523 28 18 28C14.03 28 10.6 25.726 8.898 22.43C10.048 22.807 11.274 23 12.552 23C19.006 23 24.238 17.768 24.238 11.314C24.238 9.274 23.736 7.35 22.85 5.652C25.892 7.61 28 11.068 28 18Z" fill="#FDF8F0" opacity="0.85"/>
+  </svg>
+
+  <!-- Sun -->
+  <div id="sun"></div>
+  <div id="sun-shimmer"></div>
+
+  <!-- Distant Island -->
+  <svg id="island-silhouette" viewBox="0 0 300 40" width="300" height="40" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 40 C50 20 80 15 120 18 C160 21 180 30 220 22 C250 16 280 20 300 18 L300 40Z" fill="#0B4F6C"/>
+  </svg>
+
+  <!-- Sailboat -->
+  <svg id="sailboat" viewBox="0 0 60 50" width="60" height="50" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 5 L30 40 L10 40 Z" fill="#E8C99A" opacity="0.7"/>
+    <path d="M30 8 L50 36 L30 36 Z" fill="#F7E8D4" opacity="0.6"/>
+    <rect x="5" y="38" width="50" height="5" rx="2.5" fill="#C4956A" opacity="0.7"/>
+  </svg>
+
+  <!-- Cloud layers -->
+  <div class="cloud-layer" id="cloud1">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="200" cy="50" rx="180" ry="40" fill="#F28472"/>
+      <ellipse cx="350" cy="40" rx="120" ry="32" fill="#F4845F"/>
+      <ellipse cx="600" cy="55" rx="160" ry="35" fill="#F28472"/>
+      <ellipse cx="900" cy="45" rx="200" ry="38" fill="#D4567A" opacity="0.7"/>
+      <ellipse cx="1200" cy="52" rx="170" ry="36" fill="#F4845F"/>
+    </svg>
+  </div>
+  <div class="cloud-layer" id="cloud2">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="100" cy="40" rx="130" ry="28" fill="#FFBE6A" opacity="0.6"/>
+      <ellipse cx="420" cy="30" rx="180" ry="24" fill="#F4845F" opacity="0.5"/>
+      <ellipse cx="750" cy="38" rx="150" ry="26" fill="#FFBE6A" opacity="0.5"/>
+      <ellipse cx="1100" cy="32" rx="160" ry="22" fill="#F4845F" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="cloud-layer" id="cloud3">
+    <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="250" cy="30" rx="200" ry="22" fill="#7B3F8C" opacity="0.5"/>
+      <ellipse cx="700" cy="25" rx="220" ry="20" fill="#2D1B69" opacity="0.5"/>
+      <ellipse cx="1150" cy="32" rx="190" ry="18" fill="#7B3F8C" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <!-- Wave Layers -->
+  <svg class="wave-layer" id="wave1" viewBox="0 0 2880 120" preserveAspectRatio="none" style="bottom:60px;height:80px;" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 60 C180 20 360 100 540 60 C720 20 900 100 1080 60 C1260 20 1440 100 1620 60 C1800 20 1980 100 2160 60 C2340 20 2520 100 2700 60 C2760 40 2820 50 2880 60 L2880 120 L0 120Z" fill="#0B4F6C"/>
+  </svg>
+  <svg class="wave-layer" id="wave2" viewBox="0 0 2880 120" preserveAspectRatio="none" style="bottom:50px;height:70px;opacity:0.85;" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 50 C240 90 480 20 720 50 C960 80 1200 15 1440 50 C1680 85 1920 18 2160 50 C2400 82 2640 20 2880 50 L2880 120 L0 120Z" fill="#1A7FA0"/>
+  </svg>
+  <svg class="wave-layer" id="wave3" viewBox="0 0 2880 120" preserveAspectRatio="none" style="bottom:35px;height:60px;" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 45 C200 80 400 10 600 45 C800 80 1000 10 1200 45 C1400 80 1600 10 1800 45 C2000 80 2200 10 2400 45 C2600 80 2800 10 2880 45 L2880 120 L0 120Z" fill="#4BBFCF"/>
+  </svg>
+  <svg class="wave-layer" id="wave4" viewBox="0 0 2880 80" preserveAspectRatio="none" style="bottom:52px;height:40px;opacity:0.7;" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 30 C160 50 320 10 480 30 C640 50 800 10 960 30 C1120 50 1280 10 1440 30 C1600 50 1760 10 1920 30 C2080 50 2240 10 2400 30 C2560 50 2720 10 2880 30 L2880 80 L0 80Z" fill="rgba(240,250,252,0.75)"/>
+  </svg>
+
+  <!-- Beach -->
+  <div id="beach">
+    <div id="wet-sand"></div>
+    <!-- Shells on beach -->
+    <svg style="position:absolute;bottom:6px;left:20%;opacity:0.7;" viewBox="0 0 24 18" width="20" height="15">
+      <path d="M12 16 C6 16 2 12 3 7 C4 2 10 0 14 3 C18 6 18 14 12 16Z" fill="#E8C99A" stroke="#C4956A" stroke-width="0.5"/>
+      <line x1="12" y1="16" x2="4" y2="8" stroke="#C4956A" stroke-width="0.4"/>
+      <line x1="12" y1="16" x2="12" y2="4" stroke="#C4956A" stroke-width="0.4"/>
+      <line x1="12" y1="16" x2="17" y2="7" stroke="#C4956A" stroke-width="0.4"/>
+    </svg>
+    <svg style="position:absolute;bottom:4px;left:50%;opacity:0.6;" viewBox="0 0 18 22" width="14" height="17">
+      <path d="M9 20 C4 18 1 12 3 7 C5 2 9 0 12 3 C15 6 16 14 9 20Z" fill="#FAC4B8"/>
+      <line x1="9" y1="20" x2="4" y2="8" stroke="#F28472" stroke-width="0.5"/>
+      <line x1="9" y1="20" x2="12" y2="6" stroke="#F28472" stroke-width="0.5"/>
+    </svg>
+    <svg style="position:absolute;bottom:8px;right:25%;opacity:0.65;" viewBox="0 0 28 16" width="22" height="13">
+      <path d="M14 14 C2 14 0 8 2 4 C4 0 14 0 22 4 C28 7 26 14 14 14Z" fill="#F7E8D4" stroke="#C4956A" stroke-width="0.5"/>
+      <path d="M14 14 C10 8 8 4 14 2" stroke="#C4956A" stroke-width="0.4" fill="none"/>
+      <path d="M14 14 C18 8 20 4 14 2" stroke="#C4956A" stroke-width="0.4" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- Palm Trees -->
+  <svg id="palm-left" width="200" height="380" viewBox="0 0 200 380" xmlns="http://www.w3.org/2000/svg">
+    <!-- Trunk -->
+    <path d="M80 380 C82 340 70 300 75 260 C78 220 72 180 78 140 C82 100 76 70 80 40" stroke="#3D2210" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <path d="M80 380 C76 340 68 300 72 260 C75 220 70 180 75 140" stroke="#5C3317" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.4"/>
+    <!-- Fronds -->
+    <g transform="translate(80,42)">
+      <path class="frond" d="M0 0 C-60 -30 -100 -20 -120 0" stroke="#1A3A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C-40 -60 -20 -90 10 -100" stroke="#2D5A2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C40 -60 60 -80 50 -100" stroke="#1A3A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C70 -30 100 -10 110 10" stroke="#2D5A2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C60 20 90 30 100 50" stroke="#1A3A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C20 40 10 70 -10 80" stroke="#2D5A2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C-30 30 -60 40 -80 30" stroke="#1A3A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- Coconuts -->
+    <ellipse cx="76" cy="52" rx="8" ry="9" fill="#5C3317"/>
+    <ellipse cx="88" cy="56" rx="7" ry="8" fill="#3D2210"/>
+    <ellipse cx="70" cy="60" rx="6" ry="7" fill="#5C3317"/>
+  </svg>
+
+  <svg id="palm-right" width="200" height="380" viewBox="0 0 200 380" xmlns="http://www.w3.org/2000/svg">
+    <path d="M120 380 C118 340 130 300 125 260 C122 220 128 180 122 140 C118 100 124 70 120 40" stroke="#3D2210" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <path d="M120 380 C124 340 132 300 128 260 C125 220 130 180 125 140" stroke="#5C3317" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.4"/>
+    <g transform="translate(120,42)">
+      <path class="frond" d="M0 0 C-60 -30 -100 -20 -120 0" stroke="#1A3A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C-40 -60 -20 -90 10 -100" stroke="#2D5A2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C40 -60 60 -80 50 -100" stroke="#1A3A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C70 -30 100 -10 110 10" stroke="#2D5A2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C60 20 90 30 100 50" stroke="#1A3A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C20 40 10 70 -10 80" stroke="#2D5A2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="frond" d="M0 0 C-30 30 -60 40 -80 30" stroke="#1A3A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+    <ellipse cx="124" cy="52" rx="8" ry="9" fill="#5C3317"/>
+    <ellipse cx="112" cy="56" rx="7" ry="8" fill="#3D2210"/>
+    <ellipse cx="130" cy="60" rx="6" ry="7" fill="#5C3317"/>
+  </svg>
+
+  <!-- Hero Text -->
+  <div id="hero-text">
+    <p class="hero-eyebrow">✦ &nbsp; A Destination Wedding &nbsp; ✦</p>
+    <p class="hero-pre">Together with their families</p>
+    <span class="hero-name">Aiden</span>
+    <span class="hero-amp">&amp;</span>
+    <span class="hero-name">Sophia</span>
+    <p class="hero-date">Saturday &middot; November Eighth &middot; Two Thousand Twenty Six</p>
+    <p class="hero-location">Anantara Veli Resort, Maldives</p>
+    <p class="scroll-cta">∿ &nbsp; scroll to dive in &nbsp; ∿</p>
+  </div>
+</section>
+
+<!-- ==================== WAVE DIVIDER A ==================== -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:70px;">
+    <path d="M0 30 C240 70 480 0 720 30 C960 60 1200 0 1440 30 L1440 70 L0 70Z" fill="#F7E8D4"/>
+  </svg>
+</div>
+
+<!-- ==================== BLESSINGS ==================== -->
+<section id="blessings">
+  <div class="hibiscus-watermark">
+    <svg width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(160,160)">
+        <ellipse cx="0" cy="-80" rx="28" ry="60" fill="#E8604C" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-80" rx="28" ry="60" fill="#E8604C" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-80" rx="28" ry="60" fill="#E8604C" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-80" rx="28" ry="60" fill="#E8604C" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-80" rx="28" ry="60" fill="#E8604C" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="22" fill="#FFD166"/>
+        <circle cx="0" cy="-12" r="5" fill="#F4845F"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="blessings-inner">
+    <span class="section-eyebrow reveal">A Love Story</span>
+    <span class="big-quote-mark reveal reveal-delay-1">"</span>
+    <p class="blessing-quote reveal reveal-delay-1">
+      The sea does not reward those who are too anxious, too greedy, or too impatient.
+      One should lie empty, open, choiceless as a beach — waiting for a gift from the sea.
+    </p>
+    <p class="quote-attr reveal reveal-delay-2">— Anne Morrow Lindbergh</p>
+
+    <svg class="mini-wave reveal" width="200" height="24" viewBox="0 0 200 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 12 C25 4 50 20 75 12 C100 4 125 20 150 12 C175 4 187 16 200 12" stroke="#E8604C" stroke-width="1.5" fill="none" opacity="0.5"/>
+    </svg>
+
+    <div class="family-grid reveal">
+      <div>
+        <span class="family-label">His Family</span>
+        <p class="family-name">
+          Robert & Eleanor Harmon<br>
+          <span style="font-size:var(--text-sm);color:var(--sand-dark);">Son of William & Margaret Harmon</span>
+        </p>
+      </div>
+      <div>
+        <span class="family-label">Her Family</span>
+        <p class="family-name">
+          David & Catherine Laurent<br>
+          <span style="font-size:var(--text-sm);color:var(--sand-dark);">Daughter of Henri & Isabelle Laurent</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WAVE DIVIDER ==================== -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:70px;background:#F7E8D4;">
+    <path d="M0 40 C360 0 720 70 1080 30 C1260 15 1360 40 1440 20 L1440 70 L0 70Z" fill="#FFBE6A"/>
+  </svg>
+</div>
+
+<!-- ==================== EVENTS ==================== -->
+<section id="events">
+  <div class="section-header">
+    <span class="section-eyebrow" style="color:rgba(255,255,255,0.7);" class="reveal">The Celebration</span>
+    <span class="section-title reveal">Join Us for Every Moment</span>
+    <p class="section-sub reveal reveal-delay-1">Sun, sand, and celebration await</p>
+  </div>
+
+  <div class="events-grid">
+    <!-- Card 1 -->
+    <div class="event-card reveal">
+      <svg class="event-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 8 L18 20 L26 20 Z"/>
+        <rect x="18" y="20" width="8" height="16" rx="2"/>
+        <path d="M14 24 L18 26"/>
+        <path d="M30 24 L26 26"/>
+        <circle cx="32" cy="14" r="6"/>
+        <line x1="32" y1="8" x2="32" y2="6"/>
+        <line x1="38" y1="14" x2="40" y2="14"/>
+        <line x1="36" y1="10" x2="38" y2="8"/>
+      </svg>
+      <svg class="card-wave-accent" viewBox="0 0 60 12" width="60" height="12" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 6 C10 2 20 10 30 6 C40 2 50 10 60 6" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
+      </svg>
+      <span class="event-time">Friday Evening · 6:00 PM</span>
+      <span class="event-name">Beach Welcome Party</span>
+      <p class="event-venue">Sunset Beach Bar, Anantara Veli</p>
+      <p class="event-vibe">"Bare feet welcome. Sunset guaranteed."</p>
+      <p class="event-dress">Casual Beachwear · Sundresses · Linen</p>
+    </div>
+
+    <!-- Card 2 — Featured -->
+    <div class="event-card featured reveal reveal-delay-1">
+      <svg class="event-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="16" cy="20" r="6"/>
+        <circle cx="28" cy="20" r="6"/>
+        <path d="M0 36 C10 28 34 28 44 36"/>
+        <path d="M22 8 L22 12"/>
+        <path d="M16 6 L22 12 L28 6"/>
+      </svg>
+      <svg class="card-wave-accent" viewBox="0 0 60 12" width="60" height="12" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 6 C10 2 20 10 30 6 C40 2 50 10 60 6" stroke="rgba(255,209,102,0.6)" stroke-width="1.5" fill="none"/>
+      </svg>
+      <span class="event-time">Saturday · 5:30 PM (Golden Hour)</span>
+      <span class="event-name">Sunset Vows</span>
+      <p class="event-venue">Overwater Ceremony Pavilion, Veli Lagoon</p>
+      <p class="event-vibe">"Where the sky meets the sea, we become one."</p>
+      <p class="event-dress">Tropical Formal · Flowy gowns · Linen suits</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="event-card reveal reveal-delay-2">
+      <svg class="event-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 10 L14 28 C14 30.2 15.8 32 18 32 C20.2 32 22 30.2 22 28 L22 10 Z"/>
+        <path d="M14 18 L22 18"/>
+        <path d="M30 8 L26 20 L34 20 Z"/>
+        <line x1="30" y1="20" x2="30" y2="34"/>
+        <path d="M24 34 L36 34"/>
+      </svg>
+      <svg class="card-wave-accent" viewBox="0 0 60 12" width="60" height="12" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 6 C10 2 20 10 30 6 C40 2 50 10 60 6" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none"/>
+      </svg>
+      <span class="event-time">Saturday · 7:30 PM</span>
+      <span class="event-name">Reception Dinner</span>
+      <p class="event-venue">Sea Grill Beachfront Restaurant, Anantara</p>
+      <p class="event-vibe">"Feast beneath a canopy of stars."</p>
+      <p class="event-dress">Tropical Black Tie Optional</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WAVE DIVIDER ==================== -->
+<div class="wave-divider" style="background:linear-gradient(160deg,#FFBE6A,#D4567A);">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:70px;">
+    <path d="M0 20 C480 70 960 0 1440 40 L1440 70 L0 70Z" fill="#0B4F6C"/>
+  </svg>
+</div>
+
+<!-- ==================== COUPLE ==================== -->
+<section id="couple">
+  <div class="couple-inner">
+    <div class="couple-header">
+      <span class="section-eyebrow" style="color:var(--ocean-foam);" class="reveal">Our Story</span>
+      <span class="section-title reveal">Written in the Stars, Sealed by the Sea</span>
+    </div>
+
+    <div class="couple-frames">
+      <div class="photo-frame reveal" id="frame-groom">
+        <div class="frame-arch">
+          <div class="frame-photo-placeholder" id="groom-placeholder">A</div>
+        </div>
+        <!-- Vine border overlay -->
+        <svg style="position:absolute;top:0;left:50%;transform:translateX(-50%);pointer-events:none;opacity:0.65;" width="260" height="340" viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 170 C8 100 30 40 80 15 C130 -10 180 5 220 40 C250 70 255 120 250 170" stroke="#F28472" stroke-width="1.5" fill="none"/>
+          <circle cx="30" cy="80" r="5" fill="#F28472"/>
+          <circle cx="60" cy="25" r="4" fill="#D4567A"/>
+          <circle cx="130" cy="5" r="5" fill="#F28472"/>
+          <circle cx="200" cy="20" r="4" fill="#D4567A"/>
+          <circle cx="240" cy="80" r="5" fill="#F28472"/>
+        </svg>
+        <div class="frame-name-tag">
+          <span class="person-name">Aiden</span>
+          <span class="person-role">The Groom</span>
+        </div>
+        <p class="frame-bio">A dreamer who found his compass in her laugh and his home in her eyes.</p>
+      </div>
+
+      <div class="couple-center">
+        <div class="couple-divider-line"></div>
+        <span class="couple-weds">∿</span>
+        <div class="couple-divider-line"></div>
+      </div>
+
+      <div class="photo-frame reveal reveal-delay-2" id="frame-bride">
+        <div class="frame-arch">
+          <div class="frame-photo-placeholder" id="bride-placeholder">S</div>
+        </div>
+        <svg style="position:absolute;top:0;left:50%;transform:translateX(-50%);pointer-events:none;opacity:0.65;" width="260" height="340" viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 170 C8 100 30 40 80 15 C130 -10 180 5 220 40 C250 70 255 120 250 170" stroke="#F28472" stroke-width="1.5" fill="none"/>
+          <circle cx="30" cy="80" r="5" fill="#F28472"/>
+          <circle cx="60" cy="25" r="4" fill="#FFBE6A"/>
+          <circle cx="130" cy="5" r="5" fill="#F28472"/>
+          <circle cx="200" cy="20" r="4" fill="#FFBE6A"/>
+          <circle cx="240" cy="80" r="5" fill="#F28472"/>
+        </svg>
+        <div class="frame-name-tag">
+          <span class="person-name">Sophia</span>
+          <span class="person-role">The Bride</span>
+        </div>
+        <p class="frame-bio">She carries the ocean in her heart and writes poetry with her smile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WAVE DIVIDER ==================== -->
+<div class="wave-divider" style="background:#0B4F6C;">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:70px;">
+    <path d="M0 35 C360 0 720 70 1080 25 C1260 8 1360 45 1440 30 L1440 70 L0 70Z" fill="#E8604C"/>
+  </svg>
+</div>
+
+<!-- ==================== RSVP ==================== -->
+<section id="rsvp">
+  <div class="rsvp-inner">
+    <div class="rsvp-header">
+      <span class="section-eyebrow" style="color:rgba(255,255,255,0.7);" class="reveal">Your Presence</span>
+      <span class="section-title reveal">Join Our Paradise</span>
+      <p class="rsvp-deadline reveal reveal-delay-1">Kindly respond before 1st October 2026</p>
+    </div>
+
+    <div class="rsvp-form">
+      <div class="field-group reveal">
+        <label class="field-label">Your Name</label>
+        <input type="text" id="rsvp-name" placeholder="Full name">
+      </div>
+      <div class="field-group reveal reveal-delay-1">
+        <label class="field-label">WhatsApp / Phone</label>
+        <input type="tel" id="rsvp-phone" placeholder="+1 234 567 8900">
+      </div>
+      <div class="field-group reveal reveal-delay-2">
+        <label class="field-label">Number of Guests</label>
+        <input type="number" id="rsvp-guests" placeholder="2" min="1" max="10">
+      </div>
+
+      <div class="reveal">
+        <label class="field-label" style="margin-bottom:14px;display:block;">Meal Preference</label>
+        <div class="pill-group">
+          <button class="pill" onclick="togglePill(this,'meal')">Seafood 🐟</button>
+          <button class="pill" onclick="togglePill(this,'meal')">Vegetarian 🌿</button>
+          <button class="pill" onclick="togglePill(this,'meal')">Both works!</button>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <label class="field-label" style="margin-bottom:14px;display:block;">Will you be joining us?</label>
+        <div class="pill-group">
+          <button class="pill" onclick="togglePill(this,'attend')">Yes, I'll be there! 🌴</button>
+          <button class="pill" onclick="togglePill(this,'attend')">Unable to join 🙏</button>
+        </div>
+      </div>
+
+      <div class="rsvp-buttons reveal">
+        <a id="whatsapp-btn" href="#" class="btn-whatsapp" onclick="sendWhatsApp(event)">💬 &nbsp; RSVP via WhatsApp</a>
+        <a id="email-btn" href="#" class="btn-email" onclick="sendEmail(event)">✉ &nbsp; RSVP via Email</a>
+      </div>
+
+      <div class="rsvp-confirm" id="rsvp-confirm">
+        🌊 &nbsp; We'll see you on the beach, <span id="confirm-name">dear friend</span>! &nbsp; 🌺
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WAVE DIVIDER ==================== -->
+<div class="wave-divider" style="background:#E8604C;">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:70px;">
+    <path d="M0 10 C480 70 960 5 1440 50 L1440 70 L0 70Z" fill="#F7E8D4"/>
+  </svg>
+</div>
+
+<!-- ==================== DETAILS ==================== -->
+<section id="details">
+  <div class="details-header">
+    <span class="section-eyebrow reveal">Everything You Need</span>
+    <span class="section-title reveal">Good to Know</span>
+  </div>
+
+  <div class="details-grid">
+    <!-- Card 1 -->
+    <div class="detail-card reveal">
+      <svg class="detail-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#0B4F6C" stroke-width="1.5" stroke-linecap="round">
+        <rect x="6" y="12" width="24" height="18" rx="3"/>
+        <path d="M12 12 C12 8 24 8 24 12"/>
+        <line x1="18" y1="18" x2="18" y2="24"/>
+        <path d="M6 24 C2 20 4 12 8 10"/>
+        <path d="M30 24 C34 20 32 12 28 10"/>
+      </svg>
+      <span class="detail-title">The Resort</span>
+      <div class="detail-body">
+        <strong style="color:var(--ocean-deep);">Anantara Veli Maldives Resort</strong><br>
+        South Male Atoll, Maldives<br><br>
+        <a href="https://www.anantara.com/en/veli-maldives" class="detail-link" target="_blank">Visit resort website →</a><br><br>
+        <em>All events within the resort grounds. Accommodation packages available for wedding guests.</em>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="detail-card reveal reveal-delay-1">
+      <svg class="detail-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#0B4F6C" stroke-width="1.5" stroke-linecap="round">
+        <path d="M4 18 L28 8 L24 18 L28 28 Z"/>
+        <path d="M24 18 L32 18"/>
+        <path d="M28 14 L28 22"/>
+      </svg>
+      <span class="detail-title">Getting There</span>
+      <div class="detail-body">
+        Nearest airport: <strong>Velana International Airport (MLE)</strong>, Malé<br><br>
+        ✈ Direct flights from Dubai, Singapore, Colombo<br><br>
+        🚤 Speed boat transfer from Malé Airport: <strong>20 min</strong><br><br>
+        Suggested arrival: Day before ceremony (Friday, Nov 7)
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="detail-card reveal">
+      <svg class="detail-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#0B4F6C" stroke-width="1.5" stroke-linecap="round">
+        <ellipse cx="18" cy="10" rx="10" ry="6" transform="rotate(-10 18 10)"/>
+        <path d="M8 14 C6 22 10 30 18 32 C26 30 30 22 28 14"/>
+        <line x1="18" y1="32" x2="18" y2="36"/>
+      </svg>
+      <span class="detail-title">Dress Code</span>
+      <div class="detail-body">
+        <em>"Beach Formal for vows. Barefoot chic always welcome."</em><br><br>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#1A7FA0;" title="Ocean Blue"></div>
+          <div class="swatch" style="background:#E8604C;" title="Coral"></div>
+          <div class="swatch" style="background:#FDF8F0;" title="Ivory"></div>
+          <div class="swatch" style="background:#E8C99A;" title="Sand"></div>
+          <div class="swatch" style="background:#2D5A2D;" title="Tropical Green"></div>
+        </div>
+        <br>Light fabrics. Flowy silhouettes. Leave the heels at home.
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="detail-card reveal reveal-delay-1">
+      <svg class="detail-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#0B4F6C" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="18" cy="10" r="6"/>
+        <path d="M18 4 L18 2"/>
+        <path d="M24 6 L26 4"/>
+        <path d="M26 12 L28 12"/>
+        <path d="M2 28 C8 20 28 20 34 28"/>
+        <path d="M6 28 C10 24 26 24 30 28"/>
+      </svg>
+      <span class="detail-title">Weather & Packing</span>
+      <div class="detail-body">
+        🌤 November: <strong>26–30°C · Partly cloudy · Sea breeze</strong><br><br>
+        Pack: Sunscreen ✦ Light linens ✦ Waterproof sandals ✦ Sarong<br><br>
+        🌅 Golden hour: <strong>5:47 PM</strong><br><br>
+        Share your moments with us:<br>
+        <span class="hashtag-big">#AidenAndSophiaMaldives</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WAVE DIVIDER ==================== -->
+<div class="wave-divider" style="background:#F7E8D4;">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:70px;">
+    <path d="M0 50 C360 10 720 70 1080 20 C1260 0 1380 50 1440 35 L1440 70 L0 70Z" fill="#0B4F6C"/>
+  </svg>
+</div>
+
+<!-- ==================== COUNTDOWN ==================== -->
+<section id="countdown">
+  <div class="countdown-header">
+    <span class="section-eyebrow" style="color:var(--ocean-foam);" class="reveal">Counting Down</span>
+    <span class="section-title reveal">Until We Say "I Do" on the Beach</span>
+  </div>
+
+  <div class="timer-grid reveal">
+    <div class="timer-block">
+      <span class="timer-number" id="t-days">000</span>
+      <span class="timer-label">Days</span>
+    </div>
+    <span class="timer-sep">∿</span>
+    <div class="timer-block">
+      <span class="timer-number" id="t-hours">00</span>
+      <span class="timer-label">Hours</span>
+    </div>
+    <span class="timer-sep">∿</span>
+    <div class="timer-block">
+      <span class="timer-number" id="t-mins">00</span>
+      <span class="timer-label">Minutes</span>
+    </div>
+    <span class="timer-sep">∿</span>
+    <div class="timer-block">
+      <span class="timer-number" id="t-secs">00</span>
+      <span class="timer-label">Seconds</span>
+    </div>
+  </div>
+
+  <div class="progress-section reveal">
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <span class="progress-label" id="progress-label">Calculating time to paradise...</span>
+  </div>
+</section>
+
+<!-- ==================== WAVE DIVIDER ==================== -->
+<div class="wave-divider" style="background:linear-gradient(180deg,#0B4F6C,#1A7FA0);">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:70px;">
+    <path d="M0 25 C360 70 720 10 1080 45 C1260 60 1380 20 1440 40 L1440 70 L0 70Z" fill="#0B4F6C"/>
+  </svg>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer id="footer">
+  <div style="position:relative;z-index:2;padding-bottom:80px;">
+    <!-- Starfish decorations -->
+    <div style="display:flex;justify-content:center;gap:16px;margin-bottom:8px;opacity:0.5;">
+      <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2 L13.5 9 L20 7 L15 12 L20 17 L13.5 15 L12 22 L10.5 15 L4 17 L9 12 L4 7 L10.5 9 Z" fill="#F28472"/>
+      </svg>
+      <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2 L13.5 9 L20 7 L15 12 L20 17 L13.5 15 L12 22 L10.5 15 L4 17 L9 12 L4 7 L10.5 9 Z" fill="#FFBE6A"/>
+      </svg>
+      <svg viewBox="0 0 24 24" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2 L13.5 9 L20 7 L15 12 L20 17 L13.5 15 L12 22 L10.5 15 L4 17 L9 12 L4 7 L10.5 9 Z" fill="#F28472"/>
+      </svg>
+    </div>
+
+    <span class="footer-monogram">Aiden ∿ Sophia</span>
+    <span class="footer-date">November 8 · 2026 &nbsp;·&nbsp; Maldives</span>
+
+    <svg class="mini-wave" style="margin:0 auto 24px;" width="160" height="20" viewBox="0 0 160 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 10 C20 3 40 17 60 10 C80 3 100 17 120 10 C140 3 155 14 160 10" stroke="#F28472" stroke-width="1.5" fill="none" opacity="0.6"/>
+    </svg>
+
+    <p class="footer-tagline">"Life is better with sandy toes and saltwater hair."</p>
+    <span class="footer-hashtag">#AidenAndSophiaMaldives</span>
+
+    <!-- Little crab -->
+    <svg style="display:block;margin:0 auto 24px;opacity:0.3;" viewBox="0 0 60 40" width="44" height="28" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="30" cy="22" rx="14" ry="10" fill="#E8604C"/>
+      <circle cx="22" cy="15" r="4" fill="#E8604C"/>
+      <circle cx="38" cy="15" r="4" fill="#E8604C"/>
+      <circle cx="21" cy="14" r="1.5" fill="white"/>
+      <circle cx="37" cy="14" r="1.5" fill="white"/>
+      <!-- Legs -->
+      <line x1="18" y1="20" x2="6" y2="16" stroke="#E8604C" stroke-width="2" stroke-linecap="round"/>
+      <line x1="18" y1="23" x2="5" y2="23" stroke="#E8604C" stroke-width="2" stroke-linecap="round"/>
+      <line x1="18" y1="26" x2="6" y2="30" stroke="#E8604C" stroke-width="2" stroke-linecap="round"/>
+      <line x1="42" y1="20" x2="54" y2="16" stroke="#E8604C" stroke-width="2" stroke-linecap="round"/>
+      <line x1="42" y1="23" x2="55" y2="23" stroke="#E8604C" stroke-width="2" stroke-linecap="round"/>
+      <line x1="42" y1="26" x2="54" y2="30" stroke="#E8604C" stroke-width="2" stroke-linecap="round"/>
+      <!-- Claws -->
+      <path d="M16 18 C10 12 4 14 5 18 C6 22 12 20 16 18Z" fill="#E8604C"/>
+      <path d="M44 18 C50 12 56 14 55 18 C54 22 48 20 44 18Z" fill="#E8604C"/>
+    </svg>
+
+    <p class="footer-fine">Made with love and a little sea breeze ✦</p>
+  </div>
+
+  <!-- Animated footer waves -->
+  <div style="position:absolute;bottom:0;left:0;width:100%;overflow:hidden;height:60px;">
+    <svg class="footer-waves" id="footer-wave1" viewBox="0 0 2880 60" preserveAspectRatio="none" style="position:absolute;bottom:0;height:40px;" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 30 C180 10 360 50 540 30 C720 10 900 50 1080 30 C1260 10 1440 50 1620 30 C1800 10 1980 50 2160 30 C2340 10 2520 50 2700 30 C2760 20 2820 25 2880 30 L2880 60 L0 60Z" fill="#0D3A52" opacity="0.8"/>
+    </svg>
+    <svg class="footer-waves" id="footer-wave2" viewBox="0 0 2880 50" preserveAspectRatio="none" style="position:absolute;bottom:0;height:30px;" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 20 C240 40 480 5 720 20 C960 35 1200 5 1440 20 C1680 35 1920 5 2160 20 C2400 35 2640 5 2880 20 L2880 50 L0 50Z" fill="#1A7FA0" opacity="0.5"/>
+    </svg>
+    <svg class="footer-waves" id="footer-wave3" viewBox="0 0 2880 40" preserveAspectRatio="none" style="position:absolute;bottom:0;height:20px;" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 15 C200 30 400 5 600 15 C800 25 1000 5 1200 15 C1400 25 1600 5 1800 15 C2000 25 2200 5 2400 15 C2600 25 2800 5 2880 15 L2880 40 L0 40Z" fill="rgba(240,250,252,0.25)"/>
+    </svg>
+  </div>
+</footer>
+
+<script>
+// ======================== STARS ========================
+(function() {
+  const container = document.getElementById('stars-container');
+  container.style.cssText = 'position:absolute;inset:0;pointer-events:none;';
+  for (let i = 0; i < 38; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const x = Math.random() * 100;
+    const y = Math.random() * 35;
+    const delay = Math.random() * 4;
+    const dur = 2 + Math.random() * 3;
+    const op = 0.5 + Math.random() * 0.4;
+    star.style.cssText = `left:${x}%;top:${y}%;opacity:${op};animation-delay:${delay}s;animation-duration:${dur}s;`;
+    container.appendChild(star);
+  }
+})();
+
+// ======================== FLOATING ELEMENTS ========================
+(function() {
+  const overlay = document.getElementById('floating-overlay');
+
+  const shellPaths = [
+    // Nautilus spiral
+    'M12 2 C6 2 2 6 2 12 C2 18 6 22 12 22 C15 22 18 20 20 17 C22 14 22 10 20 7 C18 4 15 2 12 2Z M12 8 C10 8 8 10 8 12 C8 14 10 16 12 16',
+    // Scallop
+    'M12 20 C4 16 2 8 6 4 C10 0 18 2 20 6 C22 10 20 18 12 20Z M6 12 C8 14 10 14 12 14 C14 14 16 14 18 12',
+    // Conch
+    'M8 2 C4 4 2 10 4 16 C6 22 12 24 16 20 C20 16 20 8 16 4 C13 1 10 1 8 2Z'
+  ];
+
+  const petalPaths = [
+    'M12 2 C16 6 18 14 12 20 C6 14 8 6 12 2Z',
+    'M12 4 C18 6 20 14 14 18 C8 16 6 8 12 4Z',
+    'M12 3 C14 7 14 15 12 19 C10 15 10 7 12 3Z'
+  ];
+
+  const colors = {
+    shells: ['#FDF8F0','#E8C99A','#FAC4B8','#F7E8D4'],
+    petals: ['#E8604C','#FF6B9D','#FDF8F0','#FFBE6A','#F28472'],
+  };
+
+  function spawn(type) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    el.setAttribute('xmlns','http://www.w3.org/2000/svg');
+
+    let size, color, pathData, sway, spin, maxOp, dur;
+
+    if (type === 'bubble') {
+      const s = 4 + Math.random() * 14;
+      const bDiv = document.createElement('div');
+      bDiv.style.cssText = `width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(75,191,207,0.2));border:1px solid rgba(255,255,255,0.4);`;
+      bDiv.className = 'float-item';
+      bDiv.style.setProperty('--max-opacity','0.5');
+      bDiv.style.setProperty('--sway', `${(Math.random()-0.5)*30}px`);
+      bDiv.style.setProperty('--spin','0deg');
+      bDiv.style.left = (10 + Math.random() * 80) + '%';
+      bDiv.style.animationDuration = (6 + Math.random() * 6) + 's';
+      bDiv.style.animationDelay = (Math.random() * 12) + 's';
+      overlay.appendChild(bDiv);
+      return;
+    }
+
+    if (type === 'shell') {
+      size = 16 + Math.random() * 20;
+      color = colors.shells[Math.floor(Math.random() * colors.shells.length)];
+      pathData = shellPaths[Math.floor(Math.random() * shellPaths.length)];
+      sway = (Math.random() - 0.5) * 80;
+      spin = Math.random() > 0.5 ? 180 : -180;
+      maxOp = 0.55 + Math.random() * 0.25;
+      dur = 12 + Math.random() * 8;
+    } else {
+      size = 14 + Math.random() * 16;
+      color = colors.petals[Math.floor(Math.random() * colors.petals.length)];
+      pathData = petalPaths[Math.floor(Math.random() * petalPaths.length)];
+      sway = (Math.random() - 0.5) * 120;
+      spin = Math.random() > 0.5 ? 360 : -360;
+      maxOp = 0.45 + Math.random() * 0.25;
+      dur = 8 + Math.random() * 6;
+    }
+
+    el.setAttribute('viewBox','0 0 24 24');
+    el.setAttribute('width', size);
+    el.setAttribute('height', size);
+    el.style.fill = color;
+    el.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))';
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', pathData);
+    el.appendChild(path);
+
+    el.className = 'float-item';
+    el.style.setProperty('--max-opacity', maxOp);
+    el.style.setProperty('--sway', sway + 'px');
+    el.style.setProperty('--spin', spin + 'deg');
+    el.style.left = (Math.random() * 100) + '%';
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = (Math.random() * 15) + 's';
+
+    overlay.appendChild(el);
+  }
+
+  // Spawn initial batch
+  for (let i = 0; i < 10; i++) spawn('shell');
+  for (let i = 0; i < 16; i++) spawn('petal');
+  for (let i = 0; i < 28; i++) spawn('bubble');
+})();
+
+// ======================== PARALLAX ========================
+(function() {
+  const skyBg = document.getElementById('sky-bg');
+  const clouds = [document.getElementById('cloud1'), document.getElementById('cloud2'), document.getElementById('cloud3')];
+  const palmLeft = document.getElementById('palm-left');
+  const palmRight = document.getElementById('palm-right');
+  const heroText = document.getElementById('hero-text');
+  const sun = document.getElementById('sun');
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        skyBg.style.transform = `translateY(${y * 0.15}px)`;
+        clouds.forEach((c, i) => {
+          if (c) c.style.transform = `translateY(${y * (0.2 + i * 0.05)}px)`;
+        });
+        if (palmLeft) palmLeft.style.transform = `translateY(${y * 0.3}px)`;
+        if (palmRight) palmRight.style.transform = `translateY(${y * 0.3}px)`;
+        if (heroText) {
+          heroText.style.transform = `translateY(${y * 0.45}px)`;
+          heroText.style.opacity = Math.max(0, 1 - y / 500);
+        }
+        if (sun) sun.style.transform = `translate(-50%, calc(-50% + ${y * 0.1}px))`;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+})();
+
+// ======================== INTERSECTION OBSERVER ========================
+(function() {
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+})();
+
+// ======================== PILL TOGGLE ========================
+function togglePill(btn, group) {
+  const siblings = btn.parentElement.querySelectorAll('.pill');
+  siblings.forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ======================== RSVP ACTIONS ========================
+function getFormData() {
+  const name = document.getElementById('rsvp-name').value.trim() || 'dear friend';
+  const phone = document.getElementById('rsvp-phone').value.trim();
+  const guests = document.getElementById('rsvp-guests').value || '1';
+  const mealEl = document.querySelector('[onclick*="meal"].active');
+  const meal = mealEl ? mealEl.textContent : 'No preference';
+  const attendEl = document.querySelector('[onclick*="attend"].active');
+  const attending = attendEl ? attendEl.textContent : 'Yes, I\'ll be there! 🌴';
+  return { name, phone, guests, meal, attending };
+}
+
+function showConfirm(name) {
+  document.getElementById('confirm-name').textContent = name;
+  const confirm = document.getElementById('rsvp-confirm');
+  confirm.style.display = 'block';
+  setTimeout(() => confirm.style.animation = 'fadeIn 0.6s ease', 10);
+}
+
+function sendWhatsApp(e) {
+  e.preventDefault();
+  const d = getFormData();
+  const msg = encodeURIComponent(`Hi! ${d.name}, party of ${d.guests} joyfully accepts your invitation to paradise! 🌺\nMeal: ${d.meal}\n${d.attending}`);
+  window.open(`https://wa.me/+11234567890?text=${msg}`, '_blank');
+  showConfirm(d.name);
+}
+
+function sendEmail(e) {
+  e.preventDefault();
+  const d = getFormData();
+  const subject = encodeURIComponent('RSVP — Aiden & Sophia Wedding');
+  const body = encodeURIComponent(`Hi!\n\n${d.name} (party of ${d.guests}) joyfully accepts your invitation to paradise! 🌺\n\nMeal preference: ${d.meal}\nAttendance: ${d.attending}\nContact: ${d.phone}\n\nSee you on the beach!`);
+  window.open(`mailto:aidenxsophia2026@gmail.com?subject=${subject}&body=${body}`, '_blank');
+  showConfirm(d.name);
+}
+
+// ======================== COUNTDOWN ========================
+(function() {
+  const target = new Date('2026-11-08T17:30:00+05:00').getTime();
+  const start = new Date('2025-11-08').getTime();
+  const total = target - start;
+
+  function update() {
+    const now = Date.now();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById('t-days').textContent = '000';
+      document.getElementById('t-hours').textContent = '00';
+      document.getElementById('t-mins').textContent = '00';
+      document.getElementById('t-secs').textContent = '00';
+      document.getElementById('progress-label').textContent = '🎉 The moment has arrived!';
+      document.getElementById('progress-fill').style.width = '100%';
+      return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('t-days').textContent = String(days).padStart(3, '0');
+    document.getElementById('t-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('t-mins').textContent = String(mins).padStart(2, '0');
+    document.getElementById('t-secs').textContent = String(secs).padStart(2, '0');
+
+    const elapsed = now - start;
+    const pct = Math.min(100, Math.max(0, (elapsed / total) * 100));
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    const months = Math.floor(days / 30);
+    const remDays = days % 30;
+    let label = '';
+    if (months > 0) label = `${months} month${months>1?'s':''}, ${remDays} day${remDays!==1?'s':''} until paradise`;
+    else label = `${days} day${days!==1?'s':''} until paradise`;
+    document.getElementById('progress-label').textContent = label;
+
+    setTimeout(update, 1000);
+  }
+  update();
+})();
+</script>
+</body>
+</html>

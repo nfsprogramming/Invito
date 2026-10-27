@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "functions": {
+    "src/app/api/preview/route.ts": {
+      "includeFiles": "src/lib/templates/*.html"
+    }
+  }
+}

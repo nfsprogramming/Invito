@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bismillah — Zaid & Amira | Nikah Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --teal:#0A2A2A;
+  --teal-mid:#0D3535;
+  --teal-light:#134040;
+  --gold:#C9942A;
+  --gold-light:#E2B354;
+  --gold-pale:#F0D080;
+  --emerald:#1A6B4A;
+  --emerald-light:#2A8B62;
+  --ivory:#FDF6E3;
+  --ivory-dim:#F0E6CC;
+  --sky1:#020C14;
+  --sky2:#061824;
+  --sky3:#0A2A3A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--teal);color:var(--ivory);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
+
+/* SCROLL PROGRESS */
+#scroll-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--emerald-light),var(--gold));z-index:9999;width:0%;transition:width .1s linear;box-shadow:0 0 12px var(--gold)}
+
+/* NAV */
+nav{position:fixed;top:3px;left:0;right:0;z-index:999;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:linear-gradient(180deg,rgba(10,42,42,.95) 0%,transparent 100%);backdrop-filter:blur(4px)}
+.nav-brand{font-family:'Cinzel Decorative',serif;font-size:.75rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.25em;color:var(--ivory-dim);text-decoration:none;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+#music-btn{background:none;border:1px solid rgba(201,148,42,.4);color:var(--gold);padding:.4rem 1rem;font-family:'Jost',sans-serif;font-size:.65rem;letter-spacing:.2em;cursor:pointer;border-radius:20px;transition:all .3s}
+#music-btn:hover{background:rgba(201,148,42,.15)}
+
+/* ═══════════════════════════════════
+   HERO SECTION
+═══════════════════════════════════ */
+#hero{position:relative;width:100%;height:100vh;min-height:700px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:8vh}
+.hero-sky{position:absolute;inset:0;background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 30%,var(--sky3) 60%,#0A2A2A 100%)}
+/* Stars */
+.stars-layer{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) var(--delay,0s) ease-in-out infinite alternate}
+@keyframes twinkle{0%{opacity:.2;transform:scale(1)}100%{opacity:1;transform:scale(1.4)}}
+
+/* Moon */
+.hero-moon{position:absolute;top:7%;right:12%;width:80px;height:80px}
+.hero-moon svg{width:100%;height:100%;filter:drop-shadow(0 0 20px rgba(201,148,42,.6))}
+
+/* Floating Lanterns */
+.lantern-float{position:absolute;opacity:0;animation:lanternRise 2s forwards;pointer-events:none}
+@keyframes lanternRise{0%{opacity:0;transform:translateY(40px)}100%{opacity:.9;transform:translateY(0)}}
+.lantern-sway{animation:sway 4s ease-in-out infinite alternate}
+@keyframes sway{0%{transform:rotate(-6deg)}100%{transform:rotate(6deg)}}
+.lantern-glow{filter:drop-shadow(0 0 18px rgba(201,148,42,.9)) drop-shadow(0 0 40px rgba(201,148,42,.4))}
+
+/* Mosque SVG */
+.mosque-wrap{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(900px,96vw);pointer-events:none}
+
+/* Bismillah */
+.bismillah-top{position:absolute;top:13%;left:50%;transform:translateX(-50%);text-align:center;z-index:10}
+.bismillah-arabic{font-family:'Amiri',serif;font-size:clamp(1.6rem,4vw,2.8rem);color:var(--gold);text-shadow:0 0 30px rgba(201,148,42,.7),0 0 60px rgba(201,148,42,.3);letter-spacing:.05em;line-height:1.4;direction:rtl}
+.bismillah-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:rgba(253,246,227,.55);letter-spacing:.25em;margin-top:.5rem}
+
+/* Hero text */
+.hero-text{position:relative;z-index:10;text-align:center}
+.hero-you-are-invited{font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;opacity:.8}
+.hero-names{font-family:'Cinzel Decorative',serif;font-size:clamp(2.2rem,6vw,5rem);color:var(--ivory);line-height:1.1;text-shadow:0 4px 40px rgba(10,42,42,.8)}
+.hero-names .amp{color:var(--gold);font-size:.7em;margin:0 .5rem}
+.hero-date{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.4rem);color:var(--gold-light);letter-spacing:.2em;margin-top:1rem}
+.hero-venue{font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.3em;color:rgba(253,246,227,.5);text-transform:uppercase;margin-top:.5rem}
+.scroll-hint{margin-top:2.5rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:.5;animation:bobble 2s ease-in-out infinite}
+.scroll-hint span{font-family:'Jost',sans-serif;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--gold),transparent)}
+@keyframes bobble{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* ═══════════════════════════════════
+   DIVIDERS
+═══════════════════════════════════ */
+.divider{width:100%;display:flex;align-items:center;justify-content:center;padding:1.5rem 0;overflow:hidden}
+.divider svg{width:min(600px,90vw);opacity:.6}
+
+/* ═══════════════════════════════════
+   SECTIONS COMMON
+═══════════════════════════════════ */
+section{padding:6rem 2rem;position:relative}
+.section-inner{max-width:900px;margin:0 auto}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Section labels */
+.section-label{font-family:'Jost',sans-serif;font-size:.65rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:1.5rem;display:block}
+.section-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.6rem,4vw,2.8rem);color:var(--ivory);margin-bottom:1rem;line-height:1.2}
+.section-title .gold{color:var(--gold)}
+
+/* ═══════════════════════════════════
+   BLESSING SECTION
+═══════════════════════════════════ */
+#blessing{background:linear-gradient(180deg,var(--teal) 0%,var(--teal-mid) 100%);text-align:center}
+.quran-verse{font-family:'Amiri',serif;font-size:clamp(1.3rem,3vw,2rem);color:var(--gold-light);direction:rtl;line-height:2;margin-bottom:1rem;text-shadow:0 0 20px rgba(201,148,42,.3)}
+.quran-ref{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:rgba(253,246,227,.5);letter-spacing:.2em;margin-bottom:3rem}
+.families-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:start;margin:3rem 0}
+.family-side{text-align:center}
+.family-label{font-family:'Jost',sans-serif;font-size:.6rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;opacity:.7;margin-bottom:.75rem}
+.elders-names{font-family:'Amiri',serif;font-size:1.05rem;color:var(--ivory-dim);line-height:2}
+.parents-names{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--gold-light);line-height:1.8;margin-top:.5rem}
+.families-divider{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding-top:1.5rem}
+.families-divider .crescent{font-size:2rem;color:var(--gold);animation:spin-slow 20s linear infinite}
+@keyframes spin-slow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.big-names{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,7vw,5.5rem);text-align:center;line-height:1;margin:3rem 0}
+.big-names .bride{color:var(--ivory)}
+.big-names .groom{color:var(--ivory)}
+.big-names .and{display:block;font-size:.35em;color:var(--gold);font-style:italic;margin:.3rem 0;letter-spacing:.3em}
+
+/* ═══════════════════════════════════
+   EVENTS SECTION
+═══════════════════════════════════ */
+#events{background:var(--teal-mid)}
+.events-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.event-card{position:relative;overflow:hidden;border-radius:4px;padding:2.5rem 2rem;background:var(--teal-light);border:1px solid rgba(201,148,42,.2);clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));transition:transform .3s,box-shadow .3s}
+.event-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 30px rgba(201,148,42,.1)}
+.event-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,148,42,.06) 0%,transparent 60%);pointer-events:none}
+.event-card-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.event-card-name{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);margin-bottom:.75rem;letter-spacing:.05em}
+.event-card-date{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--ivory);margin-bottom:.25rem}
+.event-card-time{font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.2em;color:rgba(253,246,227,.5);text-transform:uppercase;margin-bottom:.75rem}
+.event-card-venue{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:rgba(253,246,227,.6)}
+.event-card-badge{position:absolute;top:1rem;right:1rem;background:rgba(201,148,42,.15);border:1px solid rgba(201,148,42,.3);padding:.25rem .6rem;border-radius:20px;font-family:'Jost',sans-serif;font-size:.6rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+
+/* ═══════════════════════════════════
+   COUPLE SECTION
+═══════════════════════════════════ */
+#couple{background:linear-gradient(180deg,var(--teal-mid) 0%,var(--teal) 100%);text-align:center}
+.couple-frame-wrap{position:relative;width:min(400px,80vw);margin:0 auto 3rem}
+.couple-photo-placeholder{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--teal-light),var(--teal-mid));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;color:rgba(253,246,227,.3);font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.2em;position:relative;overflow:hidden}
+.couple-photo-placeholder::before{content:'Your\APhoto\AHere';white-space:pre;text-align:center;line-height:2.5;font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,148,42,.3)}
+.islamic-frame{position:absolute;inset:-2px;pointer-events:none}
+.couple-bios{display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:center;margin-top:2rem}
+.bio{text-align:center}
+.bio-name{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:var(--gold);margin-bottom:.5rem}
+.bio-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:rgba(253,246,227,.65);line-height:1.7}
+.bio-divider{display:flex;align-items:center;justify-content:center}
+.bio-divider svg{width:40px;opacity:.5}
+.couple-quote{max-width:500px;margin:3rem auto 0;font-family:'Amiri',serif;font-size:1.2rem;color:var(--gold-light);font-style:italic;line-height:2;text-align:center}
+.couple-quote::before,.couple-quote::after{content:'"';font-size:3rem;color:rgba(201,148,42,.3);line-height:0;vertical-align:-.4em;font-family:serif}
+
+/* ═══════════════════════════════════
+   RSVP SECTION
+═══════════════════════════════════ */
+#rsvp{background:linear-gradient(135deg,#0A3A2A 0%,var(--teal) 100%);text-align:center;border-top:1px solid rgba(201,148,42,.15);border-bottom:1px solid rgba(201,148,42,.15)}
+.rsvp-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:rgba(253,246,227,.7);max-width:500px;margin:1.5rem auto 2.5rem;line-height:1.9}
+.rsvp-deadline{font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.3em;color:rgba(201,148,42,.7);text-transform:uppercase;margin-bottom:2rem}
+.wa-btn{display:inline-flex;align-items:center;gap:1rem;background:linear-gradient(135deg,#1A8A3E,#25A84C);color:#fff;padding:1.1rem 2.5rem;border-radius:50px;font-family:'Jost',sans-serif;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:all .3s;box-shadow:0 8px 40px rgba(26,138,62,.4)}
+.wa-btn:hover{transform:translateY(-3px);box-shadow:0 15px 50px rgba(26,138,62,.6)}
+.wa-btn svg{width:22px;height:22px}
+
+/* ═══════════════════════════════════
+   DETAILS SECTION
+═══════════════════════════════════ */
+#details{background:var(--teal)}
+.details-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:3rem}
+.detail-card{background:rgba(255,255,255,.03);border:1px solid rgba(201,148,42,.15);border-radius:4px;padding:2rem;text-align:center;transition:border-color .3s,transform .3s}
+.detail-card:hover{border-color:rgba(201,148,42,.4);transform:translateY(-4px)}
+.detail-icon{font-size:2rem;margin-bottom:1rem;display:block;filter:drop-shadow(0 0 10px rgba(201,148,42,.5))}
+.detail-title{font-family:'Cinzel Decorative',serif;font-size:.7rem;letter-spacing:.1em;color:var(--gold);margin-bottom:.75rem}
+.detail-body{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(253,246,227,.7);line-height:1.8}
+.hashtag{font-family:'Cinzel Decorative',serif;font-size:1.5rem;color:var(--gold);letter-spacing:.05em}
+
+/* ═══════════════════════════════════
+   COUNTDOWN SECTION
+═══════════════════════════════════ */
+#countdown{position:relative;background:var(--sky1);text-align:center;overflow:hidden;padding:7rem 2rem}
+#countdown-stars{position:absolute;inset:0;pointer-events:none}
+.countdown-inner{position:relative;z-index:2}
+.countdown-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.2rem,3vw,2rem);color:var(--gold);margin-bottom:.5rem}
+.countdown-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(253,246,227,.5);margin-bottom:3rem}
+.countdown-grid{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.count-block{text-align:center;min-width:90px}
+.count-num{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,6vw,5rem);color:var(--ivory);line-height:1;display:block;text-shadow:0 0 40px rgba(201,148,42,.3)}
+.count-label{font-family:'Jost',sans-serif;font-size:.6rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;opacity:.7;margin-top:.5rem;display:block}
+.count-sep{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,4rem);color:var(--gold);opacity:.4;align-self:flex-start;padding-top:.1em}
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer{background:var(--sky1);border-top:1px solid rgba(201,148,42,.15);padding:4rem 2rem;text-align:center}
+.footer-crescent{font-size:3rem;color:var(--gold);display:block;margin-bottom:1rem;filter:drop-shadow(0 0 20px rgba(201,148,42,.5))}
+.footer-names{font-family:'Cinzel Decorative',serif;font-size:1.5rem;color:var(--ivory);margin-bottom:.5rem}
+.footer-date{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--gold-light);margin-bottom:2rem;letter-spacing:.1em}
+.footer-social{display:flex;justify-content:center;gap:2rem;list-style:none;margin-bottom:2rem}
+.footer-social a{font-family:'Jost',sans-serif;font-size:.65rem;letter-spacing:.3em;color:rgba(253,246,227,.4);text-decoration:none;text-transform:uppercase;transition:color .3s}
+.footer-social a:hover{color:var(--gold)}
+.footer-copy{font-family:'Jost',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(253,246,227,.2)}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media(max-width:650px){
+  nav{padding:.8rem 1.5rem}
+  .nav-links{display:none}
+  .families-grid,.couple-bios{grid-template-columns:1fr;text-align:center}
+  .families-divider{flex-direction:row;justify-content:center}
+  .big-names{font-size:2.2rem}
+  .events-grid{grid-template-columns:1fr}
+}
+
+/* Fade-in scroll reveal */
+@keyframes fadeUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Zaid &amp; Amira</div>
+  <ul class="nav-links">
+    <li><a href="#blessing">Blessing</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#couple">Couple</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+    <li><a href="#countdown">Countdown</a></li>
+  </ul>
+  <button id="music-btn">♪ Music Off</button>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section id="hero">
+  <div class="hero-sky"></div>
+  <div class="stars-layer" id="stars"></div>
+
+  <!-- Moon -->
+  <div class="hero-moon">
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="moonGrad" cx="40%" cy="35%" r="55%">
+          <stop offset="0%" stop-color="#F0D080"/>
+          <stop offset="100%" stop-color="#C9942A"/>
+        </radialGradient>
+        <filter id="moonGlow">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Crescent -->
+      <circle cx="40" cy="40" r="30" fill="url(#moonGrad)" filter="url(#moonGlow)"/>
+      <circle cx="52" cy="34" r="26" fill="var(--sky1)"/>
+      <!-- Stars near moon -->
+      <circle cx="68" cy="18" r="2.5" fill="#F0D080" opacity=".9"/>
+      <circle cx="72" cy="28" r="1.5" fill="#F0D080" opacity=".6"/>
+    </svg>
+  </div>
+
+  <!-- Floating Lanterns (positioned via JS for scroll effect) -->
+  <div class="lantern-float lantern-sway lantern-glow" id="lantern1" style="top:22%;left:8%;animation-delay:.3s">
+    <svg width="45" height="80" viewBox="0 0 45 80" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="lg1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD070" stop-opacity=".9"/><stop offset="100%" stop-color="#C9942A" stop-opacity=".3"/></radialGradient></defs>
+      <!-- Chain -->
+      <line x1="22.5" y1="0" x2="22.5" y2="8" stroke="#C9942A" stroke-width="1.5" opacity=".7"/>
+      <!-- Cap -->
+      <path d="M11 8 Q22.5 5 34 8 L32 14 Q22.5 11 13 14Z" fill="#C9942A" opacity=".9"/>
+      <!-- Body -->
+      <path d="M13 14 Q5 30 7 50 Q12 62 22.5 64 Q33 62 38 50 Q40 30 32 14Z" fill="url(#lg1)" stroke="#C9942A" stroke-width="1"/>
+      <!-- Geometric lattice lines -->
+      <line x1="22.5" y1="14" x2="22.5" y2="64" stroke="#C9942A" stroke-width=".8" opacity=".5"/>
+      <ellipse cx="22.5" cy="30" rx="9" ry="5" fill="none" stroke="#C9942A" stroke-width=".8" opacity=".5"/>
+      <ellipse cx="22.5" cy="45" rx="11" ry="5" fill="none" stroke="#C9942A" stroke-width=".8" opacity=".5"/>
+      <!-- Cross lattice -->
+      <line x1="9" y1="30" x2="36" y2="30" stroke="#C9942A" stroke-width=".6" opacity=".4"/>
+      <line x1="7" y1="45" x2="38" y2="45" stroke="#C9942A" stroke-width=".6" opacity=".4"/>
+      <!-- Inner glow -->
+      <ellipse cx="22.5" cy="39" rx="8" ry="14" fill="#FFD070" opacity=".25"/>
+      <!-- Base -->
+      <path d="M13 64 Q22.5 68 32 64 L30 72 Q22.5 76 15 72Z" fill="#C9942A" opacity=".8"/>
+      <!-- Drop -->
+      <ellipse cx="22.5" cy="74" rx="3" ry="5" fill="#C9942A" opacity=".5"/>
+    </svg>
+  </div>
+
+  <div class="lantern-float lantern-sway lantern-glow" id="lantern2" style="top:28%;right:7%;animation-delay:.7s;animation-duration:5s">
+    <svg width="38" height="68" viewBox="0 0 38 68" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="lg2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD070" stop-opacity=".85"/><stop offset="100%" stop-color="#C9942A" stop-opacity=".2"/></radialGradient></defs>
+      <line x1="19" y1="0" x2="19" y2="7" stroke="#C9942A" stroke-width="1.5" opacity=".7"/>
+      <path d="M9 7 Q19 4 29 7 L27 12 Q19 9 11 12Z" fill="#C9942A" opacity=".9"/>
+      <path d="M11 12 Q4 26 6 42 Q10 53 19 55 Q28 53 32 42 Q34 26 27 12Z" fill="url(#lg2)" stroke="#C9942A" stroke-width="1"/>
+      <!-- Hexagonal lattice -->
+      <line x1="19" y1="12" x2="19" y2="55" stroke="#C9942A" stroke-width=".7" opacity=".45"/>
+      <line x1="6" y1="33" x2="32" y2="33" stroke="#C9942A" stroke-width=".6" opacity=".4"/>
+      <line x1="8" y1="22" x2="30" y2="22" stroke="#C9942A" stroke-width=".6" opacity=".4"/>
+      <line x1="8" y1="44" x2="30" y2="44" stroke="#C9942A" stroke-width=".6" opacity=".4"/>
+      <!-- diagonal lattice -->
+      <line x1="11" y1="12" x2="6" y2="33" stroke="#C9942A" stroke-width=".5" opacity=".3"/>
+      <line x1="27" y1="12" x2="32" y2="33" stroke="#C9942A" stroke-width=".5" opacity=".3"/>
+      <ellipse cx="19" cy="33" rx="6" ry="11" fill="#FFD070" opacity=".22"/>
+      <path d="M11 55 Q19 59 27 55 L25 62 Q19 65 13 62Z" fill="#C9942A" opacity=".8"/>
+      <ellipse cx="19" cy="63" rx="2.5" ry="4" fill="#C9942A" opacity=".5"/>
+    </svg>
+  </div>
+
+  <div class="lantern-float lantern-sway lantern-glow" id="lantern3" style="top:40%;left:18%;animation-delay:1.2s;animation-duration:6s">
+    <svg width="30" height="54" viewBox="0 0 30 54" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="lg3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFD070" stop-opacity=".8"/><stop offset="100%" stop-color="#1A6B4A" stop-opacity=".2"/></radialGradient></defs>
+      <line x1="15" y1="0" x2="15" y2="6" stroke="#C9942A" stroke-width="1.2" opacity=".7"/>
+      <path d="M7 6 Q15 3 23 6 L21 10 Q15 7 9 10Z" fill="#C9942A" opacity=".9"/>
+      <path d="M9 10 Q3 20 4 34 Q8 43 15 44 Q22 43 26 34 Q27 20 21 10Z" fill="url(#lg3)" stroke="#1A6B4A" stroke-width="1"/>
+      <line x1="15" y1="10" x2="15" y2="44" stroke="#C9942A" stroke-width=".6" opacity=".4"/>
+      <line x1="4" y1="26" x2="26" y2="26" stroke="#C9942A" stroke-width=".5" opacity=".35"/>
+      <ellipse cx="15" cy="27" rx="5" ry="9" fill="#7FFFD4" opacity=".12"/>
+      <path d="M9 44 Q15 47 21 44 L19 49 Q15 51 11 49Z" fill="#C9942A" opacity=".8"/>
+    </svg>
+  </div>
+
+  <!-- Bismillah -->
+  <div class="bismillah-top reveal" id="bism">
+    <div class="bismillah-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="bismillah-sub">In the Name of Allah, the Most Gracious, the Most Merciful</div>
+  </div>
+
+  <!-- Mosque SVG -->
+  <div class="mosque-wrap">
+    <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="mosqueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#134040"/>
+          <stop offset="100%" stop-color="#0A2A2A"/>
+        </linearGradient>
+        <linearGradient id="domeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1A6B4A"/>
+          <stop offset="40%" stop-color="#134040"/>
+          <stop offset="100%" stop-color="#0A2A2A"/>
+        </linearGradient>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E2B354"/>
+          <stop offset="100%" stop-color="#C9942A"/>
+        </linearGradient>
+        <linearGradient id="skyFade" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="transparent"/>
+          <stop offset="100%" stop-color="var(--teal)"/>
+        </linearGradient>
+        <filter id="mosqueGlow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <!-- Geometric pattern -->
+        <pattern id="lattice" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="10" x2="20" y2="10" stroke="rgba(201,148,42,.15)" stroke-width=".5"/>
+          <line x1="10" y1="0" x2="10" y2="20" stroke="rgba(201,148,42,.15)" stroke-width=".5"/>
+          <line x1="0" y1="0" x2="20" y2="20" stroke="rgba(201,148,42,.08)" stroke-width=".5"/>
+          <line x1="20" y1="0" x2="0" y2="20" stroke="rgba(201,148,42,.08)" stroke-width=".5"/>
+        </pattern>
+      </defs>
+
+      <!-- Ground -->
+      <rect x="0" y="440" width="900" height="40" fill="url(#mosqueGrad)"/>
+
+      <!-- ─── Left Far Minaret ─── -->
+      <!-- Shaft -->
+      <rect x="60" y="200" width="28" height="200" fill="url(#mosqueGrad)" stroke="rgba(201,148,42,.3)" stroke-width=".5"/>
+      <rect x="60" y="200" width="28" height="200" fill="url(#lattice)"/>
+      <!-- Balcony rings -->
+      <rect x="54" y="280" width="40" height="8" fill="url(#goldGrad)" rx="1"/>
+      <rect x="54" y="330" width="40" height="6" fill="url(#goldGrad)" rx="1"/>
+      <!-- Minaret top drum -->
+      <rect x="62" y="185" width="24" height="18" fill="#1A6B4A" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <!-- Conical cap -->
+      <polygon points="74,130 58,185 90,185" fill="url(#domeGrad)" stroke="rgba(201,148,42,.5)" stroke-width=".8"/>
+      <!-- Crescent finial -->
+      <g transform="translate(74,128)" filter="url(#mosqueGlow)">
+        <circle cx="0" cy="-6" r="7" fill="url(#goldGrad)"/>
+        <circle cx="4" cy="-8" r="6" fill="var(--sky1)"/>
+        <circle cx="0" cy="-20" r="2.5" fill="url(#goldGrad)"/>
+        <line x1="0" y1="-20" x2="0" y2="-14" stroke="url(#goldGrad)" stroke-width="1.5"/>
+      </g>
+      <!-- Arched windows on minaret -->
+      <path d="M67 240 Q74 233 81 240 L81 265 L67 265Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".7"/>
+      <path d="M67 295 Q74 288 81 295 L81 315 L67 315Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".7"/>
+
+      <!-- ─── Left Near Minaret ─── -->
+      <rect x="175" y="230" width="36" height="170" fill="url(#mosqueGrad)" stroke="rgba(201,148,42,.3)" stroke-width=".5"/>
+      <rect x="175" y="230" width="36" height="170" fill="url(#lattice)"/>
+      <rect x="168" y="300" width="50" height="9" fill="url(#goldGrad)" rx="1"/>
+      <rect x="168" y="345" width="50" height="6" fill="url(#goldGrad)" rx="1"/>
+      <rect x="178" y="215" width="30" height="18" fill="#1A6B4A" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <polygon points="193,165 174,215 212,215" fill="url(#domeGrad)" stroke="rgba(201,148,42,.5)" stroke-width=".8"/>
+      <g transform="translate(193,163)" filter="url(#mosqueGlow)">
+        <circle cx="0" cy="-7" r="8" fill="url(#goldGrad)"/>
+        <circle cx="4.5" cy="-9.5" r="7" fill="var(--sky1)"/>
+        <circle cx="0" cy="-22" r="3" fill="url(#goldGrad)"/>
+        <line x1="0" y1="-22" x2="0" y2="-16" stroke="url(#goldGrad)" stroke-width="1.5"/>
+      </g>
+      <path d="M181 260 Q193 252 205 260 L205 288 L181 288Z" fill="rgba(255,200,80,.1)" stroke="rgba(201,148,42,.3)" stroke-width=".7"/>
+      <path d="M181 310 Q193 302 205 310 L205 335 L181 335Z" fill="rgba(255,200,80,.1)" stroke="rgba(201,148,42,.3)" stroke-width=".7"/>
+
+      <!-- ─── Right Near Minaret ─── -->
+      <rect x="689" y="230" width="36" height="170" fill="url(#mosqueGrad)" stroke="rgba(201,148,42,.3)" stroke-width=".5"/>
+      <rect x="689" y="230" width="36" height="170" fill="url(#lattice)"/>
+      <rect x="682" y="300" width="50" height="9" fill="url(#goldGrad)" rx="1"/>
+      <rect x="682" y="345" width="50" height="6" fill="url(#goldGrad)" rx="1"/>
+      <rect x="692" y="215" width="30" height="18" fill="#1A6B4A" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <polygon points="707,165 688,215 726,215" fill="url(#domeGrad)" stroke="rgba(201,148,42,.5)" stroke-width=".8"/>
+      <g transform="translate(707,163)" filter="url(#mosqueGlow)">
+        <circle cx="0" cy="-7" r="8" fill="url(#goldGrad)"/>
+        <circle cx="4.5" cy="-9.5" r="7" fill="var(--sky1)"/>
+        <circle cx="0" cy="-22" r="3" fill="url(#goldGrad)"/>
+        <line x1="0" y1="-22" x2="0" y2="-16" stroke="url(#goldGrad)" stroke-width="1.5"/>
+      </g>
+      <path d="M695 260 Q707 252 719 260 L719 288 L695 288Z" fill="rgba(255,200,80,.1)" stroke="rgba(201,148,42,.3)" stroke-width=".7"/>
+      <path d="M695 310 Q707 302 719 310 L719 335 L695 335Z" fill="rgba(255,200,80,.1)" stroke="rgba(201,148,42,.3)" stroke-width=".7"/>
+
+      <!-- ─── Right Far Minaret ─── -->
+      <rect x="812" y="200" width="28" height="200" fill="url(#mosqueGrad)" stroke="rgba(201,148,42,.3)" stroke-width=".5"/>
+      <rect x="812" y="200" width="28" height="200" fill="url(#lattice)"/>
+      <rect x="806" y="280" width="40" height="8" fill="url(#goldGrad)" rx="1"/>
+      <rect x="806" y="330" width="40" height="6" fill="url(#goldGrad)" rx="1"/>
+      <rect x="814" y="185" width="24" height="18" fill="#1A6B4A" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <polygon points="826,130 810,185 842,185" fill="url(#domeGrad)" stroke="rgba(201,148,42,.5)" stroke-width=".8"/>
+      <g transform="translate(826,128)" filter="url(#mosqueGlow)">
+        <circle cx="0" cy="-6" r="7" fill="url(#goldGrad)"/>
+        <circle cx="4" cy="-8" r="6" fill="var(--sky1)"/>
+        <circle cx="0" cy="-20" r="2.5" fill="url(#goldGrad)"/>
+        <line x1="0" y1="-20" x2="0" y2="-14" stroke="url(#goldGrad)" stroke-width="1.5"/>
+      </g>
+      <path d="M819 240 Q826 233 833 240 L833 265 L819 265Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".7"/>
+      <path d="M819 295 Q826 288 833 295 L833 315 L819 315Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".7"/>
+
+      <!-- ─── Main Body ─── -->
+      <rect x="145" y="280" width="610" height="160" fill="url(#mosqueGrad)" stroke="rgba(201,148,42,.2)" stroke-width=".5"/>
+      <rect x="145" y="280" width="610" height="160" fill="url(#lattice)"/>
+
+      <!-- ─── Side Domes ─── -->
+      <!-- Left small dome -->
+      <ellipse cx="260" cy="278" rx="55" ry="40" fill="url(#domeGrad)" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <rect x="230" y="275" width="60" height="8" fill="url(#goldGrad)" rx="1"/>
+      <g transform="translate(260,240)">
+        <circle cx="0" cy="-5" r="6" fill="url(#goldGrad)"/>
+        <circle cx="3.5" cy="-7" r="5.2" fill="var(--sky1)"/>
+        <circle cx="0" cy="-17" r="2" fill="url(#goldGrad)"/>
+        <line x1="0" y1="-17" x2="0" y2="-12" stroke="url(#goldGrad)" stroke-width="1.2"/>
+      </g>
+      <!-- Right small dome -->
+      <ellipse cx="640" cy="278" rx="55" ry="40" fill="url(#domeGrad)" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <rect x="610" y="275" width="60" height="8" fill="url(#goldGrad)" rx="1"/>
+      <g transform="translate(640,240)">
+        <circle cx="0" cy="-5" r="6" fill="url(#goldGrad)"/>
+        <circle cx="3.5" cy="-7" r="5.2" fill="var(--sky1)"/>
+        <circle cx="0" cy="-17" r="2" fill="url(#goldGrad)"/>
+        <line x1="0" y1="-17" x2="0" y2="-12" stroke="url(#goldGrad)" stroke-width="1.2"/>
+      </g>
+
+      <!-- ─── Central Grand Dome ─── -->
+      <!-- Drum base -->
+      <rect x="360" y="225" width="180" height="60" fill="url(#domeGrad)" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <rect x="360" y="225" width="180" height="60" fill="url(#lattice)"/>
+      <!-- Drum arched windows -->
+      <path d="M375 235 Q385 228 395 235 L395 280 L375 280Z" fill="rgba(255,200,80,.12)" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <path d="M405 235 Q415 228 425 235 L425 280 L405 280Z" fill="rgba(255,200,80,.12)" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <path d="M435 235 Q445 228 455 235 L455 280 L435 280Z" fill="rgba(255,200,80,.12)" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <path d="M465 235 Q475 228 485 235 L485 280 L465 280Z" fill="rgba(255,200,80,.12)" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <path d="M495 235 Q505 228 515 235 L515 280 L495 280Z" fill="rgba(255,200,80,.12)" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <!-- Gold band -->
+      <rect x="352" y="220" width="196" height="10" fill="url(#goldGrad)" rx="1"/>
+      <!-- Dome itself -->
+      <ellipse cx="450" cy="220" rx="105" ry="80" fill="url(#domeGrad)" stroke="rgba(201,148,42,.6)" stroke-width="1.5"/>
+      <!-- Dome ribs -->
+      <path d="M450 140 Q408 165 380 220" fill="none" stroke="rgba(201,148,42,.25)" stroke-width="1"/>
+      <path d="M450 140 Q430 160 420 220" fill="none" stroke="rgba(201,148,42,.25)" stroke-width="1"/>
+      <path d="M450 140 Q450 155 450 220" fill="none" stroke="rgba(201,148,42,.25)" stroke-width="1"/>
+      <path d="M450 140 Q470 160 480 220" fill="none" stroke="rgba(201,148,42,.25)" stroke-width="1"/>
+      <path d="M450 140 Q492 165 520 220" fill="none" stroke="rgba(201,148,42,.25)" stroke-width="1"/>
+      <!-- Dome highlight -->
+      <ellipse cx="430" cy="175" rx="25" ry="20" fill="rgba(26,107,74,.3)"/>
+      <!-- Dome crescent finial -->
+      <g transform="translate(450,140)" filter="url(#mosqueGlow)">
+        <line x1="0" y1="0" x2="0" y2="-25" stroke="url(#goldGrad)" stroke-width="2"/>
+        <circle cx="0" cy="-33" r="11" fill="url(#goldGrad)"/>
+        <circle cx="6" cy="-37" r="9.5" fill="var(--sky1)"/>
+        <circle cx="0" cy="-48" r="4" fill="url(#goldGrad)"/>
+        <line x1="0" y1="-48" x2="0" y2="-42" stroke="url(#goldGrad)" stroke-width="2"/>
+      </g>
+
+      <!-- ─── Iwan / Entrance Arch ─── -->
+      <!-- Arch frame -->
+      <path d="M360 440 L360 340 Q360 290 390 275 Q420 265 450 265 Q480 265 510 275 Q540 290 540 340 L540 440Z" fill="url(#mosqueGrad)"/>
+      <!-- Inner arch glow -->
+      <path d="M370 440 L370 342 Q370 298 396 285 Q422 275 450 275 Q478 275 504 285 Q530 298 530 342 L530 440Z" fill="rgba(255,200,80,.04)" stroke="rgba(201,148,42,.5)" stroke-width="1"/>
+      <!-- Arch muqarnas border -->
+      <path d="M360 340 Q360 290 390 275" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+      <path d="M540 340 Q540 290 510 275" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+      <!-- Portal door -->
+      <path d="M405 440 L405 360 Q405 330 420 322 Q435 315 450 315 Q465 315 480 322 Q495 330 495 360 L495 440Z" fill="rgba(0,0,0,.6)" stroke="rgba(201,148,42,.5)" stroke-width="1"/>
+      <!-- Door arch detail -->
+      <path d="M405 360 Q405 330 420 322 Q435 315 450 315 Q465 315 480 322 Q495 330 495 360" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+      <!-- Door geometric panels -->
+      <rect x="413" y="375" width="35" height="30" fill="none" stroke="rgba(201,148,42,.3)" stroke-width=".8" rx="2"/>
+      <rect x="452" y="375" width="35" height="30" fill="none" stroke="rgba(201,148,42,.3)" stroke-width=".8" rx="2"/>
+      <rect x="413" y="412" width="35" height="28" fill="none" stroke="rgba(201,148,42,.3)" stroke-width=".8" rx="2"/>
+      <rect x="452" y="412" width="35" height="28" fill="none" stroke="rgba(201,148,42,.3)" stroke-width=".8" rx="2"/>
+      <!-- Iwan arch muqarnas tiers -->
+      <path d="M375 295 Q385 288 395 295 Q405 288 415 295 Q425 288 435 295 Q445 288 455 295 Q465 288 475 295 Q485 288 495 295 Q505 288 515 295 Q525 288 525 295" fill="none" stroke="rgba(201,148,42,.4)" stroke-width="1"/>
+      <path d="M365 310 Q372 304 380 310 Q390 304 400 310 Q410 304 420 310 Q430 304 440 310 Q450 304 460 310 Q470 304 480 310 Q490 304 500 310 Q510 304 520 310 Q530 304 535 310" fill="none" stroke="rgba(201,148,42,.3)" stroke-width=".8"/>
+
+      <!-- Side arched windows along body -->
+      <path d="M158 320 Q170 308 182 320 L182 380 L158 380Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".8"/>
+      <path d="M196 320 Q208 308 220 320 L220 380 L196 380Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".8"/>
+      <path d="M234 320 Q246 308 258 320 L258 380 L234 380Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".8"/>
+
+      <path d="M642 320 Q654 308 666 320 L666 380 L642 380Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".8"/>
+      <path d="M680 320 Q692 308 704 320 L704 380 L680 380Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".8"/>
+      <path d="M718 320 Q730 308 742 320 L742 380 L718 380Z" fill="rgba(255,200,80,.08)" stroke="rgba(201,148,42,.3)" stroke-width=".8"/>
+
+      <!-- Gold horizontal band along top of main body -->
+      <rect x="145" y="280" width="610" height="6" fill="url(#goldGrad)" opacity=".7"/>
+      <!-- Gold ground line -->
+      <rect x="100" y="438" width="700" height="3" fill="url(#goldGrad)" opacity=".5"/>
+
+      <!-- Sky fade overlay at bottom -->
+      <rect x="0" y="380" width="900" height="100" fill="url(#skyFade)"/>
+    </svg>
+  </div>
+
+  <!-- Hero text -->
+  <div class="hero-text reveal">
+    <div class="hero-you-are-invited">With the blessings of Allah — You are invited</div>
+    <div class="hero-names">
+      <span class="groom">Zaid</span>
+      <span class="amp">&amp;</span>
+      <span class="bride">Amira</span>
+    </div>
+    <div class="hero-date">15th Rajab 1446 &nbsp;·&nbsp; January 15, 2026</div>
+    <div class="hero-venue">Al-Noor Grand Banquet Hall, Istanbul</div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DIVIDER 1 ═══════ -->
+<div class="divider reveal">
+  <svg viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="30" x2="220" y2="30" stroke="rgba(201,148,42,.4)" stroke-width="1"/>
+    <!-- 8-point Islamic star -->
+    <g transform="translate(300,30)">
+      <polygon points="0,-22 5.5,-5.5 22,0 5.5,5.5 0,22 -5.5,5.5 -22,0 -5.5,-5.5" fill="none" stroke="rgba(201,148,42,.8)" stroke-width="1.2"/>
+      <polygon points="0,-15 3.7,-3.7 15,0 3.7,3.7 0,15 -3.7,3.7 -15,0 -3.7,-3.7" fill="rgba(201,148,42,.15)" stroke="rgba(201,148,42,.5)" stroke-width=".8"/>
+      <circle cx="0" cy="0" r="4" fill="rgba(201,148,42,.4)"/>
+      <!-- Outer 16-pt star -->
+      <polygon points="0,-28 3,-10 10,-22 7,-5 22,-10 8,0 22,10 7,5 10,22 3,10 0,28 -3,10 -10,22 -7,5 -22,10 -8,0 -22,-10 -7,-5 -10,-22 -3,-10" fill="none" stroke="rgba(201,148,42,.3)" stroke-width=".7"/>
+    </g>
+    <line x1="380" y1="30" x2="600" y2="30" stroke="rgba(201,148,42,.4)" stroke-width="1"/>
+    <!-- Small flanking diamonds -->
+    <polygon points="245,30 252,24 259,30 252,36" fill="none" stroke="rgba(201,148,42,.5)" stroke-width=".8"/>
+    <polygon points="341,30 348,24 355,30 348,36" fill="none" stroke="rgba(201,148,42,.5)" stroke-width=".8"/>
+  </svg>
+</div>
+
+<!-- ═══════ BLESSING ═══════ -->
+<section id="blessing">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center">
+      <span class="section-label">Alhamdulillah</span>
+      <div class="quran-verse">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا</div>
+      <div class="quran-ref">And of His signs is that He created for you from yourselves mates that you may find tranquility in them — Quran 30:21</div>
+    </div>
+
+    <div class="families-grid reveal">
+      <div class="family-side">
+        <div class="family-label">From the Family of the Groom</div>
+        <div class="elders-names">Late Sh. Ibrahim Al-Hussaini<br/>Sh. Hassan Al-Hussaini</div>
+        <div class="parents-names">Mr. Tariq Al-Hussaini<br/>&amp; Mrs. Fatima Al-Hussaini</div>
+      </div>
+      <div class="families-divider">
+        <div class="crescent">☽</div>
+      </div>
+      <div class="family-side">
+        <div class="family-label">From the Family of the Bride</div>
+        <div class="elders-names">Late Sh. Abdul-Karim Ansari<br/>Sh. Yusuf Ansari</div>
+        <div class="parents-names">Mr. Bilal Ansari<br/>&amp; Mrs. Khadijah Ansari</div>
+      </div>
+    </div>
+
+    <div class="big-names reveal">
+      <span class="groom">Zaid Al-Hussaini</span>
+      <span class="and">weds</span>
+      <span class="bride">Amira Ansari</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DIVIDER 2 ═══════ -->
+<div class="divider reveal">
+  <svg viewBox="0 0 600 50" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="25" x2="240" y2="25" stroke="rgba(201,148,42,.35)" stroke-width="1"/>
+    <g transform="translate(300,25)">
+      <!-- Arabesque motif -->
+      <path d="M0,-18 C10,-12 18,-5 18,0 C18,8 10,14 0,18 C-10,14 -18,8 -18,0 C-18,-5 -10,-12 0,-18Z" fill="none" stroke="rgba(201,148,42,.6)" stroke-width="1"/>
+      <path d="M0,-12 C6,-8 11,-3 11,0 C11,5 6,9 0,12 C-6,9 -11,5 -11,0 C-11,-3 -6,-8 0,-12Z" fill="rgba(201,148,42,.1)" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <circle cx="0" cy="0" r="3.5" fill="rgba(201,148,42,.5)"/>
+      <!-- Extending flourishes -->
+      <path d="M18,0 C24,-4 30,-2 30,3 C30,8 24,10 20,8" fill="none" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+      <path d="M-18,0 C-24,-4 -30,-2 -30,3 C-30,8 -24,10 -20,8" fill="none" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+    </g>
+    <line x1="360" y1="25" x2="600" y2="25" stroke="rgba(201,148,42,.35)" stroke-width="1"/>
+  </svg>
+</div>
+
+<!-- ═══════ EVENTS ═══════ -->
+<section id="events">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-label">Mark Your Calendar</span>
+      <h2 class="section-title">The <span class="gold">Celebrations</span></h2>
+    </div>
+    <div class="events-grid">
+
+      <div class="event-card reveal" style="transition-delay:.1s">
+        <span class="event-card-badge">Day 1</span>
+        <span class="event-card-icon">🌿</span>
+        <div class="event-card-name">Mehendi</div>
+        <div class="event-card-date">Thursday, 13th January</div>
+        <div class="event-card-time">5:00 PM — 10:00 PM</div>
+        <div class="event-card-venue">Al-Hussaini Residence, Istanbul</div>
+      </div>
+
+      <div class="event-card reveal" style="transition-delay:.2s">
+        <span class="event-card-badge">Day 1</span>
+        <span class="event-card-icon">🌼</span>
+        <div class="event-card-name">Haldi</div>
+        <div class="event-card-date">Friday, 14th January</div>
+        <div class="event-card-time">11:00 AM — 2:00 PM</div>
+        <div class="event-card-venue">Ansari Garden Estate, Istanbul</div>
+      </div>
+
+      <div class="event-card reveal" style="transition-delay:.3s">
+        <span class="event-card-badge">Day 2</span>
+        <span class="event-card-icon">🕌</span>
+        <div class="event-card-name">Nikah Ceremony</div>
+        <div class="event-card-date">Saturday, 15th January</div>
+        <div class="event-card-time">10:00 AM — 12:30 PM</div>
+        <div class="event-card-venue">Süleymaniye Mosque, Istanbul</div>
+      </div>
+
+      <div class="event-card reveal" style="transition-delay:.4s">
+        <span class="event-card-badge">Day 2</span>
+        <span class="event-card-icon">🎊</span>
+        <div class="event-card-name">Reception</div>
+        <div class="event-card-date">Saturday, 15th January</div>
+        <div class="event-card-time">7:00 PM — 12:00 AM</div>
+        <div class="event-card-venue">Al-Noor Grand Banquet Hall</div>
+      </div>
+
+      <div class="event-card reveal" style="transition-delay:.5s">
+        <span class="event-card-badge">Day 3</span>
+        <span class="event-card-icon">🍽️</span>
+        <div class="event-card-name">Walima</div>
+        <div class="event-card-date">Sunday, 16th January</div>
+        <div class="event-card-time">1:00 PM — 6:00 PM</div>
+        <div class="event-card-venue">Topkapi Palace Gardens</div>
+      </div>
+
+      <div class="event-card reveal" style="transition-delay:.6s">
+        <span class="event-card-badge">Day 3</span>
+        <span class="event-card-icon">🌸</span>
+        <div class="event-card-name">Rukhsati</div>
+        <div class="event-card-date">Sunday, 16th January</div>
+        <div class="event-card-time">6:30 PM</div>
+        <div class="event-card-venue">Al-Noor Grand Banquet Hall</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DIVIDER 3 ═══════ -->
+<div class="divider reveal">
+  <svg viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="30" x2="210" y2="30" stroke="rgba(201,148,42,.35)" stroke-width="1"/>
+    <g transform="translate(300,30)">
+      <!-- 12-point star -->
+      <polygon points="0,-25 6,-6.5 25,0 6,6.5 0,25 -6,6.5 -25,0 -6,-6.5" fill="none" stroke="rgba(201,148,42,.7)" stroke-width="1.2"/>
+      <polygon points="0,-25 4,-4 25,0 4,4 0,25 -4,4 -25,0 -4,-4" fill="none" stroke="rgba(201,148,42,.35)" stroke-width=".7" transform="rotate(45)"/>
+      <circle cx="0" cy="0" r="5" fill="rgba(201,148,42,.3)" stroke="rgba(201,148,42,.6)" stroke-width=".8"/>
+    </g>
+    <line x1="390" y1="30" x2="600" y2="30" stroke="rgba(201,148,42,.35)" stroke-width="1"/>
+    <polygon points="242,30 249,23 256,30 249,37" fill="none" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+    <polygon points="344,30 351,23 358,30 351,37" fill="none" stroke="rgba(201,148,42,.4)" stroke-width=".8"/>
+  </svg>
+</div>
+
+<!-- ═══════ COUPLE ═══════ -->
+<section id="couple">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:2rem">
+      <span class="section-label">The Blessed Union</span>
+      <h2 class="section-title">Two <span class="gold">Souls, One Journey</span></h2>
+    </div>
+
+    <!-- Photo placeholder with Islamic frame -->
+    <div class="couple-frame-wrap reveal">
+      <div class="couple-photo-placeholder">
+        <svg width="60" height="60" viewBox="0 0 60 60" opacity=".3">
+          <circle cx="30" cy="20" r="14" fill="none" stroke="rgba(201,148,42,.7)" stroke-width="1.5"/>
+          <path d="M5 55 Q15 35 30 35 Q45 35 55 55" fill="none" stroke="rgba(201,148,42,.7)" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <!-- Ornate SVG frame overlay -->
+      <svg class="islamic-frame" viewBox="0 0 400 533" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <!-- Corner ornaments -->
+        <g stroke="rgba(201,148,42,.8)" fill="none" stroke-width="1.5">
+          <!-- TL corner -->
+          <path d="M0,0 L0,60 M0,0 L60,0"/>
+          <path d="M8,8 L8,52 M8,8 L52,8"/>
+          <path d="M16,8 Q16,16 8,16"/>
+          <circle cx="30" cy="30" r="10" stroke-width="1"/>
+          <path d="M30,20 L33,27 L40,27 L34,32 L37,39 L30,35 L23,39 L26,32 L20,27 L27,27Z" stroke-width=".8"/>
+          <!-- TR corner -->
+          <path d="M400,0 L400,60 M400,0 L340,0"/>
+          <path d="M392,8 L392,52 M392,8 L348,8"/>
+          <path d="M384,8 Q384,16 392,16"/>
+          <circle cx="370" cy="30" r="10" stroke-width="1"/>
+          <path d="M370,20 L373,27 L380,27 L374,32 L377,39 L370,35 L363,39 L366,32 L360,27 L367,27Z" stroke-width=".8"/>
+          <!-- BL corner -->
+          <path d="M0,533 L0,473 M0,533 L60,533"/>
+          <path d="M8,525 L8,481 M8,525 L52,525"/>
+          <path d="M16,525 Q16,517 8,517"/>
+          <circle cx="30" cy="503" r="10" stroke-width="1"/>
+          <!-- BR corner -->
+          <path d="M400,533 L400,473 M400,533 L340,533"/>
+          <path d="M392,525 L392,481 M392,525 L348,525"/>
+          <path d="M384,525 Q384,517 392,517"/>
+          <circle cx="370" cy="503" r="10" stroke-width="1"/>
+        </g>
+        <!-- Side mid ornaments -->
+        <g stroke="rgba(201,148,42,.5)" fill="none" stroke-width="1">
+          <polygon points="0,266 12,258 12,274" fill="rgba(201,148,42,.3)"/>
+          <polygon points="400,266 388,258 388,274" fill="rgba(201,148,42,.3)"/>
+          <path d="M2,240 Q10,266 2,292" stroke-width=".8"/>
+          <path d="M398,240 Q390,266 398,292" stroke-width=".8"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="couple-bios reveal">
+      <div class="bio">
+        <div class="bio-name">Zaid Al-Hussaini</div>
+        <div class="bio-desc">An architect of dreams and devotion,<br/>whose heart finds home in service,<br/>laughter, and the quiet of dawn prayers.</div>
+      </div>
+      <div class="bio-divider">
+        <svg viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="0" x2="20" y2="80" stroke="rgba(201,148,42,.4)" stroke-width="1"/>
+          <circle cx="20" cy="40" r="5" fill="none" stroke="rgba(201,148,42,.6)" stroke-width="1"/>
+          <circle cx="20" cy="20" r="3" fill="rgba(201,148,42,.3)"/>
+          <circle cx="20" cy="60" r="3" fill="rgba(201,148,42,.3)"/>
+        </svg>
+      </div>
+      <div class="bio">
+        <div class="bio-name">Amira Ansari</div>
+        <div class="bio-desc">A soul of warmth and wisdom,<br/>who paints the world in kindness,<br/>poetry, and the soft glow of starlight.</div>
+      </div>
+    </div>
+
+    <div class="couple-quote reveal">
+      They are a garment for you and you are a garment for them — Al-Baqarah 2:187
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ RSVP ═══════ -->
+<section id="rsvp">
+  <div class="section-inner" style="text-align:center">
+    <div class="reveal">
+      <span class="section-label">Kindly Respond</span>
+      <h2 class="section-title">Will You <span class="gold">Join Us?</span></h2>
+      <p class="rsvp-text">Your presence will make our blessed day complete. Please let us know if you will be joining us in celebrating this joyous union.</p>
+      <div class="rsvp-deadline">RSVP by 1st January 2026</div>
+      <a href="https://wa.me/905001234567?text=Assalamu+Alaykum!+I+am+attending+the+Nikah+of+Zaid+%26+Amira" class="wa-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.85L.073 23.928l6.244-1.637A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.98 0-3.831-.528-5.428-1.449l-.389-.231-4.027 1.057 1.075-3.921-.254-.403A9.797 9.797 0 012.182 12c0-5.42 4.398-9.818 9.818-9.818S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+        RSVP via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DETAILS ═══════ -->
+<section id="details">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-label">Everything You Need</span>
+      <h2 class="section-title">Wedding <span class="gold">Details</span></h2>
+    </div>
+    <div class="details-grid">
+
+      <div class="detail-card reveal" style="transition-delay:.05s">
+        <span class="detail-icon">#</span>
+        <div class="detail-title">Hashtag</div>
+        <div class="detail-body"><span class="hashtag">#ZaidLovesAmira</span><br/>Share your moments with us</div>
+      </div>
+
+      <div class="detail-card reveal" style="transition-delay:.1s">
+        <span class="detail-icon">🌤</span>
+        <div class="detail-title">Weather</div>
+        <div class="detail-body">Istanbul in January<br/>~8°C · Expect crisp winter skies<br/>Layer up, it may drizzle</div>
+      </div>
+
+      <div class="detail-card reveal" style="transition-delay:.15s">
+        <span class="detail-icon">🏨</span>
+        <div class="detail-title">Stay</div>
+        <div class="detail-body">Ciragan Palace Kempinski<br/>Exclusive rate for guests<br/>Code: <em>ZAIDAMIRA2026</em></div>
+      </div>
+
+      <div class="detail-card reveal" style="transition-delay:.2s">
+        <span class="detail-icon">👗</span>
+        <div class="detail-title">Dress Code</div>
+        <div class="detail-body">Nikah: Formal & modest<br/>Reception: Deep teal / gold / emerald<br/>Walima: Smart semi-formal</div>
+      </div>
+
+      <div class="detail-card reveal" style="transition-delay:.25s">
+        <span class="detail-icon">🚌</span>
+        <div class="detail-title">Transport</div>
+        <div class="detail-body">Shuttle from Kempinski<br/>Every hour from 9 AM<br/>Book via WhatsApp</div>
+      </div>
+
+      <div class="detail-card reveal" style="transition-delay:.3s">
+        <span class="detail-icon">🎁</span>
+        <div class="detail-title">Gifts</div>
+        <div class="detail-body">Your duas are our greatest gift.<br/>Cash gifts welcome.<br/>Home registry at Beymen</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ COUNTDOWN ═══════ -->
+<section id="countdown">
+  <canvas id="countdown-stars"></canvas>
+  <div class="countdown-inner">
+    <div class="reveal">
+      <h2 class="countdown-title">The Moment Approaches</h2>
+      <div class="countdown-sub">Until we say "Qabilt" — I accept</div>
+      <div class="countdown-grid">
+        <div class="count-block"><span class="count-num" id="cd-days">00</span><span class="count-label">Days</span></div>
+        <div class="count-sep">:</div>
+        <div class="count-block"><span class="count-num" id="cd-hours">00</span><span class="count-label">Hours</span></div>
+        <div class="count-sep">:</div>
+        <div class="count-block"><span class="count-num" id="cd-mins">00</span><span class="count-label">Minutes</span></div>
+        <div class="count-sep">:</div>
+        <div class="count-block"><span class="count-num" id="cd-secs">00</span><span class="count-label">Seconds</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <span class="footer-crescent">☽</span>
+  <div class="footer-names">Zaid &amp; Amira</div>
+  <div class="footer-date">15th January 2026 · Istanbul, Türkiye</div>
+  <ul class="footer-social">
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Facebook</a></li>
+    <li><a href="#">WhatsApp</a></li>
+    <li><a href="#">Gallery</a></li>
+  </ul>
+  <div class="footer-copy">Made with love &amp; faith · بِسْمِ اللَّهِ · Zaid &amp; Amira 2026</div>
+</footer>
+
+<!-- Hidden audio for music toggle -->
+<audio id="bg-music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"/>
+</audio>
+
+<script>
+/* ─── SCROLL PROGRESS ─── */
+window.addEventListener('scroll',()=>{
+  const el=document.getElementById('scroll-bar');
+  const pct=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+  el.style.width=pct+'%';
+});
+
+/* ─── STAR FIELD (hero) ─── */
+(function(){
+  const container=document.getElementById('stars');
+  for(let i=0;i<220;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    const size=Math.random()*2.5+.5;
+    s.style.cssText=`
+      width:${size}px;height:${size}px;
+      top:${Math.random()*75}%;
+      left:${Math.random()*100}%;
+      --d:${(Math.random()*3+2).toFixed(1)}s;
+      --delay:${(Math.random()*4).toFixed(1)}s;
+      opacity:${Math.random()*.8+.1}
+    `;
+    container.appendChild(s);
+  }
+})();
+
+/* ─── SCROLL REVEALS ─── */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ─── PARALLAX HERO ─── */
+window.addEventListener('scroll',()=>{
+  const hero=document.querySelector('.hero-text');
+  const mosque=document.querySelector('.mosque-wrap');
+  const bism=document.querySelector('.bismillah-top');
+  const y=window.scrollY;
+  if(hero) hero.style.transform=`translateY(${y*.25}px)`;
+  if(mosque) mosque.style.transform=`translateX(-50%) translateY(${y*.12}px)`;
+  if(bism) bism.style.transform=`translateX(-50%) translateY(${y*.15}px)`;
+
+  /* ─── LANTERN SCROLL DESCEND ─── */
+  ['lantern1','lantern2','lantern3'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el){
+      const offset=y*.08*(i*.4+.6);
+      el.style.transform=`translateY(${offset}px)`;
+    }
+  });
+});
+
+/* ─── MUSIC TOGGLE ─── */
+const audio=document.getElementById('bg-music');
+const btn=document.getElementById('music-btn');
+let playing=false;
+btn.addEventListener('click',()=>{
+  if(playing){audio.pause();btn.textContent='♪ Music Off';playing=false;}
+  else{audio.play().catch(()=>{});btn.textContent='♫ Music On';playing=true;}
+});
+
+/* ─── COUNTDOWN ─── */
+const weddingDate=new Date('2026-01-15T10:00:00');
+function updateCountdown(){
+  const now=new Date();
+  const diff=weddingDate-now;
+  if(diff<=0){
+    document.getElementById('cd-days').textContent='00';
+    document.getElementById('cd-hours').textContent='00';
+    document.getElementById('cd-mins').textContent='00';
+    document.getElementById('cd-secs').textContent='00';
+    return;
+  }
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('cd-days').textContent=String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+/* ─── STARFIELD CANVAS (countdown section) ─── */
+(function(){
+  const canvas=document.getElementById('countdown-stars');
+  const ctx=canvas.getContext('2d');
+  let stars=[];
+  function resize(){
+    canvas.width=canvas.offsetWidth;
+    canvas.height=canvas.offsetHeight;
+    stars=[];
+    for(let i=0;i<180;i++){
+      stars.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*1.8+.3,
+        a:Math.random(),
+        da:(Math.random()-.5)*.008
+      });
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    stars.forEach(s=>{
+      s.a+=s.da;
+      if(s.a<=0||s.a>=1)s.da*=-1;
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,220,${s.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  draw();
+})();
+
+/* ─── Countdown canvas style ─── */
+document.getElementById('countdown-stars').style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;';
+
+/* ─── Staggered reveal on load ─── */
+setTimeout(()=>{
+  document.getElementById('bism').classList.add('visible');
+  document.querySelector('.hero-text.reveal').classList.add('visible');
+},300);
+</script>
+</body>
+</html>

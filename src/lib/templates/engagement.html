@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{groomName}} & {{brideName}} • Engagement Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blush:#f7d6d0;
+  --blush-deep:#e8b4ab;
+  --gold:#c9a961;
+  --gold-light:#e6c98a;
+  --ivory:#fdf8f3;
+  --ivory-warm:#f5ebe0;
+  --text:#5a4a42;
+  --text-dark:#3a2e28;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cormorant Garamond',serif;
+  background:var(--ivory);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
+.script{font-family:'Great Vibes',cursive;color:var(--gold);}
+
+/* ========== HERO ========== */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  background: radial-gradient(ellipse at center, #fff5ee 0%, #f7d6d0 50%, #e8b4ab 100%);
+}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.hero-content{position:relative;z-index:5;padding:2rem;}
+.hero .script{
+  font-size:clamp(2.5rem,6vw,4.5rem);
+  line-height:1;
+  margin-bottom:.5rem;
+  text-shadow:0 2px 20px rgba(201,169,97,.3);
+}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,4rem);
+  color:var(--text-dark);
+  letter-spacing:.15em;
+  margin:1rem 0;
+  font-weight:700;
+}
+.hero h1 .amp{
+  font-family:'Great Vibes',cursive;
+  color:var(--gold);
+  font-size:1.5em;
+  font-weight:400;
+  margin:0 .3rem;
+  vertical-align:-.15em;
+}
+.hero-tag{
+  font-size:clamp(1rem,2vw,1.3rem);
+  letter-spacing:.4em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-top:1.5rem;
+}
+.hero-sub{
+  font-style:italic;
+  font-size:1.15rem;
+  color:var(--text);
+  margin-top:1rem;
+  letter-spacing:.1em;
+}
+.ring-glow{
+  display:inline-block;
+  margin-top:2rem;
+  filter:drop-shadow(0 0 15px #e6c98a);
+  animation: ringGlow 2.5s ease-in-out infinite;
+}
+@keyframes ringGlow{
+  0%,100%{filter:drop-shadow(0 0 10px #e6c98a) drop-shadow(0 0 20px rgba(230,201,138,.5));}
+  50%{filter:drop-shadow(0 0 25px #fff3c4) drop-shadow(0 0 40px rgba(255,243,196,.7));}
+}
+
+/* ========== PARTICLES / PETALS ========== */
+.particles{position:fixed;inset:0;pointer-events:none;z-index:2;}
+.petal{
+  position:absolute;
+  top:-30px;
+  opacity:0;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(-30px) rotate(0deg);opacity:0;}
+  10%{opacity:.8;}
+  90%{opacity:.8;}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0;}
+}
+.sparkle{
+  position:absolute;
+  width:4px;height:4px;
+  background:radial-gradient(circle,#fff8d8,transparent);
+  border-radius:50%;
+  animation:twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:0;transform:scale(.5);}
+  50%{opacity:1;transform:scale(1.3);box-shadow:0 0 8px #fff3c4;}
+}
+
+/* ========== DIVIDERS ========== */
+.divider{
+  display:flex;justify-content:center;align-items:center;
+  padding:2rem 0;
+  opacity:0;transform:translateY(20px);
+  transition:all 1s ease;
+}
+.divider.show{opacity:1;transform:translateY(0);}
+.divider svg{max-width:300px;width:80%;}
+
+/* ========== SECTIONS ========== */
+section{padding:5rem 1.5rem;position:relative;}
+.container{max-width:1100px;margin:0 auto;}
+.section-title{
+  text-align:center;
+  margin-bottom:3rem;
+}
+.section-title .script{
+  font-size:3rem;display:block;
+}
+.section-title h2{
+  font-size:2rem;
+  letter-spacing:.3em;
+  color:var(--text-dark);
+  text-transform:uppercase;
+}
+
+/* STORY TIMELINE */
+.story{background:linear-gradient(180deg,var(--ivory) 0%,var(--ivory-warm) 100%);}
+.timeline{
+  position:relative;
+  max-width:800px;
+  margin:0 auto;
+  padding:2rem 0;
+}
+.timeline::before{
+  content:'';position:absolute;
+  left:50%;top:0;bottom:0;
+  width:2px;
+  background:linear-gradient(180deg,transparent,var(--gold),transparent);
+  transform:translateX(-50%);
+}
+.time-item{
+  position:relative;
+  width:50%;
+  padding:2rem;
+  opacity:0;
+  transform:translateX(-50px);
+  transition:all .8s ease;
+}
+.time-item.right{
+  left:50%;
+  transform:translateX(50px);
+}
+.time-item.show{opacity:1;transform:translateX(0);}
+.time-item::before{
+  content:'❦';
+  position:absolute;
+  top:2rem;
+  right:-15px;
+  width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--gold);
+  color:white;
+  border-radius:50%;
+  font-size:.9rem;
+  box-shadow:0 0 15px rgba(201,169,97,.6);
+}
+.time-item.right::before{left:-15px;right:auto;}
+.time-card{
+  background:white;
+  padding:1.5rem;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(232,180,171,.25);
+  border:1px solid rgba(201,169,97,.2);
+}
+.time-card h3{color:var(--gold);font-size:1.4rem;margin-bottom:.5rem;}
+.time-card .date{
+  font-style:italic;color:var(--blush-deep);
+  letter-spacing:.15em;font-size:.95rem;margin-bottom:.75rem;
+}
+.time-card p{font-size:1.1rem;}
+
+/* BLESSING */
+.blessing{
+  background:linear-gradient(135deg,#f7d6d0 0%,#fdf8f3 100%);
+  text-align:center;
+  position:relative;
+}
+.blessing-card{
+  max-width:700px;
+  margin:0 auto;
+  padding:3rem 2rem;
+  background:rgba(255,255,255,.5);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(201,169,97,.3);
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(232,180,171,.3);
+}
+.blessing-card .quote{
+  font-size:1.6rem;
+  font-style:italic;
+  font-family:'Playfair Display',serif;
+  color:var(--text-dark);
+  margin-bottom:1.5rem;
+  line-height:1.5;
+}
+.blessing-card .quote::before,
+.blessing-card .quote::after{
+  color:var(--gold);font-size:2rem;
+}
+.blessing-card .quote::before{content:'“ ';}
+.blessing-card .quote::after{content:' ”';}
+.blessing-card .fam{
+  font-family:'Great Vibes',cursive;
+  font-size:2rem;
+  color:var(--gold);
+}
+
+/* EVENT */
+.event{background:var(--ivory);}
+.event-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:2rem;
+  max-width:1000px;
+  margin:0 auto;
+}
+.event-card{
+  background:linear-gradient(180deg,#fff 0%,#fdf8f3 100%);
+  border:2px solid transparent;
+  border-image:linear-gradient(135deg,var(--gold),var(--blush)) 1;
+  padding:2.5rem 1.5rem;
+  text-align:center;
+  transition:transform .4s ease,box-shadow .4s ease;
+  position:relative;
+}
+.event-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px rgba(201,169,97,.3);
+}
+.event-card .icon{
+  width:60px;height:60px;
+  margin:0 auto 1rem;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:white;border-radius:50%;
+  font-size:1.5rem;
+  box-shadow:0 0 20px rgba(201,169,97,.5);
+}
+.event-card h3{
+  color:var(--gold);
+  font-size:1.3rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  margin-bottom:.75rem;
+}
+.event-card p{font-size:1.15rem;color:var(--text-dark);}
+
+/* COUPLE */
+.couple{
+  background:linear-gradient(180deg,var(--ivory-warm),var(--ivory));
+}
+.couple-grid{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:2rem;
+  align-items:center;
+  max-width:1000px;
+  margin:0 auto;
+}
+.couple-card{text-align:center;}
+.couple-photo{
+  width:220px;height:220px;
+  margin:0 auto 1.5rem;
+  border-radius:50%;
+  overflow:hidden;
+  border:4px solid var(--gold);
+  box-shadow:0 0 0 8px rgba(247,214,208,.4),0 15px 40px rgba(232,180,171,.5);
+  position:relative;
+}
+.couple-photo img{width:100%;height:100%;object-fit:cover;}
+.couple-card h3{
+  font-family:'Great Vibes',cursive;
+  font-size:2.8rem;
+  color:var(--gold);
+  margin-bottom:.5rem;
+}
+.couple-card .role{
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--blush-deep);
+  font-size:.9rem;
+  margin-bottom:1rem;
+}
+.couple-card p{font-size:1.05rem;max-width:280px;margin:0 auto;}
+.couple-divider{
+  font-family:'Great Vibes',cursive;
+  font-size:5rem;
+  color:var(--gold);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);text-shadow:0 0 15px rgba(201,169,97,.5);}
+  50%{transform:scale(1.1);text-shadow:0 0 30px rgba(201,169,97,.8);}
+}
+
+/* GALLERY */
+.gallery{background:var(--ivory);}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+  max-width:1100px;
+  margin:0 auto;
+}
+.gal-item{
+  position:relative;
+  aspect-ratio:1;
+  overflow:hidden;
+  border-radius:10px;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+.gal-item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .6s ease;
+}
+.gal-item::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(201,169,97,.4));
+  opacity:0;transition:opacity .4s;
+}
+.gal-item:hover img{transform:scale(1.15);}
+.gal-item:hover::after{opacity:1;}
+
+/* COUNTDOWN */
+.countdown{
+  background:linear-gradient(135deg,#e8b4ab 0%,#f7d6d0 50%,#fdf8f3 100%);
+  text-align:center;
+  position:relative;
+}
+.count-box{
+  display:flex;justify-content:center;gap:1rem;
+  flex-wrap:wrap;
+  max-width:700px;margin:2rem auto 0;
+}
+.count-unit{
+  background:rgba(255,255,255,.6);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(201,169,97,.4);
+  padding:1.5rem 1rem;
+  border-radius:15px;
+  min-width:110px;
+  box-shadow:0 10px 30px rgba(232,180,171,.3);
+}
+.count-unit .num{
+  font-family:'Playfair Display',serif;
+  font-size:3rem;
+  color:var(--gold);
+  font-weight:700;
+  line-height:1;
+  text-shadow:0 2px 10px rgba(201,169,97,.3);
+}
+.count-unit .label{
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  font-size:.85rem;
+  color:var(--text-dark);
+  margin-top:.5rem;
+}
+
+/* RSVP */
+.rsvp{
+  background:var(--ivory);
+  text-align:center;
+}
+.rsvp-text{
+  max-width:600px;
+  margin:0 auto 2rem;
+  font-size:1.2rem;
+  font-style:italic;
+}
+.whatsapp-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.75rem;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:white;
+  padding:1rem 2.5rem;
+  border-radius:50px;
+  text-decoration:none;
+  font-size:1.1rem;
+  font-family:'Playfair Display',serif;
+  letter-spacing:.1em;
+  box-shadow:0 10px 30px rgba(37,211,102,.4);
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.whatsapp-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(37,211,102,.6);
+}
+
+/* FOOTER */
+footer{
+  background:linear-gradient(180deg,var(--ivory),#f5ebe0);
+  text-align:center;
+  padding:4rem 1.5rem 2rem;
+  border-top:1px solid rgba(201,169,97,.3);
+}
+footer .names{
+  font-family:'Great Vibes',cursive;
+  font-size:3rem;
+  color:var(--gold);
+  margin-bottom:1rem;
+}
+footer .heart{
+  color:#e8b4ab;
+  font-size:1.5rem;
+  animation:heartbeat 1.5s infinite;
+  display:inline-block;
+}
+@keyframes heartbeat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+}
+footer .copy{
+  margin-top:1rem;
+  font-size:.9rem;
+  color:var(--text);
+  letter-spacing:.1em;
+}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(40px);transition:all 1s ease;}
+.reveal.show{opacity:1;transform:translateY(0);}
+
+/* Responsive */
+@media(max-width:768px){
+  .timeline::before{left:20px;}
+  .time-item{width:100%;padding-left:50px;transform:translateX(-30px);}
+  .time-item.right{left:0;padding-left:50px;transform:translateX(-30px);}
+  .time-item::before{left:5px;right:auto;}
+  .time-item.right::before{left:5px;}
+  .couple-grid{grid-template-columns:1fr;}
+  .couple-divider{font-size:3.5rem;}
+  .count-unit{min-width:80px;padding:1rem .5rem;}
+  .count-unit .num{font-size:2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <svg class="hero-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="bokeh1" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#fff3c4" stop-opacity=".9"/>
+        <stop offset="100%" stop-color="#fff3c4" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="bokeh2" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#f7d6d0" stop-opacity=".8"/>
+        <stop offset="100%" stop-color="#f7d6d0" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="archGrad" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#c9a961"/>
+        <stop offset="100%" stop-color="#e6c98a"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Bokeh circles -->
+    <circle cx="150" cy="200" r="120" fill="url(#bokeh1)"/>
+    <circle cx="1280" cy="150" r="150" fill="url(#bokeh1)"/>
+    <circle cx="250" cy="700" r="100" fill="url(#bokeh2)"/>
+    <circle cx="1200" cy="750" r="130" fill="url(#bokeh2)"/>
+    <circle cx="900" cy="100" r="80" fill="url(#bokeh1)"/>
+    <circle cx="500" cy="80" r="70" fill="url(#bokeh1)"/>
+
+    <!-- Floral Arch (left side) -->
+    <path d="M 100 900 Q 120 500 250 300 Q 400 150 720 100" stroke="url(#archGrad)" stroke-width="3" fill="none" opacity=".7"/>
+    <path d="M 1340 900 Q 1320 500 1190 300 Q 1040 150 720 100" stroke="url(#archGrad)" stroke-width="3" fill="none" opacity=".7"/>
+
+    <!-- Roses along arch -->
+    <g opacity=".85">
+      <g transform="translate(150,500)"><circle r="18" fill="#e8b4ab"/><circle r="12" fill="#f7d6d0"/><circle r="6" fill="#fff"/></g>
+      <g transform="translate(200,380)"><circle r="14" fill="#e8b4ab"/><circle r="9" fill="#f7d6d0"/><circle r="4" fill="#fff"/></g>
+      <g transform="translate(300,260)"><circle r="20" fill="#e8b4ab"/><circle r="13" fill="#f7d6d0"/><circle r="7" fill="#fff"/></g>
+      <g transform="translate(450,170)"><circle r="16" fill="#e8b4ab"/><circle r="10" fill="#f7d6d0"/><circle r="5" fill="#fff"/></g>
+      <g transform="translate(600,120)"><circle r="14" fill="#e8b4ab"/><circle r="9" fill="#f7d6d0"/><circle r="4" fill="#fff"/></g>
+      <g transform="translate(1290,500)"><circle r="18" fill="#e8b4ab"/><circle r="12" fill="#f7d6d0"/><circle r="6" fill="#fff"/></g>
+      <g transform="translate(1240,380)"><circle r="14" fill="#e8b4ab"/><circle r="9" fill="#f7d6d0"/><circle r="4" fill="#fff"/></g>
+      <g transform="translate(1140,260)"><circle r="20" fill="#e8b4ab"/><circle r="13" fill="#f7d6d0"/><circle r="7" fill="#fff"/></g>
+      <g transform="translate(990,170)"><circle r="16" fill="#e8b4ab"/><circle r="10" fill="#f7d6d0"/><circle r="5" fill="#fff"/></g>
+      <g transform="translate(840,120)"><circle r="14" fill="#e8b4ab"/><circle r="9" fill="#f7d6d0"/><circle r="4" fill="#fff"/></g>
+    </g>
+
+    <!-- Leaves -->
+    <g fill="#a8b89f" opacity=".6">
+      <ellipse cx="180" cy="450" rx="15" ry="6" transform="rotate(40 180 450)"/>
+      <ellipse cx="250" cy="320" rx="15" ry="6" transform="rotate(50 250 320)"/>
+      <ellipse cx="380" cy="210" rx="15" ry="6" transform="rotate(70 380 210)"/>
+      <ellipse cx="1260" cy="450" rx="15" ry="6" transform="rotate(-40 1260 450)"/>
+      <ellipse cx="1190" cy="320" rx="15" ry="6" transform="rotate(-50 1190 320)"/>
+      <ellipse cx="1060" cy="210" rx="15" ry="6" transform="rotate(-70 1060 210)"/>
+    </g>
+
+    <!-- Fairy lights string -->
+    <path d="M 200 130 Q 720 280 1240 130" stroke="#c9a961" stroke-width="1" fill="none" opacity=".5"/>
+    <g>
+      <circle cx="350" cy="190" r="5" fill="#fff3c4"><animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="500" cy="230" r="5" fill="#fff3c4"><animate attributeName="opacity" values="1;0.4;1" dur="2.5s" repeatCount="indefinite"/></circle>
+      <circle cx="720" cy="245" r="5" fill="#fff3c4"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/></circle>
+      <circle cx="940" cy="230" r="5" fill="#fff3c4"><animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/></circle>
+      <circle cx="1090" cy="190" r="5" fill="#fff3c4"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.7s" repeatCount="indefinite"/></circle>
+    </g>
+  </svg>
+
+  <div class="hero-content reveal show">
+    <span class="script">Forever begins with us</span>
+    <!-- Proposal Silhouette -->
+    <div class="ring-glow">
+      <svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="handG" x1="0" x2="1">
+            <stop offset="0%" stop-color="#3a2e28"/>
+            <stop offset="100%" stop-color="#5a4a42"/>
+          </linearGradient>
+          <radialGradient id="ringG">
+            <stop offset="0%" stop-color="#fff3c4"/>
+            <stop offset="60%" stop-color="#e6c98a"/>
+            <stop offset="100%" stop-color="#c9a961"/>
+          </radialGradient>
+        </defs>
+        <!-- Bride's hand -->
+        <path d="M 20 90 Q 40 85 60 80 L 85 70 Q 90 68 92 72 L 95 80 Q 95 85 90 86 L 70 95 Q 45 100 22 98 Z" fill="url(#handG)" opacity=".85"/>
+        <!-- Groom's hand offering ring -->
+        <path d="M 180 90 Q 160 85 140 80 L 115 70 Q 110 68 108 72 L 105 80 Q 105 85 110 86 L 130 95 Q 155 100 178 98 Z" fill="url(#handG)" opacity=".85"/>
+        <!-- Ring -->
+        <circle cx="100" cy="60" r="10" fill="none" stroke="url(#ringG)" stroke-width="3"/>
+        <circle cx="100" cy="52" r="4" fill="url(#ringG)"/>
+        <!-- Sparkle -->
+        <g>
+          <circle cx="100" cy="52" r="1.5" fill="#fff"><animate attributeName="r" values="1;3;1" dur="1.5s" repeatCount="indefinite"/></circle>
+        </g>
+      </svg>
+    </div>
+    <h1>{{groomName}} <span class="amp">&amp;</span> {{brideName}}</h1>
+    <div class="hero-tag">We got engaged</div>
+    <div class="hero-sub">December 20, 2025 • Jaipur</div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="divider">
+  <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 15 Q 80 0 150 15 T 280 15" stroke="#c9a961" stroke-width="1.2" fill="none"/>
+    <circle cx="150" cy="15" r="4" fill="#c9a961"/>
+    <circle cx="80" cy="10" r="2" fill="#e8b4ab"/>
+    <circle cx="220" cy="10" r="2" fill="#e8b4ab"/>
+    <ellipse cx="50" cy="18" rx="6" ry="2.5" fill="#a8b89f"/>
+    <ellipse cx="250" cy="18" rx="6" ry="2.5" fill="#a8b89f"/>
+    <circle cx="110" cy="12" r="3" fill="#f7d6d0"/>
+    <circle cx="190" cy="12" r="3" fill="#f7d6d0"/>
+  </svg>
+</div>
+
+<!-- ===== STORY ===== -->
+<section class="story">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="script">Our Love Story</span>
+      <h2>How We Met</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item">
+        <div class="time-card">
+          <h3>First Glance</h3>
+          <div class="date">March 2021</div>
+          <p>We met at a mutual friend's birthday in Mumbai. A single smile across the room sparked a story we never expected.</p>
+        </div>
+      </div>
+      <div class="time-item right">
+        <div class="time-card">
+          <h3>The First Date</h3>
+          <div class="date">June 2021</div>
+          <p>Over coffee that turned into dinner, we shared dreams, laughter, and realized this was something truly special.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="time-card">
+          <h3>Falling in Love</h3>
+          <div class="date">February 2022</div>
+          <p>On a starlit night in Goa, we both knew — this was forever. Hand in hand, hearts in sync.</p>
+        </div>
+      </div>
+      <div class="time-item right">
+        <div class="time-card">
+          <h3>The Proposal</h3>
+          <div class="date">October 2025</div>
+          <p>Under a sky full of stars, surrounded by roses and candlelight, the ring was offered — and joyfully accepted.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 15 Q 80 0 150 15 T 280 15" stroke="#c9a961" stroke-width="1.2" fill="none"/>
+    <circle cx="150" cy="15" r="4" fill="#c9a961"/>
+    <circle cx="80" cy="10" r="2" fill="#e8b4ab"/>
+    <circle cx="220" cy="10" r="2" fill="#e8b4ab"/>
+    <ellipse cx="50" cy="18" rx="6" ry="2.5" fill="#a8b89f"/>
+    <ellipse cx="250" cy="18" rx="6" ry="2.5" fill="#a8b89f"/>
+  </svg>
+</div>
+
+<!-- ===== BLESSING ===== -->
+<section class="blessing">
+  <div class="container reveal">
+    <div class="section-title">
+      <span class="script">With Blessings From</span>
+      <h2>Our Families</h2>
+    </div>
+    <div class="blessing-card">
+      <p class="quote">Two souls, one heart. Two paths, one journey. May this union be blessed with endless love, laughter, and light.</p>
+      <div class="fam">Mr. &amp; Mrs. Sharma<br>&amp;<br>Mr. &amp; Mrs. Kapoor</div>
+      <p style="margin-top:1rem;font-style:italic;letter-spacing:.1em;">Request the pleasure of your company</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 15 Q 80 0 150 15 T 280 15" stroke="#c9a961" stroke-width="1.2" fill="none"/>
+    <circle cx="150" cy="15" r="4" fill="#c9a961"/>
+    <circle cx="80" cy="10" r="2" fill="#e8b4ab"/>
+    <circle cx="220" cy="10" r="2" fill="#e8b4ab"/>
+  </svg>
+</div>
+
+<!-- ===== EVENT ===== -->
+<section class="event">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="script">Save the Date</span>
+      <h2>Engagement Ceremony</h2>
+    </div>
+    <div class="event-grid reveal">
+      <div class="event-card">
+        <div class="icon">📅</div>
+        <h3>Date</h3>
+        <p>Saturday<br><strong>December 20, 2025</strong></p>
+      </div>
+      <div class="event-card">
+        <div class="icon">🕒</div>
+        <h3>Time</h3>
+        <p>Evening<br><strong>6:30 PM onwards</strong></p>
+      </div>
+      <div class="event-card">
+        <div class="icon">📍</div>
+        <h3>Venue</h3>
+        <p>The Leela Palace<br><strong>Jaipur, Rajasthan</strong></p>
+      </div>
+      <div class="event-card">
+        <div class="icon">💍</div>
+        <h3>Dress Code</h3>
+        <p>Traditional<br><strong>Pastel &amp; Gold</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 15 Q 80 0 150 15 T 280 15" stroke="#c9a961" stroke-width="1.2" fill="none"/>
+    <circle cx="150" cy="15" r="4" fill="#c9a961"/>
+    <circle cx="80" cy="10" r="2" fill="#e8b4ab"/>
+    <circle cx="220" cy="10" r="2" fill="#e8b4ab"/>
+  </svg>
+</div>
+
+<!-- ===== COUPLE ===== -->
+<section class="couple">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="script">The Couple</span>
+      <h2>Meet Us</h2>
+    </div>
+    <div class="couple-grid reveal">
+      <div class="couple-card">
+        <div class="couple-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop" alt="{{groomName}}">
+        </div>
+        <h3>{{groomName}}</h3>
+        <div class="role">The Groom</div>
+        <p>A software architect with a passion for photography, mountain trails, and chai. Son of Mr. &amp; Mrs. Sharma.</p>
+      </div>
+      <div class="couple-divider">&amp;</div>
+      <div class="couple-card">
+        <div class="couple-photo">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&h=500&fit=crop" alt="{{brideName}}">
+        </div>
+        <h3>{{brideName}}</h3>
+        <div class="role">The Bride</div>
+        <p>A graphic designer who lives for art, poetry, and afternoon rain. Daughter of Mr. &amp; Mrs. Kapoor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 15 Q 80 0 150 15 T 280 15" stroke="#c9a961" stroke-width="1.2" fill="none"/>
+    <circle cx="150" cy="15" r="4" fill="#c9a961"/>
+    <circle cx="80" cy="10" r="2" fill="#e8b4ab"/>
+    <circle cx="220" cy="10" r="2" fill="#e8b4ab"/>
+  </svg>
+</div>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="script">Moments</span>
+      <h2>Our Gallery</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&h=500&fit=crop" alt=""></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&h=500&fit=crop" alt=""></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500&h=500&fit=crop" alt=""></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=500&h=500&fit=crop" alt=""></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?w=500&h=500&fit=crop" alt=""></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500&h=500&fit=crop" alt=""></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=500&h=500&fit=crop" alt=""></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1522413452208-996ff3f3e740?w=500&h=500&fit=crop" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 15 Q 80 0 150 15 T 280 15" stroke="#c9a961" stroke-width="1.2" fill="none"/>
+    <circle cx="150" cy="15" r="4" fill="#c9a961"/>
+    <circle cx="80" cy="10" r="2" fill="#e8b4ab"/>
+    <circle cx="220" cy="10" r="2" fill="#e8b4ab"/>
+  </svg>
+</div>
+
+<!-- ===== COUNTDOWN ===== -->
+<section class="countdown">
+  <div class="container reveal">
+    <div class="section-title">
+      <span class="script">Counting Down</span>
+      <h2>Until Our Big Day</h2>
+    </div>
+    <div class="count-box" id="countbox">
+      <div class="count-unit"><div class="num" id="d">00</div><div class="label">Days</div></div>
+      <div class="count-unit"><div class="num" id="h">00</div><div class="label">Hours</div></div>
+      <div class="count-unit"><div class="num" id="m">00</div><div class="label">Minutes</div></div>
+      <div class="count-unit"><div class="num" id="s">00</div><div class="label">Seconds</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 15 Q 80 0 150 15 T 280 15" stroke="#c9a961" stroke-width="1.2" fill="none"/>
+    <circle cx="150" cy="15" r="4" fill="#c9a961"/>
+    <circle cx="80" cy="10" r="2" fill="#e8b4ab"/>
+    <circle cx="220" cy="10" r="2" fill="#e8b4ab"/>
+  </svg>
+</div>
+
+<!-- ===== RSVP ===== -->
+<section class="rsvp">
+  <div class="container reveal">
+    <div class="section-title">
+      <span class="script">Be With Us</span>
+      <h2>RSVP</h2>
+    </div>
+    <p class="rsvp-text">Your presence would mean the world to us. Kindly confirm your attendance so we can celebrate together.</p>
+    <a href="https://wa.me/919999999999?text=Hello!%20I'd%20love%20to%20attend%20{{groomName}}%20%26%20{{brideName}}'s%20Engagement%20%F0%9F%92%8D" target="_blank" class="whatsapp-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.304-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      RSVP on WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="names">{{groomName}} &amp; {{brideName}}</div>
+  <div class="heart">❤</div>
+  <p style="margin-top:1rem;font-style:italic;">Two hearts. One beginning.</p>
+  <div class="copy">© 2025 • Made with love</div>
+</footer>
+
+<script>
+/* ===== Scroll Reveal ===== */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('show');}
+  });
+},{threshold:.15});
+document.querySelectorAll('.reveal, .divider, .time-item').forEach(el=>io.observe(el));
+
+/* ===== Particles & Petals ===== */
+const particlesEl = document.getElementById('particles');
+function createPetal(){
+  const p = document.createElement('div');
+  p.className='petal';
+  const colors=['#e8b4ab','#f7d6d0','#f5c5b8','#fadad4'];
+  const size = 10 + Math.random()*14;
+  p.innerHTML=`<svg width="${size}" height="${size}" viewBox="0 0 20 20"><ellipse cx="10" cy="10" rx="9" ry="5" fill="${colors[Math.floor(Math.random()*colors.length)]}" opacity=".85"/></svg>`;
+  p.style.left=Math.random()*100+'vw';
+  p.style.animationDuration=(8+Math.random()*10)+'s';
+  p.style.animationDelay=Math.random()*5+'s';
+  particlesEl.appendChild(p);
+  setTimeout(()=>p.remove(),20000);
+}
+function createSparkle(){
+  const s=document.createElement('div');
+  s.className='sparkle';
+  s.style.left=Math.random()*100+'vw';
+  s.style.top=Math.random()*100+'vh';
+  s.style.animationDuration=(2+Math.random()*3)+'s';
+  s.style.animationDelay=Math.random()*2+'s';
+  particlesEl.appendChild(s);
+  setTimeout(()=>s.remove(),5000);
+}
+// initial
+for(let i=0;i<15;i++)setTimeout(createPetal,i*500);
+for(let i=0;i<20;i++)createSparkle();
+setInterval(createPetal,1200);
+setInterval(createSparkle,400);
+
+/* ===== Countdown ===== */
+const target = new Date('2025-12-20T18:30:00').getTime();
+function tick(){
+  const now=Date.now();
+  let diff=target-now;
+  if(diff<0)diff=0;
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('d').textContent=String(d).padStart(2,'0');
+  document.getElementById('h').textContent=String(h).padStart(2,'0');
+  document.getElementById('m').textContent=String(m).padStart(2,'0');
+  document.getElementById('s').textContent=String(s).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>

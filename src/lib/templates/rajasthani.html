@@ -1,0 +1,2330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Rajasthani Palace Wedding Invitation</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== CSS VARIABLES & RESET ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --maroon-deep: #4A0010;
+            --maroon-royal: #7B1C35;
+            --gold-bright: #D4AF37;
+            --gold-muted: #C5973A;
+            --gold-light: #F0D080;
+            --sand-warm: #E8C97A;
+            --ivory: #FDF6E3;
+            --ivory-dark: #F5E6C8;
+            --sunset-orange: #C2570A;
+            --sunset-red: #8B2500;
+            --sky-dusk: #1A0A2E;
+            --sky-twilight: #3D1A5C;
+            
+            --font-cinzel: 'Cinzel', serif;
+            --font-cinzel-dec: 'Cinzel Decorative', serif;
+            --font-playfair: 'Playfair Display', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-playfair);
+            color: var(--maroon-deep);
+            background-color: var(--ivory);
+            overflow-x: hidden;
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100dvh;
+            height: auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 60px;
+            overflow: visible;
+        }
+
+        .hero-sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                var(--sky-dusk) 0%,
+                var(--sky-twilight) 20%,
+                #5C2F4C 40%,
+                var(--sunset-orange) 70%,
+                var(--gold-bright) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            z-index: 2;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .hero-clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            opacity: 0.15;
+            animation: drift linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+
+        .hero-palace {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 55%;
+            z-index: 4;
+        }
+
+        .hero-palace svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 20px 60px rgba(0,0,0,0.4));
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            z-index: 10;
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 20px 10px;
+        }
+
+        .auspicious-symbol {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            letter-spacing: 0.3em;
+            color: var(--gold-bright);
+            font-family: var(--font-playfair);
+            font-weight: 400;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .blessing-line {
+            font-size: clamp(0.75rem, 1.5vw, 1rem);
+            color: var(--ivory);
+            font-style: italic;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1.2s ease-out;
+            letter-spacing: 0.1em;
+        }
+
+        .groom-name, .bride-name {
+            font-family: var(--font-cinzel-dec);
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+            margin: 0.5rem 0;
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: 0.05em;
+        }
+
+        .weds {
+            font-family: var(--font-playfair);
+            font-size: clamp(1rem, 3vw, 2rem);
+            color: var(--ivory);
+            font-style: italic;
+            margin: 1.5rem 0;
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .weds-divider {
+            display: inline-block;
+            margin: 0 1rem;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--gold-bright);
+        }
+
+        .date-line, .venue-line {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--ivory-dark);
+            margin-top: 2rem;
+            animation: fadeInUp 1.6s ease-out;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Parallax effect on scroll */
+        .hero-content {
+            transition: transform 0.2s ease-out;
+        }
+
+        /* ========== FLOATING ELEMENTS ========== */
+        .floating-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            opacity: 0;
+            animation: petal-fall linear infinite;
+        }
+
+        @keyframes petal-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(110vh) translateX(var(--sway, 0px)) rotate(360deg);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .elephant-procession {
+            position: fixed;
+            bottom: 12%;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            z-index: 6;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .elephant-svg {
+            position: absolute;
+            animation: elephant-walk 45s linear infinite;
+        }
+
+        @keyframes elephant-walk {
+            0% {
+                left: -300px;
+            }
+            100% {
+                left: 100vw;
+            }
+        }
+
+        /* ========== DIVIDER SECTIONS ========== */
+        .divider {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            margin: 2rem 0;
+        }
+
+        .divider svg {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* ========== SECTION 2: BLESSINGS ========== */
+        .blessings {
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--ivory-dark) 100%);
+            padding: clamp(3rem, 8vw, 6rem) 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blessings::before {
+            content: 'ॐ';
+            position: absolute;
+            font-size: 400px;
+            color: rgba(212, 175, 55, 0.05);
+            top: 50%;
+            right: -100px;
+            transform: translateY(-50%);
+            font-family: serif;
+            z-index: 0;
+        }
+
+        .blessings-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .shloka {
+            font-family: serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--maroon-deep);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .shloka-translation {
+            font-family: var(--font-playfair);
+            font-style: italic;
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            color: var(--maroon-royal);
+            margin-bottom: 3rem;
+        }
+
+        .family-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .family-column {
+            text-align: center;
+        }
+
+        .family-title {
+            font-family: var(--font-cinzel);
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--gold-bright);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .family-names {
+            font-family: var(--font-cinzel);
+            font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+            color: var(--maroon-deep);
+            font-weight: 600;
+            line-height: 1.8;
+        }
+
+        .relationship {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            color: var(--maroon-royal);
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        .grandparent-names {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.9rem, 1.7vw, 1rem);
+            color: var(--maroon-deep);
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .family-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* ========== SECTION 3: EVENTS ========== */
+        .events {
+            background: linear-gradient(135deg, var(--ivory-dark) 0%, var(--sand-warm) 100%);
+            padding: clamp(3rem, 8vw, 6rem) 2rem;
+        }
+
+        .section-title {
+            font-family: var(--font-cinzel-dec);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-align: center;
+            color: var(--maroon-royal);
+            margin-bottom: 3rem;
+            letter-spacing: 0.05em;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            background: var(--ivory);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            border: 3px double var(--gold-bright);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            opacity: 0;
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .event-card:nth-child(1) { animation-delay: 0s; }
+        .event-card:nth-child(2) { animation-delay: 0.15s; }
+        .event-card:nth-child(3) { animation-delay: 0.3s; }
+        .event-card:nth-child(4) { animation-delay: 0.45s; }
+        .event-card:nth-child(5) { animation-delay: 0.6s; }
+        .event-card:nth-child(6) { animation-delay: 0.75s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .event-card::before,
+        .event-card::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--gold-bright);
+            border-radius: 50%;
+        }
+
+        .event-card::before {
+            top: -6px;
+            left: -6px;
+        }
+
+        .event-card::after {
+            bottom: -6px;
+            right: -6px;
+        }
+
+        .event-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .event-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+        }
+
+        .event-name {
+            font-family: var(--font-cinzel);
+            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+            color: var(--maroon-royal);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .event-date,
+        .event-time,
+        .event-day {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            color: var(--maroon-deep);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .event-venue {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.85rem, 1.7vw, 1rem);
+            color: var(--gold-muted);
+            text-align: center;
+            font-style: italic;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding-top: 1rem;
+        }
+
+        .event-dress {
+            font-family: var(--font-cinzel);
+            font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+            color: var(--sunset-orange);
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* ========== SECTION 4: THE COUPLE ========== */
+        .couple {
+            background: linear-gradient(135deg, #6B2445 0%, var(--maroon-royal) 100%);
+            padding: clamp(3rem, 8vw, 6rem) 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .couple::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            blur: 60px;
+        }
+
+        .couple::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(248, 214, 165, 0.08) 0%, transparent 70%);
+            filter: blur(60px);
+        }
+
+        .couple-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .couple-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: center;
+        }
+
+        .couple-frame {
+            text-align: center;
+        }
+
+        .frame-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .frame-img {
+            width: 100%;
+            max-width: 280px;
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(212,175,55,0.1));
+            border: 2px solid var(--gold-bright);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.2), 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .frame-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .frame-name {
+            font-family: var(--font-cinzel);
+            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+            color: var(--gold-bright);
+            margin-top: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .frame-role {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            color: var(--ivory);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        .couple-bio {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.9rem, 1.7vw, 1rem);
+            color: var(--ivory);
+            line-height: 1.7;
+            margin-top: 1rem;
+        }
+
+        .couple-divider {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .divider-line {
+            width: 2px;
+            height: 200px;
+            background: linear-gradient(180deg, transparent, var(--gold-bright), transparent);
+        }
+
+        .divider-ornament {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .divider-quote {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            color: var(--ivory);
+            font-style: italic;
+            text-align: center;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            .couple-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .couple-divider {
+                flex-direction: row;
+                height: 100px;
+            }
+
+            .divider-line {
+                width: 200px;
+                height: 2px;
+                transform: rotate(0deg);
+            }
+
+            .divider-quote {
+                writing-mode: horizontal-tb;
+                transform: none;
+            }
+        }
+
+        /* ========== SECTION 5: RSVP ========== */
+        .rsvp {
+            background: linear-gradient(135deg, var(--maroon-deep) 0%, var(--maroon-royal) 100%);
+            padding: clamp(3rem, 8vw, 6rem) 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rsvp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(212,175,55,0.03) 35px, rgba(212,175,55,0.03) 70px);
+            pointer-events: none;
+        }
+
+        .rsvp-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .rsvp-heading {
+            font-family: var(--font-cinzel-dec);
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            color: var(--gold-bright);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .rsvp-subheading {
+            font-family: var(--font-playfair);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--ivory);
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-label {
+            font-family: var(--font-cinzel);
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            color: var(--gold-bright);
+            display: block;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--ivory);
+            border: 2px solid var(--gold-bright);
+            border-radius: 8px;
+            font-family: var(--font-playfair);
+            font-size: clamp(0.95rem, 1.7vw, 1.05rem);
+            color: var(--maroon-deep);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            background: #FFFBF0;
+        }
+
+        .form-input::placeholder {
+            color: rgba(74, 0, 16, 0.4);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-playfair);
+            font-size: clamp(0.95rem, 1.7vw, 1.05rem);
+            color: var(--ivory);
+            cursor: pointer;
+        }
+
+        .radio-label input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold-bright);
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            margin-top: 2rem;
+            background: linear-gradient(135deg, var(--maroon-royal), var(--maroon-deep));
+            border: 2px solid var(--gold-bright);
+            border-radius: 8px;
+            font-family: var(--font-cinzel);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--gold-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-light));
+            color: var(--maroon-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .rsvp-confirmation {
+            display: none;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(248, 214, 165, 0.1);
+            border: 2px solid var(--gold-bright);
+            border-radius: 8px;
+            text-align: center;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .rsvp-confirmation.show {
+            display: block;
+        }
+
+        .rsvp-message {
+            font-family: var(--font-playfair);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--gold-light);
+            line-height: 1.8;
+        }
+
+        /* ========== SECTION 6: DETAILS ========== */
+        .details {
+            background: linear-gradient(135deg, var(--ivory-dark) 0%, #F0E8D8 100%);
+            padding: clamp(3rem, 8vw, 6rem) 2rem;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .detail-card {
+            background: var(--ivory);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--gold-bright);
+        }
+
+        .detail-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+        }
+
+        .detail-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .detail-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .detail-heading {
+            font-family: var(--font-cinzel);
+            font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+            color: var(--maroon-royal);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .detail-text {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.9rem, 1.7vw, 1rem);
+            color: var(--maroon-deep);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .detail-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--gold-bright);
+            color: var(--maroon-deep);
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: var(--font-cinzel);
+            font-size: clamp(0.85rem, 1.6vw, 0.95rem);
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .detail-link:hover {
+            background: var(--gold-light);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .hashtag-display {
+            font-family: var(--font-cinzel);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            color: var(--gold-bright);
+            margin: 1.5rem 0;
+            word-break: break-word;
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--maroon-deep);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .swatch.maroon { background: var(--maroon-royal); }
+        .swatch.gold { background: var(--gold-bright); }
+        .swatch.ivory { background: var(--ivory); border-color: var(--gold-bright); }
+        .swatch.saffron { background: #FF9F1C; }
+        .swatch.emerald { background: #1B6E3A; }
+
+        /* ========== SECTION 7: COUNTDOWN ========== */
+        .countdown {
+            background: linear-gradient(135deg, #0D0820 0%, var(--sky-twilight) 100%);
+            padding: clamp(3rem, 8vw, 6rem) 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            filter: blur(80px);
+        }
+
+        .countdown-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .countdown-label {
+            font-family: var(--font-cinzel-dec);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            color: var(--gold-bright);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .timer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: clamp(1rem, 2vw, 1.5rem);
+            margin-bottom: 2rem;
+        }
+
+        .timer-block {
+            background: rgba(122, 28, 53, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--gold-bright);
+            border-radius: 8px;
+            padding: clamp(1rem, 2vw, 1.5rem);
+            transition: all 0.3s ease;
+        }
+
+        .timer-block:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: scale(1.05);
+        }
+
+        .timer-number {
+            font-family: var(--font-cinzel);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--gold-bright);
+            font-weight: 700;
+            line-height: 1;
+            perspective: 1000px;
+        }
+
+        .timer-number.flip {
+            animation: flip-number 0.6s ease-in-out;
+        }
+
+        @keyframes flip-number {
+            0% {
+                transform: rotateX(0deg);
+            }
+            50% {
+                transform: rotateX(90deg);
+            }
+            100% {
+                transform: rotateX(0deg);
+            }
+        }
+
+        .timer-label {
+            font-family: var(--font-cinzel);
+            font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+            color: var(--ivory);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-bright), var(--gold-light));
+            width: 0%;
+            animation: progress-expand 1s ease-out;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        @keyframes progress-expand {
+            from {
+                width: 0%;
+            }
+            to {
+                width: var(--progress, 50%);
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--maroon-deep);
+            color: var(--ivory);
+            padding: clamp(2rem, 5vw, 4rem) 2rem;
+            text-align: center;
+            border-top: 2px solid var(--gold-bright);
+        }
+
+        .footer-insignia {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .footer-insignia svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.3));
+        }
+
+        .footer-names {
+            font-family: var(--font-cinzel-dec);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--gold-bright);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-text {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-copyright {
+            font-family: var(--font-playfair);
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding-top: 1.5rem;
+        }
+
+        /* ========== HEADER NAV ========== */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(74, 0, 16, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--gold-bright);
+            padding: 1rem 2rem;
+            display: none;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 100;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .header-nav.show {
+            display: flex;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .header-nav a {
+            font-family: var(--font-cinzel);
+            font-size: clamp(0.85rem, 1.6vw, 1rem);
+            color: var(--gold-bright);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .header-nav a:hover {
+            color: var(--gold-light);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .family-column {
+                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+                padding-bottom: 2rem;
+            }
+
+            .family-column:last-child {
+                border-bottom: none;
+                padding-top: 2rem;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .couple-bio {
+                margin-top: 1.5rem;
+            }
+
+            .timer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .radio-group {
+                gap: 1rem;
+                flex-direction: column;
+            }
+        }
+
+        /* ========== UTILITY CLASSES ========== */
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .text-gold {
+            color: var(--gold-bright);
+        }
+
+        .text-ivory {
+            color: var(--ivory);
+        }
+
+        .text-maroon {
+            color: var(--maroon-deep);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <nav class="header-nav" id="headerNav">
+        <a href="#hero">Home</a>
+        <a href="#blessings">Blessings</a>
+        <a href="#events">Events</a>
+        <a href="#couple">Couple</a>
+        <a href="#rsvp">RSVP</a>
+        <a href="#details">Details</a>
+        <a href="#countdown">Countdown</a>
+    </nav>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-sky"></div>
+        
+        <div class="hero-stars" id="starsContainer"></div>
+        
+        <div class="hero-clouds" id="cloudsContainer"></div>
+
+        <div class="floating-container" id="petalsContainer"></div>
+
+        <div class="elephant-procession" id="elephantContainer"></div>
+
+        <!-- Palace SVG -->
+        <div class="hero-palace">
+            <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <!-- Palace Silhouette -->
+                
+                <!-- Water pool reflection -->
+                <ellipse cx="600" cy="480" rx="180" ry="60" fill="rgba(100, 180, 220, 0.2)" />
+                
+                <!-- Distant spires (faintest) -->
+                <g opacity="0.3">
+                    <polygon points="250,400 280,200 310,400" fill="#4A0010" />
+                    <rect x="275" y="350" width="10" height="50" fill="#4A0010" />
+                    <polygon points="900,400 930,180 960,400" fill="#4A0010" />
+                    <rect x="925" y="350" width="10" height="50" fill="#4A0010" />
+                </g>
+
+                <!-- Mid-ground palace layer -->
+                <g opacity="0.6">
+                    <!-- Central tower -->
+                    <rect x="520" y="200" width="160" height="250" fill="#7B1C35" />
+                    <polygon points="520,200 600,80 680,200" fill="#6B1430" />
+                    <!-- Left tower -->
+                    <rect x="350" y="250" width="100" height="200" fill="#7B1C35" />
+                    <polygon points="350,250 400,150 450,250" fill="#6B1430" />
+                    <!-- Right tower -->
+                    <rect x="750" y="250" width="100" height="200" fill="#7B1C35" />
+                    <polygon points="750,250 800,150 850,250" fill="#6B1430" />
+                </g>
+
+                <!-- Foreground palace (darkest, most detailed) -->
+                <g opacity="0.9">
+                    <!-- Ground courtyard -->
+                    <rect x="0" y="450" width="1200" height="150" fill="#6B1430" />
+                    
+                    <!-- Central ceremonial gate -->
+                    <g>
+                        <!-- Gate arch -->
+                        <path d="M 450 450 Q 450 300 600 300 Q 750 300 750 450" stroke="#8B2500" stroke-width="3" fill="none" />
+                        <path d="M 455 450 Q 455 310 600 310 Q 745 310 745 450" stroke="#D4AF37" stroke-width="2" fill="none" />
+                        
+                        <!-- Jaali lattice pattern in arch -->
+                        <g opacity="0.4" stroke="#8B2500" stroke-width="1">
+                            <!-- Vertical lines -->
+                            <line x1="475" y1="350" x2="475" y2="450" />
+                            <line x1="505" y1="320" x2="505" y2="450" />
+                            <line x1="535" y1="305" x2="535" y2="450" />
+                            <line x1="565" y1="300" x2="565" y2="450" />
+                            <line x1="595" y1="300" x2="595" y2="450" />
+                            <line x1="625" y1="300" x2="625" y2="450" />
+                            <line x1="655" y1="305" x2="655" y2="450" />
+                            <line x1="685" y1="320" x2="685" y2="450" />
+                            <line x1="715" y1="350" x2="715" y2="450" />
+                            
+                            <!-- Diagonal lines -->
+                            <line x1="475" y1="450" x2="530" y2="340" />
+                            <line x1="715" y1="450" x2="660" y2="340" />
+                        </g>
+                        
+                        <!-- Gate doors -->
+                        <rect x="520" y="350" width="60" height="100" fill="none" stroke="#D4AF37" stroke-width="2" />
+                        <rect x="620" y="350" width="60" height="100" fill="none" stroke="#D4AF37" stroke-width="2" />
+                        <line x1="550" y1="350" x2="550" y2="450" stroke="#D4AF37" stroke-width="1" />
+                        <line x1="650" y1="350" x2="650" y2="450" stroke="#D4AF37" stroke-width="1" />
+                    </g>
+                    
+                    <!-- Side gates -->
+                    <g>
+                        <!-- Left gate -->
+                        <path d="M 300 450 Q 300 350 350 350 Q 400 350 400 450" stroke="#8B2500" stroke-width="2" fill="none" />
+                        <rect x="320" y="380" width="40" height="70" fill="none" stroke="#D4AF37" stroke-width="1.5" />
+                        
+                        <!-- Right gate -->
+                        <path d="M 800 450 Q 800 350 850 350 Q 900 350 900 450" stroke="#8B2500" stroke-width="2" fill="none" />
+                        <rect x="820" y="380" width="40" height="70" fill="none" stroke="#D4AF37" stroke-width="1.5" />
+                    </g>
+                    
+                    <!-- Central Chhatri (main dome) -->
+                    <g>
+                        <!-- Base platform -->
+                        <rect x="550" y="140" width="100" height="20" fill="#D4AF37" opacity="0.4" />
+                        
+                        <!-- Pillars -->
+                        <rect x="555" y="160" width="8" height="70" fill="#8B2500" />
+                        <rect x="637" y="160" width="8" height="70" fill="#8B2500" />
+                        <rect x="555" y="165" width="90" height="4" fill="#D4AF37" opacity="0.3" />
+                        
+                        <!-- Dome -->
+                        <path d="M 550 160 Q 550 80 600 50 Q 650 80 650 160" stroke="#8B2500" stroke-width="2" fill="#6B1430" />
+                        
+                        <!-- Dome ribs -->
+                        <path d="M 570 160 Q 570 100 600 60" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.4" />
+                        <path d="M 630 160 Q 630 100 600 60" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.4" />
+                        
+                        <!-- Finial (spear) -->
+                        <rect x="598" y="40" width="4" height="30" fill="#D4AF37" />
+                        <polygon points="600,35 595,40 605,40" fill="#D4AF37" />
+                    </g>
+                    
+                    <!-- Left Chhatri -->
+                    <g>
+                        <rect x="340" y="180" width="60" height="15" fill="#D4AF37" opacity="0.3" />
+                        <rect x="345" y="195" width="5" height="50" fill="#8B2500" />
+                        <rect x="390" y="195" width="5" height="50" fill="#8B2500" />
+                        <path d="M 340 195 Q 340 140 370 110 Q 400 140 400 195" stroke="#8B2500" stroke-width="2" fill="#6B1430" />
+                        <rect x="368" y="100" width="4" height="20" fill="#D4AF37" />
+                        <polygon points="370,95 366,100 374,100" fill="#D4AF37" />
+                    </g>
+                    
+                    <!-- Right Chhatri -->
+                    <g>
+                        <rect x="800" y="180" width="60" height="15" fill="#D4AF37" opacity="0.3" />
+                        <rect x="805" y="195" width="5" height="50" fill="#8B2500" />
+                        <rect x="850" y="195" width="5" height="50" fill="#8B2500" />
+                        <path d="M 800 195 Q 800 140 830 110 Q 860 140 860 195" stroke="#8B2500" stroke-width="2" fill="#6B1430" />
+                        <rect x="828" y="100" width="4" height="20" fill="#D4AF37" />
+                        <polygon points="830,95 826,100 834,100" fill="#D4AF37" />
+                    </g>
+                    
+                    <!-- Jharokha Balconies -->
+                    <g opacity="0.8">
+                        <!-- Left balconies -->
+                        <g>
+                            <path d="M 420 280 Q 420 260 440 260 Q 460 260 460 280" stroke="#D4AF37" stroke-width="1.5" fill="none" />
+                            <rect x="425" y="280" width="30" height="35" fill="#6B1430" opacity="0.5" />
+                            <rect x="428" y="280" width="8" height="8" fill="none" stroke="#D4AF37" stroke-width="0.5" />
+                            <rect x="440" y="280" width="8" height="8" fill="none" stroke="#D4AF37" stroke-width="0.5" />
+                            <rect x="452" y="280" width="8" height="8" fill="none" stroke="#D4AF37" stroke-width="0.5" />
+                            <line x1="425" y1="315" x2="455" y2="315" stroke="#D4AF37" stroke-width="1" opacity="0.6" />
+                        </g>
+                        
+                        <!-- Center-left balconies -->
+                        <g>
+                            <path d="M 530 260 Q 530 240 550 240 Q 570 240 570 260" stroke="#D4AF37" stroke-width="1.5" fill="none" />
+                            <rect x="535" y="260" width="30" height="30" fill="#6B1430" opacity="0.5" />
+                        </g>
+                        
+                        <!-- Center-right balconies -->
+                        <g>
+                            <path d="M 630 260 Q 630 240 650 240 Q 670 240 670 260" stroke="#D4AF37" stroke-width="1.5" fill="none" />
+                            <rect x="635" y="260" width="30" height="30" fill="#6B1430" opacity="0.5" />
+                        </g>
+                        
+                        <!-- Right balconies -->
+                        <g>
+                            <path d="M 740 280 Q 740 260 760 260 Q 780 260 780 280" stroke="#D4AF37" stroke-width="1.5" fill="none" />
+                            <rect x="745" y="280" width="30" height="35" fill="#6B1430" opacity="0.5" />
+                            <line x1="745" y1="315" x2="775" y2="315" stroke="#D4AF37" stroke-width="1" opacity="0.6" />
+                        </g>
+                    </g>
+                    
+                    <!-- Corner towers (burj) -->
+                    <g>
+                        <!-- Left tower -->
+                        <polygon points="250,450 250,300 280,300 280,450" fill="#7B1C35" />
+                        <circle cx="265" cy="300" r="18" fill="none" stroke="#8B2500" stroke-width="2" />
+                        <line x1="265" y1="290" x2="265" y2="320" stroke="#8B2500" stroke-width="1" />
+                        <line x1="250" y1="305" x2="280" y2="305" stroke="#8B2500" stroke-width="1" />
+                        <polygon points="250,300 265,250 280,300" fill="#6B1430" />
+                        <rect x="263" y="240" width="4" height="20" fill="#D4AF37" />
+                        
+                        <!-- Right tower -->
+                        <polygon points="920,450 920,300 950,300 950,450" fill="#7B1C35" />
+                        <circle cx="935" cy="300" r="18" fill="none" stroke="#8B2500" stroke-width="2" />
+                        <line x1="935" y1="290" x2="935" y2="320" stroke="#8B2500" stroke-width="1" />
+                        <line x1="920" y1="305" x2="950" y2="305" stroke="#8B2500" stroke-width="1" />
+                        <polygon points="920,300 935,250 950,300" fill="#6B1430" />
+                        <rect x="933" y="240" width="4" height="20" fill="#D4AF37" />
+                    </g>
+                    
+                    <!-- Royal flags -->
+                    <g>
+                        <!-- Flags on poles -->
+                        <line x1="265" y1="240" x2="265" y2="180" stroke="#8B2500" stroke-width="2" />
+                        <polygon points="265,180 280,185 280,195" fill="#FF1B1B" opacity="0.7" />
+                        
+                        <line x1="370" y1="105" x2="370" y2="50" stroke="#8B2500" stroke-width="2" />
+                        <polygon points="370,50 385,55 385,65" fill="#FF1B1B" opacity="0.7" />
+                        
+                        <line x1="600" y1="35" x2="600" y2="-10" stroke="#8B2500" stroke-width="1" />
+                        <polygon points="600,-10 610,-5 610,5" fill="#FFD700" opacity="0.6" />
+                        
+                        <line x1="830" y1="105" x2="830" y2="50" stroke="#8B2500" stroke-width="2" />
+                        <polygon points="830,50 845,55 845,65" fill="#FF1B1B" opacity="0.7" />
+                        
+                        <line x1="935" y1="240" x2="935" y2="180" stroke="#8B2500" stroke-width="2" />
+                        <polygon points="935,180 950,185 950,195" fill="#FF1B1B" opacity="0.7" />
+                    </g>
+                </g>
+
+                <!-- Reflected palace in pool (faded) -->
+                <g opacity="0.15">
+                    <polygon points="520,480 600,550 680,480" fill="#8B2500" />
+                </g>
+            </svg>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <div class="auspicious-symbol">॥ शुभ विवाह ॥</div>
+            <div class="blessing-line">With the blessings of God and Family</div>
+            
+            <h1 class="groom-name">{{groomName}}</h1>
+            <div class="weds">
+                <span class="weds-divider">✦</span>
+                <span>weds</span>
+                <span class="weds-divider">✦</span>
+            </div>
+            <h1 class="bride-name">{{brideName}}</h1>
+            
+            <div class="date-line">The Auspicious Occasion of 15th December 2024</div>
+            <div class="venue-line">City Palace, Jaipur, Rajasthan</div>
+        </div>
+    </section>
+
+    <!-- Divider 1 -->
+    <div class="divider" id="divider1"></div>
+
+    <!-- SECTION 2: BLESSINGS -->
+    <section class="blessings" id="blessings">
+        <div class="blessings-content">
+            <div class="shloka">
+                मयी सर्वमिदं प्रोतं सूत्रे मणिगणा इव ॥<br>
+                तन्मे हृदयं भूयाद् यत्र कृष्णः समागतः
+            </div>
+            <div class="shloka-translation">
+                "As a string holds beads together, so life is held by the divine thread. May your hearts unite like two souls becoming one with the blessings of the universe."
+            </div>
+
+            <h2 style="font-family: var(--font-cinzel); font-size: clamp(1.3rem, 2.5vw, 1.6rem); color: var(--maroon-royal); margin-bottom: 2rem; letter-spacing: 0.05em;">Together with their families</h2>
+
+            <div class="family-section">
+                <div class="family-column">
+                    <div class="family-title">The Bridegroom</div>
+                    <div class="family-names">{{groomName}}</div>
+                    <div class="relationship">Son of</div>
+                    <div class="family-names">Mr. & Mrs. Singh</div>
+                    <div class="relationship">Grandson of</div>
+                    <div class="grandparent-names">Maharaja Harendra Singh & Maharani Savitri Singh</div>
+                </div>
+
+                <div class="family-column">
+                    <div class="family-title">The Bride</div>
+                    <div class="family-names">{{brideName}}</div>
+                    <div class="relationship">Daughter of</div>
+                    <div class="family-names">Dr. Ashok Kumar & Dr. Neha Kumar</div>
+                    <div class="relationship">Granddaughter of</div>
+                    <div class="grandparent-names">Prof. Ramesh Kumar & Mrs. Indira Devi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider 2 -->
+    <div class="divider" id="divider2"></div>
+
+    <!-- SECTION 3: EVENTS -->
+    <section class="events" id="events">
+        <h2 class="section-title">Wedding Events</h2>
+        <div class="events-grid" id="eventsGrid">
+            <!-- Events will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Divider 3 -->
+    <div class="divider" id="divider3"></div>
+
+    <!-- SECTION 4: THE COUPLE -->
+    <section class="couple" id="couple">
+        <div class="couple-content">
+            <div class="couple-grid">
+                <div class="couple-frame">
+                    <div class="frame-box">
+                        <div class="frame-img">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%23D4AF37' width='300' height='400'/%3E%3Ccircle cx='150' cy='120' r='50' fill='%234A0010' opacity='0.3'/%3E%3Ctext x='150' y='200' font-size='24' fill='%234A0010' text-anchor='middle' font-family='serif'%3EGroom Photo%3C/text%3E%3Crect x='100' y='240' width='100' height='120' fill='%234A0010' opacity='0.2'/%3E%3C/svg%3E" alt="Groom">
+                        </div>
+                    </div>
+                    <div class="frame-name">{{groomName}}</div>
+                    <div class="frame-role">The Bridegroom</div>
+                    <div class="couple-bio">A passionate heritage conservationist and accomplished polo player, {{groomName}} brings grace and tradition to the union with a heart devoted to family and culture.</div>
+                </div>
+
+                <div class="couple-divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-ornament">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Lotus ornament -->
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#D4AF37" stroke-width="2" />
+                            
+                            <!-- Petals -->
+                            <ellipse cx="50" cy="20" rx="12" ry="18" fill="#D4AF37" opacity="0.6" />
+                            <ellipse cx="80" cy="30" rx="12" ry="18" fill="#D4AF37" opacity="0.6" transform="rotate(60 50 50)" />
+                            <ellipse cx="80" cy="70" rx="12" ry="18" fill="#D4AF37" opacity="0.6" transform="rotate(120 50 50)" />
+                            <ellipse cx="50" cy="80" rx="12" ry="18" fill="#D4AF37" opacity="0.6" transform="rotate(180 50 50)" />
+                            <ellipse cx="20" cy="70" rx="12" ry="18" fill="#D4AF37" opacity="0.6" transform="rotate(240 50 50)" />
+                            <ellipse cx="20" cy="30" rx="12" ry="18" fill="#D4AF37" opacity="0.6" transform="rotate(300 50 50)" />
+                            
+                            <!-- Center -->
+                            <circle cx="50" cy="50" r="8" fill="#D4AF37" />
+                            <circle cx="50" cy="50" r="4" fill="#FDF6E3" />
+                        </svg>
+                    </div>
+                    <div class="divider-quote">Unity & Love</div>
+                </div>
+
+                <div class="couple-frame">
+                    <div class="frame-box">
+                        <div class="frame-img">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%23D4AF37' width='300' height='400'/%3E%3Ccircle cx='150' cy='120' r='50' fill='%234A0010' opacity='0.3'/%3E%3Ctext x='150' y='200' font-size='24' fill='%234A0010' text-anchor='middle' font-family='serif'%3EBride Photo%3C/text%3E%3Crect x='100' y='240' width='100' height='120' fill='%234A0010' opacity='0.2'/%3E%3C/svg%3E" alt="Bride">
+                        </div>
+                    </div>
+                    <div class="frame-name">{{brideName}}</div>
+                    <div class="frame-role">The Bride</div>
+                    <div class="couple-bio">A celebrated classical dancer and art curator, {{brideName}} exemplifies grace, intelligence, and cultural pride. Her kindness and warmth illuminate every room she enters.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider 4 -->
+    <div class="divider" id="divider4"></div>
+
+    <!-- SECTION 5: RSVP -->
+    <section class="rsvp" id="rsvp">
+        <div class="rsvp-content">
+            <h2 class="rsvp-heading">Honour Us With Your Presence</h2>
+            <p class="rsvp-subheading">Kindly respond by 30th November 2024</p>
+
+            <form id="rsvpForm">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Contact Number</label>
+                    <input type="tel" class="form-input" placeholder="Your WhatsApp number" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Number of Guests</label>
+                    <input type="number" class="form-input" placeholder="1" min="1" max="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Your Response</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="attending" value="yes" required>
+                            I will attend with joy ✓
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="attending" value="no" required>
+                            I regret, cannot attend
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Accept the Royal Invitation</button>
+            </form>
+
+            <div class="rsvp-confirmation" id="rsvpConfirmation">
+                <p class="rsvp-message" id="confirmationMessage">🙏 We await your arrival with joy!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider 5 -->
+    <div class="divider" id="divider5"></div>
+
+    <!-- SECTION 6: DETAILS -->
+    <section class="details" id="details">
+        <h2 class="section-title" style="margin-bottom: 3rem;">Essential Details</h2>
+        <div class="details-grid">
+            <!-- Venue Card -->
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Location pin -->
+                        <path d="M 50 10 C 35 10 25 20 25 35 C 25 50 50 85 50 85 C 50 85 75 50 75 35 C 75 20 65 10 50 10 Z" fill="none" stroke="#D4AF37" stroke-width="2" />
+                        <circle cx="50" cy="35" r="8" fill="#D4AF37" />
+                    </svg>
+                </div>
+                <h3 class="detail-heading">Venue</h3>
+                <p class="detail-text">
+                    <strong>City Palace, Jaipur</strong><br>
+                    Pitam Nivas Chowri,<br>
+                    Civil Lines,<br>
+                    Jaipur, Rajasthan 302004
+                </p>
+                <a href="https://maps.google.com" class="detail-link">Get Directions →</a>
+            </div>
+
+            <!-- Travel Card -->
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Airplane -->
+                        <path d="M 50 10 L 70 40 L 100 35 L 70 50 L 70 80 L 60 75 L 60 50 L 30 50 L 30 75 L 20 80 L 20 50 L 0 35 L 30 40 Z" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3 class="detail-heading">Travel & Stay</h3>
+                <p class="detail-text">
+                    <strong>Airport:</strong> Jaipur International Airport (2 km)<br>
+                    <strong>Hotels nearby:</strong><br>
+                    • Taj Hotels<br>
+                    • Rambagh Palace<br>
+                    • Samode Haveli
+                </p>
+                <a href="#" class="detail-link">Hotel Suggestions →</a>
+            </div>
+
+            <!-- Dress Code Card -->
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sari silhouette -->
+                        <path d="M 30 20 L 40 60 L 50 90 L 70 60 L 80 20 Z" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linejoin="round" />
+                        <path d="M 35 35 Q 50 45 65 35" fill="none" stroke="#D4AF37" stroke-width="1.5" />
+                    </svg>
+                </div>
+                <h3 class="detail-heading">Dress Code</h3>
+                <p class="detail-text">
+                    Ethnic wear encouraged. Royal colours welcome. Embrace the splendour of Rajasthani tradition.
+                </p>
+                <div class="color-swatches">
+                    <div class="swatch maroon"></div>
+                    <div class="swatch gold"></div>
+                    <div class="swatch saffron"></div>
+                    <div class="swatch emerald"></div>
+                    <div class="swatch ivory"></div>
+                </div>
+            </div>
+
+            <!-- Hashtag Card -->
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Camera -->
+                        <rect x="20" y="30" width="60" height="45" rx="8" fill="none" stroke="#D4AF37" stroke-width="2" />
+                        <circle cx="50" cy="52" r="15" fill="none" stroke="#D4AF37" stroke-width="2" />
+                        <circle cx="65" cy="35" r="4" fill="#D4AF37" />
+                    </svg>
+                </div>
+                <h3 class="detail-heading">Share the Moment</h3>
+                <div class="hashtag-display">#{{groomName}}{{brideName}}Weds</div>
+                <p class="detail-text">
+                    Share your beautiful moments with us and be part of our wedding story!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider 6 -->
+    <div class="divider" id="divider6"></div>
+
+    <!-- SECTION 7: COUNTDOWN -->
+    <section class="countdown" id="countdown">
+        <div class="countdown-content">
+            <h2 class="countdown-label">The Royal Ceremony Begins In...</h2>
+            
+            <div class="timer-container" id="timerContainer">
+                <!-- Timer blocks will be populated by JavaScript -->
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div style="position: relative; height: 150px; margin-top: 2rem;">
+                <svg style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 100px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Central emblem -->
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#D4AF37" stroke-width="1.5" />
+                    
+                    <!-- Sun rays -->
+                    <g stroke="#D4AF37" stroke-width="2">
+                        <line x1="50" y1="5" x2="50" y2="15" />
+                        <line x1="50" y1="85" x2="50" y2="95" />
+                        <line x1="5" y1="50" x2="15" y2="50" />
+                        <line x1="85" y1="50" x2="95" y2="50" />
+                        <line x1="15" y1="15" x2="22" y2="22" />
+                        <line x1="78" y1="78" x2="85" y2="85" />
+                        <line x1="85" y1="15" x2="78" y2="22" />
+                        <line x1="22" y1="78" x2="15" y2="85" />
+                    </g>
+                    
+                    <!-- Center circle -->
+                    <circle cx="50" cy="50" r="15" fill="none" stroke="#D4AF37" stroke-width="1.5" />
+                    <circle cx="50" cy="50" r="8" fill="#D4AF37" opacity="0.4" />
+                </svg>
+                <div id="sparkleContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-insignia">
+            <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Rajput royal insignia -->
+                <defs>
+                    <pattern id="goldGradient" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                        <circle cx="50" cy="50" r="50" fill="#D4AF37" />
+                    </pattern>
+                </defs>
+                
+                <!-- Swords -->
+                <g stroke="#D4AF37" stroke-width="2" fill="none">
+                    <line x1="30" y1="90" x2="40" y2="30" />
+                    <line x1="70" y1="90" x2="60" y2="30" />
+                    <rect x="38" y="28" width="24" height="6" fill="#D4AF37" />
+                </g>
+                
+                <!-- Sun -->
+                <circle cx="50" cy="40" r="18" fill="none" stroke="#D4AF37" stroke-width="1.5" />
+                <g stroke="#D4AF37" stroke-width="1">
+                    <line x1="50" y1="15" x2="50" y2="20" />
+                    <line x1="50" y1="60" x2="50" y2="65" />
+                    <line x1="25" y1="40" x2="30" y2="40" />
+                    <line x1="70" y1="40" x2="75" y2="40" />
+                    <line x1="33" y1="27" x2="37" y2="31" />
+                    <line x1="63" y1="49" x2="67" y2="53" />
+                </g>
+                <circle cx="50" cy="40" r="8" fill="#D4AF37" opacity="0.5" />
+                
+                <!-- Lotus -->
+                <g fill="#D4AF37">
+                    <ellipse cx="50" cy="100" rx="8" ry="6" />
+                    <circle cx="45" cy="95" r="2" />
+                    <circle cx="50" cy="92" r="2" />
+                    <circle cx="55" cy="95" r="2" />
+                </g>
+            </svg>
+        </div>
+        <h3 class="footer-names">{{groomName}} & {{brideName}}</h3>
+        <p class="footer-text">
+            With love and gratitude from both families.<br>
+            May the bonds we celebrate today become eternal.
+        </p>
+        <p class="footer-text">💕 Made with love for a lifetime of happiness 💕</p>
+        <div class="footer-copyright">
+            &copy; 2024 Royal Rajasthani Palace Wedding | All rights reserved
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ========== UTILITY FUNCTIONS ==========
+        const generateRandomStars = () => {
+            const container = document.getElementById('starsContainer');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 30 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (2 + Math.random() * 2) + 's';
+                container.appendChild(star);
+            }
+        };
+
+        const generateClouds = () => {
+            const container = document.getElementById('cloudsContainer');
+            
+            for (let i = 0; i < 3; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                cloud.style.top = (10 + Math.random() * 30) + '%';
+                cloud.style.width = (200 + Math.random() * 150) + 'px';
+                cloud.style.height = (60 + Math.random() * 40) + 'px';
+                cloud.style.animationDuration = (50 + Math.random() * 20) + 's';
+                cloud.style.animationDelay = Math.random() * 5 + 's';
+                
+                // SVG cloud shape
+                const svg = `
+                    <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 50 50 Q 50 30 70 30 Q 80 10 100 20 Q 120 5 140 20 Q 160 10 180 30 Q 200 30 200 50 Z" 
+                              fill="rgba(255,255,255,0.3)" stroke="none" />
+                    </svg>
+                `;
+                
+                cloud.innerHTML = svg;
+                container.appendChild(cloud);
+            }
+        };
+
+        const generatePetals = () => {
+            const container = document.getElementById('petalsContainer');
+            const petalCount = 30;
+            
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                
+                const size = 20 + Math.random() * 40;
+                const startDelay = Math.random() * 8;
+                const duration = 6 + Math.random() * 8;
+                const leftPos = Math.random() * 100;
+                const swayAmount = 20 + Math.random() * 40;
+                
+                petal.style.left = leftPos + '%';
+                petal.style.top = '-50px';
+                petal.style.width = size + 'px';
+                petal.style.height = size + 'px';
+                petal.style.setProperty('--sway', (Math.random() > 0.5 ? '' : '-') + swayAmount + 'px');
+                petal.style.animationDelay = startDelay + 's';
+                petal.style.animationDuration = duration + 's';
+                
+                // Petal SVG shape (simple 4-point oval)
+                const svg = `
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                        <ellipse cx="50" cy="30" rx="15" ry="25" fill="#D4AF37" opacity="0.8" />
+                        <ellipse cx="70" cy="50" rx="25" ry="15" fill="#E8C97A" opacity="0.7" />
+                        <ellipse cx="50" cy="70" rx="15" ry="25" fill="#FF9F1C" opacity="0.8" />
+                        <ellipse cx="30" cy="50" rx="25" ry="15" fill="#D4AF37" opacity="0.7" />
+                    </svg>
+                `;
+                
+                petal.innerHTML = svg;
+                container.appendChild(petal);
+            }
+        };
+
+        const generateElephants = () => {
+            const container = document.getElementById('elephantContainer');
+            
+            const elephantSVG = `
+                <svg class="elephant-svg" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 100px;">
+                    <!-- Elephant body -->
+                    <ellipse cx="40" cy="60" rx="25" ry="30" fill="#4A0010" />
+                    
+                    <!-- Head -->
+                    <circle cx="40" cy="35" r="18" fill="#4A0010" />
+                    
+                    <!-- Ears -->
+                    <ellipse cx="25" cy="40" rx="12" ry="20" fill="#4A0010" opacity="0.8" />
+                    <ellipse cx="55" cy="40" rx="12" ry="20" fill="#4A0010" opacity="0.8" />
+                    
+                    <!-- Trunk -->
+                    <path d="M 40 48 Q 38 65 35 80" stroke="#4A0010" stroke-width="6" fill="none" stroke-linecap="round" />
+                    
+                    <!-- Eyes -->
+                    <circle cx="35" cy="30" r="2" fill="#D4AF37" />
+                    <circle cx="45" cy="30" r="2" fill="#D4AF37" />
+                    
+                    <!-- Howdah (canopy) -->
+                    <rect x="25" y="25" width="30" height="20" fill="#7B1C35" opacity="0.7" />
+                    <polygon points="25,25 20,15 35,12 55,12 70,15 75,25" fill="#D4AF37" opacity="0.3" />
+                    
+                    <!-- Tassels -->
+                    <circle cx="26" cy="45" r="2" fill="#D4AF37" />
+                    <circle cx="54" cy="45" r="2" fill="#D4AF37" />
+                    
+                    <!-- Legs -->
+                    <rect x="30" y="85" width="4" height="12" fill="#4A0010" />
+                    <rect x="44" y="85" width="4" height="12" fill="#4A0010" />
+                    <rect x="52" y="85" width="4" height="12" fill="#4A0010" />
+                </svg>
+            `;
+            
+            for (let i = 0; i < 3; i++) {
+                const el = document.createElement('div');
+                el.innerHTML = elephantSVG;
+                el.style.left = (-300 + i * 150) + 'px';
+                el.style.animation = `elephant-walk 45s linear ${i * 1}s infinite`;
+                container.appendChild(el);
+            }
+        };
+
+        // ========== EVENTS DATA ==========
+        const eventsData = [
+            {
+                name: 'Haldi',
+                date: '10th December 2024',
+                time: '4:00 PM onwards',
+                day: 'Tuesday',
+                venue: 'Singh Villa, Jaipur',
+                dress: 'Yellow & Gold Traditional Wear',
+                icon: '🌼'
+            },
+            {
+                name: 'Mehendi',
+                date: '11th December 2024',
+                time: '6:00 PM onwards',
+                day: 'Wednesday',
+                venue: 'City Palace Gardens, Jaipur',
+                dress: 'Green & Gold Traditional Wear',
+                icon: '🌿'
+            },
+            {
+                name: 'Sangeet',
+                date: '12th December 2024',
+                time: '7:00 PM onwards',
+                day: 'Thursday',
+                venue: 'Royal Ballroom, City Palace',
+                dress: 'Ethnic Formal Wear',
+                icon: '🎵'
+            },
+            {
+                name: 'Baraat',
+                date: '15th December 2024',
+                time: '6:00 PM onwards',
+                day: 'Sunday',
+                venue: 'City Palace Entrance, Jaipur',
+                dress: 'Royal Ethnic Wear',
+                icon: '🐴'
+            },
+            {
+                name: 'Wedding Ceremony',
+                date: '15th December 2024',
+                time: '8:00 PM onwards',
+                day: 'Sunday',
+                venue: 'Royal Temple, City Palace',
+                dress: 'Maroon & Gold Traditional Wear',
+                icon: '💒'
+            },
+            {
+                name: 'Reception Dinner',
+                date: '16th December 2024',
+                time: '7:30 PM onwards',
+                day: 'Monday',
+                venue: 'Royal Ballroom, City Palace',
+                dress: 'Elegant Ethnic or Western Formal',
+                icon: '🥂'
+            }
+        ];
+
+        const populateEvents = () => {
+            const grid = document.getElementById('eventsGrid');
+            grid.innerHTML = '';
+            
+            eventsData.forEach((event, index) => {
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                
+                card.innerHTML = `
+                    <div class="event-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            ${getEventIconSVG(event.name)}
+                        </svg>
+                    </div>
+                    <div class="event-name">${event.name}</div>
+                    <div class="event-date">${event.date}</div>
+                    <div class="event-time">${event.time}</div>
+                    <div class="event-day">${event.day}</div>
+                    <div class="event-venue">${event.venue}</div>
+                    <div class="event-dress">${event.dress}</div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        };
+
+        const getEventIconSVG = (eventName) => {
+            const icons = {
+                'Haldi': `
+                    <circle cx="50" cy="50" r="35" fill="none" stroke="#FFD700" stroke-width="2" />
+                    <circle cx="50" cy="50" r="28" fill="#FFD700" opacity="0.2" />
+                    <circle cx="50" cy="35" r="6" fill="#FFD700" />
+                    <path d="M 50 41 L 60 55 L 40 55 Z" fill="#FFD700" opacity="0.8" />
+                `,
+                'Mehendi': `
+                    <path d="M 40 30 Q 45 35 40 45 Q 45 50 40 60 Q 45 65 40 75 L 45 75 Q 50 65 50 55 Q 55 50 50 40 Q 55 35 50 30 Z" fill="#1B6E3A" />
+                    <path d="M 50 30 Q 55 35 50 45 Q 55 50 50 60 Q 55 65 50 75 L 60 75 Q 65 65 65 55 Q 65 50 60 40 Q 65 35 60 30 Z" fill="#1B6E3A" opacity="0.7" />
+                    <circle cx="60" cy="25" r="3" fill="#FF1493" />
+                    <circle cx="45" cy="25" r="3" fill="#FF1493" />
+                `,
+                'Sangeet': `
+                    <circle cx="50" cy="50" r="35" fill="none" stroke="#FF6B35" stroke-width="2" />
+                    <path d="M 35 55 Q 40 40 45 55 Q 50 40 55 55 Q 60 40 65 55" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" />
+                    <circle cx="35" cy="35" r="3" fill="#FF6B35" />
+                    <circle cx="65" cy="35" r="3" fill="#FF6B35" />
+                `,
+                'Baraat': `
+                    <ellipse cx="50" cy="60" rx="25" ry="20" fill="none" stroke="#4169E1" stroke-width="2" />
+                    <circle cx="50" cy="40" r="12" fill="none" stroke="#4169E1" stroke-width="2" />
+                    <path d="M 45 35 L 40 30 M 55 35 L 60 30" stroke="#4169E1" stroke-width="2" stroke-linecap="round" />
+                    <rect x="35" y="50" width="30" height="12" fill="#4169E1" opacity="0.2" />
+                `,
+                'Wedding Ceremony': `
+                    <path d="M 50 20 L 70 50 L 65 50 L 65 70 L 35 70 L 35 50 L 30 50 Z" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linejoin="round" />
+                    <circle cx="50" cy="35" r="6" fill="#D4AF37" />
+                    <path d="M 45 42 L 40 65 M 55 42 L 60 65" stroke="#D4AF37" stroke-width="1.5" />
+                `,
+                'Reception Dinner': `
+                    <ellipse cx="50" cy="45" rx="20" ry="25" fill="none" stroke="#D4AF37" stroke-width="2" />
+                    <path d="M 35 45 L 32 35 Q 32 28 38 28 Q 42 28 42 32" stroke="#D4AF37" stroke-width="1.5" fill="none" />
+                    <path d="M 65 45 L 68 35 Q 68 28 62 28 Q 58 28 58 32" stroke="#D4AF37" stroke-width="1.5" fill="none" />
+                    <circle cx="50" cy="65" r="3" fill="#D4AF37" />
+                    <circle cx="40" cy="68" r="2" fill="#FFD700" opacity="0.6" />
+                    <circle cx="60" cy="68" r="2" fill="#FFD700" opacity="0.6" />
+                `
+            };
+            
+            return icons[eventName] || `<circle cx="50" cy="50" r="30" fill="#D4AF37" opacity="0.3" />`;
+        };
+
+        // ========== COUNTDOWN TIMER ==========
+        const weddingDate = new Date('2024-12-15T20:00:00').getTime();
+        const startDate = new Date('2024-09-15T00:00:00').getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const timeLeft = weddingDate - now;
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Update timer blocks
+            const timerContainer = document.getElementById('timerContainer');
+            if (timerContainer) {
+                const blocks = timerContainer.querySelectorAll('.timer-number');
+                const values = [days, hours, minutes, seconds];
+                
+                blocks.forEach((block, i) => {
+                    const newValue = String(values[i]).padStart(2, '0');
+                    if (block.textContent !== newValue) {
+                        block.textContent = newValue;
+                        block.classList.add('flip');
+                        setTimeout(() => block.classList.remove('flip'), 600);
+                    }
+                });
+            }
+
+            // Update progress bar
+            const totalDays = (weddingDate - startDate) / (1000 * 60 * 60 * 24);
+            const daysElapsed = totalDays - (timeLeft / (1000 * 60 * 60 * 24));
+            const progress = (daysElapsed / totalDays) * 100;
+            
+            const progressFill = document.getElementById('progressFill');
+            if (progressFill) {
+                progressFill.style.setProperty('--progress', progress + '%');
+                progressFill.style.width = progress + '%';
+            }
+        };
+
+        const createTimerBlocks = () => {
+            const container = document.getElementById('timerContainer');
+            const labels = ['Days', 'Hours', 'Minutes', 'Seconds'];
+            
+            labels.forEach(label => {
+                const block = document.createElement('div');
+                block.className = 'timer-block';
+                block.innerHTML = `
+                    <div class="timer-number">00</div>
+                    <div class="timer-label">${label}</div>
+                `;
+                container.appendChild(block);
+            });
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        };
+
+        // ========== SCROLL ANIMATIONS ==========
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // ========== PARALLAX SCROLL ==========
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollTop = window.scrollY;
+                    const heroContent = document.querySelector('.hero-content');
+                    
+                    if (heroContent && scrollTop < window.innerHeight) {
+                        heroContent.style.transform = `translate(-50%, calc(-50% + ${scrollTop * 0.4}px))`;
+                    }
+
+                    // Show header nav after hero scroll
+                    const headerNav = document.getElementById('headerNav');
+                    if (scrollTop > window.innerHeight * 0.5) {
+                        headerNav.classList.add('show');
+                    } else {
+                        headerNav.classList.remove('show');
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // ========== RSVP FORM HANDLING ==========
+        document.getElementById('rsvpForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = e.target.querySelectorAll('input');
+            const name = inputs[0].value;
+            
+            // Store in localStorage
+            const rsvpData = {
+                name: inputs[0].value,
+                phone: inputs[1].value,
+                guests: inputs[2].value,
+                attending: document.querySelector('input[name="attending"]:checked').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('rsvp_' + name, JSON.stringify(rsvpData));
+            
+            // Show confirmation
+            const confirmation = document.getElementById('rsvpConfirmation');
+            const message = document.getElementById('confirmationMessage');
+            message.textContent = `🙏 Thank you, ${name}! We await your arrival with joy on our special day!`;
+            confirmation.classList.add('show');
+            
+            // Reset form
+            e.target.reset();
+            
+            // Hide confirmation after 5 seconds
+            setTimeout(() => {
+                confirmation.classList.remove('show');
+            }, 5000);
+
+            // Trigger confetti
+            createConfetti();
+        });
+
+        // ========== CONFETTI ANIMATION ==========
+        const createConfetti = () => {
+            const container = document.body;
+            const confettiCount = 40;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                const size = 10 + Math.random() * 15;
+                const duration = 2 + Math.random() * 1.5;
+                const delay = Math.random() * 0.3;
+                const xStart = Math.random() * window.innerWidth;
+                const rotation = Math.random() * 720;
+                
+                confetti.style.left = xStart + 'px';
+                confetti.style.top = '-20px';
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                
+                const colors = ['#D4AF37', '#4A0010', '#FF9F1C', '#FDF6E3'];
+                const bgColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.background = bgColor;
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                
+                const keyframes = `
+                    @keyframes fall-${i} {
+                        0% {
+                            transform: translateY(0) translateX(0) rotate(0deg);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translateY(${window.innerHeight + 100}px) translateX(${(Math.random() - 0.5) * 200}px) rotate(${rotation}deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                
+                const style = document.createElement('style');
+                style.textContent = keyframes;
+                document.head.appendChild(style);
+                
+                confetti.style.animation = `fall-${i} ${duration}s ease-in ${delay}s forwards`;
+                container.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), (duration + delay) * 1000);
+            }
+        };
+
+        // ========== DIVIDER GENERATION ==========
+        const createDividerSVG = (type) => {
+            if (type === 'A') {
+                // Mandala Strip
+                return `
+                    <svg viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="mandala-pattern" x="0" y="0" width="80" height="100" patternUnits="userSpaceOnUse">
+                                <!-- Repeating mandala -->
+                                <circle cx="40" cy="50" r="15" fill="none" stroke="#D4AF37" stroke-width="1" />
+                                <circle cx="40" cy="50" r="10" fill="none" stroke="#D4AF37" stroke-width="0.8" />
+                                <circle cx="40" cy="50" r="5" fill="#D4AF37" opacity="0.6" />
+                            </pattern>
+                        </defs>
+                        
+                        <!-- Left lotus -->
+                        <g opacity="0.8">
+                            <circle cx="100" cy="50" r="20" fill="none" stroke="#D4AF37" stroke-width="1.5" />
+                            <ellipse cx="90" cy="35" rx="8" ry="12" fill="#D4AF37" opacity="0.5" />
+                            <ellipse cx="110" cy="35" rx="8" ry="12" fill="#D4AF37" opacity="0.5" />
+                            <circle cx="100" cy="50" r="8" fill="#D4AF37" />
+                        </g>
+                        
+                        <!-- Pattern -->
+                        <rect width="1200" height="100" fill="url(#mandala-pattern)" />
+                        
+                        <!-- Right lotus -->
+                        <g opacity="0.8">
+                            <circle cx="1100" cy="50" r="20" fill="none" stroke="#D4AF37" stroke-width="1.5" />
+                            <ellipse cx="1090" cy="35" rx="8" ry="12" fill="#D4AF37" opacity="0.5" />
+                            <ellipse cx="1110" cy="35" rx="8" ry="12" fill="#D4AF37" opacity="0.5" />
+                            <circle cx="1100" cy="50" r="8" fill="#D4AF37" />
+                        </g>
+                        
+                        <!-- Border -->
+                        <line x1="0" y1="10" x2="1200" y2="10" stroke="#D4AF37" stroke-width="1" opacity="0.5" />
+                        <line x1="0" y1="90" x2="1200" y2="90" stroke="#D4AF37" stroke-width="1" opacity="0.5" />
+                    </svg>
+                `;
+            } else {
+                // Paisley Bar
+                return `
+                    <svg viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="paisley-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                                <!-- Paisley shape -->
+                                <path d="M 50 30 Q 60 30 65 40 Q 70 50 60 60 Q 50 65 40 60 Q 30 50 35 40 Z" 
+                                      fill="none" stroke="#D4AF37" stroke-width="1.5" />
+                                <circle cx="50" cy="45" r="3" fill="#D4AF37" />
+                                <!-- Leaf -->
+                                <ellipse cx="70" cy="50" rx="6" ry="12" fill="none" stroke="#D4AF37" stroke-width="1" />
+                            </pattern>
+                        </defs>
+                        
+                        <!-- Center line -->
+                        <line x1="0" y1="50" x2="1200" y2="50" stroke="#D4AF37" stroke-width="1" opacity="0.4" />
+                        
+                        <!-- Repeating pattern -->
+                        <rect width="1200" height="100" fill="url(#paisley-pattern)" />
+                        
+                        <!-- Border lines -->
+                        <line x1="0" y1="20" x2="1200" y2="20" stroke="#D4AF37" stroke-width="1.5" opacity="0.6" />
+                        <line x1="0" y1="80" x2="1200" y2="80" stroke="#D4AF37" stroke-width="1.5" opacity="0.6" />
+                    </svg>
+                `;
+            }
+        };
+
+        const populateDividers = () => {
+            const dividers = document.querySelectorAll('.divider');
+            dividers.forEach((div, index) => {
+                const type = index % 2 === 0 ? 'A' : 'B';
+                div.innerHTML = createDividerSVG(type);
+            });
+        };
+
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            generateRandomStars();
+            generateClouds();
+            generatePetals();
+            generateElephants();
+            populateEvents();
+            createTimerBlocks();
+            populateDividers();
+
+            // Observe fade-in elements
+            document.querySelectorAll('.couple-frame, .detail-card').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Add smooth scroll to nav links
+            document.querySelectorAll('.header-nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+
+        // Regenerate stars on window resize
+        window.addEventListener('resize', () => {
+            generateRandomStars();
+        });
+    </script>
+</body>
+</html>

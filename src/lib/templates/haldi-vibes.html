@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haldi Ceremony — {{brideName}} & {{groomName}}</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Satisfy&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --turmeric: #E8A000;
+    --marigold: #F4C430;
+    --deep-orange: #D4500A;
+    --saffron: #FF8C00;
+    --leaf-green: #2D6A2D;
+    --light-green: #4CAF50;
+    --cream: #FFF8E7;
+    --golden: #FFD700;
+    --mud-yellow: #C8890A;
+    --pale-yellow: #FFF3C0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--cream);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    position: fixed;
+    width: 20px; height: 20px;
+    background: radial-gradient(circle, var(--marigold), var(--turmeric));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    mix-blend-mode: multiply;
+  }
+
+  /* ── FLOATING PETALS ── */
+  .petal-canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 1000;
+    overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    font-size: 1.2rem;
+    animation: petalFall linear infinite;
+    opacity: 0;
+    filter: drop-shadow(0 2px 4px rgba(228,160,0,0.4));
+  }
+  @keyframes petalFall {
+    0%   { opacity: 0; transform: translateY(-20px) rotate(0deg) scale(0.8); }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(110vh) rotate(720deg) scale(1.2); }
+  }
+
+  /* ── MARIGOLD DIVIDER SVG ── */
+  .divider {
+    width: 100%; overflow: hidden;
+    text-align: center; padding: 10px 0;
+    position: relative;
+  }
+  .divider svg { width: 100%; max-width: 900px; height: 60px; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(212,80,10,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(244,196,48,0.3) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 80%, rgba(255,140,0,0.2) 0%, transparent 60%),
+      linear-gradient(160deg, #FFF3A0 0%, #FFD54F 30%, #FFA000 65%, #E65100 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    overflow: hidden;
+  }
+
+  /* Decorative banana leaves */
+  .leaf-left, .leaf-right {
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.25;
+    animation: leafSway 4s ease-in-out infinite;
+    filter: hue-rotate(0deg);
+  }
+  .leaf-left  { left: -30px; top: 10%; transform: rotate(-30deg); animation-delay: 0s; }
+  .leaf-right { right: -30px; bottom: 15%; transform: rotate(30deg); animation-delay: 2s; }
+  @keyframes leafSway {
+    0%, 100% { transform: rotate(-30deg) scale(1); }
+    50%       { transform: rotate(-25deg) scale(1.05); }
+  }
+  .leaf-right { animation-name: leafSwayRight; }
+  @keyframes leafSwayRight {
+    0%, 100% { transform: rotate(30deg) scale(1); }
+    50%       { transform: rotate(25deg) scale(1.05); }
+  }
+
+  /* Brass pots decoration */
+  .brass-row {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    display: flex; justify-content: space-around;
+    align-items: flex-end; padding: 0 40px;
+    pointer-events: none;
+  }
+  .brass-pot {
+    font-size: 4rem; opacity: 0.3;
+    animation: potBob 3s ease-in-out infinite;
+    filter: sepia(1) saturate(2) hue-rotate(10deg);
+  }
+  .brass-pot:nth-child(2) { animation-delay: 1s; font-size: 3rem; }
+  .brass-pot:nth-child(3) { animation-delay: 2s; }
+  @keyframes potBob {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Satisfy', cursive;
+    color: var(--leaf-green);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    animation: fadeSlideUp 0.8s ease both;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-shadow:
+      0 4px 20px rgba(180,80,0,0.4),
+      0 2px 0 rgba(180,80,0,0.6),
+      4px 4px 0 rgba(150,60,0,0.3);
+    animation: fadeSlideUp 0.8s 0.2s ease both;
+    position: relative;
+  }
+  .hero-title span {
+    display: block;
+    font-style: italic;
+    color: var(--leaf-green);
+    font-size: 0.4em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    letter-spacing: 8px;
+    margin-top: 8px;
+  }
+
+  .hero-names {
+    font-family: 'Satisfy', cursive;
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--deep-orange);
+    text-shadow: 0 3px 15px rgba(255,255,255,0.5), 0 2px 0 rgba(180,80,0,0.4);
+    margin-top: 24px;
+    animation: fadeSlideUp 0.8s 0.4s ease both;
+  }
+  .hero-names .amp {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--leaf-green);
+    font-size: 0.7em;
+    margin: 0 12px;
+  }
+
+  .hero-date {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 50px;
+    padding: 10px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--deep-orange);
+    letter-spacing: 2px;
+    animation: fadeSlideUp 0.8s 0.6s ease both;
+  }
+
+  .hero-badge {
+    margin-top: 30px;
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    animation: fadeSlideUp 0.8s 0.8s ease both;
+  }
+  .badge {
+    background: rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,200,0,0.6);
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    backdrop-filter: blur(6px);
+    letter-spacing: 1px;
+  }
+
+  /* Turmeric splash decorations */
+  .splash {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,200,0,0.6), transparent);
+    animation: splashPulse 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .splash-1 { width: 300px; height: 300px; top: -80px; right: -80px; animation-delay: 0s; }
+  .splash-2 { width: 200px; height: 200px; bottom: 60px; left: -50px; animation-delay: 1.5s; }
+  .splash-3 { width: 150px; height: 150px; top: 40%; right: 5%; animation-delay: 0.8s; }
+  @keyframes splashPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50%       { transform: scale(1.2); opacity: 0.8; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MARIGOLD GARLAND ── */
+  .garland-row {
+    width: 100%; padding: 0; margin: 0;
+    background: linear-gradient(90deg, var(--leaf-green), #388E3C, var(--leaf-green));
+    overflow: hidden; position: relative; height: 72px;
+    display: flex; align-items: center;
+  }
+  .garland-scroll {
+    display: flex; animation: scrollGarland 12s linear infinite;
+    white-space: nowrap;
+  }
+  .g-flower {
+    font-size: 2rem; margin: 0 8px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
+  @keyframes scrollGarland {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section {
+    position: relative;
+    padding: 80px 20px;
+  }
+  .section-inner {
+    max-width: 900px; margin: 0 auto;
+    text-align: center;
+  }
+  .section-tag {
+    font-family: 'Satisfy', cursive;
+    font-size: 1.1rem;
+    color: var(--saffron);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--deep-orange);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .section-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #5a3a00;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ── BLESSING SECTION ── */
+  #blessing {
+    background:
+      radial-gradient(ellipse at center, rgba(255,215,0,0.08) 0%, transparent 70%),
+      var(--pale-yellow);
+  }
+  .blessing-card {
+    background: linear-gradient(135deg, #fff9e0, #fff3c0);
+    border: 3px solid var(--marigold);
+    border-radius: 24px;
+    padding: 50px 40px;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(232,160,0,0.2), inset 0 0 60px rgba(255,200,0,0.05);
+    max-width: 700px; margin: 0 auto;
+    overflow: hidden;
+  }
+  .blessing-card::before {
+    content: '🕉️';
+    position: absolute;
+    top: -20px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    background: var(--cream); padding: 0 12px;
+    border-radius: 50%;
+  }
+  .blessing-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-style: italic;
+    color: var(--deep-orange);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .blessing-subtitle {
+    font-size: 0.95rem;
+    color: var(--mud-yellow);
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+  .corner-deco {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0.15;
+  }
+  .corner-deco.tl { top: 10px; left: 10px; }
+  .corner-deco.tr { top: 10px; right: 10px; transform: scaleX(-1); }
+  .corner-deco.bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+  .corner-deco.br { bottom: 10px; right: 10px; transform: scale(-1); }
+
+  /* ── EVENT DETAILS ── */
+  #event {
+    background:
+      linear-gradient(135deg, #FFF8DC 0%, #FFF3A0 50%, #FFE082 100%);
+  }
+  .event-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px; margin-top: 40px;
+  }
+  .event-card {
+    background: rgba(255,255,255,0.7);
+    border: 2px solid var(--marigold);
+    border-radius: 20px;
+    padding: 32px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(6px);
+  }
+  .event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(232,160,0,0.3);
+  }
+  .event-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--marigold), var(--saffron), var(--deep-orange));
+  }
+  .card-icon { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+  .card-label {
+    font-size: 0.8rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 3px;
+    color: var(--saffron); margin-bottom: 8px;
+  }
+  .card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--deep-orange); line-height: 1.3;
+  }
+  .card-sub { font-size: 0.85rem; color: #8a6000; margin-top: 4px; }
+
+  /* ── FUN SECTION ── */
+  #fun {
+    background: linear-gradient(135deg, var(--deep-orange), #BF360C, #E65100);
+    text-align: center;
+    padding: 100px 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  #fun::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='4' fill='rgba(255,215,0,0.08)'/%3E%3C/svg%3E") repeat;
+  }
+  .fun-title {
+    font-family: 'Satisfy', cursive;
+    font-size: clamp(3rem, 10vw, 7rem);
+    color: var(--golden);
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3), 4px 4px 0 rgba(0,0,0,0.2);
+    animation: wiggle 2s ease-in-out infinite;
+    position: relative; z-index: 1;
+    line-height: 1.1;
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-1deg); }
+    50%       { transform: rotate(1deg); }
+  }
+  .fun-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: rgba(255,255,255,0.9);
+    margin-top: 20px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    position: relative; z-index: 1;
+  }
+  .fun-emojis {
+    font-size: 3rem;
+    display: flex; justify-content: center;
+    gap: 20px; margin-top: 30px;
+    position: relative; z-index: 1;
+    flex-wrap: wrap;
+  }
+  .fun-emoji {
+    display: inline-block;
+    animation: emojiPop 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  }
+  .fun-emoji:nth-child(2) { animation-delay: 0.2s; }
+  .fun-emoji:nth-child(3) { animation-delay: 0.4s; }
+  .fun-emoji:nth-child(4) { animation-delay: 0.6s; }
+  .fun-emoji:nth-child(5) { animation-delay: 0.8s; }
+  @keyframes emojiPop {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%       { transform: translateY(-12px) scale(1.15); }
+  }
+  .fun-rules {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: center; margin-top: 40px;
+    position: relative; z-index: 1;
+  }
+  .fun-rule {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,215,0,0.5);
+    border-radius: 50px;
+    padding: 10px 24px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+    transition: background 0.3s;
+  }
+  .fun-rule:hover { background: rgba(255,215,0,0.3); }
+
+  /* ── GALLERY ── */
+  #gallery {
+    background: var(--pale-yellow);
+    padding: 80px 20px;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px;
+    margin-top: 40px;
+    max-width: 900px; margin: 40px auto 0;
+  }
+  .gallery-item {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 1;
+    cursor: pointer;
+    border: 3px solid var(--marigold);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .gallery-item:hover { transform: scale(1.03); box-shadow: 0 12px 30px rgba(232,160,0,0.35); }
+  .gallery-item:nth-child(1) { grid-row: 1 / 3; aspect-ratio: auto; }
+  .gallery-item.tall { aspect-ratio: auto; }
+  .gallery-placeholder {
+    width: 100%; height: 100%; min-height: 180px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px;
+    font-size: 3rem;
+    background: linear-gradient(135deg, #FFE082, #FFD54F);
+    position: relative;
+  }
+  .gallery-placeholder::after {
+    content: attr(data-caption);
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(0deg, rgba(180,80,0,0.8), transparent);
+    color: #fff; font-size: 0.8rem; font-weight: 600;
+    padding: 20px 12px 12px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  .gallery-emoji-big { font-size: 4rem; }
+
+  /* ── RSVP ── */
+  #rsvp {
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(255,200,0,0.15), transparent 60%),
+      var(--cream);
+    text-align: center;
+  }
+  .rsvp-card {
+    max-width: 600px; margin: 0 auto;
+    background: linear-gradient(135deg, #fff, #FFF9E0);
+    border: 3px solid var(--marigold);
+    border-radius: 28px;
+    padding: 60px 40px;
+    box-shadow: 0 20px 60px rgba(232,160,0,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .rsvp-card::before {
+    content: ''; position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(255,200,0,0.1), transparent 60%);
+  }
+  .rsvp-emoji { font-size: 4rem; margin-bottom: 16px; display: block; }
+  .rsvp-text {
+    font-size: 1rem; color: #6a4500;
+    line-height: 1.8; margin-bottom: 32px;
+  }
+  .rsvp-form { display: flex; flex-direction: column; gap: 16px; }
+  .rsvp-input {
+    border: 2px solid var(--marigold);
+    border-radius: 50px;
+    padding: 14px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.8);
+    color: #4a2800;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+  }
+  .rsvp-input:focus {
+    border-color: var(--saffron);
+    box-shadow: 0 0 0 4px rgba(255,140,0,0.15);
+  }
+  .rsvp-input::placeholder { color: #c09040; }
+  .rsvp-btn {
+    background: linear-gradient(135deg, var(--marigold), var(--saffron), var(--deep-orange));
+    border: none; border-radius: 50px;
+    padding: 18px 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 24px rgba(212,80,10,0.4);
+    position: relative; overflow: hidden;
+  }
+  .rsvp-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(212,80,10,0.5); }
+  .rsvp-btn:active { transform: translateY(0); }
+  .rsvp-btn::after {
+    content: '✨';
+    margin-left: 8px;
+    display: inline-block;
+    animation: sparkle 1s ease-in-out infinite;
+  }
+  @keyframes sparkle {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.3) rotate(20deg); }
+  }
+  .rsvp-note {
+    font-size: 0.8rem; color: #a06020;
+    margin-top: 16px; letter-spacing: 1px;
+  }
+
+  /* ── COUNTDOWN ── */
+  #countdown {
+    background: linear-gradient(160deg, #FFF8E1, #FFE082 50%, #FFC107);
+    text-align: center;
+    padding: 80px 20px;
+  }
+  .countdown-ring {
+    display: flex; justify-content: center;
+    gap: clamp(12px, 3vw, 32px);
+    flex-wrap: wrap;
+    margin-top: 48px;
+  }
+  .countdown-unit {
+    display: flex; flex-direction: column; align-items: center;
+    position: relative;
+  }
+  .countdown-box {
+    width: clamp(80px, 18vw, 120px);
+    height: clamp(80px, 18vw, 120px);
+    background: linear-gradient(135deg, #fff 0%, #FFF9E0 100%);
+    border: 3px solid var(--marigold);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow:
+      0 8px 24px rgba(232,160,0,0.25),
+      inset 0 2px 6px rgba(255,255,255,0.8);
+    position: relative; overflow: hidden;
+    transition: transform 0.1s;
+  }
+  .countdown-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 50%;
+    background: rgba(255,255,255,0.4);
+    border-radius: 0 0 50% 50%;
+  }
+  .countdown-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: var(--deep-orange);
+    position: relative; z-index: 1;
+    text-shadow: 0 2px 8px rgba(212,80,10,0.2);
+  }
+  .countdown-label {
+    font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 3px;
+    color: var(--mud-yellow);
+    margin-top: 10px;
+  }
+  .countdown-sep {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--saffron);
+    align-self: center;
+    margin-bottom: 24px;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+  .countdown-flower {
+    position: absolute; top: -12px; right: -12px;
+    font-size: 1.5rem;
+    animation: rotateSlow 6s linear infinite;
+  }
+  @keyframes rotateSlow { to { transform: rotate(360deg); } }
+
+  /* ── FOOTER ── */
+  footer {
+    background: linear-gradient(135deg, var(--leaf-green) 0%, #1B5E20 100%);
+    color: #fff;
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(255,215,0,0.08), transparent 70%);
+  }
+  .footer-names {
+    font-family: 'Satisfy', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: var(--golden);
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    position: relative; z-index: 1;
+    margin-bottom: 12px;
+  }
+  .footer-tagline {
+    font-size: 1rem; letter-spacing: 3px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+    margin-bottom: 24px;
+  }
+  .footer-emojis {
+    font-size: 2rem; position: relative; z-index: 1;
+    margin-bottom: 24px;
+  }
+  .footer-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    position: relative; z-index: 1;
+    letter-spacing: 1px;
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 16px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: rgba(255,248,215,0.85);
+    backdrop-filter: blur(16px);
+    border: 2px solid rgba(244,196,48,0.5);
+    border-radius: 50px;
+    padding: 10px 28px;
+    display: flex; gap: 24px; align-items: center;
+    box-shadow: 0 4px 24px rgba(232,160,0,0.2);
+  }
+  nav a {
+    font-size: 0.8rem; font-weight: 600;
+    text-decoration: none;
+    color: var(--deep-orange);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--saffron); }
+  .nav-dot {
+    width: 6px; height: 6px;
+    background: var(--marigold);
+    border-radius: 50%;
+  }
+
+  /* Turmeric splash on click */
+  .splash-click {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,200,0,0.9), rgba(232,160,0,0.5), transparent);
+    transform: translate(-50%, -50%) scale(0);
+    animation: splashClick 0.6s ease-out forwards;
+  }
+  @keyframes splashClick {
+    0%   { transform: translate(-50%,-50%) scale(0); opacity: 1; }
+    100% { transform: translate(-50%,-50%) scale(3); opacity: 0; }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 600px) {
+    nav { display: none; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item:nth-child(1) { grid-row: auto; aspect-ratio: 1; }
+    .blessing-card { padding: 40px 24px; }
+    .rsvp-card { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+
+<!-- Floating petals container -->
+<div class="petal-canvas" id="petalCanvas"></div>
+
+<!-- Click splash effect container -->
+<div id="splashContainer"></div>
+
+<!-- Navigation -->
+<nav>
+  <a href="#blessing">Blessings</a>
+  <div class="nav-dot"></div>
+  <a href="#event">Details</a>
+  <div class="nav-dot"></div>
+  <a href="#rsvp">RSVP</a>
+  <div class="nav-dot"></div>
+  <a href="#countdown">Countdown</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  HERO -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="splash splash-1"></div>
+  <div class="splash splash-2"></div>
+  <div class="splash splash-3"></div>
+  <div class="leaf-left">🍃</div>
+  <div class="leaf-right">🍃</div>
+
+  <div class="hero-eyebrow">✦ With Joy & Turmeric ✦</div>
+
+  <h1 class="hero-title">
+    Haldi<br>
+    <span>C E R E M O N Y</span>
+  </h1>
+
+  <div class="hero-names">
+    {{brideName}} <span class="amp">&</span> {{groomName}}
+  </div>
+
+  <div class="hero-date">
+    🌼 &nbsp; Saturday, 14th June 2025 &nbsp; 🌼
+  </div>
+
+  <div class="hero-badge">
+    <div class="badge">🌿 Traditional</div>
+    <div class="badge">💛 Festive</div>
+    <div class="badge">🪔 Blessed</div>
+    <div class="badge">✨ Joyful</div>
+  </div>
+
+  <div class="brass-row">
+    <div class="brass-pot">🪔</div>
+    <div class="brass-pot">🏺</div>
+    <div class="brass-pot">🪔</div>
+  </div>
+</section>
+
+<!-- Garland -->
+<div class="garland-row">
+  <div class="garland-scroll" id="garland"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  BLESSING -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="blessing">
+  <div class="section-inner">
+    <span class="section-tag reveal">~ A Sacred Beginning ~</span>
+    <h2 class="section-title reveal reveal-delay-1">With Blessings<br>from Above</h2>
+
+    <div class="blessing-card reveal reveal-delay-2">
+      <div class="corner-deco tl">🌸</div>
+      <div class="corner-deco tr">🌸</div>
+      <div class="corner-deco bl">🌸</div>
+      <div class="corner-deco br">🌸</div>
+
+      <p class="blessing-quote">
+        "Haridra — the sacred turmeric — purifies the body, brightens the soul,
+        and blesses the beloved with prosperity, love, and eternal happiness."
+      </p>
+      <p class="blessing-subtitle">— Ancient Vedic Tradition —</p>
+    </div>
+
+    <p class="section-text reveal reveal-delay-3" style="margin-top:32px;">
+      As {{brideName}} and {{groomName}} step into this beautiful new chapter of their lives,
+      we gather with hearts full of love to anoint them with the golden grace of haldi —
+      a ritual as old as time, as warm as family, and as bright as their future together.
+    </p>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="divider">
+  <svg viewBox="0 0 900 60" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="flowerPat" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+        <circle cx="30" cy="30" r="6" fill="#F4C430" opacity="0.7"/>
+        <circle cx="30" cy="18" r="5" fill="#FFA000" opacity="0.6"/>
+        <circle cx="30" cy="42" r="5" fill="#FFA000" opacity="0.6"/>
+        <circle cx="18" cy="30" r="5" fill="#FFA000" opacity="0.6"/>
+        <circle cx="42" cy="30" r="5" fill="#FFA000" opacity="0.6"/>
+        <circle cx="30" cy="30" r="3" fill="#fff"/>
+      </pattern>
+      <pattern id="leafPat" x="0" y="0" width="30" height="60" patternUnits="userSpaceOnUse">
+        <ellipse cx="15" cy="30" rx="8" ry="14" fill="#2D6A2D" opacity="0.3" transform="rotate(15,15,30)"/>
+      </pattern>
+    </defs>
+    <rect width="900" height="60" fill="url(#leafPat)"/>
+    <rect width="900" height="60" fill="url(#flowerPat)"/>
+  </svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  EVENT DETAILS -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="event">
+  <div class="section-inner">
+    <span class="section-tag reveal">~ Mark Your Calendar ~</span>
+    <h2 class="section-title reveal reveal-delay-1">Ceremony Details</h2>
+    <p class="section-text reveal reveal-delay-2">
+      Come dressed in yellow or white — and don't wear anything you'd be heartbroken to stain!
+      Haldi is a messy, merry, magnificent affair. You've been warned (and welcomed).
+    </p>
+
+    <div class="event-cards">
+      <div class="event-card reveal reveal-delay-1">
+        <span class="card-icon">📅</span>
+        <div class="card-label">Date</div>
+        <div class="card-value">Saturday<br>14th June 2025</div>
+        <div class="card-sub">A day to remember</div>
+      </div>
+      <div class="event-card reveal reveal-delay-2">
+        <span class="card-icon">⏰</span>
+        <div class="card-label">Time</div>
+        <div class="card-value">10:00 AM<br>onwards</div>
+        <div class="card-sub">Arrive early for front row!</div>
+      </div>
+      <div class="event-card reveal reveal-delay-3">
+        <span class="card-icon">📍</span>
+        <div class="card-label">Venue</div>
+        <div class="card-value">Sharma Family<br>Residence</div>
+        <div class="card-sub">123, Lotus Garden, Jaipur</div>
+      </div>
+      <div class="event-card reveal reveal-delay-4">
+        <span class="card-icon">👗</span>
+        <div class="card-label">Dress Code</div>
+        <div class="card-value">Yellow / White<br>Ethnic Wear</div>
+        <div class="card-sub">Turmeric-proof preferred 😄</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Garland -->
+<div class="garland-row">
+  <div class="garland-scroll" id="garland2"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  FUN SECTION -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="fun">
+  <div class="fun-title reveal">Let's Get<br>Messy!</div>
+  <p class="fun-subtitle reveal reveal-delay-1">
+    A little haldi never hurt anyone... well, their clothes maybe.
+  </p>
+
+  <div class="fun-emojis reveal reveal-delay-2">
+    <span class="fun-emoji">💛</span>
+    <span class="fun-emoji">🌿</span>
+    <span class="fun-emoji">✨</span>
+    <span class="fun-emoji">🪷</span>
+    <span class="fun-emoji">🎉</span>
+  </div>
+
+  <div class="fun-rules reveal reveal-delay-3">
+    <div class="fun-rule">💛 Yellow outfits welcomed</div>
+    <div class="fun-rule">🚿 Shower before, not after</div>
+    <div class="fun-rule">📸 Candids only, no posing!</div>
+    <div class="fun-rule">🎵 Dance is mandatory</div>
+    <div class="fun-rule">🍛 Feast follows the fun</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  GALLERY -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="gallery">
+  <div class="section-inner">
+    <span class="section-tag reveal">~ Sneak Peek ~</span>
+    <h2 class="section-title reveal reveal-delay-1">Candid Moments</h2>
+    <p class="section-text reveal reveal-delay-2">
+      Laughter, love, and a whole lot of yellow — here's a glimpse of what awaits!
+    </p>
+  </div>
+
+  <div class="gallery-grid reveal">
+    <div class="gallery-item tall">
+      <div class="gallery-placeholder" data-caption="The Golden Moment">
+        <span class="gallery-emoji-big">🌼</span>
+        <span style="font-size:1.5rem">💛 ✨ 🌿</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder" data-caption="Family Blessings">
+        <span class="gallery-emoji-big">🪔</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder" data-caption="Pure Joy">
+        <span class="gallery-emoji-big">😄</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder" data-caption="Traditional Rituals">
+        <span class="gallery-emoji-big">🪷</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder" data-caption="Golden Glow">
+        <span class="gallery-emoji-big">✨</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="divider" style="background: var(--pale-yellow)">
+  <svg viewBox="0 0 900 60" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="30" x2="900" y2="30" stroke="#F4C430" stroke-width="2" stroke-dasharray="8,6"/>
+    <g id="dflowers">
+      <circle cx="150" cy="30" r="10" fill="#FFA000" opacity="0.6"/>
+      <circle cx="150" cy="30" r="5" fill="#FFF"/>
+      <circle cx="300" cy="30" r="10" fill="#D4500A" opacity="0.6"/>
+      <circle cx="300" cy="30" r="5" fill="#FFF"/>
+      <circle cx="450" cy="30" r="10" fill="#FFA000" opacity="0.6"/>
+      <circle cx="450" cy="30" r="5" fill="#FFF"/>
+      <circle cx="600" cy="30" r="10" fill="#D4500A" opacity="0.6"/>
+      <circle cx="600" cy="30" r="5" fill="#FFF"/>
+      <circle cx="750" cy="30" r="10" fill="#FFA000" opacity="0.6"/>
+      <circle cx="750" cy="30" r="5" fill="#FFF"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  RSVP -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="rsvp">
+  <div class="section-inner">
+    <span class="section-tag reveal">~ Join Us ~</span>
+    <h2 class="section-title reveal reveal-delay-1">Say Yes to<br>Haldi & Happiness!</h2>
+
+    <div class="rsvp-card reveal reveal-delay-2">
+      <span class="rsvp-emoji">💌</span>
+      <p class="rsvp-text">
+        Your presence is our greatest gift. Please let us know you're coming
+        so we can prepare enough haldi for everyone — and maybe a little extra! 😄
+      </p>
+      <div class="rsvp-form">
+        <input class="rsvp-input" type="text" placeholder="Your Full Name 🌼" />
+        <input class="rsvp-input" type="email" placeholder="Email Address ✉️" />
+        <input class="rsvp-input" type="tel" placeholder="Phone Number 📞" />
+        <button class="rsvp-btn" onclick="handleRSVP(this)">
+          I'm Coming — Count Me In
+        </button>
+      </div>
+      <p class="rsvp-note">* Please RSVP by 7th June 2025 &nbsp;•&nbsp; Dress Code: Yellow / White Ethnic</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  COUNTDOWN -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="countdown">
+  <div class="section-inner">
+    <span class="section-tag reveal">~ The Anticipation ~</span>
+    <h2 class="section-title reveal reveal-delay-1">Counting Down<br>to the Golden Day!</h2>
+    <p class="section-text reveal reveal-delay-2">
+      The turmeric is ready. The marigolds are strung. Are you?
+    </p>
+
+    <div class="countdown-ring reveal reveal-delay-3">
+      <div class="countdown-unit">
+        <div class="countdown-box">
+          <span class="countdown-flower">🌼</span>
+          <span class="countdown-number" id="days">00</span>
+        </div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-box">
+          <span class="countdown-flower">🌸</span>
+          <span class="countdown-number" id="hours">00</span>
+        </div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-box">
+          <span class="countdown-flower">🪷</span>
+          <span class="countdown-number" id="minutes">00</span>
+        </div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-box">
+          <span class="countdown-flower">✨</span>
+          <span class="countdown-number" id="seconds">00</span>
+        </div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Garland -->
+<div class="garland-row">
+  <div class="garland-scroll" id="garland3"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  FOOTER -->
+<!-- ═══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-emojis">🌼 🌿 💛 🌿 🌼</div>
+  <div class="footer-names">{{brideName}} & {{groomName}}</div>
+  <div class="footer-tagline">Together Forever • 14th June 2025</div>
+  <p class="footer-note">
+    Made with 💛 and a generous pinch of turmeric<br>
+    "May your life together be as golden as haldi."
+  </p>
+</footer>
+
+<script>
+// ── Cursor ──────────────────────────────────────
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top  = e.clientY + 'px';
+});
+
+// ── Garland fill ─────────────────────────────────
+const garlandEmojis = ['🌼','🌸','🌻','🪷','🌺','💛','🌼','🌿','🌼'];
+function fillGarland(el) {
+  if (!el) return;
+  const repeat = 30;
+  let html = '';
+  for (let i = 0; i < repeat; i++) {
+    html += garlandEmojis.map(e => `<span class="g-flower">${e}</span>`).join('');
+  }
+  el.innerHTML = html;
+}
+fillGarland(document.getElementById('garland'));
+fillGarland(document.getElementById('garland2'));
+fillGarland(document.getElementById('garland3'));
+
+// ── Floating Petals ──────────────────────────────
+const petalCanvas = document.getElementById('petalCanvas');
+const PETALS = ['🌼','💛','✨','🌿','🌸','🪷','🌺'];
+let petals = [];
+
+function spawnPetal() {
+  const el = document.createElement('div');
+  el.className = 'petal';
+  el.textContent = PETALS[Math.floor(Math.random() * PETALS.length)];
+  const x = Math.random() * 100;
+  const duration = 6 + Math.random() * 8;
+  const delay = Math.random() * 4;
+  const size = 0.8 + Math.random() * 1.2;
+  el.style.cssText = `
+    left: ${x}%;
+    font-size: ${size}rem;
+    animation-duration: ${duration}s;
+    animation-delay: ${delay}s;
+  `;
+  petalCanvas.appendChild(el);
+  petals.push(el);
+  if (petals.length > 60) {
+    const old = petals.shift();
+    old.remove();
+  }
+}
+
+setInterval(spawnPetal, 350);
+
+// ── Click Splash ─────────────────────────────────
+document.addEventListener('click', e => {
+  const splash = document.createElement('div');
+  splash.className = 'splash-click';
+  splash.style.left = e.clientX + 'px';
+  splash.style.top  = e.clientY + 'px';
+  document.body.appendChild(splash);
+  setTimeout(() => splash.remove(), 700);
+});
+
+// ── Scroll Reveal ─────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => observer.observe(el));
+
+// ── Countdown Timer ──────────────────────────────
+const targetDate = new Date('2025-06-14T10:00:00');
+
+function updateCountdown() {
+  const now  = new Date();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    document.getElementById('days').textContent    = '00';
+    document.getElementById('hours').textContent   = '00';
+    document.getElementById('minutes').textContent = '00';
+    document.getElementById('seconds').textContent = '00';
+    return;
+  }
+
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000)  / 60000);
+  const s = Math.floor((diff % 60000)    / 1000);
+
+  const fmt = n => String(n).padStart(2,'0');
+  document.getElementById('days').textContent    = fmt(d);
+  document.getElementById('hours').textContent   = fmt(h);
+  document.getElementById('minutes').textContent = fmt(m);
+  document.getElementById('seconds').textContent = fmt(s);
+
+  // Animate the seconds box
+  const sBox = document.getElementById('seconds').closest('.countdown-box');
+  sBox.style.transform = 'scale(1.05)';
+  setTimeout(() => sBox.style.transform = 'scale(1)', 150);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── RSVP ─────────────────────────────────────────
+function handleRSVP(btn) {
+  const inputs = btn.closest('.rsvp-form').querySelectorAll('input');
+  const name   = inputs[0].value.trim();
+  if (!name) {
+    inputs[0].focus();
+    inputs[0].style.borderColor = '#E53935';
+    setTimeout(() => inputs[0].style.borderColor = '', 1500);
+    return;
+  }
+  btn.textContent = '🎉 Yay! See You There!';
+  btn.style.background = 'linear-gradient(135deg,#2D6A2D,#4CAF50)';
+  btn.disabled = true;
+  // Burst petals
+  for (let i = 0; i < 15; i++) setTimeout(spawnPetal, i * 80);
+}
+
+// ── Parallax gentle on hero ───────────────────────
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const hero = document.getElementById('hero');
+  if (y < hero.offsetHeight) {
+    hero.style.backgroundPositionY = (y * 0.3) + 'px';
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Shower Invitation ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blush: #f9c4d2;
+    --peach: #fde8d8;
+    --mint: #c8eed8;
+    --lavender: #e0d4f7;
+    --gold: #e8c87a;
+    --cream: #fdf8f2;
+    --rose: #e07a8f;
+    --sage: #7db892;
+    --plum: #7c4f7a;
+    --text-dark: #3a2a3a;
+    --text-mid: #6b4f6b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── FLOATING BALLOONS ─── */
+  .balloons-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .balloon {
+    position: absolute;
+    bottom: -160px;
+    animation: floatUp linear infinite;
+    opacity: 0.75;
+  }
+
+  .balloon svg { display: block; }
+
+  .balloon:nth-child(1)  { left: 5%;   animation-duration: 14s; animation-delay: 0s;   }
+  .balloon:nth-child(2)  { left: 15%;  animation-duration: 18s; animation-delay: 3s;   }
+  .balloon:nth-child(3)  { left: 28%;  animation-duration: 12s; animation-delay: 6s;   }
+  .balloon:nth-child(4)  { left: 42%;  animation-duration: 20s; animation-delay: 1s;   }
+  .balloon:nth-child(5)  { left: 58%;  animation-duration: 15s; animation-delay: 8s;   }
+  .balloon:nth-child(6)  { left: 70%;  animation-duration: 17s; animation-delay: 4s;   }
+  .balloon:nth-child(7)  { left: 82%;  animation-duration: 13s; animation-delay: 9s;   }
+  .balloon:nth-child(8)  { left: 92%;  animation-duration: 19s; animation-delay: 2s;   }
+  .balloon:nth-child(9)  { left: 35%;  animation-duration: 22s; animation-delay: 11s;  }
+  .balloon:nth-child(10) { left: 75%;  animation-duration: 16s; animation-delay: 7s;   }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0)    rotate(0deg);   opacity: 0;    }
+    5%   { opacity: 0.75; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
+  }
+
+  /* ─── CONFETTI SPARKLES ─── */
+  .sparkles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .sparkle {
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%,100% { transform: scale(0.5); opacity: 0.2; }
+    50%      { transform: scale(1.4); opacity: 0.9; }
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 40px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, #fde8f0 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, #d4f0e8 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 85% 70%, #e8d4f7 0%, transparent 60%),
+      var(--cream);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(232,200,122,0.3) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.6;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rose);
+    background: rgba(249,196,210,0.4);
+    border: 1px solid rgba(224,122,143,0.3);
+    padding: 6px 20px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(4px);
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .hero-svg-wrap {
+    position: relative;
+    width: min(420px, 90vw);
+    margin: 0 auto 32px;
+    animation: fadeUp 1s ease 0.2s both;
+    filter: drop-shadow(0 20px 40px rgba(180,100,140,0.18));
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 5.2rem);
+    line-height: 1.1;
+    color: var(--plum);
+    margin-bottom: 10px;
+    animation: fadeUp 1s ease 0.4s both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    font-weight: 400;
+    max-width: 380px;
+    line-height: 1.7;
+    margin: 0 auto 40px;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    animation: fadeUp 1s ease 1.2s both;
+  }
+  .scroll-hint span {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    opacity: 0.7;
+  }
+  .scroll-hint .arrow {
+    width: 20px; height: 20px;
+    border-right: 2px solid var(--rose);
+    border-bottom: 2px solid var(--rose);
+    transform: rotate(45deg);
+    animation: bounce 1.4s ease-in-out infinite;
+    border-radius: 2px;
+  }
+  @keyframes bounce {
+    0%,100% { transform: rotate(45deg) translateY(0); }
+    50%      { transform: rotate(45deg) translateY(6px); }
+  }
+
+  /* ─── DETAILS SECTION ─── */
+  .details {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, var(--blush) 0%, var(--lavender) 50%, var(--mint) 100%);
+    padding: 80px 24px;
+    text-align: center;
+    clip-path: polygon(0 4%, 100% 0%, 100% 96%, 0% 100%);
+    margin: -2px 0;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--plum);
+    margin-bottom: 48px;
+  }
+
+  .cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255,255,255,0.9);
+    border-radius: 24px;
+    padding: 32px 28px;
+    width: min(240px, 90vw);
+    box-shadow: 0 8px 32px rgba(124,79,122,0.12), inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px) rotate(-1deg);
+    box-shadow: 0 20px 48px rgba(124,79,122,0.2);
+  }
+
+  .card-icon {
+    font-size: 2.4rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .card-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 8px;
+  }
+
+  .card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--plum);
+    line-height: 1.4;
+  }
+
+  /* ─── REGISTRY / MESSAGE ─── */
+  .message-section {
+    position: relative;
+    z-index: 1;
+    background: var(--cream);
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .message-box {
+    max-width: 660px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .message-box::before, .message-box::after {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 10rem;
+    color: var(--blush);
+    line-height: 0;
+    position: absolute;
+    opacity: 0.6;
+  }
+  .message-box::before { top: 50px; left: -20px; }
+  .message-box::after  { content: '"'; bottom: -30px; right: -10px; }
+
+  .message-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.15rem, 3vw, 1.55rem);
+    font-style: italic;
+    color: var(--text-mid);
+    line-height: 1.75;
+    position: relative;
+    z-index: 1;
+  }
+
+  .message-author {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--rose);
+  }
+
+  /* ─── RSVP ─── */
+  .rsvp-section {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(160deg, var(--lavender) 0%, var(--blush) 100%);
+    clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0% 100%);
+    padding: 100px 24px 80px;
+    text-align: center;
+  }
+
+  .rsvp-section .section-title { color: var(--plum); }
+
+  .rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .rsvp-form input, .rsvp-form select {
+    padding: 14px 20px;
+    border-radius: 50px;
+    border: 2px solid rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.75);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(8px);
+  }
+  .rsvp-form input:focus, .rsvp-form select:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 4px rgba(224,122,143,0.18);
+  }
+
+  .rsvp-btn {
+    padding: 16px 48px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--plum) 100%);
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgba(124,79,122,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 6px;
+  }
+  .rsvp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(124,79,122,0.45);
+  }
+  .rsvp-btn:active { transform: translateY(0); }
+
+  .toast {
+    display: none;
+    margin-top: 20px;
+    padding: 14px 28px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 50px;
+    color: var(--plum);
+    font-weight: 600;
+    font-size: 0.95rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(124,79,122,0.15);
+    animation: fadeUp 0.4s ease;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--plum);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 30px 24px;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+  footer span { color: var(--blush); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp   { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+
+  /* Intersection observer animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating Balloons -->
+<div class="balloons-layer" aria-hidden="true">
+  <!-- Colors cycle: rose, mint, gold, lavender, peach -->
+  <div class="balloon"><svg width="54" height="72" viewBox="0 0 54 72"><ellipse cx="27" cy="28" rx="22" ry="26" fill="#e07a8f"/><path d="M27 54 Q24 60 27 68" stroke="#c8a090" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="27" cy="54" rx="4" ry="3" fill="#c8607a"/></svg></div>
+  <div class="balloon"><svg width="48" height="66" viewBox="0 0 48 66"><ellipse cx="24" cy="25" rx="19" ry="23" fill="#c8eed8"/><path d="M24 48 Q21 55 24 63" stroke="#a0c0a8" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="24" cy="48" rx="3.5" ry="2.5" fill="#a0d0b0"/></svg></div>
+  <div class="balloon"><svg width="58" height="76" viewBox="0 0 58 76"><ellipse cx="29" cy="30" rx="24" ry="28" fill="#e8c87a"/><path d="M29 58 Q26 65 29 72" stroke="#c8a840" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="29" cy="58" rx="4.5" ry="3" fill="#c8a040"/></svg></div>
+  <div class="balloon"><svg width="50" height="68" viewBox="0 0 50 68"><ellipse cx="25" cy="26" rx="20" ry="24" fill="#e0d4f7"/><path d="M25 50 Q22 57 25 65" stroke="#b0a0d0" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="25" cy="50" rx="4" ry="2.8" fill="#c0a8e8"/></svg></div>
+  <div class="balloon"><svg width="52" height="70" viewBox="0 0 52 70"><ellipse cx="26" cy="27" rx="21" ry="25" fill="#fde8d8"/><path d="M26 52 Q23 59 26 67" stroke="#d0b090" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="26" cy="52" rx="4" ry="2.8" fill="#e0b898"/></svg></div>
+  <div class="balloon"><svg width="46" height="62" viewBox="0 0 46 62"><ellipse cx="23" cy="24" rx="18" ry="22" fill="#f9c4d2"/><path d="M23 46 Q20 52 23 59" stroke="#c09090" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="23" cy="46" rx="3.5" ry="2.5" fill="#d89898"/></svg></div>
+  <div class="balloon"><svg width="56" height="74" viewBox="0 0 56 74"><ellipse cx="28" cy="29" rx="23" ry="27" fill="#c8eed8"/><path d="M28 56 Q25 63 28 71" stroke="#90b898" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="28" cy="56" rx="4.5" ry="3" fill="#90c8a0"/></svg></div>
+  <div class="balloon"><svg width="50" height="68" viewBox="0 0 50 68"><ellipse cx="25" cy="26" rx="20" ry="24" fill="#e07a8f"/><path d="M25 50 Q22 57 25 65" stroke="#b06070" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="25" cy="50" rx="4" ry="2.8" fill="#c05870"/></svg></div>
+  <div class="balloon"><svg width="54" height="72" viewBox="0 0 54 72"><ellipse cx="27" cy="28" rx="22" ry="26" fill="#e8c87a"/><path d="M27 54 Q24 61 27 69" stroke="#b89840" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="27" cy="54" rx="4" ry="2.8" fill="#c8a838"/></svg></div>
+  <div class="balloon"><svg width="48" height="65" viewBox="0 0 48 65"><ellipse cx="24" cy="25" rx="19" ry="23" fill="#e0d4f7"/><path d="M24 48 Q21 55 24 62" stroke="#9880c0" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="24" cy="48" rx="3.5" ry="2.5" fill="#b09dd8"/></svg></div>
+</div>
+
+<!-- Sparkles -->
+<div class="sparkles" aria-hidden="true" id="sparkles"></div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="tag">✨ You're Invited ✨</div>
+
+  <!-- Cute Baby Hero SVG -->
+  <div class="hero-svg-wrap">
+    <svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" width="100%">
+      <!-- Background cloud puffs -->
+      <ellipse cx="60" cy="40" rx="35" ry="22" fill="rgba(255,255,255,0.7)"/>
+      <ellipse cx="90" cy="30" rx="28" ry="20" fill="rgba(255,255,255,0.7)"/>
+      <ellipse cx="40" cy="35" rx="22" ry="16" fill="rgba(255,255,255,0.7)"/>
+      <ellipse cx="350" cy="50" rx="38" ry="24" fill="rgba(255,255,255,0.7)"/>
+      <ellipse cx="380" cy="38" rx="30" ry="20" fill="rgba(255,255,255,0.7)"/>
+      <ellipse cx="330" cy="44" rx="24" ry="17" fill="rgba(255,255,255,0.7)"/>
+
+      <!-- Stars -->
+      <text x="150" y="35" font-size="18" fill="#e8c87a" opacity="0.8">★</text>
+      <text x="260" y="25" font-size="14" fill="#e8c87a" opacity="0.7">✦</text>
+      <text x="195" y="20" font-size="10" fill="#e07a8f" opacity="0.9">✦</text>
+
+      <!-- ── CRADLE ── -->
+      <!-- Hood -->
+      <path d="M100 200 Q210 100 320 200" fill="#fde8d8" stroke="#e0b898" stroke-width="2.5"/>
+      <!-- Hood decorative stripe -->
+      <path d="M130 188 Q210 110 290 188" fill="none" stroke="#f9c4d2" stroke-width="4" stroke-dasharray="6 4"/>
+      <!-- Cradle body -->
+      <rect x="95" y="196" width="230" height="90" rx="50" fill="#fdf8f2" stroke="#e0b898" stroke-width="2.5"/>
+      <!-- Cradle inner -->
+      <rect x="112" y="210" width="196" height="65" rx="40" fill="#fde8f0"/>
+      <!-- Mattress / pillow -->
+      <rect x="125" y="240" width="170" height="28" rx="14" fill="rgba(255,255,255,0.8)" stroke="#f0c8d0" stroke-width="1.5"/>
+      <!-- Blanket -->
+      <path d="M125 250 Q210 238 295 250 L295 265 Q210 275 125 265 Z" fill="#c8eed8" stroke="#a0c8b0" stroke-width="1.5"/>
+      <!-- Blanket pattern -->
+      <path d="M150 255 Q210 248 270 255" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+      <!-- Cradle legs -->
+      <line x1="130" y1="286" x2="115" y2="310" stroke="#e0b898" stroke-width="4" stroke-linecap="round"/>
+      <line x1="290" y1="286" x2="305" y2="310" stroke="#e0b898" stroke-width="4" stroke-linecap="round"/>
+      <!-- Rocker -->
+      <path d="M108 310 Q210 295 312 310" fill="none" stroke="#e0b898" stroke-width="4" stroke-linecap="round"/>
+
+      <!-- ── BABY FACE ── -->
+      <!-- Head -->
+      <circle cx="210" cy="234" r="32" fill="#fde8d8"/>
+      <!-- Cheeks -->
+      <ellipse cx="194" cy="244" rx="8" ry="5" fill="rgba(240,150,150,0.4)"/>
+      <ellipse cx="226" cy="244" rx="8" ry="5" fill="rgba(240,150,150,0.4)"/>
+      <!-- Eyes (closed, sleeping) -->
+      <path d="M200 235 Q205 231 210 235" fill="none" stroke="#7a5a5a" stroke-width="2" stroke-linecap="round"/>
+      <path d="M220 235 Q215 231 210 235" fill="none" stroke="#7a5a5a" stroke-width="2" stroke-linecap="round"/>
+      <!-- Eyelashes -->
+      <line x1="199" y1="235" x2="196" y2="232" stroke="#7a5a5a" stroke-width="1.2"/>
+      <line x1="205" y1="232" x2="204" y2="229" stroke="#7a5a5a" stroke-width="1.2"/>
+      <line x1="221" y1="235" x2="224" y2="232" stroke="#7a5a5a" stroke-width="1.2"/>
+      <line x1="215" y1="232" x2="216" y2="229" stroke="#7a5a5a" stroke-width="1.2"/>
+      <!-- Nose -->
+      <ellipse cx="210" cy="242" rx="4" ry="2.5" fill="rgba(200,130,130,0.3)"/>
+      <!-- Smile -->
+      <path d="M203 248 Q210 254 217 248" fill="none" stroke="#c07070" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- Baby hair -->
+      <path d="M182 224 Q210 208 238 224" fill="none" stroke="#c8a070" stroke-width="4" stroke-linecap="round"/>
+      <path d="M210 208 Q207 196 210 190" stroke="#c8a070" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- Baby cap -->
+      <path d="M180 224 Q182 200 210 196 Q238 200 240 224 Q220 216 200 218 Z" fill="#e0d4f7"/>
+      <path d="M180 224 Q210 218 240 224" fill="none" stroke="#c8b0e0" stroke-width="2"/>
+      <!-- Cap pompom -->
+      <circle cx="210" cy="196" r="7" fill="#e07a8f"/>
+      <circle cx="210" cy="196" r="4" fill="#f0a0b0"/>
+
+      <!-- ── MOBILE TOYS ── -->
+      <!-- Mobile arm -->
+      <line x1="210" y1="160" x2="210" y2="140" stroke="#d0c0e0" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="155" y1="140" x2="265" y2="140" stroke="#d0c0e0" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Star toy -->
+      <line x1="165" y1="140" x2="165" y2="120" stroke="#d0c0e0" stroke-width="1.5"/>
+      <text x="157" y="116" font-size="16" fill="#e8c87a">★</text>
+      <!-- Heart toy -->
+      <line x1="210" y1="140" x2="210" y2="118" stroke="#d0c0e0" stroke-width="1.5"/>
+      <text x="202" y="115" font-size="16" fill="#e07a8f">♥</text>
+      <!-- Moon toy -->
+      <line x1="255" y1="140" x2="255" y2="120" stroke="#d0c0e0" stroke-width="1.5"/>
+      <text x="247" y="116" font-size="16" fill="#a0c8c0">☽</text>
+
+      <!-- ── SIDE TOYS ── -->
+      <!-- Rubber duck left -->
+      <ellipse cx="68" cy="260" rx="22" ry="18" fill="#e8c87a"/>
+      <ellipse cx="68" cy="248" rx="14" ry="13" fill="#e8c87a"/>
+      <ellipse cx="77" cy="245" rx="8" ry="5" fill="#e0a030" rx="6"/>
+      <circle cx="71" cy="243" r="2.5" fill="#3a2a2a"/>
+      <ellipse cx="68" cy="265" rx="22" ry="6" fill="rgba(200,160,60,0.35)"/>
+      <!-- Rattle right -->
+      <circle cx="355" cy="248" r="18" fill="#f9c4d2"/>
+      <circle cx="355" cy="248" r="12" fill="#fde8f0" stroke="#e0a0b0" stroke-width="1.5"/>
+      <line x1="355" y1="266" x2="355" y2="285" stroke="#e0a0b0" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="355" cy="248" r="4" fill="#e07a8f" opacity="0.5"/>
+      <!-- Rattle dots -->
+      <circle cx="345" cy="244" r="2" fill="rgba(224,122,143,0.5)"/>
+      <circle cx="365" cy="252" r="2" fill="rgba(224,122,143,0.5)"/>
+      <!-- Stars around rattle -->
+      <text x="370" y="242" font-size="10" fill="#e8c87a">✦</text>
+      <text x="336" y="258" font-size="10" fill="#c8eed8">✦</text>
+
+      <!-- ── FLOATING MINI BALLOONS ── -->
+      <ellipse cx="80" cy="110" rx="14" ry="17" fill="#c8eed8"/>
+      <line x1="80" y1="127" x2="78" y2="145" stroke="#a0b0a0" stroke-width="1.5"/>
+      <ellipse cx="340" cy="100" rx="12" ry="15" fill="#e0d4f7"/>
+      <line x1="340" y1="115" x2="342" y2="132" stroke="#b0a0c0" stroke-width="1.5"/>
+      <ellipse cx="355" cy="130" rx="10" ry="12" fill="#f9c4d2"/>
+      <line x1="355" y1="142" x2="354" y2="155" stroke="#c09090" stroke-width="1.5"/>
+
+      <!-- Bottom decorative flowers -->
+      <text x="30"  y="305" font-size="20" fill="#e07a8f" opacity="0.7">✿</text>
+      <text x="370" y="300" font-size="16" fill="#c8eed8" opacity="0.7">✿</text>
+      <text x="190" y="318" font-size="14" fill="#e8c87a" opacity="0.6">✦</text>
+    </svg>
+  </div>
+
+  <h1 class="hero-title">Welcome, <em>Little One</em></h1>
+  <p class="hero-sub">Join us as we celebrate the upcoming arrival of a precious new baby and shower the parents-to-be with love, laughter, and lots of gifts!</p>
+
+  <div class="scroll-hint">
+    <span>Scroll for details</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════ DETAILS ═══════════ -->
+<section class="details">
+  <h2 class="section-title reveal">Event Details</h2>
+  <div class="cards-grid">
+    <div class="card reveal">
+      <span class="card-icon">📅</span>
+      <div class="card-label">Date</div>
+      <div class="card-value">Sunday, June 15<br>2025</div>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">⏰</span>
+      <div class="card-label">Time</div>
+      <div class="card-value">2:00 PM — 6:00 PM</div>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">📍</span>
+      <div class="card-label">Venue</div>
+      <div class="card-value">The Garden Terrace<br>42 Blossom Lane</div>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">🎀</span>
+      <div class="card-label">Theme</div>
+      <div class="card-value">Enchanted Garden<br>&amp; Butterflies</div>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">🍰</span>
+      <div class="card-label">Hosted By</div>
+      <div class="card-value">Emma &amp; the<br>Carter Family</div>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">📞</span>
+      <div class="card-label">Contact</div>
+      <div class="card-value">Emma Carter<br>+1 (555) 234-5678</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ QUOTE ═══════════ -->
+<section class="message-section">
+  <div class="message-box reveal">
+    <p class="message-text">
+      A baby fills a place in your heart that you never knew was empty. We can't wait to celebrate this beautiful new chapter with you — surrounded by love, joy, and the sweetest little moments.
+    </p>
+    <p class="message-author">— With all our love, The Carter Family 💕</p>
+  </div>
+</section>
+
+<!-- ═══════════ RSVP ═══════════ -->
+<section class="rsvp-section">
+  <h2 class="section-title reveal">RSVP</h2>
+  <p style="color:var(--text-mid); margin-bottom:32px; max-width:340px; margin-left:auto; margin-right:auto; line-height:1.6;" class="reveal">
+    Kindly respond by <strong style="color:var(--plum);">June 5th, 2025</strong> so we can make sure your seat is saved! 🌸
+  </p>
+  <div class="rsvp-form reveal" id="rsvpForm">
+    <input type="text"  placeholder="Your Full Name" id="rsvpName"/>
+    <input type="email" placeholder="Email Address" id="rsvpEmail"/>
+    <select id="rsvpAttend">
+      <option value="" disabled selected>Will you be attending?</option>
+      <option value="yes">🎉 Yes, I'll be there!</option>
+      <option value="no">😢 Sorry, can't make it</option>
+      <option value="maybe">🤔 Maybe — I'll try!</option>
+    </select>
+    <select id="rsvpGuests">
+      <option value="" disabled selected>Number of guests</option>
+      <option value="1">1 — Just me</option>
+      <option value="2">2 guests</option>
+      <option value="3">3 guests</option>
+      <option value="4">4+ guests</option>
+    </select>
+    <button class="rsvp-btn" onclick="submitRSVP()">Send RSVP 💌</button>
+    <div class="toast" id="toast">🎉 Thank you! We can't wait to celebrate with you!</div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  Made with <span>♥</span> for <span>Baby Carter</span> · Arriving Soon · 2025
+</footer>
+
+<script>
+  // ── Sparkles ──
+  const sparkleColors = ['#f9c4d2','#c8eed8','#e0d4f7','#e8c87a','#fde8d8','#e07a8f'];
+  const sparkleContainer = document.getElementById('sparkles');
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top  = Math.random() * 100 + 'vh';
+    s.style.background = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+    s.style.width = s.style.height = (Math.random() * 5 + 3) + 'px';
+    s.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    s.style.animationDelay   = (Math.random() * 5) + 's';
+    sparkleContainer.appendChild(s);
+  }
+
+  // ── Intersection Observer for reveal animations ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── RSVP ──
+  function submitRSVP() {
+    const name   = document.getElementById('rsvpName').value.trim();
+    const email  = document.getElementById('rsvpEmail').value.trim();
+    const attend = document.getElementById('rsvpAttend').value;
+    if (!name || !email || !attend) {
+      alert('Please fill in all the required fields 🌸');
+      return;
+    }
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    document.getElementById('rsvpName').value  = '';
+    document.getElementById('rsvpEmail').value = '';
+    document.getElementById('rsvpAttend').value  = '';
+    document.getElementById('rsvpGuests').value  = '';
+    setTimeout(() => toast.style.display = 'none', 4000);
+  }
+
+  // ── Gentle cradle sway on hero SVG ──
+  const heroSvg = document.querySelector('.hero-svg-wrap svg');
+  if (heroSvg) {
+    let t = 0;
+    function sway() {
+      t += 0.02;
+      heroSvg.style.transform = `rotate(${Math.sin(t) * 1.2}deg)`;
+      requestAnimationFrame(sway);
+    }
+    sway();
+  }
+</script>
+</body>
+</html>

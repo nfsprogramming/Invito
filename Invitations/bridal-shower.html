@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bridal Shower — Sophia & Ethan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blush:     #f5d9d0;
+    --rose:      #e8a4a4;
+    --dusty:     #c9848f;
+    --sage:      #9caf88;
+    --mint:      #c8dfc8;
+    --cream:     #fdf6f0;
+    --ivory:     #fffaf5;
+    --gold:      #c8a97e;
+    --text:      #5a3e3e;
+    --muted:     #9e7878;
+    --white:     #ffffff;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--ivory);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── FLOATING ELEMENTS ─────────────────────────── */
+  .float-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .petal {
+    position: absolute;
+    opacity: 0;
+    animation: petalFall linear infinite;
+  }
+
+  .butterfly {
+    position: absolute;
+    animation: butterflyDrift ease-in-out infinite;
+  }
+
+  .butterfly svg { animation: wingFlap ease-in-out infinite; }
+
+  @keyframes petalFall {
+    0%   { transform: translateY(-60px) rotate(0deg) translateX(0);   opacity: 0; }
+    10%  { opacity: .7; }
+    90%  { opacity: .5; }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(40px); opacity: 0; }
+  }
+
+  @keyframes butterflyDrift {
+    0%   { transform: translate(0,    0   ) rotate(-5deg); opacity: 0; }
+    5%   { opacity: 1; }
+    50%  { transform: translate(60px, -40px) rotate(5deg); }
+    100% { transform: translate(0,    0   ) rotate(-5deg); opacity: 1; }
+  }
+
+  @keyframes wingFlap {
+    0%,100% { transform: scaleX(1); }
+    50%      { transform: scaleX(.4); }
+  }
+
+  /* ─── NAV ───────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: .9rem 2rem;
+    background: rgba(253,246,240,.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(200,169,126,.3);
+    font-family: 'Jost', sans-serif;
+    font-size: .75rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .3s;
+  }
+  nav a:hover { color: var(--dusty); }
+
+  /* ─── HERO ──────────────────────────────────────── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(160deg, #fdf0ea 0%, #f9e8e4 40%, #eef5ee 100%);
+  }
+
+  .hero-garden {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 8rem 2rem 16rem;
+    animation: fadeUp .9s ease both;
+  }
+
+  .hero-eyebrow {
+    font-size: .72rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.4rem;
+    animation: fadeUp .9s .15s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.6rem, 9vw, 7rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: .8rem;
+    animation: fadeUp .9s .25s ease both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--dusty);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 2.8rem;
+    animation: fadeUp .9s .35s ease both;
+  }
+
+  .hero-date-pill {
+    display: inline-block;
+    padding: .55rem 2rem;
+    border: 1px solid var(--gold);
+    border-radius: 50px;
+    font-size: .78rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    animation: fadeUp .9s .45s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(24px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  /* ─── DIVIDER ───────────────────────────────────── */
+  .divider {
+    text-align: center;
+    padding: 1rem 0;
+    color: var(--rose);
+    font-size: 1.4rem;
+    letter-spacing: .6em;
+  }
+
+  /* ─── SECTION BASE ──────────────────────────────── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 2rem;
+  }
+
+  .section-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-tag {
+    font-size: .68rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--dusty); }
+
+  .section-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* ─── EVENT ─────────────────────────────────────── */
+  #event { background: var(--ivory); }
+
+  .event-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .event-card {
+    background: var(--white);
+    border: 1px solid #edd9d0;
+    border-radius: 20px;
+    padding: 2rem 2.2rem;
+    min-width: 200px;
+    flex: 1;
+    max-width: 230px;
+    box-shadow: 0 4px 24px rgba(200,132,143,.08);
+    transition: transform .3s, box-shadow .3s;
+  }
+
+  .event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(200,132,143,.14);
+  }
+
+  .event-card-icon { font-size: 2rem; margin-bottom: .8rem; }
+  .event-card-label {
+    font-size: .65rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: .4rem;
+  }
+
+  .event-card-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* ─── GAMES ─────────────────────────────────────── */
+  #games { background: linear-gradient(135deg, #fdf0f5 0%, #f0f5ed 100%); }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.4rem;
+    margin-top: 3rem;
+  }
+
+  .game-card {
+    background: rgba(255,255,255,.7);
+    border-radius: 18px;
+    padding: 2rem 1.6rem;
+    border: 1px solid rgba(200,169,126,.2);
+    backdrop-filter: blur(8px);
+    transition: transform .3s, box-shadow .3s;
+    text-align: left;
+  }
+
+  .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 40px rgba(156,175,136,.15);
+  }
+
+  .game-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+  .game-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: .5rem;
+  }
+
+  .game-desc {
+    font-size: .88rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .game-badge {
+    display: inline-block;
+    margin-top: .9rem;
+    padding: .28rem .9rem;
+    border-radius: 50px;
+    background: var(--blush);
+    color: var(--dusty);
+    font-size: .65rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  /* ─── COUNTDOWN ─────────────────────────────────── */
+  #countdown { background: var(--ivory); }
+
+  .countdown-wrap {
+    display: flex;
+    gap: 1.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+  }
+
+  .cd-block {
+    text-align: center;
+    min-width: 90px;
+  }
+
+  .cd-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 300;
+    color: var(--dusty);
+    line-height: 1;
+  }
+
+  .cd-label {
+    font-size: .65rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: .4rem;
+  }
+
+  .cd-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--rose);
+    align-self: flex-start;
+    margin-top: .5rem;
+  }
+
+  /* ─── RSVP ──────────────────────────────────────── */
+  #rsvp { background: linear-gradient(160deg, #f9ede8 0%, #eef5ee 100%); }
+
+  .rsvp-form {
+    margin-top: 2.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .rsvp-row { display: flex; gap: 1rem; }
+
+  .rsvp-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+  }
+
+  .rsvp-field label {
+    font-size: .68rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .rsvp-field input,
+  .rsvp-field select,
+  .rsvp-field textarea {
+    padding: .85rem 1.1rem;
+    border: 1px solid #e8ccc4;
+    border-radius: 12px;
+    background: rgba(255,255,255,.8);
+    font-family: 'Jost', sans-serif;
+    font-size: .95rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color .3s, box-shadow .3s;
+  }
+
+  .rsvp-field input:focus,
+  .rsvp-field select:focus,
+  .rsvp-field textarea:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(232,164,164,.15);
+  }
+
+  .rsvp-field textarea { resize: vertical; min-height: 90px; }
+
+  .btn-primary {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--dusty), var(--rose));
+    color: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: .8rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 6px 20px rgba(201,132,143,.3);
+    align-self: center;
+    margin-top: .4rem;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(201,132,143,.4);
+  }
+
+  .rsvp-success {
+    display: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--dusty);
+    margin-top: 2rem;
+    animation: fadeUp .6s ease both;
+  }
+
+  /* ─── FOOTER ────────────────────────────────────── */
+  footer {
+    background: var(--text);
+    color: rgba(255,255,255,.5);
+    text-align: center;
+    padding: 2.4rem 1rem;
+    font-size: .75rem;
+    letter-spacing: .12em;
+  }
+
+  footer span {
+    color: var(--rose);
+    font-size: 1rem;
+  }
+
+  /* ─── SCROLL REVEAL ─────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ────────────────────────────────── */
+  @media (max-width: 600px) {
+    .rsvp-row { flex-direction: column; }
+    nav { gap: 1.2rem; font-size: .65rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#event">Details</a>
+  <a href="#games">Games</a>
+  <a href="#countdown">Countdown</a>
+  <a href="#rsvp">RSVP</a>
+</nav>
+
+<!-- FLOATING LAYER -->
+<div class="float-layer" id="floatLayer"></div>
+
+<!-- ══════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">You're invited to celebrate</p>
+    <h1 class="hero-title"><em>Sophia's</em><br>Bridal Shower</h1>
+    <p class="hero-sub">as she blooms into forever with Ethan</p>
+    <span class="hero-date-pill">June 14 · 2025 · 11 am</span>
+  </div>
+
+  <!-- Floral Garden SVG -->
+  <svg class="hero-garden" viewBox="0 0 1440 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <!-- Ground -->
+    <ellipse cx="720" cy="320" rx="800" ry="80" fill="#d4e8c8" opacity=".5"/>
+    <rect x="0" y="280" width="1440" height="60" fill="#c8dfc8" opacity=".6"/>
+
+    <!-- Leaves -->
+    <ellipse cx="160" cy="250" rx="60" ry="22" fill="#9caf88" opacity=".7" transform="rotate(-20,160,250)"/>
+    <ellipse cx="1280" cy="250" rx="60" ry="22" fill="#9caf88" opacity=".7" transform="rotate(20,1280,250)"/>
+    <ellipse cx="600" cy="270" rx="40" ry="14" fill="#9caf88" opacity=".5" transform="rotate(-10,600,270)"/>
+    <ellipse cx="860" cy="270" rx="40" ry="14" fill="#9caf88" opacity=".5" transform="rotate(12,860,270)"/>
+
+    <!-- Stems -->
+    <line x1="200" y1="280" x2="200" y2="180" stroke="#9caf88" stroke-width="3"/>
+    <line x1="360" y1="280" x2="360" y2="160" stroke="#9caf88" stroke-width="3"/>
+    <line x1="540" y1="280" x2="540" y2="200" stroke="#9caf88" stroke-width="3"/>
+    <line x1="720" y1="280" x2="720" y2="140" stroke="#9caf88" stroke-width="3"/>
+    <line x1="900" y1="280" x2="900" y2="185" stroke="#9caf88" stroke-width="3"/>
+    <line x1="1080" y1="280" x2="1080" y2="165" stroke="#9caf88" stroke-width="3"/>
+    <line x1="1240" y1="280" x2="1240" y2="195" stroke="#9caf88" stroke-width="3"/>
+
+    <!-- Roses -->
+    <g transform="translate(200,175)">
+      <circle r="22" fill="#e8a4a4" opacity=".9"/>
+      <circle r="14" fill="#d98a8a" opacity=".8"/>
+      <circle r="7"  fill="#c97070"/>
+      <circle cx="22" cy="-5" r="11" fill="#e8a4a4" opacity=".6"/>
+      <circle cx="-20" cy="-3" r="9" fill="#e8a4a4" opacity=".6"/>
+      <circle cx="5" cy="-22" r="10" fill="#e8a4a4" opacity=".6"/>
+    </g>
+    <g transform="translate(720,135)">
+      <circle r="26" fill="#f5c0c0" opacity=".9"/>
+      <circle r="17" fill="#e8a4a4"/>
+      <circle r="9"  fill="#d98a8a"/>
+      <circle cx="26" cy="-6"  r="13" fill="#f5c0c0" opacity=".7"/>
+      <circle cx="-24" cy="-4" r="11" fill="#f5c0c0" opacity=".7"/>
+      <circle cx="6"   cy="-26" r="12" fill="#f5c0c0" opacity=".7"/>
+      <circle cx="18"  cy="22"  r="10" fill="#f5c0c0" opacity=".5"/>
+    </g>
+    <g transform="translate(1080,160)">
+      <circle r="22" fill="#e8a4a4" opacity=".9"/>
+      <circle r="14" fill="#d98a8a"/>
+      <circle r="7"  fill="#c97070"/>
+      <circle cx="22" cy="-5" r="11" fill="#e8a4a4" opacity=".6"/>
+      <circle cx="-20" cy="-3" r="9" fill="#e8a4a4" opacity=".6"/>
+    </g>
+
+    <!-- Daisies -->
+    <g transform="translate(360,155)">
+      <circle r="10" fill="#f7e6b0"/>
+      <ellipse rx="9" ry="4" fill="#fff" opacity=".9" transform="rotate(0)  translate(0,-13)"/>
+      <ellipse rx="9" ry="4" fill="#fff" opacity=".9" transform="rotate(45) translate(0,-13)"/>
+      <ellipse rx="9" ry="4" fill="#fff" opacity=".9" transform="rotate(90) translate(0,-13)"/>
+      <ellipse rx="9" ry="4" fill="#fff" opacity=".9" transform="rotate(135)translate(0,-13)"/>
+    </g>
+    <g transform="translate(540,195)">
+      <circle r="8" fill="#f7e6b0"/>
+      <ellipse rx="7" ry="3" fill="#f5d9d0" opacity=".9" transform="rotate(0)  translate(0,-11)"/>
+      <ellipse rx="7" ry="3" fill="#f5d9d0" opacity=".9" transform="rotate(60) translate(0,-11)"/>
+      <ellipse rx="7" ry="3" fill="#f5d9d0" opacity=".9" transform="rotate(120)translate(0,-11)"/>
+      <ellipse rx="7" ry="3" fill="#f5d9d0" opacity=".9" transform="rotate(180)translate(0,-11)"/>
+      <ellipse rx="7" ry="3" fill="#f5d9d0" opacity=".9" transform="rotate(240)translate(0,-11)"/>
+      <ellipse rx="7" ry="3" fill="#f5d9d0" opacity=".9" transform="rotate(300)translate(0,-11)"/>
+    </g>
+    <g transform="translate(1240,190)">
+      <circle r="9" fill="#f7e6b0"/>
+      <ellipse rx="8" ry="3.5" fill="#c8dfc8" opacity=".95" transform="rotate(0)  translate(0,-12)"/>
+      <ellipse rx="8" ry="3.5" fill="#c8dfc8" opacity=".95" transform="rotate(72) translate(0,-12)"/>
+      <ellipse rx="8" ry="3.5" fill="#c8dfc8" opacity=".95" transform="rotate(144)translate(0,-12)"/>
+      <ellipse rx="8" ry="3.5" fill="#c8dfc8" opacity=".95" transform="rotate(216)translate(0,-12)"/>
+      <ellipse rx="8" ry="3.5" fill="#c8dfc8" opacity=".95" transform="rotate(288)translate(0,-12)"/>
+    </g>
+
+    <!-- Tulips -->
+    <g transform="translate(900,180)">
+      <ellipse cx="0" cy="-15" rx="10" ry="18" fill="#f08080" opacity=".9"/>
+      <ellipse cx="-8" cy="-12" rx="7"  ry="14" fill="#e86060" opacity=".7"/>
+      <ellipse cx="8"  cy="-12" rx="7"  ry="14" fill="#f5a0a0" opacity=".7"/>
+    </g>
+
+    <!-- Small wildflowers -->
+    <circle cx="130" cy="260" r="5" fill="#f5c0d0" opacity=".8"/>
+    <circle cx="400" cy="268" r="4" fill="#c8dfc8" opacity=".8"/>
+    <circle cx="800" cy="265" r="5" fill="#f5d9d0" opacity=".8"/>
+    <circle cx="1150" cy="262" r="4" fill="#e8c8d8" opacity=".8"/>
+    <circle cx="1360" cy="268" r="5" fill="#c8dfc8" opacity=".8"/>
+
+    <!-- Grass blades -->
+    <path d="M60,280 Q65,250 58,230" stroke="#9caf88" stroke-width="2" fill="none" opacity=".6"/>
+    <path d="M70,280 Q80,255 75,235" stroke="#9caf88" stroke-width="2" fill="none" opacity=".6"/>
+    <path d="M1380,280 Q1375,252 1382,232" stroke="#9caf88" stroke-width="2" fill="none" opacity=".6"/>
+    <path d="M1370,280 Q1360,255 1366,238" stroke="#9caf88" stroke-width="2" fill="none" opacity=".6"/>
+  </svg>
+</section>
+
+<!-- ══════════════════════════════════ EVENT DETAILS -->
+<section id="event">
+  <div class="section-inner reveal">
+    <p class="section-tag">All the sweet details</p>
+    <h2 class="section-title">Come <em>Celebrate</em> With Us</h2>
+    <p class="section-body">Join us for a garden-inspired afternoon filled with love, laughter, and all things lovely as we shower the bride-to-be.</p>
+
+    <div class="event-cards">
+      <div class="event-card">
+        <div class="event-card-icon">🗓</div>
+        <div class="event-card-label">Date</div>
+        <div class="event-card-value">Saturday<br>June 14, 2025</div>
+      </div>
+      <div class="event-card">
+        <div class="event-card-icon">🕐</div>
+        <div class="event-card-label">Time</div>
+        <div class="event-card-value">11:00 AM – 3:00 PM</div>
+      </div>
+      <div class="event-card">
+        <div class="event-card-icon">🌿</div>
+        <div class="event-card-label">Venue</div>
+        <div class="event-card-value">The Garden Terrace<br>Rosewood Estate</div>
+      </div>
+      <div class="event-card">
+        <div class="event-card-icon">👗</div>
+        <div class="event-card-label">Dress Code</div>
+        <div class="event-card-value">Garden Chic<br>Florals Welcome</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ GAMES -->
+<section id="games">
+  <div class="section-inner reveal">
+    <p class="section-tag">Let the fun begin</p>
+    <h2 class="section-title">Garden <em>Party Games</em></h2>
+    <p class="section-body">We've planned a sprinkle of games to make the afternoon unforgettable. Come ready to play!</p>
+
+    <div class="games-grid">
+      <div class="game-card">
+        <div class="game-icon">💌</div>
+        <div class="game-title">He Said, She Said</div>
+        <div class="game-desc">Guess who said what — the bride or the groom? You might be surprised by the answers!</div>
+        <span class="game-badge">Fan Favourite</span>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">🎀</div>
+        <div class="game-title">Bingo Bonanza</div>
+        <div class="game-desc">Mark off gifts as they're opened. First to Bingo wins a sweet prize from our garden basket!</div>
+        <span class="game-badge">Gift Opening</span>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">📖</div>
+        <div class="game-title">Love Story Mad Libs</div>
+        <div class="game-desc">Fill in the blanks to write the couple's love story. Expect hilarity and happy tears in equal measure.</div>
+        <span class="game-badge">Creative</span>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">🌸</div>
+        <div class="game-title">Floral Bouquet Bar</div>
+        <div class="game-desc">Design your own mini bouquet to take home — a living keepsake from a blooming celebration.</div>
+        <span class="game-badge">Take-Home Craft</span>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">🍰</div>
+        <div class="game-title">Cake Tasting Vote</div>
+        <div class="game-desc">Sample three wedding cake flavours and vote for your favourite to help the couple choose!</div>
+        <span class="game-badge">Yummy</span>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">✉️</div>
+        <div class="game-title">Advice for the Bride</div>
+        <div class="game-desc">Write your best marriage advice on a card. We'll seal it and open on the couple's first anniversary.</div>
+        <span class="game-badge">Keepsake</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ COUNTDOWN -->
+<section id="countdown">
+  <div class="section-inner reveal">
+    <p class="section-tag">The big day is near</p>
+    <h2 class="section-title">Counting <em>Down</em> the Petals</h2>
+    <div class="countdown-wrap">
+      <div class="cd-block"><div class="cd-number" id="cd-d">00</div><div class="cd-label">Days</div></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-block"><div class="cd-number" id="cd-h">00</div><div class="cd-label">Hours</div></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-block"><div class="cd-number" id="cd-m">00</div><div class="cd-label">Minutes</div></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-block"><div class="cd-number" id="cd-s">00</div><div class="cd-label">Seconds</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════ RSVP -->
+<section id="rsvp">
+  <div class="section-inner reveal">
+    <p class="section-tag">We hope to see you</p>
+    <h2 class="section-title">Reserve Your <em>Petal</em></h2>
+    <p class="section-body">Please RSVP by June 1st so we can prepare a spot just for you in our garden.</p>
+
+    <div class="rsvp-form" id="rsvpForm">
+      <div class="rsvp-row">
+        <div class="rsvp-field">
+          <label>First Name</label>
+          <input type="text" placeholder="Rose" id="fname">
+        </div>
+        <div class="rsvp-field">
+          <label>Last Name</label>
+          <input type="text" placeholder="Bloom" id="lname">
+        </div>
+      </div>
+      <div class="rsvp-field">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" id="email">
+      </div>
+      <div class="rsvp-field">
+        <label>Will you attend?</label>
+        <select id="attend">
+          <option value="">— Please select —</option>
+          <option value="yes">🌸 Joyfully Accepts</option>
+          <option value="no">💌 Regretfully Declines</option>
+        </select>
+      </div>
+      <div class="rsvp-field">
+        <label>Dietary Requirements</label>
+        <input type="text" placeholder="Vegetarian, gluten-free, etc." id="diet">
+      </div>
+      <div class="rsvp-field">
+        <label>Note for the Bride</label>
+        <textarea placeholder="Share a sweet message or favourite memory…" id="note"></textarea>
+      </div>
+      <button class="btn-primary" onclick="submitRSVP()">Send My RSVP 🌷</button>
+    </div>
+    <div class="rsvp-success" id="rsvpSuccess">
+      Thank you! We can't wait to celebrate with you. 🌸
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Made with <span>♥</span> for Sophia &amp; Ethan · June 2025
+</footer>
+
+<script>
+// ─── FLOATING PETALS & BUTTERFLIES ──────────────────
+(function() {
+  const layer = document.getElementById('floatLayer');
+  const petalColors = ['#f5d9d0','#e8c4c4','#d4e8c8','#f5e8d0','#e8d4f0','#f0e8d0'];
+
+  // Petals
+  for (let i = 0; i < 22; i++) {
+    const el = document.createElement('div');
+    el.className = 'petal';
+    const size = 6 + Math.random() * 12;
+    const color = petalColors[Math.floor(Math.random() * petalColors.length)];
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      width:${size}px; height:${size*1.4}px;
+      background:${color};
+      border-radius:50% 0 50% 0;
+      animation-duration:${6+Math.random()*8}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    layer.appendChild(el);
+  }
+
+  // Butterflies
+  const butterflySVG = (c1, c2) => `
+    <svg width="28" height="22" viewBox="0 0 28 22" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="7"  cy="9"  rx="7"  ry="9"  fill="${c1}" opacity=".82"/>
+      <ellipse cx="21" cy="9"  rx="7"  ry="9"  fill="${c1}" opacity=".82"/>
+      <ellipse cx="8"  cy="15" rx="5"  ry="6"  fill="${c2}" opacity=".7"/>
+      <ellipse cx="20" cy="15" rx="5"  ry="6"  fill="${c2}" opacity=".7"/>
+      <rect x="13" y="3" width="2" height="16" rx="1" fill="#5a3e3e" opacity=".4"/>
+      <line x1="13" y1="3" x2="9"  y2="0" stroke="#5a3e3e" stroke-width="1" opacity=".4"/>
+      <line x1="15" y1="3" x2="19" y2="0" stroke="#5a3e3e" stroke-width="1" opacity=".4"/>
+    </svg>`;
+
+  const bfColors = [
+    ['#f5c0d0','#e8a4b4'],
+    ['#c8dfc8','#9caf88'],
+    ['#f5d9a0','#e8c060'],
+    ['#d0c8f0','#b0a8e0'],
+  ];
+
+  for (let i = 0; i < 5; i++) {
+    const el = document.createElement('div');
+    el.className = 'butterfly';
+    const [c1,c2] = bfColors[i % bfColors.length];
+    el.innerHTML = butterflySVG(c1, c2);
+    el.style.cssText = `
+      left:${10+Math.random()*80}%;
+      top:${5+Math.random()*60}%;
+      animation-duration:${7+Math.random()*6}s;
+      animation-delay:${Math.random()*5}s;
+    `;
+    el.querySelector('svg').style.animationDuration = `${0.25+Math.random()*0.2}s`;
+    layer.appendChild(el);
+  }
+})();
+
+// ─── COUNTDOWN ───────────────────────────────────────
+(function() {
+  const target = new Date('2025-06-14T11:00:00');
+  function tick() {
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      ['cd-d','cd-h','cd-m','cd-s'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
+    }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const pad = n => String(n).padStart(2,'0');
+    document.getElementById('cd-d').textContent = pad(d);
+    document.getElementById('cd-h').textContent = pad(h);
+    document.getElementById('cd-m').textContent = pad(m);
+    document.getElementById('cd-s').textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+// ─── SCROLL REVEAL ───────────────────────────────────
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+// ─── RSVP SUBMIT ────────────────────────────────────
+function submitRSVP() {
+  const fname = document.getElementById('fname').value.trim();
+  const attend = document.getElementById('attend').value;
+  if (!fname || !attend) { alert('Please fill in your name and attendance selection 🌸'); return; }
+  document.getElementById('rsvpForm').style.display = 'none';
+  const suc = document.getElementById('rsvpSuccess');
+  suc.style.display = 'block';
+  if (attend === 'no') suc.textContent = 'We\'ll miss you dearly! Thank you for letting us know. 💌';
+}
+</script>
+</body>
+</html>

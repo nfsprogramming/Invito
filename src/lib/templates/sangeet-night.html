@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sangeet Night — {{brideName}} & {{groomName}}</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon-purple: #b400ff;
+    --neon-blue: #00d4ff;
+    --neon-pink: #ff006e;
+    --neon-yellow: #ffe600;
+    --deep-dark: #04000d;
+    --mid-dark: #0d0020;
+    --card-bg: rgba(255,255,255,0.04);
+    --glow-purple: 0 0 20px #b400ff88, 0 0 60px #b400ff44;
+    --glow-blue: 0 0 20px #00d4ff88, 0 0 60px #00d4ff44;
+    --glow-pink: 0 0 20px #ff006e88, 0 0 60px #ff006e44;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep-dark);
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 14px; height: 14px;
+    background: var(--neon-pink);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.1s, background 0.2s;
+    box-shadow: 0 0 14px var(--neon-pink), 0 0 40px var(--neon-pink);
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--neon-blue);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: transform 0.18s ease, width 0.2s, height 0.2s;
+    opacity: 0.7;
+  }
+
+  /* FLOATING PARTICLES */
+  .particles-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background: linear-gradient(to bottom, rgba(4,0,13,0.95), transparent);
+    backdrop-filter: blur(2px);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--neon-pink); }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    height: auto;
+    padding: 70px 20px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    z-index: 1;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 80%, #4a007788 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 20%, #00d4ff22 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 10%, #ff006e22 0%, transparent 60%),
+      var(--deep-dark);
+  }
+
+  .stage-svg {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    width: 100%;
+    opacity: 0.85;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .hero-pre {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 8px;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    animation: fadeSlideUp 1s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 14vw, 13rem);
+    line-height: 0.88;
+    letter-spacing: 2px;
+    position: relative;
+    animation: fadeSlideUp 1s ease 0.2s both;
+  }
+
+  .hero-title .line1 {
+    display: block;
+    background: linear-gradient(135deg, #fff 30%, var(--neon-pink) 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px var(--neon-pink));
+  }
+  .hero-title .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px var(--neon-blue));
+  }
+
+  .hero-names {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: rgba(255,255,255,0.85);
+    margin-top: 12px;
+    animation: fadeSlideUp 1s ease 0.4s both;
+    letter-spacing: 3px;
+  }
+  .hero-names span { color: var(--neon-yellow); }
+
+  .hero-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+    padding: 10px 28px;
+    border: 1px solid var(--neon-purple);
+    background: rgba(180,0,255,0.1);
+    border-radius: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--neon-purple);
+    animation: fadeSlideUp 1s ease 0.6s both;
+    box-shadow: var(--glow-purple);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.5;
+    animation: bounce 2s infinite;
+    z-index: 10;
+  }
+  .scroll-hint span { font-size: 0.6rem; letter-spacing: 4px; }
+  .scroll-hint svg { width: 20px; opacity: 0.7; }
+
+  /* SPOTLIGHT BEAMS */
+  .spotlight {
+    position: absolute;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to top, rgba(255,255,255,0.25), transparent);
+    transform-origin: bottom center;
+    filter: blur(8px);
+    pointer-events: none;
+  }
+
+  /* ─── SOUNDWAVE DIVIDER ─── */
+  .wave-divider {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    margin: -1px 0;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 2;
+    padding: 100px 48px;
+  }
+
+  .section-tag {
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--neon-blue);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-tag::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--neon-blue);
+    box-shadow: var(--glow-blue);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 48px;
+  }
+
+  /* ─── EVENT DETAILS ─── */
+  #event { background: var(--mid-dark); }
+
+  .event-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .event-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .event-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink));
+    box-shadow: var(--glow-pink);
+  }
+  .event-card:hover { transform: translateY(-6px); border-color: var(--neon-purple); }
+
+  .event-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .event-label {
+    font-size: 0.6rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--neon-pink);
+    margin-bottom: 8px;
+  }
+  .event-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+  .event-sub {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  /* ─── SCHEDULE ─── */
+  #schedule { background: var(--deep-dark); }
+
+  .timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 80px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--neon-purple), var(--neon-pink), transparent);
+    box-shadow: var(--glow-purple);
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 48px;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .timeline-time {
+    width: 80px;
+    text-align: right;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--neon-blue);
+    padding-top: 4px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .timeline-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--neon-purple);
+    box-shadow: var(--glow-purple);
+    flex-shrink: 0;
+    margin-top: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-dot.pink { background: var(--neon-pink); box-shadow: var(--glow-pink); }
+  .timeline-dot.blue { background: var(--neon-blue); box-shadow: var(--glow-blue); }
+
+  .timeline-content {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 24px;
+    border-left: 2px solid var(--neon-purple);
+  }
+  .timeline-content.pink { border-left-color: var(--neon-pink); }
+  .timeline-content.blue { border-left-color: var(--neon-blue); }
+
+  .timeline-event-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .timeline-desc {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+  .timeline-performers {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .performer-tag {
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    padding: 4px 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+  }
+
+  /* ─── COUPLE ─── */
+  #couple {
+    background: linear-gradient(135deg, var(--mid-dark) 0%, #1a0030 50%, var(--mid-dark) 100%);
+    text-align: center;
+  }
+
+  .couple-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    max-width: 900px;
+    margin: 0 auto 48px;
+    position: relative;
+  }
+
+  .couple-frame {
+    width: 300px;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .couple-frame.left { transform: rotate(-3deg); z-index: 1; }
+  .couple-frame.right { transform: rotate(3deg); z-index: 1; }
+  .couple-frame.center { transform: scale(1.12); z-index: 2; margin: 0 -16px; }
+
+  .couple-frame-inner {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+  .couple-frame.left .couple-frame-inner {
+    background: linear-gradient(135deg, #b400ff22, #00d4ff11);
+    border-color: var(--neon-purple);
+    box-shadow: var(--glow-purple), inset 0 0 60px #b400ff11;
+  }
+  .couple-frame.center .couple-frame-inner {
+    background: linear-gradient(135deg, #ff006e22, #b400ff22);
+    border-color: var(--neon-pink);
+    box-shadow: var(--glow-pink), inset 0 0 60px #ff006e11;
+  }
+  .couple-frame.right .couple-frame-inner {
+    background: linear-gradient(135deg, #00d4ff22, #b400ff11);
+    border-color: var(--neon-blue);
+    box-shadow: var(--glow-blue), inset 0 0 60px #00d4ff11;
+  }
+
+  .frame-label {
+    position: absolute;
+    bottom: 16px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 2px;
+  }
+
+  .couple-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: rgba(255,255,255,0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+    border-left: 2px solid var(--neon-pink);
+    padding-left: 24px;
+    text-align: left;
+  }
+
+  /* ─── RSVP ─── */
+  #rsvp { background: var(--deep-dark); }
+
+  .rsvp-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .rsvp-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+    box-shadow: 0 0 20px var(--neon-purple);
+  }
+
+  .form-group { margin-bottom: 24px; }
+  .form-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--neon-blue);
+    margin-bottom: 10px;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 14px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 0 2px rgba(180,0,255,0.15), var(--glow-purple);
+  }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .form-select option { background: var(--mid-dark); }
+
+  .rsvp-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+    border: none;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: var(--glow-pink);
+  }
+  .rsvp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px var(--neon-pink), 0 0 80px var(--neon-purple);
+  }
+  .rsvp-btn:active { transform: translateY(0); }
+
+  .rsvp-success {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    color: var(--neon-blue);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+
+  /* ─── COUNTDOWN ─── */
+  #countdown {
+    background: linear-gradient(135deg, #0a0020, var(--mid-dark));
+    text-align: center;
+    padding: 80px 48px;
+  }
+
+  .countdown-display {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+
+  .countdown-unit {
+    min-width: 120px;
+    position: relative;
+  }
+  .countdown-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 7rem);
+    line-height: 1;
+    position: relative;
+    display: block;
+  }
+  .countdown-unit:nth-child(1) .countdown-number {
+    background: linear-gradient(135deg, var(--neon-purple), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px var(--neon-purple));
+  }
+  .countdown-unit:nth-child(2) .countdown-number {
+    background: linear-gradient(135deg, var(--neon-blue), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px var(--neon-blue));
+  }
+  .countdown-unit:nth-child(3) .countdown-number {
+    background: linear-gradient(135deg, var(--neon-pink), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px var(--neon-pink));
+  }
+  .countdown-unit:nth-child(4) .countdown-number {
+    background: linear-gradient(135deg, var(--neon-yellow), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px var(--neon-yellow));
+  }
+  .countdown-label {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-top: 8px;
+  }
+  .countdown-sep {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    color: rgba(255,255,255,0.2);
+    align-self: flex-start;
+    padding-top: 6px;
+    line-height: 1.2;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--deep-dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 60px 48px 40px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px var(--neon-purple));
+    margin-bottom: 16px;
+    letter-spacing: 6px;
+  }
+  .footer-names {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+  }
+  .footer-date {
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    color: var(--neon-purple);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  .footer-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+    margin: 0 auto 32px;
+  }
+  .footer-note {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 2px;
+  }
+
+  /* NEON FLOATING MUSIC NOTES */
+  .music-notes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .note {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: noteFloat linear infinite;
+    pointer-events: none;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+  }
+
+  @keyframes noteFloat {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+  }
+
+  @keyframes spotlightSway {
+    0%, 100% { transform: rotate(-20deg); }
+    50% { transform: rotate(20deg); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes countdownPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+
+  .countdown-number.pulse {
+    animation: countdownPulse 0.3s ease;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .event-grid { grid-template-columns: 1fr; }
+    .timeline::before { left: 60px; }
+    .timeline-time { width: 60px; font-size: 1.1rem; }
+    .couple-display { flex-direction: column; align-items: center; gap: 16px; }
+    .couple-frame { transform: none !important; margin: 0 !important; }
+    .rsvp-container { padding: 32px 24px; }
+    .countdown-sep { display: none; }
+    footer { padding: 48px 24px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas class="particles-canvas" id="particlesCanvas"></canvas>
+
+<!-- FLOATING MUSIC NOTES -->
+<div class="music-notes" id="musicNotes"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SANGEET</div>
+  <ul class="nav-links">
+    <li><a href="#event">Event</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#couple">Us</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+    <li><a href="#countdown">Countdown</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════ HERO ════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Spotlights -->
+  <div class="spotlight" style="left:15%;height:70%;animation:spotlightSway 4s ease-in-out infinite;"></div>
+  <div class="spotlight" style="left:30%;height:55%;animation:spotlightSway 5s ease-in-out infinite 0.5s;background:linear-gradient(to top, rgba(180,0,255,0.3), transparent);"></div>
+  <div class="spotlight" style="left:50%;height:80%;animation:spotlightSway 6s ease-in-out infinite 1s;background:linear-gradient(to top, rgba(0,212,255,0.3), transparent);"></div>
+  <div class="spotlight" style="left:70%;height:60%;animation:spotlightSway 4.5s ease-in-out infinite 0.3s;background:linear-gradient(to top, rgba(255,0,110,0.3), transparent);"></div>
+  <div class="spotlight" style="left:85%;height:65%;animation:spotlightSway 5.5s ease-in-out infinite 0.8s;"></div>
+
+  <!-- Stage SVG -->
+  <svg class="stage-svg" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Stage floor -->
+    <rect x="0" y="240" width="1440" height="80" fill="url(#stageGrad)" rx="0"/>
+    <!-- Stage edge glow -->
+    <rect x="0" y="238" width="1440" height="4" fill="url(#edgeGrad)" opacity="0.9"/>
+
+    <!-- DJ Booth -->
+    <rect x="620" y="170" width="200" height="70" rx="4" fill="#1a0030" stroke="#b400ff" stroke-width="1.5"/>
+    <rect x="630" y="180" width="80" height="40" rx="2" fill="#0d0020"/>
+    <!-- DJ Decks -->
+    <circle cx="670" cy="200" r="16" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.8"/>
+    <circle cx="670" cy="200" r="4" fill="#00d4ff" opacity="0.8"/>
+    <rect x="720" y="183" width="90" height="8" rx="2" fill="#b400ff" opacity="0.7"/>
+    <rect x="720" y="197" width="90" height="4" rx="2" fill="#00d4ff" opacity="0.5"/>
+    <rect x="720" y="207" width="70" height="4" rx="2" fill="#ff006e" opacity="0.5"/>
+    <!-- Mixer knobs -->
+    <circle cx="770" cy="215" r="5" fill="#b400ff" opacity="0.9"/>
+    <circle cx="785" cy="215" r="5" fill="#ff006e" opacity="0.9"/>
+    <circle cx="800" cy="215" r="5" fill="#00d4ff" opacity="0.9"/>
+
+    <!-- Dance Silhouette 1 (couple dancing left) -->
+    <g transform="translate(200, 90)" fill="#1a0030" stroke="#b400ff" stroke-width="0.8" opacity="0.9">
+      <!-- Person 1 -->
+      <circle cx="0" cy="0" r="14"/>
+      <line x1="0" y1="14" x2="0" y2="60"/>
+      <line x1="0" y1="28" x2="-22" y2="50"/>
+      <line x1="0" y1="28" x2="18" y2="45"/>
+      <line x1="0" y1="60" x2="-15" y2="95"/>
+      <line x1="0" y1="60" x2="15" y2="90"/>
+      <!-- Person 2 -->
+      <circle cx="50" cy="-8" r="12"/>
+      <line x1="50" y1="4" x2="50" y2="48"/>
+      <line x1="50" y1="20" x2="25" y2="42"/>
+      <line x1="50" y1="20" x2="68" y2="38"/>
+      <line x1="50" y1="48" x2="38" y2="82"/>
+      <line x1="50" y1="48" x2="60" y2="80"/>
+    </g>
+
+    <!-- Dance Silhouette 2 (solo dancer right) -->
+    <g transform="translate(1100, 80)" fill="#0d0020" stroke="#ff006e" stroke-width="0.8" opacity="0.9">
+      <circle cx="0" cy="0" r="14"/>
+      <line x1="0" y1="14" x2="0" y2="58"/>
+      <line x1="0" y1="26" x2="-28" y2="15"/>
+      <line x1="0" y1="26" x2="25" y2="10"/>
+      <line x1="0" y1="58" x2="-18" y2="96"/>
+      <line x1="0" y1="58" x2="20" y2="100"/>
+    </g>
+
+    <!-- Dance Silhouette 3 -->
+    <g transform="translate(900, 110)" fill="#1a0030" stroke="#00d4ff" stroke-width="0.8" opacity="0.8">
+      <circle cx="0" cy="0" r="12"/>
+      <line x1="0" y1="12" x2="0" y2="54"/>
+      <line x1="0" y1="24" x2="-20" y2="40"/>
+      <line x1="0" y1="24" x2="22" y2="35"/>
+      <line x1="0" y1="54" x2="-14" y2="86"/>
+      <line x1="0" y1="54" x2="16" y2="88"/>
+    </g>
+
+    <!-- Stage lights fixtures -->
+    <g opacity="0.7">
+      <polygon points="100,0 90,30 110,30" fill="#b400ff"/>
+      <line x1="100" y1="30" x2="150" y2="240" stroke="#b400ff" stroke-width="0.5" opacity="0.3"/>
+      <polygon points="350,0 340,30 360,30" fill="#00d4ff"/>
+      <line x1="350" y1="30" x2="400" y2="240" stroke="#00d4ff" stroke-width="0.5" opacity="0.3"/>
+      <polygon points="720,0 710,30 730,30" fill="#ff006e"/>
+      <line x1="720" y1="30" x2="720" y2="240" stroke="#ff006e" stroke-width="0.5" opacity="0.3"/>
+      <polygon points="1090,0 1080,30 1100,30" fill="#b400ff"/>
+      <line x1="1090" y1="30" x2="1040" y2="240" stroke="#b400ff" stroke-width="0.5" opacity="0.3"/>
+      <polygon points="1340,0 1330,30 1350,30" fill="#00d4ff"/>
+      <line x1="1340" y1="30" x2="1280" y2="240" stroke="#00d4ff" stroke-width="0.5" opacity="0.3"/>
+    </g>
+
+    <!-- Glow on stage floor -->
+    <ellipse cx="720" cy="270" rx="300" ry="30" fill="#b400ff" opacity="0.08"/>
+    <ellipse cx="720" cy="270" rx="150" ry="15" fill="#ff006e" opacity="0.1"/>
+
+    <!-- Gradients -->
+    <defs>
+      <linearGradient id="stageGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#1a0030"/>
+        <stop offset="100%" stop-color="#04000d"/>
+      </linearGradient>
+      <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="transparent"/>
+        <stop offset="20%" stop-color="#b400ff"/>
+        <stop offset="50%" stop-color="#ff006e"/>
+        <stop offset="80%" stop-color="#00d4ff"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-pre">✦ An Evening of Music & Dance ✦</div>
+    <h1 class="hero-title">
+      <span class="line1">SANGEET</span>
+      <span class="line2">NIGHT</span>
+    </h1>
+    <div class="hero-names">
+      <span>{{brideName}}</span> &nbsp;✦&nbsp; <span>{{groomName}}</span>
+    </div>
+    <div class="hero-date-badge">
+      🎵 &nbsp; Saturday, 14th December 2025 &nbsp; 🎵
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SOUNDWAVE DIVIDER 1 -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#b400ff"/>
+        <stop offset="50%" stop-color="#ff006e"/>
+        <stop offset="100%" stop-color="#00d4ff"/>
+      </linearGradient>
+    </defs>
+    <g fill="url(#waveGrad1)" opacity="0.8">
+      <rect x="0" y="25" width="3" height="10"/>
+      <rect x="8" y="20" width="3" height="20"/>
+      <rect x="16" y="15" width="3" height="30"/>
+      <rect x="24" y="22" width="3" height="16"/>
+      <rect x="32" y="18" width="3" height="24"/>
+      <rect x="40" y="10" width="3" height="40"/>
+      <rect x="48" y="20" width="3" height="20"/>
+      <rect x="56" y="25" width="3" height="10"/>
+      <rect x="64" y="16" width="3" height="28"/>
+      <rect x="72" y="8" width="3" height="44"/>
+      <rect x="80" y="22" width="3" height="16"/>
+      <rect x="88" y="18" width="3" height="24"/>
+      <rect x="96" y="28" width="3" height="4"/>
+      <rect x="104" y="14" width="3" height="32"/>
+      <rect x="112" y="20" width="3" height="20"/>
+      <rect x="120" y="12" width="3" height="36"/>
+      <rect x="128" y="24" width="3" height="12"/>
+      <rect x="136" y="16" width="3" height="28"/>
+      <rect x="144" y="22" width="3" height="16"/>
+      <rect x="152" y="6" width="3" height="48"/>
+      <rect x="160" y="20" width="3" height="20"/>
+      <rect x="168" y="26" width="3" height="8"/>
+      <rect x="176" y="14" width="3" height="32"/>
+      <rect x="184" y="10" width="3" height="40"/>
+      <rect x="192" y="22" width="3" height="16"/>
+      <rect x="200" y="18" width="3" height="24"/>
+    </g>
+    <!-- Continue pattern -->
+    <g fill="url(#waveGrad1)" opacity="0.8" transform="translate(210, 0)">
+      <rect x="0" y="25" width="3" height="10"/>
+      <rect x="8" y="18" width="3" height="24"/>
+      <rect x="16" y="12" width="3" height="36"/>
+      <rect x="24" y="20" width="3" height="20"/>
+      <rect x="32" y="8" width="3" height="44"/>
+      <rect x="40" y="22" width="3" height="16"/>
+      <rect x="48" y="16" width="3" height="28"/>
+      <rect x="56" y="26" width="3" height="8"/>
+      <rect x="64" y="14" width="3" height="32"/>
+      <rect x="72" y="20" width="3" height="20"/>
+      <rect x="80" y="10" width="3" height="40"/>
+      <rect x="88" y="24" width="3" height="12"/>
+      <rect x="96" y="18" width="3" height="24"/>
+      <rect x="104" y="6" width="3" height="48"/>
+      <rect x="112" y="22" width="3" height="16"/>
+      <rect x="120" y="28" width="3" height="4"/>
+      <rect x="128" y="14" width="3" height="32"/>
+      <rect x="136" y="20" width="3" height="20"/>
+      <rect x="144" y="16" width="3" height="28"/>
+      <rect x="152" y="10" width="3" height="40"/>
+    </g>
+    <g fill="url(#waveGrad1)" opacity="0.8" transform="translate(420, 0)">
+      <rect x="0" y="22" width="3" height="16"/>
+      <rect x="8" y="16" width="3" height="28"/>
+      <rect x="16" y="8" width="3" height="44"/>
+      <rect x="24" y="20" width="3" height="20"/>
+      <rect x="32" y="25" width="3" height="10"/>
+      <rect x="40" y="12" width="3" height="36"/>
+      <rect x="48" y="18" width="3" height="24"/>
+      <rect x="56" y="6" width="3" height="48"/>
+      <rect x="64" y="22" width="3" height="16"/>
+      <rect x="72" y="28" width="3" height="4"/>
+      <rect x="80" y="14" width="3" height="32"/>
+      <rect x="88" y="20" width="3" height="20"/>
+      <rect x="96" y="10" width="3" height="40"/>
+      <rect x="104" y="24" width="3" height="12"/>
+      <rect x="112" y="16" width="3" height="28"/>
+      <rect x="120" y="22" width="3" height="16"/>
+      <rect x="128" y="8" width="3" height="44"/>
+      <rect x="136" y="18" width="3" height="24"/>
+      <rect x="144" y="26" width="3" height="8"/>
+      <rect x="152" y="14" width="3" height="32"/>
+    </g>
+    <g fill="url(#waveGrad1)" opacity="0.8" transform="translate(630, 0)">
+      <rect x="0" y="20" width="3" height="20"/>
+      <rect x="8" y="12" width="3" height="36"/>
+      <rect x="16" y="24" width="3" height="12"/>
+      <rect x="24" y="16" width="3" height="28"/>
+      <rect x="32" y="6" width="3" height="48"/>
+      <rect x="40" y="22" width="3" height="16"/>
+      <rect x="48" y="18" width="3" height="24"/>
+      <rect x="56" y="28" width="3" height="4"/>
+      <rect x="64" y="10" width="3" height="40"/>
+      <rect x="72" y="20" width="3" height="20"/>
+      <rect x="80" y="14" width="3" height="32"/>
+      <rect x="88" y="8" width="3" height="44"/>
+      <rect x="96" y="22" width="3" height="16"/>
+      <rect x="104" y="26" width="3" height="8"/>
+      <rect x="112" y="16" width="3" height="28"/>
+      <rect x="120" y="12" width="3" height="36"/>
+      <rect x="128" y="20" width="3" height="20"/>
+      <rect x="136" y="24" width="3" height="12"/>
+      <rect x="144" y="6" width="3" height="48"/>
+      <rect x="152" y="18" width="3" height="24"/>
+    </g>
+    <g fill="url(#waveGrad1)" opacity="0.8" transform="translate(840, 0)">
+      <rect x="0" y="14" width="3" height="32"/>
+      <rect x="8" y="20" width="3" height="20"/>
+      <rect x="16" y="8" width="3" height="44"/>
+      <rect x="24" y="22" width="3" height="16"/>
+      <rect x="32" y="18" width="3" height="24"/>
+      <rect x="40" y="26" width="3" height="8"/>
+      <rect x="48" y="12" width="3" height="36"/>
+      <rect x="56" y="20" width="3" height="20"/>
+      <rect x="64" y="6" width="3" height="48"/>
+      <rect x="72" y="24" width="3" height="12"/>
+      <rect x="80" y="16" width="3" height="28"/>
+      <rect x="88" y="22" width="3" height="16"/>
+      <rect x="96" y="10" width="3" height="40"/>
+      <rect x="104" y="18" width="3" height="24"/>
+      <rect x="112" y="28" width="3" height="4"/>
+      <rect x="120" y="14" width="3" height="32"/>
+      <rect x="128" y="20" width="3" height="20"/>
+      <rect x="136" y="8" width="3" height="44"/>
+      <rect x="144" y="22" width="3" height="16"/>
+      <rect x="152" y="16" width="3" height="28"/>
+    </g>
+    <g fill="url(#waveGrad1)" opacity="0.8" transform="translate(1050, 0)">
+      <rect x="0" y="20" width="3" height="20"/>
+      <rect x="8" y="26" width="3" height="8"/>
+      <rect x="16" y="14" width="3" height="32"/>
+      <rect x="24" y="8" width="3" height="44"/>
+      <rect x="32" y="22" width="3" height="16"/>
+      <rect x="40" y="18" width="3" height="24"/>
+      <rect x="48" y="12" width="3" height="36"/>
+      <rect x="56" y="20" width="3" height="20"/>
+      <rect x="64" y="6" width="3" height="48"/>
+      <rect x="72" y="24" width="3" height="12"/>
+      <rect x="80" y="16" width="3" height="28"/>
+      <rect x="88" y="10" width="3" height="40"/>
+      <rect x="96" y="22" width="3" height="16"/>
+      <rect x="104" y="28" width="3" height="4"/>
+      <rect x="112" y="14" width="3" height="32"/>
+      <rect x="120" y="20" width="3" height="20"/>
+      <rect x="128" y="8" width="3" height="44"/>
+      <rect x="136" y="18" width="3" height="24"/>
+      <rect x="144" y="22" width="3" height="16"/>
+      <rect x="152" y="26" width="3" height="8"/>
+    </g>
+    <g fill="url(#waveGrad1)" opacity="0.8" transform="translate(1260, 0)">
+      <rect x="0" y="14" width="3" height="32"/>
+      <rect x="8" y="20" width="3" height="20"/>
+      <rect x="16" y="10" width="3" height="40"/>
+      <rect x="24" y="24" width="3" height="12"/>
+      <rect x="32" y="16" width="3" height="28"/>
+      <rect x="40" y="6" width="3" height="48"/>
+      <rect x="48" y="22" width="3" height="16"/>
+      <rect x="56" y="18" width="3" height="24"/>
+      <rect x="64" y="28" width="3" height="4"/>
+      <rect x="72" y="12" width="3" height="36"/>
+      <rect x="80" y="20" width="3" height="20"/>
+      <rect x="88" y="8" width="3" height="44"/>
+      <rect x="96" y="22" width="3" height="16"/>
+      <rect x="104" y="14" width="3" height="32"/>
+      <rect x="112" y="26" width="3" height="8"/>
+      <rect x="120" y="16" width="3" height="28"/>
+      <rect x="128" y="10" width="3" height="40"/>
+      <rect x="136" y="20" width="3" height="20"/>
+      <rect x="144" y="22" width="3" height="16"/>
+      <rect x="152" y="18" width="3" height="24"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ════════════ EVENT DETAILS ════════════ -->
+<section id="event">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-tag">Event Details</div>
+    <h2 class="section-title" style="background:linear-gradient(135deg,var(--neon-pink),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+      THE NIGHT AWAITS
+    </h2>
+    <div class="event-grid">
+      <div class="event-card">
+        <span class="event-icon">📅</span>
+        <div class="event-label">Date</div>
+        <div class="event-value">Saturday<br>14th December</div>
+        <div class="event-sub">2025 — A night you'll<br>never forget</div>
+      </div>
+      <div class="event-card">
+        <span class="event-icon">⏰</span>
+        <div class="event-label">Time</div>
+        <div class="event-value">7:00 PM<br>Onwards</div>
+        <div class="event-sub">Doors open at 6:30 PM<br>Arrive early for the best seats</div>
+      </div>
+      <div class="event-card">
+        <span class="event-icon">📍</span>
+        <div class="event-label">Venue</div>
+        <div class="event-value">The Grand<br>Ballroom</div>
+        <div class="event-sub">Hotel Oberoi, Mumbai<br>Level 4 — Crystal Hall</div>
+      </div>
+      <div class="event-card">
+        <span class="event-icon">👗</span>
+        <div class="event-label">Dress Code</div>
+        <div class="event-value">Glam &<br>Festive</div>
+        <div class="event-sub">Traditional, fusion, or<br>semi-formal — look your best!</div>
+      </div>
+      <div class="event-card">
+        <span class="event-icon">🎤</span>
+        <div class="event-label">Entertainment</div>
+        <div class="event-value">Live Band<br>+ DJ Night</div>
+        <div class="event-sub">Bollywood classics, folk,<br>and chart-topping beats</div>
+      </div>
+      <div class="event-card">
+        <span class="event-icon">🍽️</span>
+        <div class="event-label">Includes</div>
+        <div class="event-value">Dinner &<br>Cocktails</div>
+        <div class="event-sub">Live stations, open bar,<br>and midnight dessert spread</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOUNDWAVE DIVIDER 2 -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#00d4ff"/>
+        <stop offset="50%" stop-color="#b400ff"/>
+        <stop offset="100%" stop-color="#ff006e"/>
+      </linearGradient>
+    </defs>
+    <g fill="url(#waveGrad2)" opacity="0.6">
+      <rect x="0" y="15" width="4" height="30"/>
+      <rect x="10" y="8" width="4" height="44"/>
+      <rect x="20" y="20" width="4" height="20"/>
+      <rect x="30" y="5" width="4" height="50"/>
+      <rect x="40" y="18" width="4" height="24"/>
+      <rect x="50" y="12" width="4" height="36"/>
+      <rect x="60" y="25" width="4" height="10"/>
+      <rect x="70" y="10" width="4" height="40"/>
+      <rect x="80" y="20" width="4" height="20"/>
+      <rect x="90" y="15" width="4" height="30"/>
+      <rect x="100" y="7" width="4" height="46"/>
+      <rect x="110" y="22" width="4" height="16"/>
+      <rect x="120" y="18" width="4" height="24"/>
+      <rect x="130" y="28" width="4" height="4"/>
+      <rect x="140" y="12" width="4" height="36"/>
+      <rect x="150" y="20" width="4" height="20"/>
+    </g>
+    <!-- Repeat pattern across width -->
+    <use href="#waveBase" x="160"/>
+    <use href="#waveBase" x="320"/>
+    <use href="#waveBase" x="480"/>
+    <use href="#waveBase" x="640"/>
+    <use href="#waveBase" x="800"/>
+    <use href="#waveBase" x="960"/>
+    <use href="#waveBase" x="1120"/>
+    <use href="#waveBase" x="1280"/>
+  </svg>
+</div>
+
+<!-- ════════════ SCHEDULE ════════════ -->
+<section id="schedule">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="section-tag">Programme</div>
+    <h2 class="section-title" style="background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+      THE LINEUP
+    </h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-time">6:30</div>
+        <div class="timeline-dot blue"></div>
+        <div class="timeline-content blue">
+          <div class="timeline-event-name">Arrival & Cocktails</div>
+          <div class="timeline-desc">Welcome drinks & appetisers. Get those Insta pics in — the backdrop is 🔥</div>
+          <div class="timeline-performers">
+            <span class="performer-tag">DJ Pre-set</span>
+            <span class="performer-tag">Photobooth</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">7:00</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-event-name">Couple's Grand Entry</div>
+          <div class="timeline-desc">{{brideName}} & {{groomName}} make their entrance to a specially choreographed performance</div>
+          <div class="timeline-performers">
+            <span class="performer-tag">Live Band</span>
+            <span class="performer-tag">Pyrotechnics</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">7:30</div>
+        <div class="timeline-dot pink"></div>
+        <div class="timeline-content pink">
+          <div class="timeline-event-name">Family Performances</div>
+          <div class="timeline-desc">The mamas, the papas, and the chaotic cousins — all taking the stage!</div>
+          <div class="timeline-performers">
+            <span class="performer-tag">{{brideName}}'s Squad</span>
+            <span class="performer-tag">{{groomName}}'s Crew</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">8:30</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-event-name">Dinner Begins</div>
+          <div class="timeline-desc">Lavish live counters, regional delicacies, and every dessert you've dreamed of</div>
+          <div class="timeline-performers">
+            <span class="performer-tag">Live Stations</span>
+            <span class="performer-tag">Open Bar</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">9:30</div>
+        <div class="timeline-dot blue"></div>
+        <div class="timeline-content blue">
+          <div class="timeline-event-name">Couple's Dance</div>
+          <div class="timeline-desc">The moment everyone's been waiting for — {{brideName}} & {{groomName}}'s choreographed romantic number</div>
+          <div class="timeline-performers">
+            <span class="performer-tag">Main Event</span>
+            <span class="performer-tag">✨ Surprise ✨</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">10:00</div>
+        <div class="timeline-dot pink"></div>
+        <div class="timeline-content pink">
+          <div class="timeline-event-name">DJ Night Begins</div>
+          <div class="timeline-desc">DJ drops the beat — Bollywood, Punjabi, International. Dance till midnight!</div>
+          <div class="timeline-performers">
+            <span class="performer-tag">DJ Karan</span>
+            <span class="performer-tag">Dance Floor Open</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">12:00</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-event-name">Midnight & Farewell</div>
+          <div class="timeline-desc">Last dance, midnight bites, and a send-off wrapped in neon lights & love</div>
+          <div class="timeline-performers">
+            <span class="performer-tag">Midnight Desserts</span>
+            <span class="performer-tag">Fireworks</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ COUPLE ════════════ -->
+<section id="couple">
+  <div class="section-tag" style="justify-content:center;">Our Story</div>
+  <h2 class="section-title" style="background:linear-gradient(135deg,var(--neon-pink),var(--neon-yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;">
+    {{brideName}} & {{groomName}}
+  </h2>
+
+  <div class="couple-display">
+    <div class="couple-frame left">
+      <div class="couple-frame-inner">
+        <svg viewBox="0 0 200 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- Elegant dance silhouette - woman -->
+          <defs>
+            <linearGradient id="sg1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#b400ff" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#00d4ff" stop-opacity="0.4"/>
+            </linearGradient>
+          </defs>
+          <!-- Woman dancing pose -->
+          <ellipse cx="100" cy="40" rx="22" ry="26" fill="url(#sg1)"/>
+          <!-- body -->
+          <path d="M88 64 Q85 100 80 130 Q90 160 100 165 Q110 160 120 130 Q115 100 112 64" fill="url(#sg1)"/>
+          <!-- skirt flare -->
+          <path d="M80 130 Q60 180 55 240 Q100 220 100 165 Q100 220 145 240 Q140 180 120 130" fill="url(#sg1)" opacity="0.7"/>
+          <!-- raised arm -->
+          <path d="M112 75 Q140 55 155 35" stroke="#b400ff" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <!-- other arm -->
+          <path d="M88 80 Q68 90 55 100" stroke="#00d4ff" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <!-- sparkles -->
+          <circle cx="155" cy="35" r="5" fill="#ffe600" opacity="0.9"/>
+          <circle cx="165" cy="28" r="3" fill="#ff006e" opacity="0.8"/>
+          <circle cx="148" cy="20" r="4" fill="#b400ff" opacity="0.7"/>
+        </svg>
+        <div class="frame-label">{{brideName}}</div>
+      </div>
+    </div>
+
+    <div class="couple-frame center">
+      <div class="couple-frame-inner">
+        <svg viewBox="0 0 200 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sg3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff006e" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#b400ff" stop-opacity="0.6"/>
+            </linearGradient>
+          </defs>
+          <!-- Couple together -->
+          <!-- Man -->
+          <ellipse cx="115" cy="38" rx="20" ry="24" fill="url(#sg3)" opacity="0.8"/>
+          <rect x="103" y="62" width="24" height="70" rx="8" fill="url(#sg3)" opacity="0.8"/>
+          <rect x="103" y="132" width="10" height="70" rx="5" fill="url(#sg3)" opacity="0.7"/>
+          <rect x="117" y="132" width="10" height="70" rx="5" fill="url(#sg3)" opacity="0.7"/>
+          <!-- Woman -->
+          <ellipse cx="72" cy="45" rx="18" ry="22" fill="#b400ff" opacity="0.7"/>
+          <path d="M62 67 Q58 100 55 125 Q65 150 72 155 Q79 150 89 125 Q86 100 82 67" fill="#b400ff" opacity="0.7"/>
+          <path d="M55 125 Q40 175 38 230 Q72 210 72 155 Q72 210 106 230 Q104 175 89 125" fill="#b400ff" opacity="0.5"/>
+          <!-- joined arms -->
+          <path d="M90 80 Q103 90 103 100" stroke="#ff006e" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <!-- heart above -->
+          <path d="M93 15 C93 10, 88 5, 83 10 C78 5, 73 10, 73 15 C73 20, 83 28, 83 28 C83 28, 93 20, 93 15Z" fill="#ff006e" opacity="0.9"/>
+        </svg>
+        <div class="frame-label">Together ♥</div>
+      </div>
+    </div>
+
+    <div class="couple-frame right">
+      <div class="couple-frame-inner">
+        <svg viewBox="0 0 200 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sg2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#b400ff" stop-opacity="0.4"/>
+            </linearGradient>
+          </defs>
+          <!-- Man dancing pose -->
+          <ellipse cx="100" cy="40" rx="22" ry="26" fill="url(#sg2)"/>
+          <rect x="88" y="64" width="24" height="75" rx="8" fill="url(#sg2)"/>
+          <!-- legs in stride -->
+          <path d="M88 139 Q75 185 70 240" stroke="#00d4ff" stroke-width="16" stroke-linecap="round" fill="none"/>
+          <path d="M112 139 Q125 175 130 230" stroke="#b400ff" stroke-width="16" stroke-linecap="round" fill="none"/>
+          <!-- arms out -->
+          <path d="M112 80 Q145 65 165 55" stroke="#00d4ff" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M88 85 Q58 75 40 80" stroke="#b400ff" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <!-- sparkles -->
+          <circle cx="40" cy="80" r="5" fill="#00d4ff" opacity="0.9"/>
+          <circle cx="32" cy="70" r="3" fill="#ffe600" opacity="0.8"/>
+          <circle cx="165" cy="55" r="5" fill="#b400ff" opacity="0.9"/>
+        </svg>
+        <div class="frame-label">{{groomName}}</div>
+      </div>
+    </div>
+  </div>
+
+  <blockquote class="couple-quote" style="margin:0 auto;">
+    "Two souls who found each other in the chaos of a crowded dance floor — and never stopped dancing since. Join us as we celebrate love, music, and the beginning of forever."
+  </blockquote>
+</section>
+
+<!-- SOUNDWAVE DIVIDER 3 -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="waveGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ff006e"/>
+        <stop offset="50%" stop-color="#ffe600"/>
+        <stop offset="100%" stop-color="#b400ff"/>
+      </linearGradient>
+    </defs>
+    <g fill="url(#waveGrad3)" opacity="0.7">
+      <rect x="5" y="10" width="5" height="40"/>
+      <rect x="15" y="18" width="5" height="24"/>
+      <rect x="25" y="5" width="5" height="50"/>
+      <rect x="35" y="22" width="5" height="16"/>
+      <rect x="45" y="14" width="5" height="32"/>
+      <rect x="55" y="8" width="5" height="44"/>
+      <rect x="65" y="20" width="5" height="20"/>
+      <rect x="75" y="26" width="5" height="8"/>
+      <rect x="85" y="12" width="5" height="36"/>
+      <rect x="95" y="18" width="5" height="24"/>
+      <rect x="105" y="6" width="5" height="48"/>
+      <rect x="115" y="22" width="5" height="16"/>
+      <rect x="125" y="16" width="5" height="28"/>
+      <rect x="135" y="10" width="5" height="40"/>
+      <rect x="145" y="24" width="5" height="12"/>
+      <rect x="155" y="20" width="5" height="20"/>
+    </g>
+    <!-- Repeat across -->
+    <g fill="url(#waveGrad3)" opacity="0.7" transform="translate(170,0)"><rect x="5" y="10" width="5" height="40"/><rect x="15" y="18" width="5" height="24"/><rect x="25" y="5" width="5" height="50"/><rect x="35" y="22" width="5" height="16"/><rect x="45" y="14" width="5" height="32"/><rect x="55" y="8" width="5" height="44"/><rect x="65" y="20" width="5" height="20"/><rect x="75" y="26" width="5" height="8"/><rect x="85" y="12" width="5" height="36"/><rect x="95" y="18" width="5" height="24"/><rect x="105" y="6" width="5" height="48"/><rect x="115" y="22" width="5" height="16"/><rect x="125" y="16" width="5" height="28"/><rect x="135" y="10" width="5" height="40"/><rect x="145" y="24" width="5" height="12"/><rect x="155" y="20" width="5" height="20"/></g>
+    <g fill="url(#waveGrad3)" opacity="0.7" transform="translate(340,0)"><rect x="5" y="10" width="5" height="40"/><rect x="15" y="18" width="5" height="24"/><rect x="25" y="5" width="5" height="50"/><rect x="35" y="22" width="5" height="16"/><rect x="45" y="14" width="5" height="32"/><rect x="55" y="8" width="5" height="44"/><rect x="65" y="20" width="5" height="20"/><rect x="75" y="26" width="5" height="8"/><rect x="85" y="12" width="5" height="36"/><rect x="95" y="18" width="5" height="24"/><rect x="105" y="6" width="5" height="48"/><rect x="115" y="22" width="5" height="16"/><rect x="125" y="16" width="5" height="28"/><rect x="135" y="10" width="5" height="40"/><rect x="145" y="24" width="5" height="12"/><rect x="155" y="20" width="5" height="20"/></g>
+    <g fill="url(#waveGrad3)" opacity="0.7" transform="translate(510,0)"><rect x="5" y="10" width="5" height="40"/><rect x="15" y="18" width="5" height="24"/><rect x="25" y="5" width="5" height="50"/><rect x="35" y="22" width="5" height="16"/><rect x="45" y="14" width="5" height="32"/><rect x="55" y="8" width="5" height="44"/><rect x="65" y="20" width="5" height="20"/><rect x="75" y="26" width="5" height="8"/><rect x="85" y="12" width="5" height="36"/><rect x="95" y="18" width="5" height="24"/><rect x="105" y="6" width="5" height="48"/><rect x="115" y="22" width="5" height="16"/><rect x="125" y="16" width="5" height="28"/><rect x="135" y="10" width="5" height="40"/><rect x="145" y="24" width="5" height="12"/><rect x="155" y="20" width="5" height="20"/></g>
+    <g fill="url(#waveGrad3)" opacity="0.7" transform="translate(680,0)"><rect x="5" y="10" width="5" height="40"/><rect x="15" y="18" width="5" height="24"/><rect x="25" y="5" width="5" height="50"/><rect x="35" y="22" width="5" height="16"/><rect x="45" y="14" width="5" height="32"/><rect x="55" y="8" width="5" height="44"/><rect x="65" y="20" width="5" height="20"/><rect x="75" y="26" width="5" height="8"/><rect x="85" y="12" width="5" height="36"/><rect x="95" y="18" width="5" height="24"/><rect x="105" y="6" width="5" height="48"/><rect x="115" y="22" width="5" height="16"/><rect x="125" y="16" width="5" height="28"/><rect x="135" y="10" width="5" height="40"/><rect x="145" y="24" width="5" height="12"/><rect x="155" y="20" width="5" height="20"/></g>
+    <g fill="url(#waveGrad3)" opacity="0.7" transform="translate(850,0)"><rect x="5" y="10" width="5" height="40"/><rect x="15" y="18" width="5" height="24"/><rect x="25" y="5" width="5" height="50"/><rect x="35" y="22" width="5" height="16"/><rect x="45" y="14" width="5" height="32"/><rect x="55" y="8" width="5" height="44"/><rect x="65" y="20" width="5" height="20"/><rect x="75" y="26" width="5" height="8"/><rect x="85" y="12" width="5" height="36"/><rect x="95" y="18" width="5" height="24"/><rect x="105" y="6" width="5" height="48"/><rect x="115" y="22" width="5" height="16"/><rect x="125" y="16" width="5" height="28"/><rect x="135" y="10" width="5" height="40"/><rect x="145" y="24" width="5" height="12"/><rect x="155" y="20" width="5" height="20"/></g>
+    <g fill="url(#waveGrad3)" opacity="0.7" transform="translate(1020,0)"><rect x="5" y="10" width="5" height="40"/><rect x="15" y="18" width="5" height="24"/><rect x="25" y="5" width="5" height="50"/><rect x="35" y="22" width="5" height="16"/><rect x="45" y="14" width="5" height="32"/><rect x="55" y="8" width="5" height="44"/><rect x="65" y="20" width="5" height="20"/><rect x="75" y="26" width="5" height="8"/><rect x="85" y="12" width="5" height="36"/><rect x="95" y="18" width="5" height="24"/><rect x="105" y="6" width="5" height="48"/><rect x="115" y="22" width="5" height="16"/><rect x="125" y="16" width="5" height="28"/><rect x="135" y="10" width="5" height="40"/><rect x="145" y="24" width="5" height="12"/><rect x="155" y="20" width="5" height="20"/></g>
+    <g fill="url(#waveGrad3)" opacity="0.7" transform="translate(1190,0)"><rect x="5" y="10" width="5" height="40"/><rect x="15" y="18" width="5" height="24"/><rect x="25" y="5" width="5" height="50"/><rect x="35" y="22" width="5" height="16"/><rect x="45" y="14" width="5" height="32"/><rect x="55" y="8" width="5" height="44"/><rect x="65" y="20" width="5" height="20"/><rect x="75" y="26" width="5" height="8"/><rect x="85" y="12" width="5" height="36"/><rect x="95" y="18" width="5" height="24"/><rect x="105" y="6" width="5" height="48"/><rect x="115" y="22" width="5" height="16"/><rect x="125" y="16" width="5" height="28"/><rect x="135" y="10" width="5" height="40"/><rect x="145" y="24" width="5" height="12"/><rect x="155" y="20" width="5" height="20"/></g>
+  </svg>
+</div>
+
+<!-- ════════════ RSVP ════════════ -->
+<section id="rsvp">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="section-tag">Confirm Attendance</div>
+    <h2 class="section-title" style="background:linear-gradient(135deg,var(--neon-purple),var(--neon-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+      RSVP NOW
+    </h2>
+    <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:40px;line-height:1.8;max-width:480px;">
+      Please confirm your attendance by <strong style="color:var(--neon-pink);">1st December 2025</strong>. 
+      We can't wait to dance the night away with you! 🎉
+    </p>
+
+    <div class="rsvp-container">
+      <div id="rsvpForm">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input class="form-input" type="text" placeholder="Full Name" id="rsvpName">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX" id="rsvpPhone">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="your@email.com" id="rsvpEmail">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div class="form-group">
+            <label class="form-label">Attending?</label>
+            <select class="form-select" id="rsvpAttend">
+              <option value="">Select...</option>
+              <option value="yes">🎉 Absolutely Yes!</option>
+              <option value="maybe">🤔 Maybe</option>
+              <option value="no">😢 Can't Make It</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Number of Guests</label>
+            <select class="form-select" id="rsvpGuests">
+              <option value="1">Just Me (1)</option>
+              <option value="2">2 People</option>
+              <option value="3">3 People</option>
+              <option value="4">4 People</option>
+              <option value="5+">5+ People</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Special Message / Dietary Requirements</label>
+          <textarea class="form-textarea" placeholder="Share a message for {{brideName}} & {{groomName}}, or let us know about any dietary needs..." id="rsvpMessage"></textarea>
+        </div>
+        <button class="rsvp-btn" onclick="submitRSVP()">✦ CONFIRM MY SPOT ✦</button>
+      </div>
+      <div class="rsvp-success" id="rsvpSuccess">
+        <div style="font-size:3rem;margin-bottom:16px;">🎉</div>
+        <div>You're on the list!</div>
+        <div style="font-size:0.75rem;font-family:'Space Mono',monospace;color:rgba(255,255,255,0.5);margin-top:12px;letter-spacing:2px;">We'll see you on the dance floor ✨</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ COUNTDOWN ════════════ -->
+<section id="countdown">
+  <div class="section-tag" style="justify-content:center;">The Moment Approaches</div>
+  <h2 class="section-title" style="background:linear-gradient(135deg,var(--neon-yellow),var(--neon-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+    COUNTING DOWN
+  </h2>
+  <p style="color:rgba(255,255,255,0.4);font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;">
+    Until Sangeet Night
+  </p>
+
+  <div class="countdown-display">
+    <div class="countdown-unit">
+      <span class="countdown-number" id="cdDays">00</span>
+      <div class="countdown-label">Days</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <span class="countdown-number" id="cdHours">00</span>
+      <div class="countdown-label">Hours</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <span class="countdown-number" id="cdMins">00</span>
+      <div class="countdown-label">Minutes</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <span class="countdown-number" id="cdSecs">00</span>
+      <div class="countdown-label">Seconds</div>
+    </div>
+  </div>
+
+  <div style="margin-top:64px;padding:32px;border:1px solid rgba(255,255,255,0.06);max-width:500px;margin-left:auto;margin-right:auto;margin-top:64px;">
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,0.7);text-align:center;line-height:1.8;">
+      "Dance like nobody's watching,<br>love like you've never been hurt."
+    </div>
+    <div style="text-align:center;margin-top:16px;font-size:0.65rem;letter-spacing:4px;color:var(--neon-purple);text-transform:uppercase;">
+      — Mark Twain
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <div class="footer-logo">P ✦ A</div>
+  <div class="footer-names">{{brideName}} Sharma & {{groomName}} Kapoor</div>
+  <div class="footer-date">Saturday, 14th December 2025</div>
+  <div style="display:flex;justify-content:center;gap:32px;margin-bottom:40px;flex-wrap:wrap;">
+    <a href="#hero" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;" onmouseover="this.style.color='#b400ff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Hero</a>
+    <a href="#event" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;" onmouseover="this.style.color='#ff006e'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Event</a>
+    <a href="#schedule" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Schedule</a>
+    <a href="#couple" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;" onmouseover="this.style.color='#b400ff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Couple</a>
+    <a href="#rsvp" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;" onmouseover="this.style.color='#ff006e'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">RSVP</a>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-note">Made with 💜 for the most awaited night of the year · Hotel Oberoi, Mumbai</div>
+</footer>
+
+<script>
+// ── CUSTOM CURSOR ──
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+    cursorRing.style.width = '60px';
+    cursorRing.style.height = '60px';
+    cursorRing.style.borderColor = 'var(--neon-pink)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    cursorRing.style.width = '36px';
+    cursorRing.style.height = '36px';
+    cursorRing.style.borderColor = 'var(--neon-blue)';
+  });
+});
+
+// ── PARTICLES CANVAS ──
+const canvas = document.getElementById('particlesCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const colors = ['#b400ff', '#00d4ff', '#ff006e', '#ffe600'];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    size: Math.random() * 2.5 + 0.5,
+    speedX: (Math.random() - 0.5) * 0.5,
+    speedY: (Math.random() - 0.5) * 0.5,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    opacity: Math.random() * 0.6 + 0.1,
+    pulse: Math.random() * Math.PI * 2
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.pulse += 0.02;
+    const alpha = p.opacity * (0.7 + 0.3 * Math.sin(p.pulse));
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = alpha;
+    ctx.fill();
+    // Glow
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = p.color;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ── FLOATING MUSIC NOTES ──
+const noteContainer = document.getElementById('musicNotes');
+const noteChars = ['♩', '♪', '♫', '♬', '𝄞', '🎵', '🎶'];
+const noteColors = ['#b400ff', '#00d4ff', '#ff006e', '#ffe600'];
+
+for (let i = 0; i < 20; i++) {
+  const note = document.createElement('div');
+  note.className = 'note';
+  note.textContent = noteChars[Math.floor(Math.random() * noteChars.length)];
+  note.style.left = Math.random() * 100 + 'vw';
+  note.style.color = noteColors[Math.floor(Math.random() * noteColors.length)];
+  note.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
+  note.style.animationDuration = (Math.random() * 15 + 10) + 's';
+  note.style.animationDelay = (Math.random() * 10) + 's';
+  note.style.textShadow = '0 0 10px currentColor';
+  noteContainer.appendChild(note);
+}
+
+// ── COUNTDOWN ──
+function updateCountdown() {
+  const eventDate = new Date('2025-12-14T19:00:00');
+  const now = new Date();
+  let diff = eventDate - now;
+
+  if (diff <= 0) {
+    document.getElementById('cdDays').textContent = '00';
+    document.getElementById('cdHours').textContent = '00';
+    document.getElementById('cdMins').textContent = '00';
+    document.getElementById('cdSecs').textContent = '00';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+  const set = (id, val) => {
+    const el = document.getElementById(id);
+    const newVal = String(val).padStart(2, '0');
+    if (el.textContent !== newVal) {
+      el.classList.add('pulse');
+      setTimeout(() => el.classList.remove('pulse'), 300);
+    }
+    el.textContent = newVal;
+  };
+
+  set('cdDays', days);
+  set('cdHours', hours);
+  set('cdMins', mins);
+  set('cdSecs', secs);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── RSVP ──
+function submitRSVP() {
+  const name = document.getElementById('rsvpName').value;
+  const attend = document.getElementById('rsvpAttend').value;
+
+  if (!name.trim()) {
+    document.getElementById('rsvpName').style.borderColor = '#ff006e';
+    document.getElementById('rsvpName').style.boxShadow = '0 0 0 2px rgba(255,0,110,0.2)';
+    setTimeout(() => {
+      document.getElementById('rsvpName').style.borderColor = '';
+      document.getElementById('rsvpName').style.boxShadow = '';
+    }, 2000);
+    return;
+  }
+
+  document.getElementById('rsvpForm').style.display = 'none';
+  const success = document.getElementById('rsvpSuccess');
+  success.style.display = 'block';
+  if (attend === 'yes') {
+    success.querySelector('div').textContent = '🎉';
+    success.querySelector('div:nth-child(2)').textContent = `${name}, you're on the guest list!`;
+  } else if (attend === 'no') {
+    success.querySelector('div').textContent = '😢';
+    success.querySelector('div:nth-child(2)').textContent = `${name}, we'll miss you!`;
+  } else {
+    success.querySelector('div').textContent = '✨';
+    success.querySelector('div:nth-child(2)').textContent = `Thanks ${name}, we'll keep a spot for you!`;
+  }
+
+  // Confetti burst
+  createConfetti();
+}
+
+function createConfetti() {
+  const confettiColors = ['#b400ff', '#00d4ff', '#ff006e', '#ffe600', '#fff'];
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement('div');
+    el.style.cssText = `
+      position:fixed;
+      width:${Math.random() * 8 + 4}px;
+      height:${Math.random() * 8 + 4}px;
+      background:${confettiColors[Math.floor(Math.random() * confettiColors.length)]};
+      left:${Math.random() * 100}vw;
+      top:${Math.random() * 40 + 30}%;
+      border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
+      pointer-events:none;
+      z-index:9999;
+      animation:confettiFall ${Math.random() * 2 + 1.5}s ease forwards;
+      opacity:1;
+      transform:rotate(${Math.random() * 360}deg);
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+  }
+}
+
+// Add confetti animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(250px) rotate(720deg); opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
+
+// ── SCROLL ANIMATIONS ──
+const observerOpts = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOpts);
+
+document.querySelectorAll('.event-card, .timeline-item, .couple-frame').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>

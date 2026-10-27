@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Evening of Revelry | Wedding Invitation</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;700&family=IM+Fell+English:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & VARIABLES
+           ========================================================================== */
+        :root {
+            /* Color Palette */
+            --black-ink:        #080808;
+            --black-rich:       #111111;
+            --black-warm:       #1A1810;
+            --black-velvet:     #0D0C0A;
+            --gold-bright:      #D4AF37;
+            --gold-rich:        #C9922A;
+            --gold-light:       #E8C96A;
+            --gold-pale:        #F0DFA0;
+            --gold-dim:         #8A6F2E;
+            --gold-antique:     #B8974E;
+            --champagne:        #F7E7C6;
+            --champagne-dark:   #E8D4A8;
+            --champagne-deep:   #D4B87A;
+            --ivory:            #FDF6E3;
+            --sepia-light:      #C4A882;
+            --sepia-mid:        #8B6914;
+            --sepia-dark:       #4A3410;
+            --cream:            #FAF0DC;
+            --white-pearl:      #FEFCF8;
+
+            /* Fluid Typography */
+            --text-xs:          clamp(0.7rem, 1vw, 0.8rem);
+            --text-sm:          clamp(0.85rem, 1.5vw, 0.95rem);
+            --text-base:        clamp(1rem, 2vw, 1.1rem);
+            --text-md:          clamp(1.2rem, 2.5vw, 1.5rem);
+            --text-lg:          clamp(1.6rem, 3.5vw, 2.2rem);
+            --text-xl:          clamp(2.5rem, 5vw, 3.8rem);
+            --text-hero:        clamp(3.5rem, 8vw, 6.5rem);
+        }
+
+        /* ==========================================================================
+           2. GLOBAL RESETS & TYPOGRAPHY
+           ========================================================================== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background-color: var(--black-ink);
+            color: var(--champagne);
+            font-family: 'Playfair Display', serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography Classes */
+        .cinzel-dec { font-family: 'Cinzel Decorative', serif; }
+        .cinzel { font-family: 'Cinzel', serif; text-transform: uppercase; }
+        .playfair { font-family: 'Playfair Display', serif; }
+        .playfair-italic { font-family: 'Playfair Display', serif; font-style: italic; }
+        .fell-english { font-family: 'IM Fell English', serif; }
+
+        .gold-gradient-text {
+            background: linear-gradient(180deg, var(--gold-light), var(--gold-rich));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .letter-spaced-sm { letter-spacing: 0.15em; }
+        .letter-spaced-md { letter-spacing: 0.25em; }
+        .letter-spaced-lg { letter-spacing: 0.4em; }
+
+        /* ==========================================================================
+           3. BACKGROUND & PARTICLES
+           ========================================================================== */
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2; pointer-events: none;
+        }
+
+        #particles-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 1; pointer-events: none;
+        }
+
+        /* Diamond Grid Overlay */
+        .diamond-grid {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(45deg, rgba(212,175,55,0.04) 1px, transparent 1px), 
+                              linear-gradient(-45deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ==========================================================================
+           4. DIVIDERS & ORNAMENTS
+           ========================================================================== */
+        /* Type A — Grand Horizontal Rule */
+        .divider-type-a {
+            display: flex; align-items: center; justify-content: center;
+            width: min(600px, 80vw); margin: 3rem auto;
+        }
+        .divider-type-a .line-group { flex: 1; height: 6px; position: relative; }
+        .divider-type-a .line-group::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gold-rich); }
+        .divider-type-a .line-group::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0.5px; background: var(--gold-bright); }
+        .divider-type-a .diamond { color: var(--gold-rich); font-size: 0.9rem; margin: 0 1rem; }
+
+        /* Type B — Ornamental Bar */
+        .divider-type-b {
+            display: flex; align-items: center; justify-content: center;
+            margin: 2rem auto; width: 80%; max-width: 400px;
+        }
+        .divider-type-b::before, .divider-type-b::after { content: ''; flex: 1; height: 1px; background: var(--gold-dim); }
+        .divider-type-b .ornament { color: var(--gold-rich); font-size: 0.6rem; margin: 0 15px; display: flex; gap: 15px; }
+
+        /* Type C — Full-page geometric band */
+        .divider-type-c {
+            width: 100%; height: 32px;
+            border-top: 1px solid var(--gold-rich); border-bottom: 2px solid var(--gold-rich);
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212,175,55,0.12) 10px, rgba(212,175,55,0.12) 20px);
+            margin: 0;
+        }
+
+        /* ==========================================================================
+           5. SECTIONS
+           ========================================================================== */
+        section {
+            position: relative;
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Section 1: Hero */
+        #hero {
+            min-height: 100vh;
+            height: auto;
+            padding: 80px 20px 60px;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+            overflow: visible;
+        }
+        .hero-frame-line {
+            display: none;
+        }
+        
+        .hero-names { font-size: var(--text-hero); line-height: 1.1; margin: 0.8rem 0; }
+        .hero-and { font-size: var(--text-lg); color: var(--champagne); margin: -6px 0; display: block; }
+        
+        .scroll-cue { 
+            position: relative;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: var(--text-sm);
+            color: var(--gold-bright);
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 60px 16px !important;
+                overflow: visible !important;
+            }
+            #hero {
+                min-height: 100vh;
+                height: auto;
+                padding: 70px 16px 40px !important;
+                overflow: visible !important;
+            }
+            #hero .cinzel-dec.letter-spaced-md {
+                font-size: 1.3rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            #hero .divider-type-b {
+                margin: 0.8rem auto !important;
+            }
+            #hero div[style*="margin-bottom: 2rem"] {
+                margin-bottom: 0.8rem !important;
+            }
+            #hero div[style*="margin: 0 auto 2rem"] {
+                margin: 0 auto 0.8rem !important;
+            }
+            #hero div[style*="margin: 2rem auto"] {
+                margin: 0.8rem auto !important;
+            }
+            #hero .hero-names {
+                font-size: clamp(2rem, 7vw, 3rem) !important;
+                margin: 0.4rem 0 !important;
+            }
+            #hero .hero-and {
+                font-size: 1.1rem !important;
+                margin: -4px 0 !important;
+            }
+            .scroll-cue {
+                margin-top: 1rem !important;
+            }
+        }
+
+        /* Section 2: Blessings */
+        #blessings {
+            background-color: var(--black-warm);
+            background-image: repeating-linear-gradient(45deg, rgba(212,175,55,0.02) 0px, rgba(212,175,55,0.02) 1px, transparent 1px, transparent 20px);
+        }
+        .blessing-content { max-width: 800px; margin: 0 auto; padding: 0 40px; }
+        .drop-cap {
+            float: left; font-size: 5rem; line-height: 0.8; margin-right: 12px; margin-top: 5px;
+            color: var(--gold-rich);
+        }
+        .blessing-quote { font-size: var(--text-lg); line-height: 1.9; color: var(--champagne); text-align: left; margin-bottom: 2rem;}
+        .family-grid { display: flex; justify-content: space-around; width: 100%; max-width: 900px; margin-top: 2rem; gap: 2rem;}
+        .family-col h4 { border-bottom: 1px solid var(--gold-dim); padding-bottom: 5px; margin-bottom: 1rem; }
+        @media (max-width: 768px) { .family-grid { flex-direction: column; } }
+
+        /* Section 3: Events */
+        #events { background-color: var(--black-ink); }
+        .events-grid { display: flex; gap: 2rem; max-width: 1200px; width: 100%; margin-top: 4rem; flex-wrap: wrap; justify-content: center; }
+        .event-card {
+            background: var(--black-warm); flex: 1; min-width: 300px; max-width: 380px;
+            padding: 48px 36px; border: 1px solid rgba(212,175,55,0.3);
+            box-shadow: inset 0 0 0 6px rgba(212,175,55,0.08), inset 0 0 0 8px transparent;
+            transition: 0.4s ease; position: relative;
+        }
+        .event-card:hover {
+            box-shadow: 0 0 40px rgba(212,175,55,0.2), inset 0 0 0 2px rgba(212,175,55,0.5);
+        }
+        .event-card.centerpiece { padding: 60px 36px; border-color: rgba(212,175,55,0.6); box-shadow: 0 0 30px rgba(212,175,55,0.15), inset 0 0 0 6px rgba(212,175,55,0.12); }
+        .event-num { font-size: var(--text-xl); margin-bottom: 1rem; border-bottom: 1px solid var(--gold-dim); padding-bottom: 10px; }
+        .corner-star { position: absolute; width: 12px; height: 12px; transition: 0.4s ease; }
+        .corner-star path { fill: var(--gold-rich); }
+        .cs-tl { top: 12px; left: 12px; } .cs-tr { top: 12px; right: 12px; }
+        .cs-bl { bottom: 12px; left: 12px; } .cs-br { bottom: 12px; right: 12px; }
+        .event-card:hover .corner-star { transform: scale(1.4); }
+
+        /* Section 4: The Couple */
+        #couple { background-color: var(--black-warm); }
+        .couple-grid { display: flex; gap: 4rem; justify-content: center; align-items: center; margin-top: 4rem; flex-wrap: wrap; }
+        .photo-frame {
+            position: relative; width: 280px; padding: 12px;
+            border: 2px solid var(--gold-rich);
+        }
+        .photo-frame::before { content: ''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px; border: 0.5px solid var(--gold-bright); }
+        .photo-frame::after { content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; border: 1px solid var(--gold-rich); pointer-events: none; }
+        .photo-area {
+            width: 100%; height: 340px; background: linear-gradient(180deg, var(--sepia-light), var(--sepia-mid));
+            filter: sepia(100%) contrast(1.1) brightness(0.9) saturate(0.8);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .photo-initial { font-size: 4rem; color: var(--sepia-dark); opacity: 0.5; }
+        .nameplate {
+            background: rgba(212,175,55,0.15); border: 1px solid var(--gold-rich);
+            margin: -20px auto 0; width: 80%; padding: 8px 0; position: relative; z-index: 2;
+        }
+        .couple-divider { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .couple-divider .rings { width: 80px; height: 80px; border: 1px solid var(--gold-rich); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; }
+
+        /* Section 5: RSVP */
+        #rsvp { background-color: var(--black-velvet); }
+        .rsvp-form { max-width: 600px; width: 100%; margin-top: 3rem; text-align: left; z-index: 2;}
+        .form-group { margin-bottom: 2rem; }
+        .form-label { display: block; font-size: var(--text-xs); color: var(--gold-rich); margin-bottom: 8px; }
+        .form-input {
+            width: 100%; background: rgba(212,175,55,0.04); border: 1px solid rgba(212,175,55,0.3);
+            color: var(--champagne); font-family: 'Playfair Display', serif; font-size: var(--text-base);
+            padding: 12px 16px; border-radius: 0; outline: none; transition: 0.3s;
+        }
+        .form-input:focus { border-color: rgba(212,175,55,0.8); box-shadow: inset 0 0 0 1px rgba(212,175,55,0.3); }
+        
+        .toggle-row { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;}
+        .toggle-card {
+            flex: 1; border: 1px solid var(--gold-rich); padding: 20px; text-align: center; cursor: pointer;
+            transition: 0.3s; position: relative; min-width: 140px;
+        }
+        .toggle-card.active { background: rgba(212,175,55,0.12); border-color: var(--gold-bright); }
+        
+        .submit-btn {
+            width: 100%; height: 64px; background: linear-gradient(180deg, var(--gold-light), var(--gold-rich));
+            color: var(--black-ink); font-size: 0.9rem; border: none; cursor: pointer;
+            position: relative; overflow: hidden; transition: 0.3s; margin-top: 1rem;
+        }
+        .submit-btn:hover { box-shadow: 0 0 30px rgba(212,175,55,0.4); background: linear-gradient(180deg, var(--gold-rich), var(--gold-light));}
+
+        /* Section 6: Details */
+        #details { background-color: var(--black-warm); }
+        .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; width: 100%; margin-top: 4rem; }
+        .detail-card {
+            background: var(--black-velvet); padding: 44px; border-radius: 0;
+            outline: 1px solid rgba(212,175,55,0.4); outline-offset: -1px;
+            position: relative;
+        }
+        .detail-card::after { content: ''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 1px solid rgba(212,175,55,0.15); pointer-events: none;}
+        .detail-icon { width: 40px; height: 40px; margin-bottom: 20px; stroke: var(--gold-rich); fill: none; stroke-width: 1.5; }
+        .palette-row { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
+        .color-dot { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--gold-dim); }
+
+        /* Section 7: Countdown */
+        #countdown { background-color: var(--black-ink); padding: 120px 20px; }
+        .clock-container {
+            display: flex; gap: 1.5rem; justify-content: center; align-items: center; margin-top: 3rem;
+            position: relative; padding: 40px; border: 1px solid rgba(212,175,55,0.2);
+        }
+        .clock-block { display: flex; flex-direction: column; align-items: center; }
+        .flip-card {
+            position: relative; width: 100px; height: 120px; background: var(--black-warm);
+            border: 2px solid rgba(212,175,55,0.5); perspective: 1000px; box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+            border-radius: 0;
+        }
+        .flip-half {
+            position: absolute; width: 100%; height: 50%; left: 0; overflow: hidden;
+            display: flex; justify-content: center; background: #111;
+        }
+        .flip-top { top: 0; align-items: flex-end; transform-origin: bottom; border-bottom: 1px solid rgba(212,175,55,0.6); }
+        .flip-bottom { bottom: 0; align-items: flex-start; transform-origin: top; background: var(--black-velvet); }
+        .flip-num { font-size: 3.5rem; color: var(--gold-bright); line-height: 0; }
+        .flip-top .flip-num { transform: translateY(50%); }
+        .flip-bottom .flip-num { transform: translateY(-50%); }
+        .clock-colon { font-size: 2rem; color: var(--gold-rich); animation: pulse 1s infinite; }
+        
+        .progress-bar { width: 100%; max-width: 400px; height: 1px; background: rgba(212,175,55,0.2); margin: 3rem auto 1rem; position: relative; }
+        .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--gold-bright); width: 10%; } /* Static width for demo */
+
+        @media (max-width: 600px) {
+            .clock-container { flex-wrap: wrap; padding: 20px; }
+            .flip-card { width: 70px; height: 90px; }
+            .flip-num { font-size: 2.5rem; }
+        }
+
+        /* Section 8: Footer */
+        #footer { position: relative; padding: 150px 20px 50px; background-color: var(--black-ink); }
+        .footer-sunburst {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: min(500px, 80vw); height: min(500px, 80vw); opacity: 0.12; pointer-events: none;
+            background: conic-gradient(from 0deg, transparent 0deg 5deg, var(--gold-bright) 5deg 10deg, transparent 10deg 15deg, var(--gold-bright) 15deg 20deg, transparent 20deg 25deg, var(--gold-bright) 25deg 30deg, transparent 30deg 35deg, var(--gold-bright) 35deg 40deg, transparent 40deg 45deg, var(--gold-bright) 45deg 50deg, transparent 50deg 55deg, var(--gold-bright) 55deg 60deg, transparent 60deg 65deg, var(--gold-bright) 65deg 70deg, transparent 70deg 75deg, var(--gold-bright) 75deg 80deg, transparent 80deg 85deg, var(--gold-bright) 85deg 90deg, transparent 90deg 95deg, var(--gold-bright) 95deg 100deg, transparent 100deg 105deg, var(--gold-bright) 105deg 110deg, transparent 110deg 115deg, var(--gold-bright) 115deg 120deg, transparent 120deg 125deg, var(--gold-bright) 125deg 130deg, transparent 130deg 135deg, var(--gold-bright) 135deg 140deg, transparent 140deg 145deg, var(--gold-bright) 145deg 150deg, transparent 150deg 155deg, var(--gold-bright) 155deg 160deg, transparent 160deg 165deg, var(--gold-bright) 165deg 170deg, transparent 170deg 175deg, var(--gold-bright) 175deg 180deg, transparent 180deg 185deg, var(--gold-bright) 185deg 190deg, transparent 190deg 195deg, var(--gold-bright) 195deg 200deg, transparent 200deg 205deg, var(--gold-bright) 205deg 210deg, transparent 210deg 215deg, var(--gold-bright) 215deg 220deg, transparent 220deg 225deg, var(--gold-bright) 225deg 230deg, transparent 230deg 235deg, var(--gold-bright) 235deg 240deg, transparent 240deg 245deg, var(--gold-bright) 245deg 250deg, transparent 250deg 255deg, var(--gold-bright) 255deg 260deg, transparent 260deg 265deg, var(--gold-bright) 265deg 270deg, transparent 270deg 275deg, var(--gold-bright) 275deg 280deg, transparent 280deg 285deg, var(--gold-bright) 285deg 290deg, transparent 290deg 295deg, var(--gold-bright) 295deg 300deg, transparent 300deg 305deg, var(--gold-bright) 305deg 310deg, transparent 310deg 315deg, var(--gold-bright) 315deg 320deg, transparent 320deg 325deg, var(--gold-bright) 325deg 330deg, transparent 330deg 335deg, var(--gold-bright) 335deg 340deg, transparent 340deg 345deg, var(--gold-bright) 345deg 350deg, transparent 350deg 355deg, var(--gold-bright) 355deg 360deg);
+            border-radius: 50%; mask-image: radial-gradient(black, transparent); -webkit-mask-image: radial-gradient(black, transparent);
+            animation: rotateSlow 120s linear infinite;
+        }
+        .monogram-medallion { width: 120px; height: 120px; border: 2px solid var(--gold-rich); display: flex; justify-content: center; align-items: center; margin: 0 auto; outline: 1px solid var(--gold-bright); outline-offset: 4px; transform: rotate(45deg); margin-bottom: 3rem;}
+        .monogram-medallion > div { transform: rotate(-45deg); }
+
+        /* ==========================================================================
+           6. ANIMATIONS & UTILITIES
+           ========================================================================== */
+        @keyframes rotateSlow { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+        @keyframes drawLine { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+        
+        .animate-line { animation: drawLine 1.2s ease-out forwards; }
+        
+        .fade-text { opacity: 0; letter-spacing: 0.6em; transition: opacity 1.5s ease-out, letter-spacing 1.5s ease-out; }
+        .fade-text.in-view { opacity: 1; letter-spacing: normal; }
+        .fade-text.cinzel.in-view { letter-spacing: 0.3em; } /* Preserve intended spacing */
+
+        .fade-up { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
+        .fade-up.in-view { opacity: 1; transform: translateY(0); }
+
+        /* Particle CSS */
+        .particle { position: absolute; background: var(--gold-bright); border-radius: 50%; will-change: transform, opacity; }
+        .p-sparkle { width: 8px; height: 8px; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation: p-twinkle ease-in-out infinite alternate; }
+        .p-mote { animation: p-drift linear infinite; }
+        .p-streak { width: 1px; border-radius: 0; background: linear-gradient(180deg, transparent, var(--gold-bright), transparent); animation: p-fall linear infinite; }
+
+        @keyframes p-twinkle { 0% { opacity: 0.2; transform: translateY(-4px); } 100% { opacity: 1; transform: translateY(4px); } }
+        @keyframes p-drift { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.5; } 100% { transform: translate(30px, -80px); opacity: 0; } }
+        @keyframes p-fall { 0% { transform: translate(0, -20px) rotate(45deg); opacity: 0; } 20% { opacity: 0.4; } 80% { opacity: 0.4; } 100% { transform: translate(20px, 60px) rotate(45deg); opacity: 0; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+            #particles-overlay { display: none; }
+            .fade-text, .fade-up { opacity: 1; transform: none; letter-spacing: inherit; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="diamond-grid"></div>
+    <div id="particles-overlay"></div>
+
+    <section id="hero">
+        <svg id="bg-canvas" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <line x1="50" y1="100" x2="10" y2="0" stroke="rgba(212,175,55,0.4)" stroke-width="0.1" />
+            <line x1="50" y1="100" x2="25" y2="0" stroke="rgba(212,175,55,0.2)" stroke-width="0.05" />
+            <line x1="50" y1="100" x2="40" y2="0" stroke="rgba(212,175,55,0.4)" stroke-width="0.1" />
+            <line x1="50" y1="100" x2="50" y2="0" stroke="rgba(212,175,55,0.6)" stroke-width="0.1" />
+            <line x1="50" y1="100" x2="60" y2="0" stroke="rgba(212,175,55,0.4)" stroke-width="0.1" />
+            <line x1="50" y1="100" x2="75" y2="0" stroke="rgba(212,175,55,0.2)" stroke-width="0.05" />
+            <line x1="50" y1="100" x2="90" y2="0" stroke="rgba(212,175,55,0.4)" stroke-width="0.1" />
+            <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.1" />
+            <circle cx="0" cy="0" r="20" fill="none" stroke="rgba(212,175,55,0.2)" stroke-width="0.1" />
+            <circle cx="100" cy="0" r="10" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.1" />
+            <circle cx="100" cy="0" r="20" fill="none" stroke="rgba(212,175,55,0.2)" stroke-width="0.1" />
+        </svg>
+
+        <div class="hero-frame-line top-1 animate-trigger"></div>
+        <div class="hero-frame-line top-2 animate-trigger"></div>
+        <div class="hero-frame-line bottom-1 animate-trigger"></div>
+        <div class="hero-frame-line bottom-2 animate-trigger"></div>
+
+        <div class="fade-up animate-trigger" style="transition-delay: 0.2s">
+            <div class="cinzel-dec gold-gradient-text letter-spaced-md" style="font-size: 1.8rem; margin-bottom: 1rem;">
+                ◆ &nbsp;[G]&nbsp; ✦ &nbsp;[B]&nbsp; ◆
+            </div>
+        </div>
+
+        <div class="divider-type-b fade-up animate-trigger" style="transition-delay: 0.4s">
+            <div class="ornament">◈ ✦ ◈</div>
+        </div>
+
+        <div class="cinzel letter-spaced-lg fade-text animate-trigger" style="font-size: var(--text-xs); color: var(--ivory); margin-bottom: 2rem; transition-delay: 0.6s">
+            THE FAMILIES OF
+        </div>
+        <div class="cinzel letter-spaced-sm fade-text animate-trigger" style="font-size: var(--text-sm); color: var(--champagne); margin-bottom: 2rem; transition-delay: 0.8s">
+            [Groom Father & Mother] &nbsp; &nbsp; and &nbsp; &nbsp; [Bride Father & Mother]
+        </div>
+
+        <div style="width: 100px; height: 1px; background: var(--gold-rich); margin: 0 auto 2rem;"></div>
+
+        <div class="cinzel letter-spaced-lg fade-text animate-trigger" style="font-size: var(--text-xs); color: var(--gold-bright); margin-bottom: 2rem; transition-delay: 1s">
+            REQUEST THE PLEASURE OF YOUR COMPANY<br>AT THE MARRIAGE OF
+        </div>
+
+        <div class="fade-up animate-trigger" style="transition-delay: 1.2s">
+            <h1 class="cinzel-dec gold-gradient-text hero-names">[GROOM NAME]</h1>
+            <span class="playfair-italic hero-and">and</span>
+            <h1 class="cinzel-dec gold-gradient-text hero-names">[BRIDE NAME]</h1>
+        </div>
+
+        <div class="divider-type-a fade-up animate-trigger" style="transition-delay: 1.5s">
+            <div class="line-group"></div>
+            <div class="diamond">◆</div>
+            <div class="line-group"></div>
+        </div>
+
+        <div class="playfair-italic fade-text animate-trigger" style="font-size: var(--text-md); color: var(--champagne); margin-bottom: 2rem; transition-delay: 1.8s">
+            Saturday, the Fourteenth of June<br>
+            Two Thousand and Twenty-Six<br>
+            at Half Past Six in the Evening
+        </div>
+
+        <div class="cinzel letter-spaced-sm fade-text animate-trigger" style="font-size: var(--text-sm); color: var(--gold-bright); transition-delay: 2s">
+            THE GRAND BALLROOM · THE PLAZA HOTEL · NEW YORK
+        </div>
+
+        <div style="width: 100px; height: 1px; background: var(--gold-rich); margin: 2rem auto;"></div>
+
+        <div class="scroll-cue playfair-italic">
+            ↓ &nbsp;Enter the Ballroom&nbsp; ↓
+        </div>
+    </section>
+
+    <div class="divider-type-c"></div>
+    <section id="blessings">
+        <div class="blessing-content">
+            <div class="cinzel letter-spaced-lg fade-up animate-trigger" style="font-size: var(--text-xs); color: var(--gold-bright); margin-bottom: 2rem;">
+                ✦ A BLESSING ✦
+            </div>
+            
+            <div class="fade-up animate-trigger" style="transition-delay: 0.2s">
+                <span class="drop-cap cinzel-dec">"G</span>
+                <p class="blessing-quote playfair-italic">
+                    row old along with me,<br>
+                    the best is yet to be —<br>
+                    the last of life for which the first was made."
+                </p>
+                <div class="cinzel letter-spaced-md" style="font-size: var(--text-xs); color: var(--gold-bright); text-align: right;">
+                    — ROBERT BROWNING
+                </div>
+            </div>
+
+            <div class="divider-type-a">
+                <div class="line-group"></div>
+                <div class="diamond">◆</div>
+                <div class="line-group"></div>
+            </div>
+
+            <div class="family-grid fade-up animate-trigger" style="transition-delay: 0.4s">
+                <div class="family-col">
+                    <h4 class="cinzel letter-spaced-sm" style="color: var(--gold-bright); font-size: var(--text-xs);">═══ HIS FAMILY ═══</h4>
+                    <p class="playfair" style="color: var(--champagne); font-size: var(--text-base);">[Father Name]<br>[Mother Name]</p>
+                    <p class="playfair-italic" style="color: var(--sepia-light); opacity: 0.7; font-size: var(--text-sm); margin-top: 10px;">Son of [Grandfather & Grandmother]</p>
+                </div>
+                <div class="family-col">
+                    <h4 class="cinzel letter-spaced-sm" style="color: var(--gold-bright); font-size: var(--text-xs);">═══ HER FAMILY ═══</h4>
+                    <p class="playfair" style="color: var(--champagne); font-size: var(--text-base);">[Father Name]<br>[Mother Name]</p>
+                    <p class="playfair-italic" style="color: var(--sepia-light); opacity: 0.7; font-size: var(--text-sm); margin-top: 10px;">Daughter of [Grandfather & Grandmother]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-type-c"></div>
+    <section id="events">
+        <div class="cinzel letter-spaced-lg fade-up animate-trigger" style="font-size: var(--text-xs); color: var(--gold-bright); margin-bottom: 1rem;">
+            THE EVENING'S PROGRAMME
+        </div>
+        <h2 class="cinzel-dec gold-gradient-text fade-up animate-trigger" style="font-size: var(--text-xl); margin-bottom: 0.5rem; transition-delay: 0.1s;">An Evening of Revelry</h2>
+        <p class="playfair-italic fade-up animate-trigger" style="color: var(--champagne); font-size: var(--text-base); transition-delay: 0.2s;">Join us for a night the city will not forget</p>
+
+        <div class="events-grid">
+            <div class="event-card fade-up animate-trigger" style="transition-delay: 0.3s">
+                <svg class="corner-star cs-tl" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                <svg class="corner-star cs-tr" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                <svg class="corner-star cs-bl" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                <svg class="corner-star cs-br" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                
+                <div class="event-num cinzel-dec gold-gradient-text">I</div>
+                <h3 class="playfair" style="color: var(--champagne); margin: 1rem 0 0.5rem;">The Cocktail Hour</h3>
+                <p class="playfair-italic" style="color: var(--sepia-light); font-size: var(--text-sm); margin-bottom: 1.5rem;">Prohibition-Era Libations</p>
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: var(--text-xs); margin-bottom: 1rem;">VI · O'CLOCK IN THE EVENING</div>
+                <p class="playfair" style="color: var(--ivory); font-size: var(--text-sm);">[Rooftop Bar / Drawing Room]</p>
+                <p class="playfair-italic" style="color: var(--gold-dim); font-size: var(--text-xs); margin-top: 1rem;">Black Tie Encouraged — feathers & furs welcome</p>
+            </div>
+
+            <div class="event-card centerpiece fade-up animate-trigger" style="transition-delay: 0.4s">
+                <svg class="corner-star cs-tl" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                <svg class="corner-star cs-tr" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                <svg class="corner-star cs-bl" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                <svg class="corner-star cs-br" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+
+                <div class="event-num cinzel-dec gold-gradient-text">II</div>
+                <h3 class="playfair" style="color: var(--champagne); margin: 1rem 0 0.5rem; font-size: var(--text-lg)">The Ceremony</h3>
+                <p class="playfair-italic" style="color: var(--champagne); font-size: var(--text-base); margin-bottom: 1.5rem;">"Where two become one"</p>
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: var(--text-sm); margin-bottom: 1rem; font-weight: bold;">VII · THIRTY IN THE EVENING</div>
+                <p class="playfair" style="color: var(--ivory); font-size: var(--text-base);">[Grand Ballroom / Cathedral Name]</p>
+                <p class="playfair-italic" style="color: var(--gold-dim); font-size: var(--text-sm); margin-top: 1rem;">White Tie Requested</p>
+            </div>
+
+            <div class="event-card fade-up animate-trigger" style="transition-delay: 0.5s">
+                <svg class="corner-star cs-tl" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                <svg class="corner-star cs-tr" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                <svg class="corner-star cs-bl" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+                <svg class="corner-star cs-br" viewBox="0 0 24 24"><path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10Z"/></svg>
+
+                <div class="event-num cinzel-dec gold-gradient-text">III</div>
+                <h3 class="playfair" style="color: var(--champagne); margin: 1rem 0 0.5rem;">Dinner & Dancing</h3>
+                <p class="playfair-italic" style="color: var(--sepia-light); font-size: var(--text-sm); margin-bottom: 1.5rem;">Jazz, Jubilation & Joie de Vivre</p>
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: var(--text-xs); margin-bottom: 1rem;">IX · O'CLOCK — UNTIL THE LAST WALTZ</div>
+                <p class="playfair" style="color: var(--ivory); font-size: var(--text-sm);">[Dining Hall / Supper Club]</p>
+                <p class="playfair-italic" style="color: var(--gold-dim); font-size: var(--text-xs); margin-top: 1rem;">Evening Wear · Pearls & Cufflinks</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-type-c"></div>
+    <section id="couple">
+        <div class="cinzel letter-spaced-lg fade-up animate-trigger" style="font-size: var(--text-xs); color: var(--gold-bright); margin-bottom: 1rem;">
+            ✦ THE COUPLE ✦
+        </div>
+        <h2 class="playfair-italic fade-up animate-trigger" style="color: var(--champagne); font-size: var(--text-xl); transition-delay: 0.1s;">A Love Story for the Ages</h2>
+
+        <div class="couple-grid">
+            <div class="fade-up animate-trigger" style="transition-delay: 0.2s">
+                <div class="photo-frame">
+                    <div class="photo-area">
+                        <div class="photo-initial cinzel-dec">[G]</div>
+                    </div>
+                </div>
+                <div class="nameplate cinzel letter-spaced-md gold-gradient-text">[GROOM NAME]</div>
+                <p class="playfair-italic" style="color: var(--champagne); font-size: var(--text-sm); margin-top: 1rem; max-width: 280px;">A gentleman of distinguished taste,<br>ready to embark on the greatest<br>adventure of all.</p>
+            </div>
+
+            <div class="couple-divider fade-up animate-trigger" style="transition-delay: 0.3s">
+                <div style="width: 1px; height: 60px; background: var(--gold-rich);"></div>
+                <div class="rings cinzel-dec gold-gradient-text">&</div>
+                <div style="width: 1px; height: 60px; background: var(--gold-rich);"></div>
+            </div>
+
+            <div class="fade-up animate-trigger" style="transition-delay: 0.4s">
+                <div class="photo-frame">
+                    <div class="photo-area">
+                        <div class="photo-initial cinzel-dec">[B]</div>
+                    </div>
+                </div>
+                <div class="nameplate cinzel letter-spaced-md gold-gradient-text">[BRIDE NAME]</div>
+                <p class="playfair-italic" style="color: var(--champagne); font-size: var(--text-sm); margin-top: 1rem; max-width: 280px;">A vision of elegance and grace,<br>whose light outshines the<br>grandest chandeliers.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-type-c"></div>
+    <section id="rsvp">
+        <div class="cinzel letter-spaced-lg fade-up animate-trigger" style="font-size: var(--text-xs); color: var(--gold-bright); margin-bottom: 1rem;">
+            YOUR RESPONSE IS REQUESTED
+        </div>
+        <h2 class="cinzel-dec gold-gradient-text fade-up animate-trigger" style="font-size: var(--text-xl); margin-bottom: 0.5rem; transition-delay: 0.1s;">The Pleasure of Your Reply</h2>
+        <p class="playfair-italic fade-up animate-trigger" style="color: var(--champagne); font-size: var(--text-base); transition-delay: 0.2s;">Kindly respond by the First of May, 1927</p>
+
+        <form class="rsvp-form fade-up animate-trigger" style="transition-delay: 0.4s" onsubmit="event.preventDefault(); document.getElementById('rsvp-confirm').style.display='block'; this.style.display='none';">
+            <div class="form-group">
+                <label class="form-label cinzel letter-spaced-md">M(s). Full Name</label>
+                <input type="text" class="form-input" required placeholder="Guest Name">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label cinzel letter-spaced-md">Number in Party</label>
+                <input type="number" class="form-input" min="1" max="10" required placeholder="2">
+            </div>
+
+            <label class="form-label cinzel letter-spaced-md" style="margin-bottom: 1rem;">Will you attend?</label>
+            <div class="toggle-row">
+                <div class="toggle-card active" onclick="document.querySelectorAll('.toggle-card').forEach(c=>c.classList.remove('active')); this.classList.add('active');">
+                    <div class="cinzel letter-spaced-sm" style="color: var(--gold-bright); font-weight: bold;">◆ ACCEPTS</div>
+                    <div class="playfair-italic" style="color: var(--champagne); font-size: 0.85rem;">with pleasure</div>
+                </div>
+                <div class="toggle-card" onclick="document.querySelectorAll('.toggle-card').forEach(c=>c.classList.remove('active')); this.classList.add('active');">
+                    <div class="cinzel letter-spaced-sm" style="color: var(--gold-dim);">◈ REGRETS</div>
+                    <div class="playfair-italic" style="color: var(--champagne); font-size: 0.85rem;">with sincere regret</div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn cinzel letter-spaced-md">
+                ═══════ ◆ CONFIRM YOUR ATTENDANCE ◆ ═══════
+            </button>
+        </form>
+
+        <div id="rsvp-confirm" style="display: none; margin-top: 4rem; text-align: center; border: 1px solid var(--gold-rich); padding: 40px; background: rgba(212,175,55,0.05);">
+            <div class="cinzel letter-spaced-md gold-gradient-text" style="font-size: var(--text-md); margin-bottom: 1rem;">◆ Your attendance has been recorded ◆</div>
+            <div class="playfair-italic" style="color: var(--champagne); font-size: var(--text-base);">We shall expect you at The Plaza.</div>
+        </div>
+    </section>
+
+    <div class="divider-type-c"></div>
+    <section id="details">
+        <div class="details-grid">
+            <div class="detail-card fade-up animate-trigger">
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: var(--text-xs); margin-bottom: 10px;">THE VENUE</div>
+                <div class="divider-type-b" style="margin: 10px auto;"><div class="ornament">◈</div></div>
+                <h3 class="cinzel-dec gold-gradient-text" style="font-size: var(--text-md); margin: 1.5rem 0 0.5rem;">The Plaza Hotel</h3>
+                <p class="playfair" style="color: var(--champagne); font-size: var(--text-sm);">768 5th Avenue<br>New York, NY 10019</p>
+                <a href="#" class="cinzel letter-spaced-sm" style="color: var(--gold-bright); font-size: var(--text-xs); text-decoration: none; border-bottom: 1px solid var(--gold-bright); margin-top: 1rem; display: inline-block;">DIRECTIONS</a>
+            </div>
+
+            <div class="detail-card fade-up animate-trigger" style="transition-delay: 0.2s">
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: var(--text-xs); margin-bottom: 10px;">ACCOMMODATIONS</div>
+                <div class="divider-type-b" style="margin: 10px auto;"><div class="ornament">◈</div></div>
+                <p class="playfair-italic" style="color: var(--champagne); font-size: var(--text-sm); margin: 1.5rem 0;">A block of rooms has been<br>reserved under the name</p>
+                <p class="cinzel letter-spaced-sm" style="color: var(--gold-bright);">[COUPLE'S LAST NAME]</p>
+                <a href="#" class="cinzel letter-spaced-sm" style="color: var(--gold-bright); font-size: var(--text-xs); text-decoration: none; border-bottom: 1px solid var(--gold-bright); margin-top: 1rem; display: inline-block;">RESERVE A SUITE</a>
+            </div>
+
+            <div class="detail-card fade-up animate-trigger" style="transition-delay: 0.3s">
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: var(--text-xs); margin-bottom: 10px;">DRESS CODE</div>
+                <div class="divider-type-b" style="margin: 10px auto;"><div class="ornament">◈</div></div>
+                <p class="cinzel letter-spaced-sm" style="color: var(--gold-bright); font-size: var(--text-sm); margin: 1.5rem 0 0.5rem;">WHITE TIE PREFERRED<br>BLACK TIE ACCEPTED</p>
+                <div class="palette-row">
+                    <div class="color-dot" style="background: var(--black-ink);"></div>
+                    <div class="color-dot" style="background: var(--white-pearl);"></div>
+                    <div class="color-dot" style="background: var(--gold-rich);"></div>
+                    <div class="color-dot" style="background: var(--champagne);"></div>
+                    <div class="color-dot" style="background: #4A1010;"></div>
+                </div>
+                <p class="playfair-italic" style="color: var(--champagne); font-size: var(--text-xs);">Feathers, pearls, and evening gloves are warmly encouraged.</p>
+            </div>
+
+            <div class="detail-card fade-up animate-trigger" style="transition-delay: 0.4s">
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: var(--text-xs); margin-bottom: 10px;">THE OCCASION</div>
+                <div class="divider-type-b" style="margin: 10px auto;"><div class="ornament">◈</div></div>
+                <div class="cinzel-dec gold-gradient-text" style="font-size: var(--text-md); margin: 1.5rem 0;">#[CouplesHashtag]</div>
+                <p class="playfair-italic" style="color: var(--champagne); font-size: var(--text-sm);">The evening will be photographed.<br>Please tag your memories.</p>
+                <p class="cinzel letter-spaced-sm" style="color: var(--gold-dim); font-size: var(--text-xs); margin-top: 1rem;">NO FLASH DURING CEREMONY</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-type-c"></div>
+    <section id="countdown">
+        <div class="cinzel letter-spaced-lg fade-up animate-trigger" style="font-size: var(--text-xs); color: var(--gold-bright); margin-bottom: 1rem;">
+            ◆ TIME REMAINING ◆
+        </div>
+        <h2 class="cinzel-dec gold-gradient-text fade-up animate-trigger" style="font-size: var(--text-xl); margin-bottom: 0.5rem; transition-delay: 0.1s;">The Hour Approaches</h2>
+        <p class="playfair-italic fade-up animate-trigger" style="color: var(--champagne); font-size: var(--text-base); transition-delay: 0.2s;">Wind your watch, dear guest</p>
+
+        <div class="clock-container fade-up animate-trigger" style="transition-delay: 0.4s">
+            <div class="clock-block">
+                <div class="flip-card">
+                    <div class="flip-half flip-top"><span class="flip-num cinzel-dec" id="t-days">00</span></div>
+                    <div class="flip-half flip-bottom"><span class="flip-num cinzel-dec" id="b-days">00</span></div>
+                </div>
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: 0.6rem; margin-top: 1rem;">DAYS</div>
+            </div>
+            <div class="clock-colon">:</div>
+            <div class="clock-block">
+                <div class="flip-card">
+                    <div class="flip-half flip-top"><span class="flip-num cinzel-dec" id="t-hours">00</span></div>
+                    <div class="flip-half flip-bottom"><span class="flip-num cinzel-dec" id="b-hours">00</span></div>
+                </div>
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: 0.6rem; margin-top: 1rem;">HOURS</div>
+            </div>
+            <div class="clock-colon">:</div>
+            <div class="clock-block">
+                <div class="flip-card">
+                    <div class="flip-half flip-top"><span class="flip-num cinzel-dec" id="t-mins">00</span></div>
+                    <div class="flip-half flip-bottom"><span class="flip-num cinzel-dec" id="b-mins">00</span></div>
+                </div>
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: 0.6rem; margin-top: 1rem;">MINUTES</div>
+            </div>
+            <div class="clock-colon">:</div>
+            <div class="clock-block">
+                <div class="flip-card">
+                    <div class="flip-half flip-top"><span class="flip-num cinzel-dec" id="t-secs">00</span></div>
+                    <div class="flip-half flip-bottom"><span class="flip-num cinzel-dec" id="b-secs">00</span></div>
+                </div>
+                <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: 0.6rem; margin-top: 1rem;">SECONDS</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="cinzel letter-spaced-md" style="color: var(--gold-bright); font-size: var(--text-xs);">
+            ◆ WAITING FOR THE GRAND REVEAL ◆
+        </div>
+    </section>
+
+    <div class="divider-type-c"></div>
+    <section id="footer">
+        <div class="footer-sunburst"></div>
+        
+        <div class="monogram-medallion fade-up animate-trigger">
+            <div class="cinzel-dec gold-gradient-text" style="font-size: 2.5rem; letter-spacing: 0.1em;">
+                [G]<span style="font-size: 1.5rem; color: var(--gold-rich);">◆</span>[B]
+            </div>
+        </div>
+
+        <div class="divider-type-a fade-up animate-trigger" style="transition-delay: 0.2s">
+            <div class="line-group"></div>
+            <div class="diamond">◆</div>
+            <div class="line-group"></div>
+        </div>
+
+        <div class="cinzel-dec gold-gradient-text letter-spaced-sm fade-up animate-trigger" style="font-size: var(--text-lg); margin: 2rem 0; transition-delay: 0.3s;">
+            [GROOM FULL NAME] & [BRIDE FULL NAME]
+        </div>
+
+        <div class="cinzel letter-spaced-lg fade-up animate-trigger" style="font-size: var(--text-xs); color: var(--champagne); transition-delay: 0.4s;">
+            SATURDAY · THE FOURTEENTH OF JUNE · MMXXVI
+        </div>
+
+        <div class="divider-type-b fade-up animate-trigger" style="transition-delay: 0.5s">
+            <div class="ornament">◈</div>
+        </div>
+
+        <p class="playfair-italic fade-up animate-trigger" style="color: var(--champagne); font-size: var(--text-base); margin-bottom: 2rem; transition-delay: 0.6s;">
+            "Old sport, it was a magnificent evening."
+        </p>
+
+        <div style="width: 200px; height: 1px; background: var(--gold-rich); margin: 0 auto 2rem; opacity: 0.5;"></div>
+
+        <div class="cinzel letter-spaced-md" style="color: var(--gold-dim); font-size: 0.65rem;">
+            CRAFTED WITH DEVOTION ◆ MMXXVI
+        </div>
+    </section>
+    <div class="divider-type-c" style="height: 12px; border-bottom: none;"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. Gold Dust Particle System ---
+            const overlay = document.getElementById('particles-overlay');
+            const particleCount = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 100;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const p = document.createElement('div');
+                const type = Math.floor(Math.random() * 3);
+                
+                p.classList.add('particle');
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = Math.random() * 100 + 'vh';
+                
+                if (type === 0) {
+                    p.classList.add('p-sparkle');
+                    p.style.animationDuration = (1.5 + Math.random() * 1.5) + 's';
+                } else if (type === 1) {
+                    p.classList.add('p-mote');
+                    p.style.width = (2 + Math.random() * 3) + 'px';
+                    p.style.height = p.style.width;
+                    p.style.animationDuration = (15 + Math.random() * 10) + 's';
+                } else {
+                    p.classList.add('p-streak');
+                    p.style.height = (8 + Math.random() * 8) + 'px';
+                    p.style.animationDuration = (4 + Math.random() * 3) + 's';
+                }
+                
+                p.style.animationDelay = (Math.random() * 5) + 's';
+                overlay.appendChild(p);
+            }
+
+            // --- 2. Scroll Animations (Intersection Observer) ---
+            const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        if (entry.target.classList.contains('hero-frame-line') || entry.target.classList.contains('line-group')) {
+                            entry.target.classList.add('animate-line');
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-trigger, .hero-frame-line').forEach(el => observer.observe(el));
+
+            // --- 3. Flip Clock Logic ---
+            const targetDate = new Date('2026-06-14T18:30:00').getTime();
+            let prev = { d: -1, h: -1, m: -1, s: -1 };
+
+            function updateClock() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+
+                if (diff < 0) return; // Event passed
+
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                updateDigit('days', d, prev.d);
+                updateDigit('hours', h, prev.h);
+                updateDigit('mins', m, prev.m);
+                updateDigit('secs', s, prev.s);
+
+                prev = { d, h, m, s };
+            }
+
+            function pad(num) { return num < 10 ? '0' + num : num; }
+
+            function updateDigit(id, current, previous) {
+                if (current !== previous) {
+                    const topEl = document.getElementById(`t-${id}`);
+                    const botEl = document.getElementById(`b-${id}`);
+                    const padded = pad(current);
+                    
+                    // Simple text update for performance (avoiding complex CSS 3D flips which can glitch without libraries)
+                    topEl.innerText = padded;
+                    botEl.innerText = padded;
+                    
+                    // Add subtle mechanical pulse
+                    topEl.parentElement.parentElement.style.transform = 'scale(0.98)';
+                    setTimeout(() => { topEl.parentElement.parentElement.style.transform = 'scale(1)'; }, 50);
+                }
+            }
+
+            setInterval(updateClock, 1000);
+            updateClock();
+        });
+    </script>
+</body>
+</html>

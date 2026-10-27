@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elara & Caspian — A Fairytale Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --midnight: #06050f;
+  --deep-navy: #0d0b2b;
+  --navy: #111340;
+  --purple-deep: #1a0a3d;
+  --purple: #4a1fa8;
+  --purple-mid: #6b35c4;
+  --purple-light: #9b6ee8;
+  --purple-glow: #c49fff;
+  --gold: #c8973a;
+  --gold-light: #f0c96a;
+  --gold-pale: #fde9a8;
+  --gold-glow: rgba(240,201,106,0.4);
+  --silver: #b8c4e8;
+  --silver-dim: #6a7aaa;
+  --moon: #f0e6c8;
+  --cream: #fdf6e8;
+  --text: #e8dff8;
+  --text-dim: #9a8fc0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--midnight);
+  color: var(--text);
+  font-family: 'EB Garamond', serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ═══════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════ */
+#cursor-wand {
+  position: fixed;
+  width: 24px; height: 24px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s;
+}
+#cursor-wand svg { width: 24px; height: 24px; }
+#cursor-trail-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ═══════════════════════════════════════
+   GLOBAL CANVAS LAYERS
+═══════════════════════════════════════ */
+#firefly-canvas, #butterfly-canvas, #fairy-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+#butterfly-canvas { z-index: 6; }
+#fairy-canvas { z-index: 4; }
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #020108 0%,
+    #06041a 20%,
+    #0d0830 45%,
+    #1a0d45 65%,
+    #120826 85%,
+    #080318 100%
+  );
+}
+
+/* Star field */
+.star-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+}
+@keyframes twinkle {
+  0%, 100% { opacity: var(--min-op, 0.2); transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+
+/* Moon */
+.moon-wrap {
+  position: absolute;
+  top: 8%; right: 12%;
+  z-index: 2;
+  animation: moonFloat 8s ease-in-out infinite;
+}
+@keyframes moonFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.moon-glow {
+  position: absolute;
+  inset: -50%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(240,230,200,0.15) 0%, transparent 70%);
+  animation: moonPulse 4s ease-in-out infinite;
+}
+@keyframes moonPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Forest silhouette */
+.forest-layer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+/* Hero content */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 2rem;
+  animation: heroFadeIn 2.5s cubic-bezier(0.23,1,0.32,1) 0.5s both;
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.hero-names {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  background: linear-gradient(135deg, var(--gold-pale) 0%, var(--gold-light) 30%, var(--gold) 60%, var(--gold-light) 80%, var(--gold-pale) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px var(--gold-glow)) drop-shadow(0 0 60px rgba(200,151,58,0.2));
+  text-shadow: none;
+}
+
+.hero-ampersand {
+  display: block;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--purple-glow);
+  -webkit-text-fill-color: var(--purple-glow);
+  filter: drop-shadow(0 0 12px rgba(196,159,255,0.6));
+  margin: 0.1em 0;
+}
+
+.hero-sub {
+  margin-top: 1.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+  letter-spacing: 0.35em;
+  color: var(--silver);
+  opacity: 0.75;
+}
+
+.hero-date {
+  margin-top: 0.7rem;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--gold-light);
+  filter: drop-shadow(0 0 8px var(--gold-glow));
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0.5;
+  animation: scrollBob 2.5s ease-in-out infinite;
+}
+@keyframes scrollBob {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+  50% { transform: translateX(-50%) translateY(6px); opacity: 0.8; }
+}
+.scroll-indicator span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+}
+.scroll-chevron {
+  width: 16px; height: 10px;
+  border-left: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  transform: rotate(-45deg) translateY(-3px);
+}
+
+/* ═══════════════════════════════════════
+   VINE DIVIDER
+═══════════════════════════════════════ */
+.vine-divider {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+}
+.vine-divider svg { display: block; width: 100%; }
+
+/* ═══════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════ */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-bg-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.section-inner {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.section-label {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.55em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  opacity: 0.7;
+}
+
+.section-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-pale), var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 15px var(--gold-glow));
+}
+
+.deco-line {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 1.5rem auto;
+  max-width: 350px;
+}
+.deco-line::before, .deco-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dark, #9b7a2a), transparent);
+}
+.deco-line::after { background: linear-gradient(to left, transparent, var(--gold-dark, #9b7a2a), transparent); }
+.deco-line span { color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+
+/* ═══════════════════════════════════════
+   BLESSING
+═══════════════════════════════════════ */
+#blessing {
+  background: linear-gradient(to bottom, #06040f, #0e0828, #06040f);
+}
+
+.blessing-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+  line-height: 1.8;
+  color: var(--text);
+  max-width: 680px;
+  margin: 0 auto 1.5rem;
+  position: relative;
+}
+.blessing-quote::before {
+  content: '"';
+  position: absolute;
+  top: -1.5rem;
+  left: -1rem;
+  font-size: 5rem;
+  color: var(--purple-light);
+  opacity: 0.2;
+  font-style: normal;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+.blessing-quote em { color: var(--gold-light); font-style: normal; }
+.blessing-attr {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--purple-glow);
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════
+   EVENTS
+═══════════════════════════════════════ */
+#events {
+  background: linear-gradient(to bottom, #06040f, #110932, #06040f);
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.8rem;
+  margin-top: 3rem;
+}
+
+.event-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(26,10,61,0.8), rgba(17,19,64,0.8));
+  border: 1px solid rgba(196,159,255,0.2);
+  border-top: 1px solid rgba(240,201,106,0.3);
+  padding: 2.5rem 2rem;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease;
+  backdrop-filter: blur(4px);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+.event-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top center, rgba(196,159,255,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.event-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(240,201,106,0.04));
+  pointer-events: none;
+}
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(100,50,200,0.2), 0 0 0 1px rgba(240,201,106,0.25), 0 0 30px rgba(196,159,255,0.1);
+}
+
+.event-glyph {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(196,159,255,0.5));
+}
+.event-name {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  margin-bottom: 0.6rem;
+  filter: drop-shadow(0 0 6px var(--gold-glow));
+}
+.event-date {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--purple-glow);
+  margin-bottom: 0.2rem;
+}
+.event-time {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--silver-dim);
+}
+.event-desc {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(196,159,255,0.12);
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════
+   COUPLE
+═══════════════════════════════════════ */
+#couple {
+  background: linear-gradient(to bottom, #06040f, #0e0626, #06040f);
+}
+
+.fantasy-frame {
+  position: relative;
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 3.5rem 3rem;
+  background: linear-gradient(145deg, rgba(20,8,50,0.9), rgba(14,12,40,0.9));
+  border: 1px solid rgba(196,159,255,0.25);
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+/* Animated corners */
+.frame-corner {
+  position: absolute;
+  width: 50px; height: 50px;
+}
+.frame-corner.tl { top: -1px; left: -1px; }
+.frame-corner.tr { top: -1px; right: -1px; transform: scaleX(-1); }
+.frame-corner.bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
+.frame-corner.br { bottom: -1px; right: -1px; transform: scale(-1); }
+
+.frame-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(196,159,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
+  animation: frameBreath 4s ease-in-out infinite;
+}
+@keyframes frameBreath {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.couple-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.5em;
+  color: var(--purple-glow);
+  opacity: 0.7;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.couple-name-large {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-pale), var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 0.95;
+  filter: drop-shadow(0 0 15px var(--gold-glow));
+}
+.couple-amp {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--purple-glow);
+  -webkit-text-fill-color: var(--purple-glow);
+  display: block;
+  margin: 0.6rem 0;
+  filter: drop-shadow(0 0 8px rgba(196,159,255,0.5));
+}
+.couple-story {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin: 1.5rem 0;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.couple-story em { color: var(--purple-glow); font-style: normal; }
+
+/* ═══════════════════════════════════════
+   RSVP
+═══════════════════════════════════════ */
+#rsvp {
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, #150a38 0%, #06040f 70%);
+}
+
+.rsvp-text {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--text-dim);
+  max-width: 480px;
+  margin: 1rem auto 2.5rem;
+  line-height: 1.7;
+}
+
+.magic-btn {
+  display: inline-block;
+  position: relative;
+  padding: 1.1rem 3.5rem;
+  background: linear-gradient(135deg, rgba(74,31,168,0.6), rgba(26,10,61,0.8));
+  border: 1px solid rgba(196,159,255,0.4);
+  color: var(--gold-light);
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  filter: drop-shadow(0 0 15px rgba(196,159,255,0.3));
+}
+.magic-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(240,201,106,0.15), transparent 50%, rgba(196,159,255,0.1));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.magic-btn:hover {
+  filter: drop-shadow(0 0 25px rgba(196,159,255,0.6)) drop-shadow(0 0 50px rgba(240,201,106,0.3));
+  transform: scale(1.05) translateY(-2px);
+  color: var(--gold-pale);
+}
+.magic-btn:hover::before { opacity: 1; }
+
+.btn-sparkle {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rsvp-note {
+  margin-top: 1.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--purple-glow);
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════
+   DETAILS
+═══════════════════════════════════════ */
+#details {
+  background: linear-gradient(to bottom, #06040f, #0e0828, #06040f);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  text-align: left;
+}
+
+.detail-item {
+  position: relative;
+  padding: 1.8rem;
+  background: rgba(26,10,61,0.4);
+  border-left: 2px solid rgba(196,159,255,0.25);
+  border-bottom: 1px solid rgba(196,159,255,0.1);
+  transition: border-color 0.3s;
+}
+.detail-item:hover { border-left-color: var(--gold); }
+
+.detail-icon { font-size: 1.6rem; margin-bottom: 0.8rem; display: block; }
+.detail-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+.detail-val {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+.detail-val em { color: var(--purple-glow); font-style: italic; }
+
+.attire-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+.attire-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  color: var(--purple-glow);
+  border: 1px solid rgba(196,159,255,0.3);
+  padding: 0.25rem 0.6rem;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════
+   COUNTDOWN
+═══════════════════════════════════════ */
+#countdown {
+  background: linear-gradient(to bottom, #06040f, #10092e, #06040f);
+  position: relative;
+}
+
+.countdown-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: orbDrift var(--dur, 12s) ease-in-out infinite alternate;
+}
+@keyframes orbDrift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(var(--tx, 30px), var(--ty, 20px)); }
+}
+
+.countdown-flex {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cd-item {
+  text-align: center;
+  min-width: 90px;
+}
+.cd-num {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--purple-glow), var(--gold-light), var(--purple-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 15px rgba(196,159,255,0.5)) drop-shadow(0 0 40px rgba(240,201,106,0.2));
+  animation: cdPulse 2.5s ease-in-out infinite;
+}
+.cd-item:nth-child(2) .cd-num { animation-delay: 0.3s; }
+.cd-item:nth-child(3) .cd-num { animation-delay: 0.6s; }
+.cd-item:nth-child(4) .cd-num { animation-delay: 0.9s; }
+@keyframes cdPulse {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(196,159,255,0.4)); }
+  50% { filter: drop-shadow(0 0 25px rgba(196,159,255,0.7)) drop-shadow(0 0 60px rgba(240,201,106,0.25)); }
+}
+.cd-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  color: var(--silver-dim);
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+}
+.cd-sep {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 3rem;
+  color: var(--purple-mid);
+  opacity: 0.4;
+  align-self: flex-start;
+  padding-top: 0.4rem;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+#footer {
+  background: linear-gradient(to bottom, #06040f, #020108);
+  border-top: 1px solid rgba(196,159,255,0.12);
+  padding: 4rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-names {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  background: linear-gradient(135deg, var(--gold-pale), var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 15px var(--gold-glow));
+  margin-bottom: 0.5rem;
+}
+.footer-date {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--purple-glow);
+  opacity: 0.7;
+  margin-bottom: 2rem;
+}
+
+.footer-lore {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.45em;
+  color: var(--silver-dim);
+  opacity: 0.35;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.footer-copy {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.8rem;
+  color: rgba(154,143,192,0.35);
+}
+
+#fairy-dust-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.9s cubic-bezier(0.23,1,0.32,1), transform 0.9s cubic-bezier(0.23,1,0.32,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1);
+}
+.reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.1s; }
+.reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.25s; }
+.reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.4s; }
+.reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.55s; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 600px) {
+  .countdown-flex { gap: 0.8rem; }
+  .cd-sep { display: none; }
+  .events-grid { grid-template-columns: 1fr; }
+  .details-grid { grid-template-columns: 1fr; }
+  .fantasy-frame { padding: 2.5rem 1.5rem; }
+  .cd-num { font-size: 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- CANVAS LAYERS -->
+<canvas id="firefly-canvas"></canvas>
+<canvas id="butterfly-canvas"></canvas>
+
+<!-- CURSOR WAND -->
+<div id="cursor-wand">
+  <svg viewBox="0 0 24 24" fill="none">
+    <line x1="2" y1="22" x2="18" y2="6" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="18,2 22,6 20,8 16,4" fill="#c9a84c" stroke="#f0c96a" stroke-width="0.5"/>
+    <circle cx="2" cy="22" r="1.5" fill="#c49fff" opacity="0.8"/>
+  </svg>
+</div>
+<canvas id="cursor-trail-canvas"></canvas>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <!-- Star field -->
+  <div class="star-field" id="starField"></div>
+
+  <!-- Moon -->
+  <div class="moon-wrap">
+    <div class="moon-glow"></div>
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+      <defs>
+        <radialGradient id="moonGrad" cx="38%" cy="35%" r="55%">
+          <stop offset="0%" stop-color="#fdf6e8"/>
+          <stop offset="40%" stop-color="#f0e6c8"/>
+          <stop offset="100%" stop-color="#c8b896"/>
+        </radialGradient>
+        <filter id="moonBlur">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="1"/>
+        </filter>
+        <radialGradient id="moonHalo" cx="50%" cy="50%" r="50%">
+          <stop offset="60%" stop-color="transparent"/>
+          <stop offset="100%" stop-color="rgba(240,230,200,0.06)"/>
+        </radialGradient>
+      </defs>
+      <circle cx="50" cy="50" r="48" fill="rgba(240,230,200,0.05)" filter="url(#moonBlur)"/>
+      <circle cx="50" cy="50" r="38" fill="url(#moonGrad)"/>
+      <circle cx="35" cy="38" r="5" fill="rgba(0,0,0,0.06)"/>
+      <circle cx="55" cy="55" r="3" fill="rgba(0,0,0,0.05)"/>
+      <circle cx="62" cy="35" r="4" fill="rgba(0,0,0,0.04)"/>
+      <!-- Moon glow ring -->
+      <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(240,230,200,0.08)" stroke-width="8"/>
+    </svg>
+  </div>
+
+  <!-- Castle SVG -->
+  <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(700px,90vw);z-index:4;">
+    <svg viewBox="0 0 700 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="castleBody" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e1060"/>
+          <stop offset="100%" stop-color="#0a0620"/>
+        </linearGradient>
+        <linearGradient id="castleWall" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#261474"/>
+          <stop offset="100%" stop-color="#0d0830"/>
+        </linearGradient>
+        <radialGradient id="castleGlow" cx="50%" cy="100%" r="60%">
+          <stop offset="0%" stop-color="rgba(196,159,255,0.25)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <filter id="castleFilter">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="blur"/>
+          <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0 0 0.5 0 0 0 0 0 1 0 0 0 0 0 1 0" result="purple"/>
+          <feMerge><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Castle glow base -->
+      <ellipse cx="350" cy="420" rx="280" ry="40" fill="rgba(196,159,255,0.12)" filter="url(#moonBlur)"/>
+      <!-- Main keep -->
+      <rect x="240" y="120" width="220" height="300" fill="url(#castleBody)"/>
+      <!-- Battlements main -->
+      <rect x="235" y="108" width="20" height="22" rx="2" fill="url(#castleWall)"/>
+      <rect x="265" y="108" width="20" height="22" rx="2" fill="url(#castleWall)"/>
+      <rect x="295" y="108" width="20" height="22" rx="2" fill="url(#castleWall)"/>
+      <rect x="325" y="108" width="20" height="22" rx="2" fill="url(#castleWall)"/>
+      <rect x="355" y="108" width="20" height="22" rx="2" fill="url(#castleWall)"/>
+      <rect x="385" y="108" width="20" height="22" rx="2" fill="url(#castleWall)"/>
+      <rect x="415" y="108" width="20" height="22" rx="2" fill="url(#castleWall)"/>
+      <rect x="445" y="108" width="20" height="22" rx="2" fill="url(#castleWall)"/>
+      <!-- Left tower -->
+      <rect x="145" y="170" width="120" height="250" fill="url(#castleWall)"/>
+      <rect x="138" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <rect x="162" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <rect x="186" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <rect x="210" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <rect x="234" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <!-- Left tower spire -->
+      <polygon points="205,40 145,170 265,170" fill="#12094a"/>
+      <line x1="205" y1="40" x2="205" y2="15" stroke="#c8973a" stroke-width="2"/>
+      <polygon points="205,15 210,30 200,30" fill="#c8973a"/>
+      <!-- Right tower -->
+      <rect x="435" y="170" width="120" height="250" fill="url(#castleWall)"/>
+      <rect x="428" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <rect x="452" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <rect x="476" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <rect x="500" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <rect x="524" y="155" width="18" height="22" rx="2" fill="#1e1060"/>
+      <!-- Right tower spire -->
+      <polygon points="495,40 435,170 555,170" fill="#12094a"/>
+      <line x1="495" y1="40" x2="495" y2="15" stroke="#c8973a" stroke-width="2"/>
+      <polygon points="495,15 500,30 490,30" fill="#c8973a"/>
+      <!-- Center spire -->
+      <polygon points="350,30 280,120 420,120" fill="#0e0840"/>
+      <line x1="350" y1="30" x2="350" y2="2" stroke="#f0c96a" stroke-width="2.5"/>
+      <polygon points="350,2 356,18 344,18" fill="#f0c96a"/>
+      <!-- Windows glow -->
+      <ellipse cx="350" cy="200" rx="22" ry="30" fill="rgba(240,201,106,0.15)" stroke="rgba(240,201,106,0.4)" stroke-width="1"/>
+      <ellipse cx="350" cy="200" rx="14" ry="20" fill="rgba(240,201,106,0.25)"/>
+      <ellipse cx="205" cy="240" rx="14" ry="20" fill="rgba(196,159,255,0.2)" stroke="rgba(196,159,255,0.3)" stroke-width="1"/>
+      <ellipse cx="495" cy="240" rx="14" ry="20" fill="rgba(196,159,255,0.2)" stroke="rgba(196,159,255,0.3)" stroke-width="1"/>
+      <!-- Smaller windows -->
+      <ellipse cx="295" cy="260" rx="8" ry="12" fill="rgba(240,201,106,0.15)" stroke="rgba(240,201,106,0.25)" stroke-width="1"/>
+      <ellipse cx="405" cy="260" rx="8" ry="12" fill="rgba(240,201,106,0.15)" stroke="rgba(240,201,106,0.25)" stroke-width="1"/>
+      <!-- Gate arch -->
+      <path d="M310 420 L310 340 Q350 310 390 340 L390 420 Z" fill="rgba(5,2,15,0.9)" stroke="rgba(196,159,255,0.25)" stroke-width="1.5"/>
+      <!-- Drawbridge -->
+      <rect x="322" y="380" width="56" height="40" fill="#0e0530"/>
+      <!-- Castle glow overlay -->
+      <rect x="145" y="40" width="410" height="380" fill="url(#castleGlow)"/>
+      <!-- Reflected light on windows -->
+      <ellipse cx="350" cy="185" rx="5" ry="8" fill="rgba(255,255,220,0.4)" transform="rotate(-15,350,185)"/>
+    </svg>
+  </div>
+
+  <!-- Forest silhouette -->
+  <div class="forest-layer">
+    <svg viewBox="0 0 1440 250" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
+      <defs>
+        <linearGradient id="forestGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#050210"/>
+          <stop offset="100%" stop-color="#020108"/>
+        </linearGradient>
+      </defs>
+      <!-- Back trees -->
+      <path d="M0 250 L0 120 L40 80 L80 120 L80 90 L120 50 L160 90 L160 100 L200 60 L240 100 L240 80 L280 40 L320 80 L320 110 L360 70 L400 110 L400 85 L440 45 L480 85 L480 95 L520 55 L560 95 L560 75 L600 35 L640 75 L640 100 L680 60 L720 100 L720 80 L760 40 L800 80 L800 90 L840 50 L880 90 L880 75 L920 35 L960 75 L960 100 L1000 60 L1040 100 L1040 80 L1080 40 L1120 80 L1120 95 L1160 55 L1200 95 L1200 75 L1240 35 L1280 75 L1280 100 L1320 60 L1360 100 L1360 120 L1400 80 L1440 120 L1440 250 Z" fill="#050210" opacity="0.8"/>
+      <!-- Front trees (darker) -->
+      <path d="M0 250 L0 160 L50 110 L100 160 L100 130 L160 80 L220 130 L220 145 L270 100 L320 145 L320 125 L390 75 L460 125 L460 140 L510 95 L560 140 L560 120 L630 70 L700 120 L700 135 L750 90 L800 135 L800 115 L870 65 L940 115 L940 130 L990 85 L1040 130 L1040 110 L1110 60 L1180 110 L1180 125 L1230 80 L1280 125 L1280 140 L1340 90 L1400 140 L1440 160 L1440 250 Z" fill="#030110"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ Once Upon a Time ✦</p>
+    <div class="hero-names">
+      <span>Elara</span>
+      <span class="hero-ampersand">&amp;</span>
+      <span>Caspian</span>
+    </div>
+    <p class="hero-sub">Invite You to Witness Their Enchanted Union</p>
+    <p class="hero-date">The Twenty-First Day of June, Two Thousand &amp; Twenty-Five</p>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Enter the Story</span>
+    <div class="scroll-chevron"></div>
+  </div>
+</section>
+
+<!-- VINE DIVIDER -->
+<div class="vine-divider">
+  <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <rect width="1440" height="80" fill="#06040f"/>
+    <path d="M0 40 Q180 10 360 40 Q540 70 720 40 Q900 10 1080 40 Q1260 70 1440 40" stroke="rgba(155,110,232,0.35)" stroke-width="1.5" fill="none"/>
+    <path d="M0 40 Q180 70 360 40 Q540 10 720 40 Q900 70 1080 40 Q1260 10 1440 40" stroke="rgba(200,151,58,0.25)" stroke-width="1" fill="none"/>
+    <!-- Leaves and flowers along vine -->
+    <g opacity="0.5">
+      <ellipse cx="180" cy="22" rx="12" ry="6" fill="rgba(155,110,232,0.4)" transform="rotate(-20,180,22)"/>
+      <ellipse cx="360" cy="40" rx="8" ry="8" fill="rgba(200,151,58,0.5)"/>
+      <ellipse cx="540" cy="58" rx="12" ry="6" fill="rgba(155,110,232,0.4)" transform="rotate(20,540,58)"/>
+      <ellipse cx="720" cy="40" rx="8" ry="8" fill="rgba(200,151,58,0.5)"/>
+      <ellipse cx="900" cy="22" rx="12" ry="6" fill="rgba(155,110,232,0.4)" transform="rotate(-20,900,22)"/>
+      <ellipse cx="1080" cy="40" rx="8" ry="8" fill="rgba(200,151,58,0.5)"/>
+      <ellipse cx="1260" cy="58" rx="12" ry="6" fill="rgba(155,110,232,0.4)" transform="rotate(20,1260,58)"/>
+    </g>
+    <!-- Small 5-petal flowers -->
+    <g opacity="0.6">
+      <circle cx="90" cy="36" r="4" fill="rgba(240,201,106,0.4)"/>
+      <circle cx="270" cy="50" r="3" fill="rgba(196,159,255,0.5)"/>
+      <circle cx="450" cy="30" r="4" fill="rgba(240,201,106,0.4)"/>
+      <circle cx="630" cy="52" r="3" fill="rgba(196,159,255,0.5)"/>
+      <circle cx="810" cy="28" r="4" fill="rgba(240,201,106,0.4)"/>
+      <circle cx="990" cy="50" r="3" fill="rgba(196,159,255,0.5)"/>
+      <circle cx="1170" cy="30" r="4" fill="rgba(240,201,106,0.4)"/>
+      <circle cx="1350" cy="48" r="3" fill="rgba(196,159,255,0.5)"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ═══════════ BLESSING ═══════════ -->
+<section id="blessing">
+  <div class="section-inner">
+    <span class="section-label reveal">✦ An Ancient Enchantment ✦</span>
+    <h2 class="section-title reveal">Words of Magic</h2>
+    <div class="deco-line reveal"><span>❧</span></div>
+    <div class="blessing-quote reveal">
+      "In the space between the stars and the roots of the old forest,
+      two souls found each other — <em>not by chance, but by the quiet magic</em>
+      that weaves through all things, binding hearts across time and tide."
+    </div>
+    <div class="deco-line reveal"><span>✦</span></div>
+    <p class="blessing-attr reveal">— From the Chronicle of Enchanted Hearts</p>
+  </div>
+</section>
+
+<!-- VINE DIVIDER 2 -->
+<div class="vine-divider">
+  <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <rect width="1440" height="60" fill="#06040f"/>
+    <path d="M0 30 C240 5 480 55 720 30 C960 5 1200 55 1440 30" stroke="rgba(155,110,232,0.3)" stroke-width="1.5" fill="none"/>
+    <g opacity="0.45">
+      <ellipse cx="240" cy="14" rx="10" ry="5" fill="rgba(196,159,255,0.5)" transform="rotate(-15,240,14)"/>
+      <ellipse cx="480" cy="46" rx="10" ry="5" fill="rgba(200,151,58,0.4)" transform="rotate(15,480,46)"/>
+      <ellipse cx="720" cy="14" rx="10" ry="5" fill="rgba(196,159,255,0.5)" transform="rotate(-15,720,14)"/>
+      <ellipse cx="960" cy="46" rx="10" ry="5" fill="rgba(200,151,58,0.4)" transform="rotate(15,960,46)"/>
+      <ellipse cx="1200" cy="14" rx="10" ry="5" fill="rgba(196,159,255,0.5)" transform="rotate(-15,1200,14)"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ═══════════ EVENTS ═══════════ -->
+<section id="events">
+  <div class="section-inner">
+    <span class="section-label reveal">✦ Three Nights of Magic ✦</span>
+    <h2 class="section-title reveal">The Enchanted Celebrations</h2>
+    <div class="deco-line reveal"><span>⚜</span></div>
+    <div class="events-grid reveal-stagger">
+      <div class="event-card">
+        <span class="event-glyph">🌙</span>
+        <div class="event-name">Enchanted Evening</div>
+        <div class="event-date">June 19, 2025</div>
+        <div class="event-time">8:00 PM — MIDNIGHT</div>
+        <div class="event-desc">A twilight gathering beneath lantern-lit canopies. Music, merriment, and ancient forest magic as our worlds first entwine.</div>
+      </div>
+      <div class="event-card">
+        <span class="event-glyph">💍</span>
+        <div class="event-name">The Ceremony</div>
+        <div class="event-date">June 21, 2025</div>
+        <div class="event-time">6:00 PM — 8:00 PM</div>
+        <div class="event-desc">Beneath the Great Elder Oak, as the solstice sun descends, two souls shall be bound by the ancient rites of love.</div>
+      </div>
+      <div class="event-card">
+        <span class="event-glyph">🏰</span>
+        <div class="event-name">The Grand Feast</div>
+        <div class="event-date">June 21, 2025</div>
+        <div class="event-time">9:00 PM — DAWN</div>
+        <div class="event-desc">A celebration of legendary proportions within the castle halls — feasting, dancing, and revelry until the first light of a new era.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VINE DIVIDER 3 -->
+<div class="vine-divider">
+  <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <rect width="1440" height="60" fill="#06040f"/>
+    <path d="M0 30 C360 55 720 5 1080 30 C1260 42 1380 20 1440 30" stroke="rgba(200,151,58,0.25)" stroke-width="1.5" fill="none"/>
+    <g opacity="0.4">
+      <circle cx="360" cy="46" r="5" fill="rgba(240,201,106,0.5)"/>
+      <circle cx="720" cy="14" r="4" fill="rgba(196,159,255,0.5)"/>
+      <circle cx="1080" cy="36" r="5" fill="rgba(240,201,106,0.5)"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ═══════════ COUPLE ═══════════ -->
+<section id="couple">
+  <div class="section-inner">
+    <span class="section-label reveal">✦ The Beloved ✦</span>
+    <h2 class="section-title reveal">Fated Hearts</h2>
+    <div class="fantasy-frame reveal">
+      <div class="frame-glow"></div>
+      <!-- Corner ornaments SVG -->
+      <svg class="frame-corner tl" viewBox="0 0 50 50" fill="none"><path d="M2 48 L2 8 Q2 2 8 2 L48 2" stroke="rgba(196,159,255,0.5)" stroke-width="1.5"/><circle cx="8" cy="8" r="3" fill="rgba(196,159,255,0.4)"/><circle cx="2" cy="2" r="1.5" fill="rgba(240,201,106,0.6)"/><path d="M12 2 Q20 12 12 22" stroke="rgba(200,151,58,0.3)" stroke-width="1" fill="none"/></svg>
+      <svg class="frame-corner tr" viewBox="0 0 50 50" fill="none"><path d="M2 48 L2 8 Q2 2 8 2 L48 2" stroke="rgba(196,159,255,0.5)" stroke-width="1.5"/><circle cx="8" cy="8" r="3" fill="rgba(196,159,255,0.4)"/><circle cx="2" cy="2" r="1.5" fill="rgba(240,201,106,0.6)"/><path d="M12 2 Q20 12 12 22" stroke="rgba(200,151,58,0.3)" stroke-width="1" fill="none"/></svg>
+      <svg class="frame-corner bl" viewBox="0 0 50 50" fill="none"><path d="M2 48 L2 8 Q2 2 8 2 L48 2" stroke="rgba(196,159,255,0.5)" stroke-width="1.5"/><circle cx="8" cy="8" r="3" fill="rgba(196,159,255,0.4)"/><circle cx="2" cy="2" r="1.5" fill="rgba(240,201,106,0.6)"/></svg>
+      <svg class="frame-corner br" viewBox="0 0 50 50" fill="none"><path d="M2 48 L2 8 Q2 2 8 2 L48 2" stroke="rgba(196,159,255,0.5)" stroke-width="1.5"/><circle cx="8" cy="8" r="3" fill="rgba(196,159,255,0.4)"/><circle cx="2" cy="2" r="1.5" fill="rgba(240,201,106,0.6)"/></svg>
+
+      <p class="couple-eyebrow">✦ Brought Together By Fate ✦</p>
+      <div class="couple-name-large">Elara</div>
+      <span class="couple-amp">&amp;</span>
+      <div class="couple-name-large">Caspian</div>
+      <div class="deco-line" style="margin:1.2rem auto;"><span>✦</span></div>
+      <p class="couple-story">
+        She, the daughter of the <em>Moon Court</em>, keeper of ancient starlight.<br>
+        He, the guardian of the <em>Enchanted Forest</em>, who heard her name in the wind.<br><br>
+        Their love is older than the stories told of them.
+      </p>
+      <div class="deco-line" style="margin:1.2rem auto;"><span>❧</span></div>
+      <p style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.45em;color:var(--silver-dim);opacity:0.5;text-transform:uppercase;">Together ✦ Forever ✦ In All Realms</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ RSVP ═══════════ -->
+<section id="rsvp">
+  <div class="section-inner">
+    <span class="section-label reveal">✦ Your Presence Is Requested ✦</span>
+    <h2 class="section-title reveal">Claim Your Place</h2>
+    <div class="deco-line reveal"><span>⚜</span></div>
+    <p class="rsvp-text reveal">
+      The realm awaits your arrival. Secure your place in this chapter of legend before the enchantment closes its gates.
+    </p>
+    <div class="reveal">
+      <a href="mailto:rsvp@elaraandcaspian.com" class="magic-btn">
+        ✦ &nbsp; Accept the Invitation &nbsp; ✦
+      </a>
+    </div>
+    <p class="rsvp-note reveal">Kindly Reply Before the Eve of May, 2025</p>
+  </div>
+</section>
+
+<!-- VINE DIVIDER 4 -->
+<div class="vine-divider">
+  <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <rect width="1440" height="60" fill="#06040f"/>
+    <path d="M0 30 Q360 10 720 30 Q1080 50 1440 30" stroke="rgba(155,110,232,0.3)" stroke-width="1.5" fill="none"/>
+    <g opacity="0.45">
+      <ellipse cx="360" cy="18" rx="11" ry="5" fill="rgba(196,159,255,0.4)" transform="rotate(-10,360,18)"/>
+      <ellipse cx="720" cy="34" rx="9" ry="4" fill="rgba(240,201,106,0.45)" transform="rotate(10,720,34)"/>
+      <ellipse cx="1080" cy="42" rx="11" ry="5" fill="rgba(196,159,255,0.4)" transform="rotate(15,1080,42)"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ═══════════ DETAILS ═══════════ -->
+<section id="details">
+  <div class="section-inner">
+    <span class="section-label reveal">✦ All You Need to Know ✦</span>
+    <h2 class="section-title reveal">The Realm's Details</h2>
+    <div class="deco-line reveal"><span>🌿</span></div>
+    <div class="details-grid reveal-stagger">
+      <div class="detail-item">
+        <span class="detail-icon">🏰</span>
+        <div class="detail-label">The Venue</div>
+        <div class="detail-val">Moonveil Estate &amp; Gardens<br>Whisperwood Lane<br><em>Thornbury, Somerset</em></div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon">🗺️</span>
+        <div class="detail-label">Finding the Realm</div>
+        <div class="detail-val">Follow the lanterns from the Old Stone Gate.<br>Parking is enchanted — <em>follow the golden signs.</em></div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon">👑</span>
+        <div class="detail-label">The Dress Code</div>
+        <div class="detail-val">Fantasy Fairytale Formal</div>
+        <div class="attire-tags">
+          <span class="attire-tag">Gowns</span>
+          <span class="attire-tag">Cloaks</span>
+          <span class="attire-tag">Crowns</span>
+          <span class="attire-tag">Velvet</span>
+          <span class="attire-tag">Midnight Blue</span>
+          <span class="attire-tag">Gold &amp; Purple</span>
+        </div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon">🌙</span>
+        <div class="detail-label">The Stay</div>
+        <div class="detail-val">Rooms held at <em>The Moongate Inn</em><br>+44 1234 567890<br>Quote: Elara &amp; Caspian</div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon">🎁</span>
+        <div class="detail-label">Gifts</div>
+        <div class="detail-val">Your presence is the greatest magic.<br><em>A honeymoon fund</em> is available if you wish.</div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon">📜</span>
+        <div class="detail-label">Contact the Realm</div>
+        <div class="detail-val">Herald Rosalind: <em>+44 7890 123456</em><br>rsvp@elaraandcaspian.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ COUNTDOWN ═══════════ -->
+<section id="countdown">
+  <div class="countdown-orbs">
+    <div class="orb" style="width:300px;height:300px;background:rgba(74,31,168,0.12);top:10%;left:5%;--dur:14s;--tx:40px;--ty:30px;"></div>
+    <div class="orb" style="width:200px;height:200px;background:rgba(200,151,58,0.08);top:30%;right:8%;--dur:10s;--tx:-30px;--ty:20px;"></div>
+    <div class="orb" style="width:250px;height:250px;background:rgba(107,53,196,0.1);bottom:5%;left:40%;--dur:16s;--tx:20px;--ty:-30px;"></div>
+  </div>
+  <div class="section-inner">
+    <span class="section-label reveal">✦ The Stars Are Aligning ✦</span>
+    <h2 class="section-title reveal">Until the Magic Begins</h2>
+    <div class="deco-line reveal"><span>✨</span></div>
+    <div class="countdown-flex" id="countdownFlex">
+      <div class="cd-item">
+        <div class="cd-num" id="cd-days">00</div>
+        <div class="cd-label">Days</div>
+      </div>
+      <div class="cd-sep">·</div>
+      <div class="cd-item">
+        <div class="cd-num" id="cd-hours">00</div>
+        <div class="cd-label">Hours</div>
+      </div>
+      <div class="cd-sep">·</div>
+      <div class="cd-item">
+        <div class="cd-num" id="cd-mins">00</div>
+        <div class="cd-label">Minutes</div>
+      </div>
+      <div class="cd-sep">·</div>
+      <div class="cd-item">
+        <div class="cd-num" id="cd-secs">00</div>
+        <div class="cd-label">Seconds</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VINE DIVIDER 5 -->
+<div class="vine-divider">
+  <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <rect width="1440" height="60" fill="#06040f"/>
+    <path d="M0 30 C480 55 960 5 1440 30" stroke="rgba(155,110,232,0.3)" stroke-width="1.5" fill="none"/>
+    <path d="M0 30 C480 10 960 50 1440 30" stroke="rgba(200,151,58,0.2)" stroke-width="1" fill="none"/>
+    <g opacity="0.5">
+      <circle cx="240" cy="20" r="4" fill="rgba(240,201,106,0.5)"/>
+      <circle cx="480" cy="45" r="3" fill="rgba(196,159,255,0.5)"/>
+      <circle cx="720" cy="18" r="5" fill="rgba(240,201,106,0.4)"/>
+      <circle cx="960" cy="42" r="3" fill="rgba(196,159,255,0.5)"/>
+      <circle cx="1200" cy="20" r="4" fill="rgba(240,201,106,0.5)"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer id="footer">
+  <canvas id="fairy-dust-canvas"></canvas>
+  <div style="position:relative;z-index:10;">
+    <div class="footer-names">Elara &amp; Caspian</div>
+    <p class="footer-date">June 21, 2025 · Moonveil Estate · Somerset</p>
+    <div class="deco-line" style="max-width:250px;"><span>✦</span></div>
+    <p class="footer-lore">And they lived, loved, and laughed — enchanted — ever after</p>
+    <p style="font-family:'EB Garamond',serif;font-style:italic;color:rgba(196,159,255,0.25);font-size:0.9rem;margin-top:0.3rem;">✦ &nbsp; ✦ &nbsp; ✦</p>
+    <p class="footer-copy" style="margin-top:1.5rem;">© 2025 Elara &amp; Caspian · All realms reserved · Made with moonlight &amp; magic</p>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════
+   CURSOR WAND
+═══════════════════════════════════════ */
+const wandEl = document.getElementById('cursor-wand');
+const trailCanvas = document.getElementById('cursor-trail-canvas');
+const tCtx = trailCanvas.getContext('2d');
+trailCanvas.width = window.innerWidth;
+trailCanvas.height = window.innerHeight;
+
+let mouseX = -200, mouseY = -200;
+const trailPoints = [];
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  wandEl.style.left = mouseX + 'px';
+  wandEl.style.top = mouseY + 'px';
+  trailPoints.push({ x: mouseX, y: mouseY, life: 1.0, r: Math.random() * 3 + 1 });
+  if (trailPoints.length > 60) trailPoints.shift();
+});
+
+function animateTrail() {
+  tCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+  for (let i = trailPoints.length - 1; i >= 0; i--) {
+    const p = trailPoints[i];
+    p.life -= 0.025;
+    if (p.life <= 0) { trailPoints.splice(i, 1); continue; }
+    const hue = Math.random() > 0.5 ? '196, 159, 255' : '240, 201, 106';
+    tCtx.beginPath();
+    tCtx.arc(p.x, p.y, p.r * p.life, 0, Math.PI * 2);
+    tCtx.fillStyle = `rgba(${hue}, ${p.life * 0.7})`;
+    tCtx.fill();
+  }
+  requestAnimationFrame(animateTrail);
+}
+animateTrail();
+
+window.addEventListener('resize', () => {
+  trailCanvas.width = window.innerWidth;
+  trailCanvas.height = window.innerHeight;
+});
+
+/* ═══════════════════════════════════════
+   STAR FIELD
+═══════════════════════════════════════ */
+const starField = document.getElementById('starField');
+const starCount = 220;
+for (let i = 0; i < starCount; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.5 + 0.5;
+  const dur = (Math.random() * 4 + 2).toFixed(1);
+  const delay = (Math.random() * 5).toFixed(1);
+  const minOp = (Math.random() * 0.3 + 0.1).toFixed(2);
+  s.style.cssText = `
+    width:${size}px;height:${size}px;
+    left:${Math.random()*100}%;
+    top:${Math.random()*85}%;
+    --dur:${dur}s;--delay:-${delay}s;--min-op:${minOp};
+    box-shadow: 0 0 ${size*2}px rgba(255,255,255,0.5);
+  `;
+  starField.appendChild(s);
+}
+
+/* ═══════════════════════════════════════
+   FIREFLIES
+═══════════════════════════════════════ */
+const ffCanvas = document.getElementById('firefly-canvas');
+const ffCtx = ffCanvas.getContext('2d');
+ffCanvas.width = window.innerWidth;
+ffCanvas.height = window.innerHeight;
+
+const fireflies = [];
+for (let i = 0; i < 55; i++) {
+  fireflies.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.5,
+    vy: (Math.random() - 0.5) * 0.4,
+    r: Math.random() * 2.5 + 1,
+    life: Math.random(),
+    lifeSpeed: Math.random() * 0.008 + 0.003,
+    lifeDir: 1,
+    hue: Math.random() > 0.4 ? [240, 240, 180] : [196, 159, 255],
+    angle: Math.random() * Math.PI * 2,
+    angleSpeed: (Math.random() - 0.5) * 0.03,
+    radius: Math.random() * 60 + 20,
+    cx: Math.random() * window.innerWidth,
+    cy: Math.random() * window.innerHeight,
+  });
+}
+
+function animateFireflies() {
+  ffCtx.clearRect(0, 0, ffCanvas.width, ffCanvas.height);
+  fireflies.forEach(f => {
+    f.angle += f.angleSpeed;
+    f.x = f.cx + Math.cos(f.angle) * f.radius;
+    f.y = f.cy + Math.sin(f.angle) * f.radius * 0.6;
+    f.cx += f.vx; f.cy += f.vy;
+    if (f.cx < 0) f.cx = ffCanvas.width;
+    if (f.cx > ffCanvas.width) f.cx = 0;
+    if (f.cy < 0) f.cy = ffCanvas.height;
+    if (f.cy > ffCanvas.height) f.cy = 0;
+    f.life += f.lifeSpeed * f.lifeDir;
+    if (f.life >= 1) f.lifeDir = -1;
+    if (f.life <= 0) { f.lifeDir = 1; f.cx = Math.random() * ffCanvas.width; f.cy = Math.random() * ffCanvas.height; }
+    const alpha = Math.max(0, f.life);
+    const [r, g, b] = f.hue;
+    const grad = ffCtx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 4);
+    grad.addColorStop(0, `rgba(${r},${g},${b},${alpha})`);
+    grad.addColorStop(0.4, `rgba(${r},${g},${b},${alpha * 0.4})`);
+    grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    ffCtx.beginPath();
+    ffCtx.arc(f.x, f.y, f.r * 4, 0, Math.PI * 2);
+    ffCtx.fillStyle = grad;
+    ffCtx.fill();
+    ffCtx.beginPath();
+    ffCtx.arc(f.x, f.y, f.r * 0.5, 0, Math.PI * 2);
+    ffCtx.fillStyle = `rgba(255,255,240,${alpha * 0.9})`;
+    ffCtx.fill();
+  });
+  requestAnimationFrame(animateFireflies);
+}
+animateFireflies();
+
+/* ═══════════════════════════════════════
+   BUTTERFLIES
+═══════════════════════════════════════ */
+const bfCanvas = document.getElementById('butterfly-canvas');
+const bfCtx = bfCanvas.getContext('2d');
+bfCanvas.width = window.innerWidth;
+bfCanvas.height = window.innerHeight;
+
+const butterflies = [];
+for (let i = 0; i < 12; i++) {
+  butterflies.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight * 0.7,
+    vx: (Math.random() - 0.5) * 1.2,
+    vy: (Math.random() - 0.5) * 0.8,
+    wingAngle: 0,
+    wingSpeed: Math.random() * 0.15 + 0.1,
+    size: Math.random() * 10 + 12,
+    hue: Math.random() > 0.5 ? [155, 90, 220] : [200, 140, 50],
+    alpha: Math.random() * 0.4 + 0.25,
+    rotation: Math.random() * Math.PI * 2,
+  });
+}
+
+function drawButterfly(ctx, x, y, size, wingAngle, hue, alpha, rotation) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(rotation);
+  ctx.globalAlpha = alpha;
+  const [r, g, b] = hue;
+  const w = Math.abs(Math.sin(wingAngle)) * size;
+  // Left wing
+  ctx.beginPath();
+  ctx.ellipse(-w * 0.5, -size * 0.3, w * 0.8, size * 0.6, -0.3, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(${r},${g},${b},0.7)`;
+  ctx.fill();
+  // Right wing
+  ctx.beginPath();
+  ctx.ellipse(w * 0.5, -size * 0.3, w * 0.8, size * 0.6, 0.3, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(${r},${g},${b},0.7)`;
+  ctx.fill();
+  // Lower wings
+  ctx.beginPath();
+  ctx.ellipse(-w * 0.4, size * 0.2, w * 0.5, size * 0.35, -0.5, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(${r},${g},${b},0.5)`;
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(w * 0.4, size * 0.2, w * 0.5, size * 0.35, 0.5, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(${r},${g},${b},0.5)`;
+  ctx.fill();
+  // Body
+  ctx.beginPath();
+  ctx.ellipse(0, 0, 1.5, size * 0.45, 0, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(255,255,240,0.8)`;
+  ctx.fill();
+  ctx.restore();
+}
+
+function animateButterflies() {
+  bfCtx.clearRect(0, 0, bfCanvas.width, bfCanvas.height);
+  butterflies.forEach(b => {
+    b.wingAngle += b.wingSpeed;
+    b.x += b.vx + Math.sin(b.wingAngle * 0.5) * 0.3;
+    b.y += b.vy + Math.cos(b.wingAngle * 0.7) * 0.2;
+    b.rotation = Math.atan2(b.vy, b.vx) + Math.PI / 2;
+    if (b.x < -50) b.x = bfCanvas.width + 50;
+    if (b.x > bfCanvas.width + 50) b.x = -50;
+    if (b.y < -50) b.y = bfCanvas.height * 0.7;
+    if (b.y > bfCanvas.height * 0.75) b.vy = -Math.abs(b.vy);
+    if (b.y < 50) b.vy = Math.abs(b.vy);
+    drawButterfly(bfCtx, b.x, b.y, b.size, b.wingAngle, b.hue, b.alpha, b.rotation);
+  });
+  requestAnimationFrame(animateButterflies);
+}
+animateButterflies();
+
+/* ═══════════════════════════════════════
+   FAIRY DUST (FOOTER)
+═══════════════════════════════════════ */
+const fdCanvas = document.getElementById('fairy-dust-canvas');
+const fdCtx = fdCanvas.getContext('2d');
+function resizeFD() {
+  const footer = document.getElementById('footer');
+  fdCanvas.width = footer.offsetWidth;
+  fdCanvas.height = footer.offsetHeight;
+}
+resizeFD();
+window.addEventListener('resize', resizeFD);
+
+const dustParticles = [];
+for (let i = 0; i < 80; i++) {
+  dustParticles.push({
+    x: Math.random() * (fdCanvas.width || 1000),
+    y: Math.random() * (fdCanvas.height || 300),
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: -(Math.random() * 0.5 + 0.1),
+    r: Math.random() * 2 + 0.5,
+    life: Math.random(),
+    lifeSpeed: Math.random() * 0.005 + 0.002,
+    hue: Math.random() > 0.5 ? '196,159,255' : '240,201,106',
+  });
+}
+
+function animateDust() {
+  fdCtx.clearRect(0, 0, fdCanvas.width, fdCanvas.height);
+  dustParticles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    p.life += p.lifeSpeed;
+    if (p.life > 1 || p.y < 0) {
+      p.x = Math.random() * fdCanvas.width;
+      p.y = fdCanvas.height + 10;
+      p.life = 0;
+    }
+    const alpha = Math.sin(p.life * Math.PI) * 0.6;
+    fdCtx.beginPath();
+    fdCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    fdCtx.fillStyle = `rgba(${p.hue},${alpha})`;
+    fdCtx.fill();
+  });
+  requestAnimationFrame(animateDust);
+}
+animateDust();
+
+/* ═══════════════════════════════════════
+   RESIZE HANDLERS
+═══════════════════════════════════════ */
+window.addEventListener('resize', () => {
+  ffCanvas.width = bfCanvas.width = trailCanvas.width = window.innerWidth;
+  ffCanvas.height = bfCanvas.height = trailCanvas.height = window.innerHeight;
+  resizeFD();
+});
+
+/* ═══════════════════════════════════════
+   COUNTDOWN
+═══════════════════════════════════════ */
+const weddingDate = new Date('2025-06-21T18:00:00').getTime();
+function tick() {
+  const now = Date.now();
+  let diff = Math.max(0, weddingDate - now);
+  const days = Math.floor(diff / 86400000); diff %= 86400000;
+  const hrs = Math.floor(diff / 3600000); diff %= 3600000;
+  const mins = Math.floor(diff / 60000); diff %= 60000;
+  const secs = Math.floor(diff / 1000);
+  document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(hrs).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nathaniel & Evangeline — A Sacred Union</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --midnight:#060E18;
+  --navy:#0D1B2A;
+  --navy-2:#152842;
+  --gold:#C9A84C;
+  --gold-soft:#E3C77A;
+  --gold-deep:#8C6F2A;
+  --ivory:#FDF8F0;
+  --blush:#E8D5D0;
+  --blush-deep:#C99A95;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cormorant Garamond',serif;
+  background:var(--midnight);
+  color:var(--ivory);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+/* Scroll Progress */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--gold-soft),var(--gold));
+  z-index:9999;box-shadow:0 0 10px var(--gold);
+}
+
+/* Music Toggle */
+.music-toggle{
+  position:fixed;top:20px;right:20px;z-index:9998;
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(13,27,42,.8);border:1px solid var(--gold);
+  color:var(--gold);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(10px);transition:all .4s;
+}
+.music-toggle:hover{background:var(--gold);color:var(--navy)}
+.music-toggle.playing .note{animation:spin 4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* HERO */
+.hero{
+  position:relative;min-height:100vh;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(201,168,76,.25) 0%, transparent 60%),
+    linear-gradient(180deg,#060E18 0%, #0D1B2A 40%, #1B2F4A 70%, #5A4420 95%, #C9A84C 100%);
+  overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  padding:40px 20px 0;
+}
+.stars{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle 3s infinite}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+
+.hero-scripture{
+  position:relative;z-index:3;text-align:center;
+  max-width:720px;margin-top:20px;
+  color:var(--gold-soft);
+  font-family:'Cinzel',serif;
+  letter-spacing:.35em;font-size:.75rem;
+  text-transform:uppercase;
+}
+.hero-scripture em{
+  display:block;font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.15rem;letter-spacing:.05em;
+  color:var(--ivory);margin-top:14px;text-transform:none;
+}
+
+.cathedral-wrap{
+  position:relative;z-index:2;width:100%;max-width:900px;
+  margin-top:30px;
+}
+.cathedral-wrap svg{width:100%;height:auto;display:block}
+
+.hero-title{
+  position:absolute;top:38%;left:50%;transform:translateX(-50%);
+  z-index:5;text-align:center;width:90%;
+}
+.hero-title .amp{
+  font-family:'Cinzel Decorative',serif;
+  color:var(--gold);font-size:2rem;display:block;margin:8px 0;
+  text-shadow:0 0 30px rgba(201,168,76,.8);
+}
+.hero-title h1{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(2.4rem,6vw,5rem);
+  color:var(--ivory);letter-spacing:.08em;
+  text-shadow:0 4px 30px rgba(0,0,0,.6), 0 0 60px rgba(201,168,76,.3);
+  line-height:1;
+}
+.hero-title .date{
+  margin-top:20px;color:var(--gold-soft);
+  font-family:'Cinzel',serif;letter-spacing:.4em;font-size:.85rem;
+}
+
+/* Proposal Silhouette */
+.proposal{
+  position:relative;z-index:4;margin-top:-80px;width:100%;max-width:500px;
+}
+.proposal svg{width:100%;height:auto;display:block}
+.ring-gem{animation:ringPulse 2s ease-in-out infinite}
+@keyframes ringPulse{
+  0%,100%{filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 16px var(--gold))}
+  50%{filter:drop-shadow(0 0 20px #fff) drop-shadow(0 0 40px var(--gold-soft))}
+}
+
+.scroll-hint{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  z-index:6;color:var(--gold);letter-spacing:.3em;font-size:.7rem;
+  font-family:'Cinzel',serif;
+  animation:float 2.5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+/* Section base */
+section{position:relative;padding:100px 24px;z-index:2}
+.container{max-width:1200px;margin:0 auto}
+.section-title{
+  font-family:'Cinzel Decorative',serif;
+  text-align:center;font-size:clamp(1.8rem,4vw,3rem);
+  color:var(--gold);letter-spacing:.08em;margin-bottom:20px;
+}
+.section-sub{
+  text-align:center;color:var(--blush);
+  font-style:italic;font-size:1.1rem;margin-bottom:60px;
+  letter-spacing:.05em;
+}
+
+/* Divider */
+.divider{display:flex;justify-content:center;padding:20px 0;position:relative;z-index:3}
+.divider svg{width:min(340px,80%);height:auto}
+
+/* BLESSING */
+.blessing{
+  background:linear-gradient(180deg,var(--midnight),var(--navy) 50%,var(--midnight));
+  text-align:center;
+}
+.verse{
+  max-width:680px;margin:0 auto 50px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.3rem;color:var(--ivory);line-height:1.8;
+  padding:40px 30px;border-top:1px solid var(--gold-deep);
+  border-bottom:1px solid var(--gold-deep);
+  position:relative;
+}
+.verse::before,.verse::after{
+  content:'✠';position:absolute;color:var(--gold);
+  background:var(--midnight);padding:0 15px;font-size:1.2rem;
+}
+.verse::before{top:-12px;left:50%;transform:translateX(-50%)}
+.verse::after{bottom:-12px;left:50%;transform:translateX(-50%)}
+.verse cite{display:block;margin-top:15px;font-style:normal;color:var(--gold);letter-spacing:.3em;font-size:.85rem;font-family:'Cinzel',serif}
+
+.families{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px;margin-bottom:70px}
+.family h4{
+  font-family:'Cinzel',serif;color:var(--gold);
+  letter-spacing:.3em;font-size:.8rem;margin-bottom:15px;
+}
+.family p{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--ivory);line-height:1.9}
+.family .and{color:var(--gold);font-style:italic}
+
+.couple-names{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(2rem,6vw,4.5rem);
+  color:var(--ivory);letter-spacing:.05em;
+  text-shadow:0 0 40px rgba(201,168,76,.3);
+}
+.couple-names .amp{color:var(--gold);font-style:italic;display:block;font-size:.6em;margin:10px 0;font-family:'Playfair Display',serif}
+.invite-text{margin-top:30px;color:var(--blush);font-style:italic;font-size:1.1rem;max-width:600px;margin-inline:auto}
+
+/* EVENTS */
+.events{background:linear-gradient(180deg,var(--midnight),#0A1626)}
+.events-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
+.event-card{
+  position:relative;padding:50px 30px 40px;
+  background:linear-gradient(160deg,var(--navy-2),var(--navy));
+  clip-path:polygon(50% 0, 100% 8%, 100% 92%, 50% 100%, 0 92%, 0 8%);
+  border:1px solid rgba(201,168,76,.2);
+  text-align:center;transition:transform .5s, box-shadow .5s;
+}
+.event-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(201,168,76,.15)}
+.event-icon{
+  width:60px;height:60px;margin:0 auto 20px;
+  color:var(--gold);
+}
+.event-card h3{
+  font-family:'Cinzel',serif;color:var(--gold);
+  letter-spacing:.15em;font-size:1.1rem;margin-bottom:8px;
+  text-transform:uppercase;
+}
+.event-card .date{font-family:'Playfair Display',serif;font-style:italic;color:var(--blush);margin-bottom:15px;font-size:.95rem}
+.event-card p{color:var(--ivory);font-size:1rem;line-height:1.7}
+.event-card .time{color:var(--gold-soft);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.25em;margin-top:12px;display:block}
+
+/* COUPLE */
+.couple{background:linear-gradient(180deg,#0A1626,var(--midnight))}
+.couple-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:60px;align-items:center}
+.portrait-frame{
+  position:relative;padding:25px;
+  background:linear-gradient(145deg,var(--gold-deep),var(--gold),var(--gold-deep));
+  border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
+  box-shadow:0 20px 50px rgba(201,168,76,.3);
+}
+.portrait-frame::before{
+  content:'';position:absolute;inset:-8px;
+  border:1px solid var(--gold);
+  border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
+}
+.portrait-inner{
+  aspect-ratio:3/4;
+  background:
+    radial-gradient(circle at 50% 30%, #2a3a5a, var(--navy)),
+    var(--navy);
+  border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-family:'Cinzel',serif;
+  letter-spacing:.3em;font-size:.8rem;
+  overflow:hidden;position:relative;
+}
+.portrait-inner svg{width:50%;opacity:.4}
+
+.bio h3{
+  font-family:'Cinzel Decorative',serif;
+  color:var(--gold);font-size:2rem;margin-bottom:10px;
+}
+.bio .role{font-family:'Cinzel',serif;letter-spacing:.25em;color:var(--blush);font-size:.75rem;margin-bottom:20px;display:block}
+.bio p{color:var(--ivory);font-size:1.1rem;line-height:1.8;margin-bottom:15px}
+.bio-divider{width:60px;height:1px;background:var(--gold);margin:25px 0}
+
+.quote-block{
+  margin-top:80px;text-align:center;max-width:800px;margin-inline:auto;
+  padding:50px 30px;
+  border:1px solid var(--gold-deep);
+  position:relative;
+}
+.quote-block::before{content:'❦';position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--midnight);color:var(--gold);padding:0 20px;font-size:1.5rem}
+.quote-block p{font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--ivory);line-height:1.7}
+.quote-block cite{display:block;margin-top:20px;font-style:normal;color:var(--gold);letter-spacing:.3em;font-size:.8rem;font-family:'Cinzel',serif}
+
+/* RSVP */
+.rsvp{
+  background:
+    radial-gradient(ellipse at center, rgba(201,168,76,.1), transparent 70%),
+    var(--midnight);
+  text-align:center;padding:120px 24px;
+}
+.rsvp-box{
+  max-width:640px;margin:0 auto;
+  padding:60px 40px;
+  background:rgba(13,27,42,.6);
+  border:1px solid var(--gold-deep);
+  backdrop-filter:blur(10px);
+}
+.rsvp p{color:var(--ivory);font-size:1.15rem;margin-bottom:30px;font-style:italic}
+.whatsapp-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,var(--gold-deep),var(--gold),var(--gold-soft));
+  color:var(--navy);padding:18px 45px;
+  font-family:'Cinzel',serif;font-weight:600;
+  letter-spacing:.25em;font-size:.9rem;
+  text-decoration:none;text-transform:uppercase;
+  border:none;cursor:pointer;transition:all .4s;
+  box-shadow:0 10px 30px rgba(201,168,76,.3);
+}
+.whatsapp-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(201,168,76,.5)}
+.rsvp-deadline{margin-top:25px;color:var(--blush);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.3em}
+
+/* DETAILS */
+.details{background:linear-gradient(180deg,var(--midnight),var(--navy))}
+.details-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+.detail-card{
+  padding:40px 30px;text-align:center;
+  background:rgba(13,27,42,.5);
+  border:1px solid rgba(201,168,76,.15);
+  transition:all .4s;
+}
+.detail-card:hover{border-color:var(--gold);background:rgba(21,40,66,.7)}
+.detail-card .icon{width:45px;height:45px;margin:0 auto 20px;color:var(--gold)}
+.detail-card h4{font-family:'Cinzel',serif;color:var(--gold);letter-spacing:.2em;font-size:.9rem;margin-bottom:15px;text-transform:uppercase}
+.detail-card p{color:var(--ivory);font-size:1rem;line-height:1.7}
+.detail-card strong{color:var(--gold-soft);font-weight:500}
+
+/* COUNTDOWN */
+.countdown{
+  position:relative;
+  background:
+    radial-gradient(ellipse at center, var(--navy-2), var(--midnight) 70%);
+  text-align:center;overflow:hidden;
+}
+.sparkles{position:absolute;inset:0;pointer-events:none}
+.sparkle{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;animation:sparkle 4s infinite}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(2);box-shadow:0 0 10px var(--gold)}}
+
+.timer{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:40px;position:relative;z-index:2}
+.time-unit{
+  min-width:130px;padding:30px 20px;
+  background:linear-gradient(160deg,var(--navy-2),var(--navy));
+  border:1px solid var(--gold-deep);
+  clip-path:polygon(50% 0, 100% 15%, 100% 85%, 50% 100%, 0 85%, 0 15%);
+}
+.time-unit .num{
+  font-family:'Cinzel Decorative',serif;
+  font-size:3.5rem;color:var(--gold);
+  display:block;line-height:1;
+  text-shadow:0 0 20px rgba(201,168,76,.5);
+}
+.time-unit .label{
+  font-family:'Cinzel',serif;color:var(--ivory);
+  letter-spacing:.25em;font-size:.7rem;
+  text-transform:uppercase;margin-top:10px;display:block;
+}
+
+/* FOOTER */
+footer{
+  background:var(--midnight);padding:80px 24px 40px;
+  text-align:center;border-top:1px solid var(--gold-deep);
+  position:relative;
+}
+.cross-footer{color:var(--gold);font-size:2rem;margin-bottom:20px}
+.footer-names{
+  font-family:'Cinzel Decorative',serif;
+  color:var(--ivory);font-size:2rem;margin-bottom:10px;
+  letter-spacing:.05em;
+}
+.footer-date{color:var(--blush);font-style:italic;margin-bottom:30px}
+.socials{display:flex;gap:20px;justify-content:center;margin-bottom:30px}
+.socials a{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--gold-deep);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);transition:all .3s;
+}
+.socials a:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.copyright{color:var(--gold-deep);font-size:.85rem;letter-spacing:.2em;font-family:'Cinzel',serif}
+
+/* Petals */
+.petal{
+  position:fixed;top:-50px;pointer-events:none;z-index:3;
+  opacity:0;will-change:transform;
+}
+.petal svg{width:100%;height:100%;display:block}
+@keyframes petalFall{
+  0%{transform:translateY(-50px) translateX(0) rotate(0);opacity:0}
+  10%{opacity:.8}
+  90%{opacity:.6}
+  100%{transform:translateY(110vh) translateX(var(--drift,80px)) rotate(720deg);opacity:0}
+}
+@keyframes sway{
+  0%,100%{margin-left:0}
+  50%{margin-left:40px}
+}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s, transform 1s}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+@media(max-width:720px){
+  .hero-title{top:42%}
+  .time-unit{min-width:100px;padding:20px 10px}
+  .time-unit .num{font-size:2.2rem}
+  section{padding:70px 18px}
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="progress"></div>
+<button class="music-toggle" id="musicBtn" aria-label="Toggle music">
+  <svg class="note" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 17V5l10-2v12"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="15" r="2.5"/></svg>
+</button>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="stars" id="stars"></div>
+  
+  <div class="hero-scripture reveal">
+    ✠ &nbsp; A Blessed Union &nbsp; ✠
+    <em>"Therefore what God has joined together, let no one separate."</em>
+    — Mark 10:9
+  </div>
+
+  <div class="cathedral-wrap">
+    <!-- CATHEDRAL SVG -->
+    <svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="stoneGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1a2942"/>
+          <stop offset="1" stop-color="#060E18"/>
+        </linearGradient>
+        <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#C9A84C"/>
+          <stop offset=".5" stop-color="#E3C77A"/>
+          <stop offset="1" stop-color="#8C6F2A"/>
+        </linearGradient>
+        <radialGradient id="roseGlow">
+          <stop offset="0" stop-color="#fff8d8"/>
+          <stop offset=".4" stop-color="#C9A84C"/>
+          <stop offset="1" stop-color="#5a3f15"/>
+        </radialGradient>
+        <radialGradient id="windowGlow">
+          <stop offset="0" stop-color="#fde9a0" stop-opacity=".9"/>
+          <stop offset="1" stop-color="#C9A84C" stop-opacity=".5"/>
+        </radialGradient>
+      </defs>
+      
+      <!-- Ground -->
+      <rect x="0" y="640" width="900" height="60" fill="#060E18"/>
+      
+      <!-- Main Cathedral Body -->
+      <rect x="280" y="300" width="340" height="340" fill="url(#stoneGrad)" stroke="#2a3a5a" stroke-width="1"/>
+      
+      <!-- Left Spire -->
+      <rect x="150" y="200" width="110" height="440" fill="url(#stoneGrad)" stroke="#2a3a5a"/>
+      <polygon points="150,200 205,60 260,200" fill="#0D1B2A" stroke="#2a3a5a"/>
+      <line x1="205" y1="60" x2="205" y2="20" stroke="#C9A84C" stroke-width="2"/>
+      <line x1="195" y1="35" x2="215" y2="35" stroke="#C9A84C" stroke-width="2"/>
+      <circle cx="205" cy="15" r="3" fill="#C9A84C"/>
+      
+      <!-- Right Spire -->
+      <rect x="640" y="200" width="110" height="440" fill="url(#stoneGrad)" stroke="#2a3a5a"/>
+      <polygon points="640,200 695,60 750,200" fill="#0D1B2A" stroke="#2a3a5a"/>
+      <line x1="695" y1="60" x2="695" y2="20" stroke="#C9A84C" stroke-width="2"/>
+      <line x1="685" y1="35" x2="705" y2="35" stroke="#C9A84C" stroke-width="2"/>
+      <circle cx="695" cy="15" r="3" fill="#C9A84C"/>
+      
+      <!-- Spire windows -->
+      <path d="M185 240 Q205 220 225 240 L225 290 L185 290 Z" fill="#0A1626" stroke="#C9A84C" stroke-width="1"/>
+      <path d="M185 340 Q205 320 225 340 L225 390 L185 390 Z" fill="url(#glassGrad)" opacity=".7" stroke="#C9A84C"/>
+      <path d="M185 440 Q205 420 225 440 L225 490 L185 490 Z" fill="url(#glassGrad)" opacity=".6" stroke="#C9A84C"/>
+      
+      <path d="M675 240 Q695 220 715 240 L715 290 L675 290 Z" fill="#0A1626" stroke="#C9A84C" stroke-width="1"/>
+      <path d="M675 340 Q695 320 715 340 L715 390 L675 390 Z" fill="url(#glassGrad)" opacity=".7" stroke="#C9A84C"/>
+      <path d="M675 440 Q695 420 715 440 L715 490 L675 490 Z" fill="url(#glassGrad)" opacity=".6" stroke="#C9A84C"/>
+      
+      <!-- Central peak/roof -->
+      <polygon points="280,300 450,180 620,300" fill="#0A1626" stroke="#2a3a5a"/>
+      <line x1="450" y1="180" x2="450" y2="140" stroke="#C9A84C" stroke-width="2"/>
+      <line x1="440" y1="155" x2="460" y2="155" stroke="#C9A84C" stroke-width="2"/>
+      
+      <!-- Rose Window -->
+      <circle cx="450" cy="370" r="70" fill="url(#roseGlow)" stroke="#C9A84C" stroke-width="2"/>
+      <g stroke="#C9A84C" stroke-width="1.5" fill="none">
+        <circle cx="450" cy="370" r="55"/>
+        <circle cx="450" cy="370" r="35"/>
+        <circle cx="450" cy="370" r="15" fill="#fff8d8"/>
+        <!-- Tracery spokes -->
+        <g>
+          <line x1="450" y1="300" x2="450" y2="440"/>
+          <line x1="380" y1="370" x2="520" y2="370"/>
+          <line x1="400" y1="320" x2="500" y2="420"/>
+          <line x1="500" y1="320" x2="400" y2="420"/>
+        </g>
+        <!-- Petals -->
+        <g fill="#8C6F2A" opacity=".5">
+          <circle cx="450" cy="330" r="10"/>
+          <circle cx="450" cy="410" r="10"/>
+          <circle cx="410" cy="370" r="10"/>
+          <circle cx="490" cy="370" r="10"/>
+          <circle cx="420" cy="340" r="10"/>
+          <circle cx="480" cy="340" r="10"/>
+          <circle cx="420" cy="400" r="10"/>
+          <circle cx="480" cy="400" r="10"/>
+        </g>
+      </g>
+      
+      <!-- Side pointed arch windows -->
+      <g>
+        <path d="M305 470 Q325 440 345 470 L345 560 L305 560 Z" fill="url(#glassGrad)" opacity=".8" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="325" y1="455" x2="325" y2="560" stroke="#060E18" stroke-width="1"/>
+        <line x1="305" y1="500" x2="345" y2="500" stroke="#060E18" stroke-width=".5"/>
+        
+        <path d="M360 470 Q380 440 400 470 L400 560 L360 560 Z" fill="url(#glassGrad)" opacity=".7" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="380" y1="455" x2="380" y2="560" stroke="#060E18" stroke-width="1"/>
+        
+        <path d="M500 470 Q520 440 540 470 L540 560 L500 560 Z" fill="url(#glassGrad)" opacity=".7" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="520" y1="455" x2="520" y2="560" stroke="#060E18" stroke-width="1"/>
+        
+        <path d="M555 470 Q575 440 595 470 L595 560 L555 560 Z" fill="url(#glassGrad)" opacity=".8" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="575" y1="455" x2="575" y2="560" stroke="#060E18" stroke-width="1"/>
+        <line x1="555" y1="500" x2="595" y2="500" stroke="#060E18" stroke-width=".5"/>
+      </g>
+      
+      <!-- Entrance Door (pointed arch) -->
+      <path d="M410 640 L410 510 Q450 460 490 510 L490 640 Z" fill="#2a1a0d" stroke="#C9A84C" stroke-width="2"/>
+      <line x1="450" y1="475" x2="450" y2="640" stroke="#C9A84C" stroke-width="1.5"/>
+      <path d="M418 640 L418 515 Q450 475 450 475" fill="none" stroke="#8C6F2A" stroke-width=".5"/>
+      <circle cx="438" cy="575" r="2" fill="#C9A84C"/>
+      <circle cx="462" cy="575" r="2" fill="#C9A84C"/>
+      <!-- Door arch decoration -->
+      <path d="M400 510 Q450 450 500 510" fill="none" stroke="#C9A84C" stroke-width="1"/>
+      
+      <!-- Candles at entrance -->
+      <g>
+        <rect x="370" y="600" width="6" height="35" fill="#FDF8F0"/>
+        <ellipse cx="373" cy="598" rx="3" ry="6" fill="#FFE29A">
+          <animate attributeName="ry" values="6;7;5;6" dur="1.2s" repeatCount="indefinite"/>
+        </ellipse>
+        <circle cx="373" cy="596" r="8" fill="#FFE29A" opacity=".3"/>
+        
+        <rect x="524" y="600" width="6" height="35" fill="#FDF8F0"/>
+        <ellipse cx="527" cy="598" rx="3" ry="6" fill="#FFE29A">
+          <animate attributeName="ry" values="6;5;7;6" dur="1.4s" repeatCount="indefinite"/>
+        </ellipse>
+        <circle cx="527" cy="596" r="8" fill="#FFE29A" opacity=".3"/>
+      </g>
+      
+      <!-- Flying buttresses hint -->
+      <line x1="260" y1="400" x2="280" y2="420" stroke="#2a3a5a" stroke-width="2"/>
+      <line x1="260" y1="480" x2="280" y2="500" stroke="#2a3a5a" stroke-width="2"/>
+      <line x1="640" y1="400" x2="620" y2="420" stroke="#2a3a5a" stroke-width="2"/>
+      <line x1="640" y1="480" x2="620" y2="500" stroke="#2a3a5a" stroke-width="2"/>
+      
+      <!-- Ornamental crosses on body -->
+      <g fill="#C9A84C" opacity=".6">
+        <rect x="448" y="270" width="4" height="20"/>
+        <rect x="442" y="276" width="16" height="4"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-title">
+    <h1>Nathaniel</h1>
+    <span class="amp">&amp;</span>
+    <h1>Evangeline</h1>
+    <div class="date">✦ &nbsp; XVI · OCTOBER · MMXXV &nbsp; ✦</div>
+  </div>
+
+  <!-- Proposal Silhouette -->
+  <div class="proposal">
+    <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="gemGlow">
+          <stop offset="0" stop-color="#ffffff"/>
+          <stop offset=".5" stop-color="#fff8d8"/>
+          <stop offset="1" stop-color="#C9A84C" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      
+      <!-- Groom kneeling (left) -->
+      <g fill="#060E18">
+        <!-- Head -->
+        <circle cx="165" cy="120" r="18"/>
+        <!-- Body/jacket kneeling -->
+        <path d="M145 138 L145 210 Q145 220 160 220 L195 220 Q200 200 195 175 L188 145 Q180 138 170 138 Z"/>
+        <!-- Back leg (kneeling) -->
+        <path d="M170 220 L200 260 L240 270 L245 260 L210 250 L195 220 Z"/>
+        <!-- Front leg bent -->
+        <path d="M195 220 L230 225 L240 255 L230 260 L218 240 L200 230 Z"/>
+        <!-- Arm extended with ring box -->
+        <path d="M192 165 L245 155 L260 145 L255 142 L240 148 L195 158 Z"/>
+        <!-- Ring box -->
+        <rect x="255" y="135" width="22" height="16" rx="2"/>
+        <rect x="255" y="128" width="22" height="9" rx="2" transform="rotate(-15 266 132)"/>
+      </g>
+      
+      <!-- Ring gem glowing between them -->
+      <g class="ring-gem">
+        <circle cx="283" cy="125" r="25" fill="url(#gemGlow)"/>
+        <circle cx="283" cy="125" r="4" fill="#ffffff"/>
+        <polygon points="283,119 286,124 283,129 280,124" fill="#fff8d8"/>
+      </g>
+      
+      <!-- Bride standing (right) -->
+      <g fill="#060E18">
+        <!-- Head -->
+        <circle cx="340" cy="105" r="17"/>
+        <!-- Hair bun/veil -->
+        <path d="M325 95 Q320 80 335 75 Q355 75 358 92 Q360 105 355 108 Q345 98 340 98 Q332 100 325 105 Z"/>
+        <!-- Veil flowing -->
+        <path d="M355 92 Q385 110 375 180 Q365 160 360 130 Z" opacity=".5"/>
+        <!-- Bodice -->
+        <path d="M320 120 Q318 150 325 170 L355 170 Q362 150 360 120 Q352 115 340 115 Q328 115 320 120 Z"/>
+        <!-- A-line gown -->
+        <path d="M325 170 L295 275 L385 275 L355 170 Z"/>
+        <!-- Arms -->
+        <path d="M322 135 Q305 155 310 185 L318 182 Q315 160 328 145 Z"/>
+        <path d="M358 135 Q375 150 372 175 L365 172 Q365 155 355 145 Z"/>
+        <!-- Bouquet -->
+        <ellipse cx="314" cy="195" rx="14" ry="12" fill="#060E18"/>
+      </g>
+      <!-- Bouquet flower accents -->
+      <g fill="#E8D5D0" opacity=".8">
+        <circle cx="310" cy="192" r="3"/>
+        <circle cx="318" cy="194" r="2.5"/>
+        <circle cx="313" cy="199" r="2.5"/>
+      </g>
+      <g fill="#C9A84C" opacity=".7">
+        <circle cx="316" cy="190" r="1.5"/>
+        <circle cx="312" cy="197" r="1.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="scroll-hint">✦ Scroll ✦</div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <svg viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 55 Q10 20 40 20 L150 20 Q170 5 170 5 Q170 5 170 5 Q170 5 170 5 Q170 5 170 5" fill="none" stroke="#C9A84C" stroke-width="1"/>
+    <path d="M20 55 L20 25 Q20 15 30 15 L150 15 Q170 0 190 15 L310 15 Q320 15 320 25 L320 55" fill="none" stroke="#C9A84C" stroke-width="1"/>
+    <circle cx="170" cy="30" r="8" fill="none" stroke="#C9A84C"/>
+    <circle cx="170" cy="30" r="3" fill="#C9A84C"/>
+    <line x1="40" y1="40" x2="140" y2="40" stroke="#C9A84C" stroke-width=".5" opacity=".6"/>
+    <line x1="200" y1="40" x2="300" y2="40" stroke="#C9A84C" stroke-width=".5" opacity=".6"/>
+  </svg>
+</div>
+
+<!-- BLESSING -->
+<section class="blessing">
+  <div class="container">
+    <h2 class="section-title reveal">✠ A Sacred Union ✠</h2>
+    <div class="verse reveal">
+      "Many waters cannot quench love; neither can the floods drown it. I am my beloved's, and my beloved is mine."
+      <cite>— Song of Solomon 8:7 · 6:3 —</cite>
+    </div>
+    
+    <div class="families reveal">
+      <div class="family">
+        <h4>❦ The Groom's Family ❦</h4>
+        <p>Mr. & Mrs. Augustus Harrington</p>
+        <p class="and">—— grandparents of ——</p>
+        <p>Mr. & Mrs. Theodore Harrington</p>
+      </div>
+      <div class="family">
+        <h4>❦ The Bride's Family ❦</h4>
+        <p>Mr. & Mrs. Cornelius Whitfield</p>
+        <p class="and">—— grandparents of ——</p>
+        <p>Dr. & Mrs. Benjamin Whitfield</p>
+      </div>
+    </div>
+    
+    <div class="reveal">
+      <p style="font-family:'Cinzel',serif;letter-spacing:.3em;color:var(--blush);font-size:.75rem;margin-bottom:30px">REQUEST THE HONOUR OF YOUR PRESENCE AT THE MARRIAGE OF</p>
+      <h2 class="couple-names">
+        Nathaniel James
+        <span class="amp">&amp;</span>
+        Evangeline Rose
+      </h2>
+      <p class="invite-text">As they enter into the holy covenant of matrimony before God, their families, and dearest friends.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 55 L20 25 Q20 15 30 15 L150 15 Q170 0 190 15 L310 15 Q320 15 320 25 L320 55" fill="none" stroke="#C9A84C"/>
+    <text x="170" y="45" text-anchor="middle" fill="#C9A84C" font-family="Cinzel" font-size="10" letter-spacing="3">✠</text>
+  </svg>
+</div>
+
+<!-- EVENTS -->
+<section class="events">
+  <div class="container">
+    <h2 class="section-title reveal">The Order of Celebrations</h2>
+    <p class="section-sub reveal">Six days of sacred rejoicing & fellowship</p>
+    
+    <div class="events-grid">
+      <div class="event-card reveal">
+        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l2 6h6l-5 4 2 7-5-4-5 4 2-7-5-4h6z"/></svg>
+        <h3>Rehearsal Dinner</h3>
+        <div class="date">Thursday, October 14</div>
+        <p>An intimate evening with immediate family & bridal party.</p>
+        <span class="time">6:30 PM · THE GARDEN ROOM</span>
+      </div>
+      
+      <div class="event-card reveal">
+        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2v20M8 6h8M7 10h10"/><path d="M4 22h16"/></svg>
+        <h3>Holy Matrimony</h3>
+        <div class="date">Saturday, October 16</div>
+        <p>Nuptial Mass at St. Gabriel's Cathedral.</p>
+        <span class="time">11:00 AM · CATHEDRAL</span>
+      </div>
+      
+      <div class="event-card reveal">
+        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+        <h3>Wedding Breakfast</h3>
+        <div class="date">Saturday, October 16</div>
+        <p>A luncheon feast following the ceremony.</p>
+        <span class="time">1:30 PM · ABBEY HALL</span>
+      </div>
+      
+      <div class="event-card reveal">
+        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 2v6a6 6 0 0012 0V2M6 2h12M10 14v6M14 14v6M8 22h8"/></svg>
+        <h3>Evening Reception</h3>
+        <div class="date">Saturday, October 16</div>
+        <p>Dinner, dancing, and celebration beneath the stars.</p>
+        <span class="time">6:00 PM · GRAND BALLROOM</span>
+      </div>
+      
+      <div class="event-card reveal">
+        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+        <h3>Morning Brunch</h3>
+        <div class="date">Sunday, October 17</div>
+        <p>A farewell gathering with the couple.</p>
+        <span class="time">10:00 AM · TERRACE GARDEN</span>
+      </div>
+      
+      <div class="event-card reveal">
+        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 3l2.5 7H22l-6 4.5 2.5 7.5L12 17l-6.5 5L8 14.5 2 10h7.5z"/></svg>
+        <h3>Thanksgiving Service</h3>
+        <div class="date">Sunday, October 17</div>
+        <p>A service of gratitude to our gracious God.</p>
+        <span class="time">4:00 PM · CATHEDRAL CHAPEL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 55 L20 25 Q20 15 30 15 L150 15 Q170 0 190 15 L310 15 Q320 15 320 25 L320 55" fill="none" stroke="#C9A84C"/>
+    <circle cx="170" cy="30" r="4" fill="#C9A84C"/>
+  </svg>
+</div>
+
+<!-- COUPLE -->
+<section class="couple">
+  <div class="container">
+    <h2 class="section-title reveal">The Beloved</h2>
+    <p class="section-sub reveal">Two souls, one eternal covenant</p>
+    
+    <div class="couple-grid">
+      <div class="reveal">
+        <div class="portrait-frame">
+          <div class="portrait-inner">
+            <svg viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="35" r="15"/><path d="M20 90 Q20 60 50 60 Q80 60 80 90 Z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="bio reveal">
+        <span class="role">✦ THE GROOM ✦</span>
+        <h3>Nathaniel James</h3>
+        <p>A man of quiet faith and steadfast devotion, Nathaniel found in Evangeline the embodiment of every prayer he whispered in solitude.</p>
+        <div class="bio-divider"></div>
+        <p>An architect by trade, he has drawn blueprints for cathedrals — yet nothing he has built compares to the sanctuary he finds in her presence.</p>
+      </div>
+    </div>
+    
+    <div class="couple-grid" style="margin-top:60px;direction:rtl">
+      <div class="reveal" style="direction:ltr">
+        <div class="portrait-frame">
+          <div class="portrait-inner">
+            <svg viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="35" r="15"/><path d="M20 90 Q20 60 50 60 Q80 60 80 90 Z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="bio reveal" style="direction:ltr">
+        <span class="role">✦ THE BRIDE ✦</span>
+        <h3>Evangeline Rose</h3>
+        <p>With a heart tender as morning light and a spirit anchored in grace, Evangeline walks through the world leaving gentleness in her wake.</p>
+        <div class="bio-divider"></div>
+        <p>A literature professor and organist, she reads to him by candlelight and plays the hymns that filled their first courtship evenings.</p>
+      </div>
+    </div>
+    
+    <div class="quote-block reveal">
+      <p>"I have found the one whom my soul loves."</p>
+      <cite>— SONG OF SOLOMON 3:4 —</cite>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 55 L20 25 Q20 15 30 15 L150 15 Q170 0 190 15 L310 15 Q320 15 320 25 L320 55" fill="none" stroke="#C9A84C"/>
+    <text x="170" y="42" text-anchor="middle" fill="#C9A84C" font-family="serif" font-size="16">❦</text>
+  </svg>
+</div>
+
+<!-- RSVP -->
+<section class="rsvp">
+  <div class="container">
+    <h2 class="section-title reveal">Kindly Respond</h2>
+    <p class="section-sub reveal">Your presence would be our greatest gift</p>
+    <div class="rsvp-box reveal">
+      <p>We ask that you confirm your attendance so we may prepare a place of honour for you at our table. Please reach us via WhatsApp.</p>
+      <a href="https://wa.me/15555551234?text=I%20joyfully%20accept%20the%20invitation%20to%20Nathaniel%20%26%20Evangeline%27s%20wedding" class="whatsapp-btn" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9s-.5-.1-.7.2c-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.7-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4-.1-.5-.1-.1-.7-1.7-.9-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2z"/></svg>
+        RSVP VIA WHATSAPP
+      </a>
+      <div class="rsvp-deadline">KINDLY REPLY BY · SEPTEMBER 15</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 55 L20 25 Q20 15 30 15 L150 15 Q170 0 190 15 L310 15 Q320 15 320 25 L320 55" fill="none" stroke="#C9A84C"/>
+  </svg>
+</div>
+
+<!-- DETAILS -->
+<section class="details">
+  <div class="container">
+    <h2 class="section-title reveal">Wedding Particulars</h2>
+    <p class="section-sub reveal">All you may need for the celebration</p>
+    
+    <div class="details-grid">
+      <div class="detail-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 4h14l-2 16H7z"/><path d="M10 4V2M14 4V2"/></svg>
+        <h4>Hashtag</h4>
+        <p><strong>#NathAndEvieForever</strong><br>Share every precious moment.</p>
+      </div>
+      <div class="detail-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2"/></svg>
+        <h4>Weather</h4>
+        <p>Mild autumn afternoon.<br><strong>Expected: 64°F · 18°C</strong><br>Light breeze, clear skies.</p>
+      </div>
+      <div class="detail-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 20h20M4 20V10l8-6 8 6v10M9 20v-6h6v6"/></svg>
+        <h4>Hotel</h4>
+        <p><strong>The Ashbourne Manor</strong><br>Reserve under "Harrington Wedding" for a blessed rate.</p>
+      </div>
+      <div class="detail-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 4h8l1 6H7zM6 10h12v8H6zM8 18v2M16 18v2"/></svg>
+        <h4>Dress Code</h4>
+        <p><strong>Black Tie Optional</strong><br>Ladies in floor-length.<br>Gentlemen in tuxedo or dark suit.</p>
+      </div>
+      <div class="detail-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 17h18M5 17V9l2-4h10l2 4v8"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+        <h4>Transport</h4>
+        <p>Complimentary shuttles from hotel to cathedral<br><strong>Depart 10:00 AM sharp</strong></p>
+      </div>
+      <div class="detail-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="8" width="18" height="13"/><path d="M12 8v13M3 12h18M8 8a2 2 0 010-4 3 3 0 014 3 3 3 0 014-3 2 2 0 010 4"/></svg>
+        <h4>Gifts</h4>
+        <p>Your presence is our present.<br>A registry is available upon request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 55 L20 25 Q20 15 30 15 L150 15 Q170 0 190 15 L310 15 Q320 15 320 25 L320 55" fill="none" stroke="#C9A84C"/>
+    <text x="170" y="42" text-anchor="middle" fill="#C9A84C" font-size="14">✦</text>
+  </svg>
+</div>
+
+<!-- COUNTDOWN -->
+<section class="countdown">
+  <div class="sparkles" id="sparkles"></div>
+  <div class="container">
+    <h2 class="section-title reveal">Counting the Blessed Days</h2>
+    <p class="section-sub reveal">Until two become one before the Lord</p>
+    <div class="timer reveal" id="timer">
+      <div class="time-unit"><span class="num" id="d">00</span><span class="label">Days</span></div>
+      <div class="time-unit"><span class="num" id="h">00</span><span class="label">Hours</span></div>
+      <div class="time-unit"><span class="num" id="m">00</span><span class="label">Minutes</span></div>
+      <div class="time-unit"><span class="num" id="s">00</span><span class="label">Seconds</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="cross-footer">✠</div>
+  <div class="footer-names">Nathaniel &amp; Evangeline</div>
+  <div class="footer-date">XVI · OCTOBER · MMXXV</div>
+  <div class="socials">
+    <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+    <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+    <a href="#" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></a>
+  </div>
+  <div class="copyright">MADE WITH ✦ LOVE ✦ AND ✦ PRAYER</div>
+</footer>
+
+<script>
+// Stars
+(function(){
+  const stars = document.getElementById('stars');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    const size=Math.random()*2+0.5;
+    s.style.width=size+'px';s.style.height=size+'px';
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*70+'%';
+    s.style.animationDelay=(Math.random()*3)+'s';
+    stars.appendChild(s);
+  }
+})();
+
+// Sparkles
+(function(){
+  const sp = document.getElementById('sparkles');
+  for(let i=0;i<40;i++){
+    const s=document.createElement('div');
+    s.className='sparkle';
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.animationDelay=(Math.random()*4)+'s';
+    sp.appendChild(s);
+  }
+})();
+
+// Scroll progress
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress').style.width=p+'%';
+});
+
+// Reveal on scroll
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Petals
+const petalSVGs = [
+  '<svg viewBox="0 0 30 30"><path d="M15 3 Q5 10 6 20 Q15 27 24 20 Q25 10 15 3 Z" fill="#E8D5D0" opacity=".85"/><path d="M15 5 Q9 12 10 19" stroke="#C99A95" stroke-width=".5" fill="none"/></svg>',
+  '<svg viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="12" fill="#C99A95" opacity=".8" transform="rotate(30 15 15)"/><path d="M15 4 Q15 15 15 26" stroke="#8C5752" stroke-width=".5" opacity=".5" fill="none" transform="rotate(30 15 15)"/></svg>',
+  '<svg viewBox="0 0 30 30"><path d="M15 2 Q22 8 22 15 Q22 22 15 28 Q8 22 8 15 Q8 8 15 2 Z" fill="#F2DDD8" opacity=".75"/></svg>'
+];
+let lastPetalY = 0;
+window.addEventListener('scroll',()=>{
+  const y = window.scrollY;
+  if(Math.abs(y-lastPetalY) > 60){
+    lastPetalY = y;
+    spawnPetal();
+  }
+});
+function spawnPetal(){
+  const p = document.createElement('div');
+  p.className='petal';
+  const size = 18+Math.random()*20;
+  p.style.width=size+'px';p.style.height=size+'px';
+  p.style.left=Math.random()*100+'%';
+  p.innerHTML = petalSVGs[Math.floor(Math.random()*3)];
+  const dur = 8+Math.random()*6;
+  const drift = (Math.random()-0.5)*300;
+  p.style.setProperty('--drift',drift+'px');
+  p.style.animation = `petalFall ${dur}s linear forwards, sway ${2+Math.random()*2}s ease-in-out infinite`;
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(), dur*1000+500);
+}
+
+// Countdown
+const target = new Date('2025-10-16T11:00:00').getTime();
+function tick(){
+  const now = Date.now();
+  let diff = target-now;
+  if(diff<0)diff=0;
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('d').textContent=String(d).padStart(2,'0');
+  document.getElementById('h').textContent=String(h).padStart(2,'0');
+  document.getElementById('m').textContent=String(m).padStart(2,'0');
+  document.getElementById('s').textContent=String(s).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+
+// Music toggle (silent placeholder)
+const musicBtn = document.getElementById('musicBtn');
+let playing = false;
+let audioCtx, oscillators = [];
+musicBtn.addEventListener('click',()=>{
+  playing = !playing;
+  musicBtn.classList.toggle('playing', playing);
+  if(playing){
+    try{
+      audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+      const notes = [261.63, 329.63, 392.00, 523.25];
+      notes.forEach((f,i)=>{
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type='sine';o.frequency.value=f;
+        g.gain.value=0.03;
+        o.connect(g);g.connect(audioCtx.destination);
+        o.start();
+        oscillators.push({o,g});
+      });
+    }catch(e){}
+  } else {
+    oscillators.forEach(({o})=>{try{o.stop()}catch(e){}});
+    oscillators=[];
+  }
+});
+
+// Parallax hero title
+window.addEventListener('scroll',()=>{
+  const y = window.scrollY;
+  const title = document.querySelector('.hero-title');
+  if(title && y<window.innerHeight){
+    title.style.transform = `translateX(-50%) translateY(${y*0.3}px)`;
+    title.style.opacity = 1 - y/600;
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{groomName}} & {{brideName}} — A Grand Bollywood Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8B0000;
+    --gold: #C9A84C;
+    --gold-light: #F5D88A;
+    --gold-dark: #9B7A2A;
+    --black: #0A0000;
+    --deep: #150000;
+    --cream: #FFF8E7;
+    --white: #FFFDF5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 18px; height: 18px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, background 0.15s ease;
+    mix-blend-mode: screen;
+  }
+  .cursor-dot {
+    width: 5px; height: 5px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+  }
+
+  /* ============ FLOATING ELEMENTS ============ */
+  .float-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .sparkle {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: var(--gold-light);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: floatSpark linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes floatSpark {
+    0% { transform: translateY(110vh) rotate(0deg) scale(0); opacity: 0; }
+    10% { opacity: 1; transform: translateY(90vh) rotate(45deg) scale(1); }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) rotate(360deg) scale(0.5); opacity: 0; }
+  }
+
+  .confetti-piece {
+    position: absolute;
+    width: 8px; height: 8px;
+    animation: confettiFall linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ============ FILM REEL FLOAT ============ */
+  .film-reel-float {
+    position: fixed;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 5;
+    animation: reelDrift linear infinite;
+  }
+
+  @keyframes reelDrift {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-50px) rotate(360deg); }
+  }
+
+  /* ============ SECTIONS BASE ============ */
+  section { position: relative; overflow: hidden; }
+
+  /* ============ HERO ============ */
+  #hero {
+    min-height: 100vh;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 50% 60%, #3a0000 0%, #0A0000 70%);
+  }
+
+  /* Curtains */
+  .curtain-left, .curtain-right {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 2;
+    transform-origin: left center;
+    animation: curtainOpen 2.5s cubic-bezier(0.77, 0, 0.175, 1) 0.5s forwards;
+  }
+  .curtain-left { left: 0; transform-origin: left center; }
+  .curtain-right { right: 0; transform-origin: right center; }
+
+  @keyframes curtainOpen {
+    0% { transform: scaleX(1); }
+    100% { transform: scaleX(0); }
+  }
+
+  /* Spotlight SVG */
+  .spotlight-svg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    opacity: 0;
+    animation: spotFade 1s ease 2s forwards;
+  }
+  @keyframes spotFade { to { opacity: 1; } }
+
+  .red-carpet {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 55%;
+    background: linear-gradient(to bottom, #6B0000, #8B0000 40%, #A00000);
+    border-left: 3px solid var(--gold-dark);
+    border-right: 3px solid var(--gold-dark);
+    z-index: 1;
+    box-shadow: 0 0 40px rgba(139,0,0,0.5);
+  }
+  .red-carpet::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 20px,
+      rgba(0,0,0,0.15) 20px,
+      rgba(0,0,0,0.15) 21px
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 20;
+    text-align: center;
+    opacity: 0;
+    animation: heroReveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) 2.8s forwards;
+  }
+  @keyframes heroReveal {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: var(--gold);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-names {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    line-height: 0.9;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 30px rgba(201,168,76,0.4));
+    letter-spacing: 0.05em;
+  }
+
+  .hero-and {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--crimson);
+    margin: 0.2rem 0;
+    display: block;
+  }
+
+  .hero-date {
+    margin-top: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--cream);
+    letter-spacing: 0.3em;
+  }
+
+  .hero-date span {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .hero-scroll {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    opacity: 0.6;
+  }
+  .hero-scroll span {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ============ FILM STRIP DIVIDER ============ */
+  .filmstrip-divider {
+    width: 100%;
+    background: var(--black);
+    padding: 1.5rem 0;
+    overflow: hidden;
+  }
+
+  .filmstrip-scroll {
+    display: flex;
+    gap: 0;
+    animation: stripScroll 20s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes stripScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .film-hole {
+    width: 28px; height: 20px;
+    border-radius: 4px;
+    border: 2px solid var(--gold-dark);
+    background: var(--black);
+    margin: 0 6px;
+    flex-shrink: 0;
+  }
+
+  .film-frame {
+    width: 80px; height: 56px;
+    border: 2px solid var(--gold-dark);
+    background: linear-gradient(135deg, #1a0000, #300000);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.55rem;
+    color: var(--gold-dark);
+    letter-spacing: 0.1em;
+  }
+
+  .filmstrip-inner {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #1a0800, #100000, #1a0800);
+    border-top: 4px solid var(--gold-dark);
+    border-bottom: 4px solid var(--gold-dark);
+    padding: 8px 0;
+  }
+
+  /* ============ BLESSING SECTION ============ */
+  #blessing {
+    background: linear-gradient(to bottom, #0A0000, #1a0505, #0A0000);
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  #blessing::before {
+    content: '❝';
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6rem;
+    color: var(--gold);
+    opacity: 0.15;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .blessing-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    color: var(--cream);
+    max-width: 750px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .blessing-quote em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .blessing-attr {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--gold-dark);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .blessing-deco {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 1.5rem auto;
+  }
+
+  /* ============ EVENTS SECTION ============ */
+  #events {
+    background: var(--deep);
+    padding: 5rem 2rem;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.5em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.1em;
+    line-height: 1;
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .event-card {
+    background: linear-gradient(145deg, #180000, #220808);
+    border: 1px solid var(--gold-dark);
+    border-top: 3px solid var(--gold);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(201,168,76,0.15), 0 0 0 1px var(--gold);
+  }
+
+  .event-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .event-card:hover::before { opacity: 1; }
+
+  .event-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .event-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .event-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .event-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: var(--gold-dark);
+    letter-spacing: 0.15em;
+  }
+
+  .event-venue {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    color: rgba(255,248,231,0.6);
+    line-height: 1.5;
+  }
+
+  .event-tag {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--black);
+    background: var(--gold);
+    padding: 0.2rem 0.6rem;
+  }
+
+  /* ============ COUPLE SECTION ============ */
+  #couple {
+    background: linear-gradient(to bottom, #0A0000, #1a0505);
+    padding: 6rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .poster-frame {
+    position: relative;
+    max-width: 520px;
+    width: 100%;
+    margin: 3rem auto;
+  }
+
+  .poster-inner {
+    background: linear-gradient(145deg, #1c0000, #2d0808, #1c0000);
+    border: 3px solid var(--gold);
+    padding: 3.5rem 3rem;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 60px rgba(139,0,0,0.4), 0 0 120px rgba(139,0,0,0.1), inset 0 0 30px rgba(0,0,0,0.5);
+  }
+
+  .poster-corner {
+    position: absolute;
+    width: 30px; height: 30px;
+    border-color: var(--gold-light);
+    border-style: solid;
+  }
+  .poster-corner.tl { top: -2px; left: -2px; border-width: 3px 0 0 3px; }
+  .poster-corner.tr { top: -2px; right: -2px; border-width: 3px 3px 0 0; }
+  .poster-corner.bl { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; }
+  .poster-corner.br { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; }
+
+  .poster-stars {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    text-transform: uppercase;
+  }
+
+  .poster-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 0.9;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3rem;
+  }
+
+  .poster-ampersand {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 2rem;
+    color: var(--crimson);
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  .poster-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(255,248,231,0.7);
+    line-height: 1.6;
+    margin: 1.5rem 0;
+  }
+
+  .poster-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .poster-divider::before, .poster-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dark));
+  }
+  .poster-divider::after {
+    background: linear-gradient(to left, transparent, var(--gold-dark));
+  }
+  .poster-divider span {
+    color: var(--gold);
+    font-size: 1.2rem;
+  }
+
+  .poster-tagline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+    color: var(--gold-dark);
+    margin-top: 1.5rem;
+  }
+
+  .poster-rating {
+    position: absolute;
+    bottom: -1px; right: 1.5rem;
+    background: var(--crimson);
+    color: var(--cream);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.8rem;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+
+  .stars-rating {
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ============ RSVP SECTION ============ */
+  #rsvp {
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, #300000, var(--black));
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .rsvp-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: var(--cream);
+    margin: 1.5rem auto;
+    max-width: 500px;
+    opacity: 0.8;
+  }
+
+  .rsvp-btn {
+    display: inline-block;
+    margin-top: 2.5rem;
+    padding: 1.2rem 3.5rem;
+    background: linear-gradient(135deg, var(--crimson), #6B0000);
+    border: 2px solid var(--gold);
+    color: var(--gold-light);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.3em;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(139,0,0,0.4);
+  }
+
+  .rsvp-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .rsvp-btn:hover::before { left: 100%; }
+  .rsvp-btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 50px rgba(201,168,76,0.3), 0 0 100px rgba(139,0,0,0.3);
+    color: var(--white);
+  }
+
+  .rsvp-deadline {
+    margin-top: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--gold-dark);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* ============ DETAILS SECTION ============ */
+  #details {
+    background: linear-gradient(to bottom, #0A0000, #180000);
+    padding: 5rem 2rem;
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 3rem auto 0;
+  }
+
+  .detail-block {
+    text-align: center;
+  }
+
+  .detail-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .detail-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--cream);
+    line-height: 1.7;
+    opacity: 0.85;
+  }
+
+  .dress-code-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+
+  .dress-tag {
+    background: rgba(139,0,0,0.3);
+    border: 1px solid var(--gold-dark);
+    color: var(--gold-light);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* ============ COUNTDOWN ============ */
+  #countdown {
+    background: var(--black);
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .countdown-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(201,168,76,0.02) 40px, rgba(201,168,76,0.02) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,168,76,0.02) 40px, rgba(201,168,76,0.02) 41px);
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .countdown-item {
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .countdown-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    line-height: 1;
+    background: linear-gradient(135deg, #ff6666, var(--gold-light), #ff4444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 15px rgba(255,100,100,0.4));
+    position: relative;
+    animation: neonPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes neonPulse {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255,100,100,0.3)); }
+    50% { filter: drop-shadow(0 0 25px rgba(255,100,100,0.6)) drop-shadow(0 0 50px rgba(201,168,76,0.2)); }
+  }
+
+  .countdown-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .countdown-sep {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: var(--gold-dark);
+    line-height: 1.1;
+    opacity: 0.4;
+    align-self: flex-start;
+    padding-top: 0.2rem;
+  }
+
+  /* ============ FOOTER ============ */
+  #footer {
+    background: var(--black);
+    border-top: 3px solid var(--gold-dark);
+    overflow: hidden;
+    padding: 3rem 0 0;
+    position: relative;
+  }
+
+  .footer-logo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.15em;
+  }
+
+  .footer-credits-wrap {
+    overflow: hidden;
+    background: linear-gradient(to right, var(--black), #1a0000, var(--black));
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    margin-top: 1.5rem;
+  }
+
+  .credits-scroll {
+    display: flex;
+    gap: 4rem;
+    animation: creditsRoll 30s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes creditsRoll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .credit-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--gold-dark);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .credit-item strong {
+    color: var(--gold-light);
+    font-style: normal;
+  }
+
+  .credit-sep { color: var(--crimson); font-size: 1.2rem; }
+
+  .footer-bottom {
+    text-align: center;
+    padding: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: rgba(201,168,76,0.4);
+    letter-spacing: 0.2em;
+  }
+
+  /* ============ SCROLL ANIMATIONS ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger children */
+  .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.1s; }
+  .stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.25s; }
+  .stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.4s; }
+  .stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.55s; }
+
+  /* ============ GOLD ORNAMENT ============ */
+  .ornament {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--gold);
+    opacity: 0.6;
+    margin: 0.5rem 0;
+    letter-spacing: 0.5rem;
+  }
+
+  /* ============ SPARKLE GLOW BUTTON ============ */
+  @keyframes borderGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(201,168,76,0.3), inset 0 0 10px rgba(201,168,76,0.05); }
+    50% { box-shadow: 0 0 30px rgba(201,168,76,0.5), 0 0 60px rgba(139,0,0,0.3), inset 0 0 15px rgba(201,168,76,0.1); }
+  }
+
+  .event-card { animation: borderGlow 4s ease-in-out infinite; }
+  .event-card:nth-child(2) { animation-delay: 1s; }
+  .event-card:nth-child(3) { animation-delay: 2s; }
+  .event-card:nth-child(4) { animation-delay: 3s; }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 600px) {
+    .countdown-grid { gap: 1rem; }
+    .countdown-sep { display: none; }
+    .events-grid { grid-template-columns: 1fr; }
+    .poster-inner { padding: 2.5rem 1.5rem; }
+    .details-grid { gap: 2rem; }
+    .curtain-left, .curtain-right { display: none; }
+    .rsvp-btn { padding: 1rem 2rem; font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- FLOATING ELEMENTS -->
+<div class="float-layer" id="floatLayer"></div>
+
+<!-- FILM REEL FLOATERS (bg) -->
+<svg class="film-reel-float" style="top:15%;right:3%;width:90px;animation-duration:18s;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="45" stroke="#C9A84C" stroke-width="4"/>
+  <circle cx="50" cy="50" r="15" stroke="#C9A84C" stroke-width="3"/>
+  <circle cx="50" cy="50" r="6" fill="#C9A84C" opacity="0.5"/>
+  <g opacity="0.6"><circle cx="50" cy="10" r="7" stroke="#C9A84C" stroke-width="2"/>
+  <circle cx="50" cy="90" r="7" stroke="#C9A84C" stroke-width="2"/>
+  <circle cx="10" cy="50" r="7" stroke="#C9A84C" stroke-width="2"/>
+  <circle cx="90" cy="50" r="7" stroke="#C9A84C" stroke-width="2"/>
+  <circle cx="21" cy="21" r="5" stroke="#C9A84C" stroke-width="2"/>
+  <circle cx="79" cy="21" r="5" stroke="#C9A84C" stroke-width="2"/>
+  <circle cx="21" cy="79" r="5" stroke="#C9A84C" stroke-width="2"/>
+  <circle cx="79" cy="79" r="5" stroke="#C9A84C" stroke-width="2"/></g>
+</svg>
+<svg class="film-reel-float" style="top:60%;left:2%;width:65px;animation-duration:22s;animation-direction:reverse;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="45" stroke="#8B0000" stroke-width="4"/>
+  <circle cx="50" cy="50" r="15" stroke="#8B0000" stroke-width="3"/>
+  <circle cx="50" cy="50" r="6" fill="#8B0000" opacity="0.5"/>
+  <g opacity="0.6"><circle cx="50" cy="10" r="7" stroke="#8B0000" stroke-width="2"/>
+  <circle cx="50" cy="90" r="7" stroke="#8B0000" stroke-width="2"/>
+  <circle cx="10" cy="50" r="7" stroke="#8B0000" stroke-width="2"/>
+  <circle cx="90" cy="50" r="7" stroke="#8B0000" stroke-width="2"/></g>
+</svg>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Curtains -->
+  <div class="curtain-left">
+    <svg width="100%" height="100%" viewBox="0 0 400 900" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="curtainL" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#5a0000"/>
+          <stop offset="60%" stop-color="#8B0000"/>
+          <stop offset="100%" stop-color="#4a0000"/>
+        </linearGradient>
+      </defs>
+      <rect width="400" height="900" fill="url(#curtainL)"/>
+      <!-- Curtain folds -->
+      <path d="M50 0 Q80 450 50 900" stroke="rgba(0,0,0,0.2)" stroke-width="3" fill="none"/>
+      <path d="M130 0 Q160 450 130 900" stroke="rgba(0,0,0,0.2)" stroke-width="3" fill="none"/>
+      <path d="M210 0 Q240 450 210 900" stroke="rgba(0,0,0,0.2)" stroke-width="3" fill="none"/>
+      <path d="M290 0 Q320 450 290 900" stroke="rgba(0,0,0,0.2)" stroke-width="3" fill="none"/>
+      <!-- Gold trim -->
+      <rect x="380" y="0" width="20" height="900" fill="#9B7A2A" opacity="0.8"/>
+      <!-- Gold tassel -->
+      <ellipse cx="390" cy="60" rx="12" ry="18" fill="#C9A84C"/>
+      <line x1="390" y1="78" x2="390" y2="130" stroke="#C9A84C" stroke-width="3"/>
+      <ellipse cx="390" cy="138" rx="8" ry="12" fill="#C9A84C"/>
+    </svg>
+  </div>
+  <div class="curtain-right">
+    <svg width="100%" height="100%" viewBox="0 0 400 900" preserveAspectRatio="none" style="transform:scaleX(-1)">
+      <defs>
+        <linearGradient id="curtainR" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#4a0000"/>
+          <stop offset="40%" stop-color="#8B0000"/>
+          <stop offset="100%" stop-color="#5a0000"/>
+        </linearGradient>
+      </defs>
+      <rect width="400" height="900" fill="url(#curtainR)"/>
+      <path d="M50 0 Q80 450 50 900" stroke="rgba(0,0,0,0.2)" stroke-width="3" fill="none"/>
+      <path d="M130 0 Q160 450 130 900" stroke="rgba(0,0,0,0.2)" stroke-width="3" fill="none"/>
+      <path d="M210 0 Q240 450 210 900" stroke="rgba(0,0,0,0.2)" stroke-width="3" fill="none"/>
+      <path d="M290 0 Q320 450 290 900" stroke="rgba(0,0,0,0.2)" stroke-width="3" fill="none"/>
+      <rect x="380" y="0" width="20" height="900" fill="#9B7A2A" opacity="0.8"/>
+      <ellipse cx="390" cy="60" rx="12" ry="18" fill="#C9A84C"/>
+      <line x1="390" y1="78" x2="390" y2="130" stroke="#C9A84C" stroke-width="3"/>
+      <ellipse cx="390" cy="138" rx="8" ry="12" fill="#C9A84C"/>
+    </svg>
+  </div>
+
+  <!-- Spotlight SVG -->
+  <svg class="spotlight-svg" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="z-index:1;">
+    <defs>
+      <radialGradient id="spot1" cx="50%" cy="0%" r="80%">
+        <stop offset="0%" stop-color="#FFF8E7" stop-opacity="0.25"/>
+        <stop offset="60%" stop-color="#C9A84C" stop-opacity="0.06"/>
+        <stop offset="100%" stop-color="#8B0000" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="spot2" cx="30%" cy="0%" r="60%">
+        <stop offset="0%" stop-color="#FFF8E7" stop-opacity="0.1"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <radialGradient id="spot3" cx="70%" cy="0%" r="60%">
+        <stop offset="0%" stop-color="#FFF8E7" stop-opacity="0.1"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+    </defs>
+    <path d="M300 0 L100 400 L500 400 Z" fill="url(#spot1)"/>
+    <path d="M180 0 L0 400 L350 400 Z" fill="url(#spot2)"/>
+    <path d="M420 0 L250 400 L600 400 Z" fill="url(#spot3)"/>
+    <!-- Stage lights -->
+    <circle cx="100" cy="20" r="12" fill="#FFF8E7" opacity="0.7"/>
+    <circle cx="100" cy="20" r="20" fill="#FFF8E7" opacity="0.15"/>
+    <circle cx="500" cy="20" r="12" fill="#FFF8E7" opacity="0.7"/>
+    <circle cx="500" cy="20" r="20" fill="#FFF8E7" opacity="0.15"/>
+    <circle cx="300" cy="10" r="10" fill="#C9A84C" opacity="0.9"/>
+    <circle cx="300" cy="10" r="18" fill="#C9A84C" opacity="0.2"/>
+  </svg>
+
+  <!-- Red carpet -->
+  <div class="red-carpet"></div>
+
+  <!-- Hero Content -->
+  <div class="hero-content">
+    <p class="hero-tagline">The Most Awaited Event of the Year</p>
+    <div class="hero-names">
+      <span>{{groomName}}</span>
+      <span class="hero-and">&amp;</span>
+      <span>{{brideName}}</span>
+    </div>
+    <p class="hero-date">TOGETHER IN LOVE · <span>December 14, 2025</span> · MUMBAI</p>
+    <div class="hero-scroll">
+      <span>Scroll to begin</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FILMSTRIP DIVIDER ============ -->
+<div class="filmstrip-divider">
+  <div class="filmstrip-inner">
+    <div class="filmstrip-scroll" id="filmstrip1"></div>
+  </div>
+</div>
+
+<!-- ============ BLESSING ============ -->
+<section id="blessing">
+  <div class="blessing-quote reveal">
+    "Pyaar woh rang hai jo zindagi ke kanvas pe<br>
+    <em>sirf ek baar</em> aur <em>hamesha ke liye</em> bikhar jaata hai..."
+  </div>
+  <div class="blessing-deco reveal"></div>
+  <p class="blessing-attr reveal">— Written in the Stars, For {{groomName}} & {{brideName}}</p>
+  <div class="ornament reveal">✦ ✦ ✦</div>
+</section>
+
+<!-- FILMSTRIP DIVIDER 2 -->
+<div class="filmstrip-divider">
+  <div class="filmstrip-inner">
+    <div class="filmstrip-scroll" id="filmstrip2" style="animation-direction:reverse;"></div>
+  </div>
+</div>
+
+<!-- ============ EVENTS ============ -->
+<section id="events">
+  <div class="section-heading reveal">
+    <span class="section-label">Mark Your Calendars</span>
+    <h2 class="section-title">The Grand Program</h2>
+  </div>
+  <div class="events-grid stagger" id="eventsGrid">
+    <div class="event-card">
+      <span class="event-tag">Night 1</span>
+      <span class="event-icon">🎵</span>
+      <div class="event-name">Sangeet Night</div>
+      <div class="event-date">December 12, 2025</div>
+      <div class="event-time">7:00 PM — 1:00 AM</div>
+      <div class="event-venue">Grand Ballroom, The Taj Mahal Palace<br>Colaba, Mumbai</div>
+    </div>
+    <div class="event-card">
+      <span class="event-tag">Morning</span>
+      <span class="event-icon">🌿</span>
+      <div class="event-name">Haldi Ceremony</div>
+      <div class="event-date">December 13, 2025</div>
+      <div class="event-time">10:00 AM — 1:00 PM</div>
+      <div class="event-venue">Family Residence<br>Juhu, Mumbai</div>
+    </div>
+    <div class="event-card">
+      <span class="event-tag">The Big Day</span>
+      <span class="event-icon">💍</span>
+      <div class="event-name">The Wedding</div>
+      <div class="event-date">December 14, 2025</div>
+      <div class="event-time">6:00 PM — 11:00 PM</div>
+      <div class="event-venue">Crystal Pavilion, Leela Palace<br>Andheri, Mumbai</div>
+    </div>
+    <div class="event-card">
+      <span class="event-tag">Night 3</span>
+      <span class="event-icon">🥂</span>
+      <div class="event-name">Reception</div>
+      <div class="event-date">December 15, 2025</div>
+      <div class="event-time">7:30 PM — 12:00 AM</div>
+      <div class="event-venue">Rooftop Terrace, Four Seasons<br>Worli, Mumbai</div>
+    </div>
+  </div>
+</section>
+
+<!-- FILMSTRIP DIVIDER 3 -->
+<div class="filmstrip-divider">
+  <div class="filmstrip-inner">
+    <div class="filmstrip-scroll" id="filmstrip3"></div>
+  </div>
+</div>
+
+<!-- ============ COUPLE ============ -->
+<section id="couple">
+  <div class="section-heading reveal">
+    <span class="section-label">The Stars of the Show</span>
+    <h2 class="section-title">Meet the Couple</h2>
+  </div>
+  <div class="poster-frame reveal">
+    <div class="poster-inner">
+      <div class="poster-corner tl"></div>
+      <div class="poster-corner tr"></div>
+      <div class="poster-corner bl"></div>
+      <div class="poster-corner br"></div>
+
+      <div class="poster-stars">✦ A Bollywood Production ✦</div>
+      <div class="stars-rating">★ ★ ★ ★ ★</div>
+      <div class="poster-title">{{groomName}}</div>
+      <span class="poster-ampersand">&amp;</span>
+      <div class="poster-title">{{brideName}}</div>
+      <div class="poster-divider"><span>❤</span></div>
+      <p class="poster-subtitle">
+        Two hearts. One destiny.<br>
+        A love story written in the stars,<br>directed by life itself.
+      </p>
+      <div class="poster-divider"><span>✦</span></div>
+      <div class="poster-tagline">Coming Together · Forever · December 2025</div>
+      <div class="poster-rating">LOVE FOREVER</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section id="rsvp">
+  <div class="section-heading reveal">
+    <span class="section-label">You're Invited</span>
+    <h2 class="section-title">Book Your Seat</h2>
+  </div>
+  <p class="rsvp-tagline reveal">
+    Every great story needs its audience. Join us for a celebration of a lifetime — 
+    your presence is the greatest gift.
+  </p>
+  <div class="reveal">
+    <a href="mailto:wedding@example.com" class="rsvp-btn">🎬 RSVP Now — Confirm Your Seat</a>
+  </div>
+  <p class="rsvp-deadline reveal">Kindly respond by November 30, 2025</p>
+</section>
+
+<!-- ============ DETAILS ============ -->
+<section id="details">
+  <div class="section-heading reveal">
+    <span class="section-label">Everything You Need to Know</span>
+    <h2 class="section-title">The Details</h2>
+  </div>
+  <div class="details-grid stagger">
+    <div class="detail-block">
+      <div class="detail-icon">📍</div>
+      <div class="detail-label">Venue</div>
+      <div class="detail-text">Crystal Pavilion<br>The Leela Palace Hotel<br>Andheri, Mumbai — 400 099</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-icon">✈️</div>
+      <div class="detail-label">Getting There</div>
+      <div class="detail-text">5 min from Mumbai Intl Airport<br>Valet parking available<br>Shuttle from The Taj & ITC Hotels</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-icon">👗</div>
+      <div class="detail-label">Dress Code</div>
+      <div class="detail-text">Bollywood Glamour<br>Think: old-world cinematic royalty</div>
+      <div class="dress-code-items">
+        <span class="dress-tag">Lehenga</span>
+        <span class="dress-tag">Sherwani</span>
+        <span class="dress-tag">Saree</span>
+        <span class="dress-tag">Suit</span>
+        <span class="dress-tag">Indo-Western</span>
+      </div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-icon">🎁</div>
+      <div class="detail-label">Registry</div>
+      <div class="detail-text">Your blessings are enough.<br>Should you wish to gift,<br>a cash envelope is appreciated.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-icon">🏨</div>
+      <div class="detail-label">Stay</div>
+      <div class="detail-text">Room blocks reserved at<br>The Leela Palace & ITC Maratha<br>Quote: "{{groomName}} × {{brideName}} Wedding"</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-icon">📞</div>
+      <div class="detail-label">Contact</div>
+      <div class="detail-text">Wedding Coordinator<br>Riya Mehta: +91 98765 43210<br>wedding@example.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- FILMSTRIP DIVIDER 4 -->
+<div class="filmstrip-divider">
+  <div class="filmstrip-inner">
+    <div class="filmstrip-scroll" id="filmstrip4" style="animation-direction:reverse;"></div>
+  </div>
+</div>
+
+<!-- ============ COUNTDOWN ============ -->
+<section id="countdown">
+  <div class="countdown-bg"></div>
+  <div class="section-heading reveal" style="position:relative;z-index:1;">
+    <span class="section-label">The Clock Is Ticking</span>
+    <h2 class="section-title">Counting Down To Forever</h2>
+  </div>
+  <div class="countdown-grid" id="countdownGrid">
+    <div class="countdown-item">
+      <div class="countdown-num" id="cd-days">00</div>
+      <div class="countdown-label">Days</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-item">
+      <div class="countdown-num" id="cd-hours">00</div>
+      <div class="countdown-label">Hours</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-item">
+      <div class="countdown-num" id="cd-mins">00</div>
+      <div class="countdown-label">Minutes</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-item">
+      <div class="countdown-num" id="cd-secs">00</div>
+      <div class="countdown-label">Seconds</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="footer">
+  <div class="footer-logo">
+    <div class="footer-logo-text">{{groomName}} ✦ {{brideName}}</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-dark);font-size:0.9rem;margin-top:0.3rem;letter-spacing:0.2em;">December 14, 2025 · Mumbai</div>
+  </div>
+
+  <div class="footer-credits-wrap">
+    <div class="credits-scroll" id="creditsScroll"></div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 {{groomName}} × {{brideName}} WEDDING PRODUCTIONS · ALL RIGHTS RESERVED · MADE WITH ❤
+  </div>
+</footer>
+
+<script>
+  // ===== CURSOR =====
+  const cursor = document.getElementById('cursor');
+  const cursorDot = document.getElementById('cursorDot');
+  let mx = -100, my = -100, dx = -100, dy = -100;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursorDot.style.left = mx - 2.5 + 'px';
+    cursorDot.style.top = my - 2.5 + 'px';
+  });
+  function animCursor() {
+    dx += (mx - dx) * 0.15;
+    dy += (my - dy) * 0.15;
+    cursor.style.left = dx - 9 + 'px';
+    cursor.style.top = dy - 9 + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+  document.querySelectorAll('a, button, .event-card, .rsvp-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; cursor.style.background = 'rgba(201,168,76,0.2)'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; cursor.style.background = 'transparent'; });
+  });
+
+  // ===== FLOATING SPARKLES & CONFETTI =====
+  const floatLayer = document.getElementById('floatLayer');
+  const colors = ['#C9A84C', '#F5D88A', '#8B0000', '#FF6666', '#FFF8E7'];
+
+  function createSparkle() {
+    const el = document.createElement('div');
+    el.className = 'sparkle';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.top = '100vh';
+    const size = 4 + Math.random() * 10;
+    el.style.width = el.style.height = size + 'px';
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.animationDuration = 5 + Math.random() * 8 + 's';
+    el.style.animationDelay = Math.random() * 3 + 's';
+    floatLayer.appendChild(el);
+    setTimeout(() => el.remove(), 14000);
+  }
+
+  function createConfetti() {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.top = '-10px';
+    const size = 5 + Math.random() * 8;
+    el.style.width = size + 'px';
+    el.style.height = size * 1.5 + 'px';
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+    el.style.animationDuration = 4 + Math.random() * 5 + 's';
+    floatLayer.appendChild(el);
+    setTimeout(() => el.remove(), 10000);
+  }
+
+  setInterval(createSparkle, 400);
+  setInterval(createConfetti, 600);
+
+  // ===== FILMSTRIP BUILDER =====
+  const eventLabels = ['SANGEET','HALDI','WEDDING','RECEPTION','{{groomName}}','{{brideName}}','MUMBAI','DEC 2025','LOVE','JOY','CELEBRATE','FOREVER'];
+  function buildFilmstrip(id) {
+    const container = document.getElementById(id);
+    if (!container) return;
+    let html = '';
+    for (let i = 0; i < 2; i++) {
+      for (let j = 0; j < 20; j++) {
+        const label = eventLabels[j % eventLabels.length];
+        html += `<div class="film-hole"></div><div class="film-frame">${label}</div>`;
+      }
+    }
+    container.innerHTML = html;
+  }
+  ['filmstrip1','filmstrip2','filmstrip3','filmstrip4'].forEach(buildFilmstrip);
+
+  // ===== CREDITS SCROLL =====
+  const credits = [
+    { role: 'Directed by', name: 'Destiny & Love' },
+    { role: 'Starring', name: '{{groomName}} & {{brideName}}' },
+    { role: 'Produced by', name: 'The Sharma & Kapoor Families' },
+    { role: 'Music by', name: 'DJ Aakash & The Wedding Band' },
+    { role: 'Choreography', name: 'Neha Dance Academy' },
+    { role: 'Photography', name: 'Lens of Dreams Studio' },
+    { role: 'Decor', name: 'Royal Blooms Events' },
+    { role: 'Catering', name: 'Grand Feast by Oberoi' },
+    { role: 'Venue', name: 'The Leela Palace, Mumbai' },
+    { role: 'Special Thanks', name: 'Every Guest Who Made This Possible' },
+  ];
+  const scrollEl = document.getElementById('creditsScroll');
+  let creditsHTML = '';
+  for (let r = 0; r < 2; r++) {
+    credits.forEach((c, i) => {
+      creditsHTML += `<span class="credit-item"><span style="color:var(--gold-dark);font-style:italic;">${c.role}</span>&nbsp;<strong>${c.name}</strong></span><span class="credit-sep">✦</span>`;
+    });
+  }
+  scrollEl.innerHTML = creditsHTML;
+
+  // ===== COUNTDOWN =====
+  const weddingDate = new Date('2025-12-14T18:00:00').getTime();
+  function updateCountdown() {
+    const now = Date.now();
+    let diff = weddingDate - now;
+    if (diff < 0) {
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
+      return;
+    }
+    const days = Math.floor(diff / 86400000);
+    diff %= 86400000;
+    const hours = Math.floor(diff / 3600000);
+    diff %= 3600000;
+    const mins = Math.floor(diff / 60000);
+    diff %= 60000;
+    const secs = Math.floor(diff / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ===== SCROLL REVEAL =====
+  const revealEls = document.querySelectorAll('.reveal, .stagger');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

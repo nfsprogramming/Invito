@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamil Wedding Invitation | திருமண அழைப்பிதழ்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Catamaran:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --crimson: #7B0D1E;
+  --crimson-deep: #4A0010;
+  --gold: #C8960C;
+  --gold-light: #E8B84B;
+  --gold-pale: #F5DFA0;
+  --jasmine: #FFF8E7;
+  --jasmine-warm: #FEF0C7;
+  --green: #2D5016;
+  --green-light: #3D6B20;
+  --copper: #B87333;
+  --copper-light: #D4955A;
+  --cream: #FAF3E0;
+  --shadow-gold: rgba(200,150,12,0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--crimson-deep);
+  font-family: 'EB Garamond', serif;
+  color: var(--jasmine);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ── PETAL RAIN ── */
+.petals-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -40px;
+  font-size: 18px;
+  animation: fall linear infinite;
+  opacity: 0.85;
+}
+
+@keyframes fall {
+  0%   { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0.9; }
+  50%  { transform: translateY(50vh) rotate(180deg) translateX(30px); opacity: 0.7; }
+  100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
+}
+
+/* ── BACKGROUND KOLAM TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20px 20px, rgba(200,150,12,0.06) 1px, transparent 1px),
+    radial-gradient(circle at 60px 60px, rgba(200,150,12,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── SCROLL FADE IN ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #1A0008 0%, var(--crimson-deep) 40%, #2A0814 100%);
+}
+
+/* Banana leaves */
+.leaf-left, .leaf-right {
+  position: absolute;
+  top: 0;
+  width: 140px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.leaf-left { left: 0; }
+.leaf-right { right: 0; transform: scaleX(-1); }
+
+.leaf-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Lamp container */
+.lamp-wrapper {
+  position: relative;
+  margin-bottom: 30px;
+  z-index: 2;
+}
+
+.lamp-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(200,150,12,0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+  50%       { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+}
+
+.lamp-svg {
+  width: 90px;
+  height: 120px;
+  filter: drop-shadow(0 0 12px rgba(200,150,12,0.7));
+  position: relative;
+  z-index: 2;
+}
+
+.flame {
+  animation: flicker 0.6s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+@keyframes flicker {
+  0%   { transform: scaleX(1) scaleY(1) rotate(-3deg); }
+  100% { transform: scaleX(0.85) scaleY(1.15) rotate(3deg); }
+}
+
+/* Bells */
+.bells {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin-bottom: 20px;
+  z-index: 2;
+  position: relative;
+}
+.bell {
+  font-size: 28px;
+  animation: swing 3s ease-in-out infinite;
+  display: inline-block;
+  transform-origin: top center;
+  filter: drop-shadow(0 2px 4px rgba(200,150,12,0.5));
+}
+.bell:nth-child(2) { animation-delay: 0.5s; animation-duration: 3.5s; }
+.bell:nth-child(3) { animation-delay: 1s; animation-duration: 2.8s; }
+@keyframes swing {
+  0%, 100% { transform: rotate(-12deg); }
+  50%       { transform: rotate(12deg); }
+}
+
+/* Hero text */
+.om-symbol {
+  font-size: 48px;
+  color: var(--gold-light);
+  display: block;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px var(--shadow-gold);
+  animation: glowText 3s ease-in-out infinite;
+  z-index: 2;
+  position: relative;
+}
+@keyframes glowText {
+  0%, 100% { text-shadow: 0 0 15px var(--shadow-gold); }
+  50%       { text-shadow: 0 0 30px rgba(200,150,12,0.8), 0 0 60px rgba(200,150,12,0.4); }
+}
+
+.hero-blessing {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(13px, 3.5vw, 17px);
+  color: var(--gold-pale);
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  z-index: 2;
+  position: relative;
+  font-weight: 300;
+}
+
+.couple-names {
+  z-index: 2;
+  position: relative;
+  margin-bottom: 24px;
+}
+.groom-name, .bride-name {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(28px, 8vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--gold-light);
+  text-shadow: 0 2px 12px rgba(200,150,12,0.4);
+  display: block;
+}
+.name-en {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(12px, 3vw, 20px);
+  color: var(--gold-pale);
+  font-weight: 400;
+  letter-spacing: 3px;
+  display: block;
+  margin-top: 2px;
+}
+.name-divider {
+  font-size: clamp(22px, 5vw, 36px);
+  color: var(--copper-light);
+  display: block;
+  margin: 8px 0;
+}
+
+.wedding-date-block {
+  z-index: 2;
+  position: relative;
+  background: linear-gradient(135deg, rgba(200,150,12,0.15), rgba(123,13,30,0.3));
+  border: 1px solid rgba(200,150,12,0.4);
+  border-radius: 12px;
+  padding: 16px 32px;
+  margin-top: 20px;
+  backdrop-filter: blur(4px);
+}
+.tamil-date {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(14px, 3.5vw, 18px);
+  color: var(--gold-pale);
+  font-weight: 600;
+  display: block;
+}
+.greg-date {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(11px, 3vw, 15px);
+  color: var(--copper-light);
+  letter-spacing: 2px;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ── KOLAM DIVIDER ── */
+.kolam-divider {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.kolam-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.kolam-center {
+  color: var(--gold);
+  font-size: 22px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section-title-tamil {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(22px, 5vw, 34px);
+  font-weight: 700;
+  color: var(--gold-light);
+  display: block;
+}
+.section-title-en {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(11px, 2.5vw, 15px);
+  color: var(--copper-light);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 6px;
+}
+
+/* ── BLESSING SECTION ── */
+.blessing-section {
+  background: linear-gradient(135deg, rgba(123,13,30,0.6), rgba(74,0,16,0.8));
+  border-radius: 20px;
+  padding: 40px 30px;
+  border: 1px solid rgba(200,150,12,0.25);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.blessing-section::before {
+  content: 'ஓம்';
+  position: absolute;
+  font-family: 'Catamaran', sans-serif;
+  font-size: 180px;
+  font-weight: 800;
+  color: rgba(200,150,12,0.04);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.blessing-text {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(16px, 4vw, 22px);
+  line-height: 1.9;
+  color: var(--jasmine);
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+.family-block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.family-card {
+  background: rgba(200,150,12,0.1);
+  border: 1px solid rgba(200,150,12,0.3);
+  border-radius: 12px;
+  padding: 16px 24px;
+  min-width: 180px;
+  text-align: center;
+}
+.family-name {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(14px, 3vw, 18px);
+  font-weight: 700;
+  color: var(--gold-light);
+  display: block;
+}
+.family-sub {
+  font-size: clamp(11px, 2.5vw, 13px);
+  color: var(--copper-light);
+  margin-top: 4px;
+  display: block;
+}
+
+/* ── EVENTS ── */
+.events-timeline {
+  position: relative;
+  padding-left: 40px;
+}
+.events-timeline::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), var(--copper), var(--gold));
+}
+
+.event-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(123,13,30,0.5), rgba(74,0,16,0.7));
+  border: 1px solid rgba(200,150,12,0.3);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.event-card:hover {
+  transform: translateX(6px);
+  box-shadow: 0 8px 30px rgba(200,150,12,0.2);
+}
+.event-card::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 28px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px var(--shadow-gold);
+}
+
+.event-icon { font-size: 30px; margin-bottom: 10px; display: block; }
+.event-name-tamil {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(18px, 4vw, 24px);
+  font-weight: 700;
+  color: var(--gold-light);
+  display: block;
+}
+.event-name-en {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(10px, 2vw, 13px);
+  color: var(--copper-light);
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 12px;
+}
+.event-detail {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(13px, 3vw, 16px);
+  color: var(--jasmine);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.event-time {
+  display: inline-block;
+  background: rgba(200,150,12,0.2);
+  border: 1px solid rgba(200,150,12,0.4);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: clamp(12px, 2.5vw, 14px);
+  color: var(--gold-light);
+  margin-top: 10px;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 600;
+}
+
+/* ── COUNTDOWN ── */
+.countdown-wrapper {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.countdown-unit {
+  background: linear-gradient(135deg, rgba(123,13,30,0.7), rgba(74,0,16,0.9));
+  border: 2px solid rgba(200,150,12,0.4);
+  border-radius: 16px;
+  padding: 20px 16px;
+  min-width: 80px;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(200,150,12,0.2), 0 4px 20px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.countdown-unit::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+}
+.countdown-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(24px, 6vw, 40px);
+  color: var(--gold-light);
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 0 20px var(--shadow-gold);
+  display: block;
+}
+.countdown-label {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(10px, 2.5vw, 13px);
+  color: var(--copper-light);
+  font-weight: 600;
+  display: block;
+  margin-top: 6px;
+  letter-spacing: 1px;
+}
+
+/* ── VENUE ── */
+.venue-card {
+  background: linear-gradient(135deg, rgba(45,80,22,0.3), rgba(74,0,16,0.5));
+  border: 1px solid rgba(200,150,12,0.3);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+}
+.venue-name {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(18px, 4vw, 26px);
+  font-weight: 700;
+  color: var(--gold-light);
+  display: block;
+  margin-bottom: 8px;
+}
+.venue-address {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(13px, 3vw, 16px);
+  color: var(--jasmine);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.map-placeholder {
+  margin-top: 20px;
+  background: rgba(0,0,0,0.3);
+  border: 1px dashed rgba(200,150,12,0.3);
+  border-radius: 12px;
+  padding: 30px;
+  font-family: 'Catamaran', sans-serif;
+  color: var(--copper-light);
+  font-size: 14px;
+}
+.map-icon { font-size: 40px; display: block; margin-bottom: 8px; }
+
+/* ── RSVP ── */
+.rsvp-card {
+  background: linear-gradient(135deg, rgba(123,13,30,0.5), rgba(74,0,16,0.8));
+  border: 1px solid rgba(200,150,12,0.3);
+  border-radius: 20px;
+  padding: 36px 28px;
+  position: relative;
+}
+.rsvp-card::before {
+  content: '';
+  position: absolute;
+  top: 12px; left: 12px; right: 12px; bottom: 12px;
+  border: 1px solid rgba(200,150,12,0.15);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.form-group { margin-bottom: 20px; }
+.form-label {
+  display: block;
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(13px, 3vw, 15px);
+  color: var(--gold-pale);
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.form-input, .form-select {
+  width: 100%;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(200,150,12,0.35);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: var(--jasmine);
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(13px, 3vw, 15px);
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-input:focus, .form-select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(200,150,12,0.2);
+}
+.form-select option { background: var(--crimson-deep); }
+
+.rsvp-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold), var(--copper));
+  color: var(--crimson-deep);
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(15px, 3.5vw, 18px);
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 10px;
+}
+.rsvp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(200,150,12,0.4);
+}
+.rsvp-success {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(16px, 4vw, 22px);
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.5));
+  padding: 50px 20px 30px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.contact-item {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(13px, 3vw, 16px);
+  color: var(--jasmine);
+  font-weight: 300;
+}
+.contact-item strong {
+  color: var(--gold-light);
+  font-weight: 700;
+  display: block;
+}
+.footer-blessing {
+  font-family: 'Catamaran', sans-serif;
+  font-size: clamp(14px, 3.5vw, 19px);
+  color: var(--gold-pale);
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+.footer-kolam {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.footer-copy {
+  font-family: 'EB Garamond', serif;
+  font-size: 12px;
+  color: rgba(200,150,12,0.4);
+  margin-top: 16px;
+}
+
+/* ── RESPONSIVE ── */
+@media (min-width: 600px) {
+  .leaf-left, .leaf-right { width: 180px; }
+  .lamp-svg { width: 110px; height: 140px; }
+  .events-timeline { padding-left: 60px; }
+  .events-timeline::before { left: 24px; }
+  .event-card::before { left: -44px; }
+}
+
+@media (min-width: 900px) {
+  .section { padding: 80px 40px; }
+}
+
+/* ── PRINT ── */
+@media print {
+  .petals-container, .bells, .lamp-glow { display: none; }
+  body { background: white; color: black; }
+  .event-card, .blessing-section, .rsvp-card, .venue-card { border-color: #ccc; background: white; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Petals -->
+<div class="petals-container" id="petals"></div>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="home">
+  <!-- Banana Leaves -->
+  <div class="leaf-left">
+    <svg class="leaf-svg" viewBox="0 0 140 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="leafG1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1a3a08;stop-opacity:0.9"/>
+          <stop offset="100%" style="stop-color:#2D5016;stop-opacity:0.4"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="30" cy="200" rx="28" ry="180" fill="url(#leafG1)" transform="rotate(-15 30 200)"/>
+      <ellipse cx="20" cy="450" rx="32" ry="200" fill="url(#leafG1)" transform="rotate(-10 20 450)"/>
+      <ellipse cx="40" cy="700" rx="24" ry="160" fill="url(#leafG1)" transform="rotate(-20 40 700)"/>
+      <line x1="30" y1="20" x2="30" y2="380" stroke="#3D6B20" stroke-width="1.5" opacity="0.6"/>
+      <line x1="20" y1="250" x2="20" y2="650" stroke="#3D6B20" stroke-width="1.5" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="leaf-right">
+    <svg class="leaf-svg" viewBox="0 0 140 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <ellipse cx="30" cy="200" rx="28" ry="180" fill="url(#leafG1)" transform="rotate(-15 30 200)"/>
+      <ellipse cx="20" cy="450" rx="32" ry="200" fill="url(#leafG1)" transform="rotate(-10 20 450)"/>
+      <ellipse cx="40" cy="700" rx="24" ry="160" fill="url(#leafG1)" transform="rotate(-20 40 700)"/>
+      <line x1="30" y1="20" x2="30" y2="380" stroke="#3D6B20" stroke-width="1.5" opacity="0.6"/>
+      <line x1="20" y1="250" x2="20" y2="650" stroke="#3D6B20" stroke-width="1.5" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <!-- Bells -->
+  <div class="bells">
+    <span class="bell">🔔</span>
+    <span class="bell">🔔</span>
+    <span class="bell">🔔</span>
+  </div>
+
+  <!-- Kuthu Vilakku Lamp -->
+  <div class="lamp-wrapper">
+    <div class="lamp-glow"></div>
+    <svg class="lamp-svg" viewBox="0 0 90 120" xmlns="http://www.w3.org/2000/svg">
+      <!-- Flame -->
+      <ellipse class="flame" cx="45" cy="14" rx="7" ry="12" fill="#FF6B00" opacity="0.95"/>
+      <ellipse class="flame" cx="45" cy="16" rx="4" ry="8" fill="#FFD700" opacity="0.9"/>
+      <ellipse cx="45" cy="19" rx="2.5" ry="4" fill="white" opacity="0.8"/>
+      <!-- Wick cup -->
+      <ellipse cx="45" cy="28" rx="12" ry="5" fill="#B87333"/>
+      <rect x="33" y="26" width="24" height="4" rx="2" fill="#D4A017"/>
+      <!-- Lamp body -->
+      <path d="M33 32 Q20 55 18 75 Q18 85 45 87 Q72 85 72 75 Q70 55 57 32 Z" fill="url(#lampBody)"/>
+      <defs>
+        <linearGradient id="lampBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#D4A017"/>
+          <stop offset="50%" style="stop-color:#B87333"/>
+          <stop offset="100%" style="stop-color:#8B5E3C"/>
+        </linearGradient>
+        <linearGradient id="baseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#C8960C"/>
+          <stop offset="100%" style="stop-color:#8B5E3C"/>
+        </linearGradient>
+      </defs>
+      <!-- Decorative ring -->
+      <ellipse cx="45" cy="75" rx="24" ry="8" fill="none" stroke="#E8B84B" stroke-width="1.5" opacity="0.7"/>
+      <!-- Base -->
+      <ellipse cx="45" cy="98" rx="28" ry="9" fill="url(#baseGrad)"/>
+      <rect x="17" y="92" width="56" height="8" rx="4" fill="#C8960C"/>
+      <!-- Bottom disk -->
+      <ellipse cx="45" cy="108" rx="32" ry="7" fill="#B87333"/>
+      <ellipse cx="45" cy="108" rx="32" ry="5" fill="none" stroke="#E8B84B" stroke-width="1" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Om & Blessing -->
+  <span class="om-symbol">ஓம்</span>
+  <p class="hero-blessing" lang="ta">திருமணத்தில் உங்களை அன்போடு அழைக்கிறோம்</p>
+
+  <!-- Couple Names -->
+  <div class="couple-names fade-in">
+    <span class="groom-name" lang="ta">கார்த்திக்</span>
+    <span class="name-en">Karthik</span>
+    <span class="name-divider">♥</span>
+    <span class="bride-name" lang="ta">மேகலா</span>
+    <span class="name-en">Mekalaa</span>
+  </div>
+
+  <!-- Date Block -->
+  <div class="wedding-date-block fade-in">
+    <span class="tamil-date" lang="ta">விக்கிரம வருஷம் | பங்குனி மாதம் | சுக்ல பட்சம்</span>
+    <span class="greg-date">Saturday, 15th March 2025</span>
+  </div>
+</section>
+
+<!-- ══════════ BLESSING ══════════ -->
+<div class="kolam-divider fade-in">
+  <div class="kolam-line"></div>
+  <div class="kolam-center">✦ ❋ ✦</div>
+  <div class="kolam-line"></div>
+</div>
+
+<section class="section fade-in" id="blessing">
+  <div class="section-header">
+    <span class="section-title-tamil" lang="ta">வாழ்த்துகள்</span>
+    <span class="section-title-en">Divine Blessings</span>
+  </div>
+  <div class="blessing-section">
+    <p class="blessing-text" lang="ta">
+      வக்கிர துண்ட மஹாகாய | கோடி சூர்ய சம பிரப | நிர்விக்னம் குரு மே தேவ | சர்வ கார்யேஷு சர்வதா
+      <br><br>
+      ஸ்ரீ கணேச பகவானின் திருவருளால்<br>
+      இரு குடும்பங்களும் மகிழ்வோடு<br>
+      உங்களை இந்த திருமண விழாவிற்கு<br>
+      அன்போடு அழைக்கின்றோம்
+    </p>
+
+    <div class="family-block">
+      <div class="family-card">
+        <span class="family-name" lang="ta">திரு. ரமேஷ் & திருமதி. செல்வி</span>
+        <span class="family-sub" lang="ta">மதுரை, தமிழ்நாடு</span>
+        <span class="family-sub">Parents of the Groom</span>
+      </div>
+      <div class="family-card">
+        <span class="family-name" lang="ta">திரு. முருகன் & திருமதி. லலிதா</span>
+        <span class="family-sub" lang="ta">திருச்சி, தமிழ்நாடு</span>
+        <span class="family-sub">Parents of the Bride</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ EVENTS ══════════ -->
+<div class="kolam-divider fade-in">
+  <div class="kolam-line"></div>
+  <div class="kolam-center">✦ ❋ ✦</div>
+  <div class="kolam-line"></div>
+</div>
+
+<section class="section fade-in" id="events">
+  <div class="section-header">
+    <span class="section-title-tamil" lang="ta">நிகழ்ச்சி நிரல்</span>
+    <span class="section-title-en">Events Schedule</span>
+  </div>
+  <div class="events-timeline">
+
+    <div class="event-card fade-in">
+      <span class="event-icon">🌸</span>
+      <span class="event-name-tamil" lang="ta">நிச்சயதார்த்தம்</span>
+      <span class="event-name-en">Nichayathartham — Engagement</span>
+      <p class="event-detail" lang="ta">
+        இரு குடும்பங்களும் ஒன்று சேர்ந்து திருமணத்தை உறுதி செய்யும் புனித நிகழ்வு.<br>
+        அனைவரும் வேட்டி / புடவையில் வருக.
+      </p>
+      <span class="event-time" lang="ta">📅 14 மார்ச் 2025 | காலை 9:00 மணி</span>
+    </div>
+
+    <div class="event-card fade-in">
+      <span class="event-icon">🪷</span>
+      <span class="event-name-tamil" lang="ta">நளங்கு</span>
+      <span class="event-name-en">Nalangu — Auspicious Ceremony</span>
+      <p class="event-detail" lang="ta">
+        மஞ்சள், குங்குமம், வாழைப்பழம், தேங்காய் சேர்ந்து மணமகன் & மணமகளுக்கு ஆசீர்வாதம்.<br>
+        மாலை சந்தோஷமான பாட்டு, ஆட்டம், நாட்டியம்.
+      </p>
+      <span class="event-time" lang="ta">📅 14 மார்ச் 2025 | மாலை 5:00 மணி</span>
+    </div>
+
+    <div class="event-card fade-in">
+      <span class="event-icon">🔥</span>
+      <span class="event-name-tamil" lang="ta">முகூர்த்தம்</span>
+      <span class="event-name-en">Muhurtham — Sacred Wedding</span>
+      <p class="event-detail" lang="ta">
+        நல்ல நேரம் — காலை 8:42 மணி முதல் 9:18 மணி வரை.<br>
+        அக்னி சாட்சியாக, வேத மந்திரங்களுடன் திருமணம் நடைபெறும்.
+      </p>
+      <span class="event-time" lang="ta">📅 15 மார்ச் 2025 | நல்ல நேரம்: 8:42 AM</span>
+    </div>
+
+    <div class="event-card fade-in">
+      <span class="event-icon">🍽️</span>
+      <span class="event-name-tamil" lang="ta">வரவேற்பு விழா</span>
+      <span class="event-name-en">Reception — Grand Celebration</span>
+      <p class="event-detail" lang="ta">
+        திருமண வரவேற்பு விழா — விருந்து, இசை, கலாசாரம்.<br>
+        அனைத்து உறவினர்கள் & நண்பர்களையும் வரவேற்கிறோம்.
+      </p>
+      <span class="event-time" lang="ta">📅 15 மார்ச் 2025 | மாலை 7:00 மணி</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ VENUE ══════════ -->
+<div class="kolam-divider fade-in">
+  <div class="kolam-line"></div>
+  <div class="kolam-center">✦ ❋ ✦</div>
+  <div class="kolam-line"></div>
+</div>
+
+<section class="section fade-in" id="venue">
+  <div class="section-header">
+    <span class="section-title-tamil" lang="ta">திருமண மண்டபம்</span>
+    <span class="section-title-en">Venue</span>
+  </div>
+  <div class="venue-card">
+    <span class="venue-name" lang="ta">🏛️ ஸ்ரீ கல்யாண மண்டபம்</span>
+    <p class="venue-address" lang="ta">
+      அண்ணா நகர் முதல் தெரு<br>
+      மதுரை – 625 020<br>
+      தமிழ்நாடு, இந்தியா<br><br>
+      <strong>📞 +91 98765 43210</strong>
+    </p>
+    <div class="map-placeholder">
+      <span class="map-icon">📍</span>
+      <span lang="ta">Google Maps இல் திசை பெற:</span><br>
+      <a href="https://maps.google.com" target="_blank" style="color:var(--gold-light);text-decoration:none;font-weight:600;">maps.google.com — Sri Kalyana Mandapam, Madurai</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ COUNTDOWN ══════════ -->
+<div class="kolam-divider fade-in">
+  <div class="kolam-line"></div>
+  <div class="kolam-center">✦ ❋ ✦</div>
+  <div class="kolam-line"></div>
+</div>
+
+<section class="section fade-in" id="countdown">
+  <div class="section-header">
+    <span class="section-title-tamil" lang="ta">நேரக் கணக்கு</span>
+    <span class="section-title-en">Countdown to Muhurtham</span>
+  </div>
+  <div class="countdown-wrapper">
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-days">00</span>
+      <span class="countdown-label" lang="ta">நாள்</span>
+    </div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-hours">00</span>
+      <span class="countdown-label" lang="ta">மணி</span>
+    </div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-mins">00</span>
+      <span class="countdown-label" lang="ta">நிமிடம்</span>
+    </div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-secs">00</span>
+      <span class="countdown-label" lang="ta">நொடி</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RSVP ══════════ -->
+<div class="kolam-divider fade-in">
+  <div class="kolam-line"></div>
+  <div class="kolam-center">✦ ❋ ✦</div>
+  <div class="kolam-line"></div>
+</div>
+
+<section class="section fade-in" id="rsvp">
+  <div class="section-header">
+    <span class="section-title-tamil" lang="ta">உறுதிப்படுத்தல்</span>
+    <span class="section-title-en">RSVP — Confirm Your Presence</span>
+  </div>
+  <div class="rsvp-card">
+    <div id="rsvp-form">
+      <div class="form-group">
+        <label class="form-label" for="rsvp-name" lang="ta">உங்கள் பெயர் / Your Name</label>
+        <input class="form-input" id="rsvp-name" type="text" placeholder="பெயர் உள்ளிடவும்..." autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="rsvp-phone" lang="ta">தொலைபேசி எண் / Phone</label>
+        <input class="form-input" id="rsvp-phone" type="tel" placeholder="+91 XXXXX XXXXX" autocomplete="tel">
+      </div>
+      <div class="form-group">
+        <label class="form-label" lang="ta">வருகிறீர்களா? / Attending?</label>
+        <select class="form-select" id="rsvp-attend">
+          <option value="">தேர்ந்தெடுக்கவும்</option>
+          <option value="yes">ஆம், வருகிறேன் 🙏</option>
+          <option value="no">இல்லை, மன்னிக்கவும்</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" lang="ta">நிகழ்வு / Event</label>
+        <select class="form-select" id="rsvp-event">
+          <option value="all">அனைத்து நிகழ்வுகளும்</option>
+          <option value="nalangu">நளங்கு மட்டும்</option>
+          <option value="muhurtham">முகூர்த்தம் மட்டும்</option>
+          <option value="reception">வரவேற்பு மட்டும்</option>
+        </select>
+      </div>
+      <button class="rsvp-btn" onclick="submitRSVP()" lang="ta">🙏 உறுதிப்படுத்தவும்</button>
+    </div>
+    <div class="rsvp-success" id="rsvp-success">
+      <p lang="ta">🙏 நன்றி! உங்கள் வருகையை எதிர்நோக்குகிறோம்! 🌸</p>
+      <p style="font-size:14px;color:var(--copper-light);margin-top:8px;">உங்கள் உறுதிப்படுத்தல் பதிவாகியது</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<div class="kolam-divider fade-in">
+  <div class="kolam-line"></div>
+  <div class="kolam-center">✦ ❋ ✦</div>
+  <div class="kolam-line"></div>
+</div>
+
+<footer class="fade-in">
+  <div class="contact-row">
+    <div class="contact-item">
+      <strong lang="ta">கார்த்திக் குடும்பம்</strong>
+      <span lang="ta">திரு. ரமேஷ் — 98765 43210</span>
+    </div>
+    <div class="contact-item">
+      <strong lang="ta">மேகலா குடும்பம்</strong>
+      <span lang="ta">திரு. முருகன் — 87654 32109</span>
+    </div>
+  </div>
+  <p class="footer-blessing" lang="ta">
+    "உங்கள் இனிய வருகையை அன்போடு எதிர்நோக்குகிறோம்"<br>
+    வாழ்க வளமுடன் 🌺
+  </p>
+  <div class="footer-kolam">
+    <span style="color:var(--gold);font-size:20px;">✦</span>
+    <span style="color:var(--gold-light);font-size:24px;">❋</span>
+    <span style="color:var(--gold);font-size:20px;">✦</span>
+    <span style="color:var(--gold-light);font-size:24px;">❋</span>
+    <span style="color:var(--gold);font-size:20px;">✦</span>
+  </div>
+  <p class="footer-copy">© 2025 திருமண அழைப்பிதழ் | Tamil Wedding Invitation</p>
+</footer>
+
+<script>
+// ── PETALS ──
+(function() {
+  const container = document.getElementById('petals');
+  const emojis = ['🌸','🌺','🌼','🌻','🏵️','✿'];
+  for (let i = 0; i < 22; i++) {
+    const el = document.createElement('div');
+    el.className = 'petal';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.fontSize = (14 + Math.random() * 12) + 'px';
+    el.style.animationDuration = (6 + Math.random() * 10) + 's';
+    el.style.animationDelay = (Math.random() * 10) + 's';
+    el.style.opacity = (0.5 + Math.random() * 0.4).toFixed(2);
+    container.appendChild(el);
+  }
+})();
+
+// ── COUNTDOWN ──
+(function() {
+  const target = new Date('2025-03-15T08:42:00');
+  function update() {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+  update();
+  setInterval(update, 1000);
+})();
+
+// ── SCROLL FADE ──
+(function() {
+  const els = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  els.forEach(el => observer.observe(el));
+})();
+
+// ── RSVP ──
+function submitRSVP() {
+  const name   = document.getElementById('rsvp-name').value.trim();
+  const phone  = document.getElementById('rsvp-phone').value.trim();
+  const attend = document.getElementById('rsvp-attend').value;
+  if (!name || !attend) {
+    alert('பெயர் மற்றும் வருகை தகவல் தேவை! / Please fill in name and attendance.');
+    return;
+  }
+  console.log('RSVP:', { name, phone, attend, event: document.getElementById('rsvp-event').value });
+  document.getElementById('rsvp-form').style.display = 'none';
+  document.getElementById('rsvp-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
